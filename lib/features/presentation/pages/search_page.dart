@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -25,6 +27,45 @@ class _SearchPageState extends State<SearchPage> {
             fontSize: 24,
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            child: TextLiquidFill(
+              text: 'Search',
+              waveColor: Colors.blueAccent,
+              boxBackgroundColor: Colors.white,
+              textStyle: TextStyle(
+                fontSize: 80.0,
+                fontWeight: FontWeight.bold,
+              ),
+              boxHeight: 300.0,
+              loadDuration: Duration(seconds: 1),
+            ),
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              DefaultTextStyle(
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 40.0,
+                  fontFamily: 'Horizon',
+                  color: Colors.black,
+                ),
+                child: AnimatedTextKit(
+                  isRepeatingAnimation: true,
+                  animatedTexts: [
+                    RotateAnimatedText('AWESOME'),
+                    RotateAnimatedText('OPTIMISTIC'),
+                    RotateAnimatedText('DIFFERENT'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/post_owner_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slider/carousel.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../core/utiles.dart';
 
@@ -128,6 +130,15 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                   ),
                   const SizedBox(height: 20),
                   ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: const PostOwnerProfilePage(),
+                        ),
+                      );
+                    },
                     tileColor: const Color(0xffE8E8E8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),

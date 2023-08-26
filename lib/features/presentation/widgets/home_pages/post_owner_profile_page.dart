@@ -1,20 +1,19 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slider/carousel.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../../core/utiles.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import '../../../../core/utiles.dart';
+
+class PostOwnerProfilePage extends StatefulWidget {
+  const PostOwnerProfilePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<PostOwnerProfilePage> createState() => _PostOwnerProfilePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,120 +22,123 @@ class _HomePageState extends State<HomePage> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              elevation: 0,
-              automaticallyImplyLeading: false,
+              foregroundColor: Colors.black,
+              automaticallyImplyLeading: true,
               backgroundColor: Colors.white,
-              pinned: false,
+              pinned: true,
               snap: false,
-              floating: true,
-              expandedHeight: 60,
-              flexibleSpace: const FlexibleSpaceBar(
-                titlePadding: EdgeInsets.all(16),
+              floating: false,
+              expandedHeight: 50,
+              flexibleSpace: FlexibleSpaceBar(
+                titlePadding: const EdgeInsets.all(0),
                 centerTitle: false,
               ),
-              title: const Text(
-                "Find Your Stay",
-                style: TextStyle(
-                  color: Color(0xffF2AE00),
-                  fontFamily: 'Dosis',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Aung Khant Kyaw",
+                              style: TextStyle(
+                                color: Color(0xff000000),
+                                fontFamily: 'Dosis',
+                                fontSize: 20,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.phone,
+                                  size: 15,
+                                  color: Color(0xff534F4F),
+                                ),
+                                Text(
+                                  "09-87654321",
+                                  style: TextStyle(
+                                    color: Color(0xff534F4F),
+                                    fontFamily: 'Dosis',
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/svgs/facebook_logo.svg',
+                                ),
+                                const SizedBox(width: 10),
+                                SvgPicture.asset(
+                                  'assets/svgs/instagram_logo.svg',
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        CachedNetworkImage(
+                          imageUrl:
+                              "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                          imageBuilder: (context, imageProvider) => Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(
+                            color: Color(0xffF2AE00),
+                            backgroundColor: Colors.white,
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    const Divider(
+                      color: Colors.grey,
+                    ),
+                  ],
                 ),
               ),
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.topToBottom,
-                            child: const SettingPage()),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.settings,
-                      color: Colors.black,
-                    ))
-              ],
             ),
             SliverList.list(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(
-                        height: 190,
-                        child: Carousel(
-                          autoScroll: false,
-                          animationPageCurve: Curves.linear,
-                          activateIndicatorColor: const Color(0xffF2AE00),
-                          indicatorBarColor: Colors.transparent,
-                          isCircle: false,
-                          indicatorHeight: 5,
-                          indicatorWidth: 20,
-                          items: [
-                            Utils.headerImagesSlide(
-                              "https://images.unsplash.com/photo-1620332372374-f108c53d2e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=872&q=80",
-                              context,
-                            ),
-                            Utils.headerImagesSlide(
-                              "https://images.unsplash.com/photo-1623625434462-e5e42318ae49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-                              context,
-                            ),
-                            Utils.headerImagesSlide(
-                              "https://images.unsplash.com/photo-1520277739336-7bf67edfa768?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80",
-                              context,
-                            ),
-                          ],
+                      const Text(
+                        "Posts",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Dosis',
+                          fontSize: 18,
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Recent",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Dosis',
-                              fontSize: 18,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Row(
-                              children: [
-                                Text(
-                                  "see all",
-                                  style: TextStyle(
-                                    color: Color(0xff534F4F),
-                                    fontFamily: 'Dosis',
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: Color(0xff534F4F),
-                                  size: 15,
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      const SizedBox(height: 16),
                       InkWell(
                         borderRadius: BorderRadius.circular(10),
                         splashColor: Color(0xffF2AE00).withOpacity(0.4),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: const FlatDescriptionPage()),
-                          );
-                        },
+                        onTap: () {},
                         child: SizedBox(
                           height: 100,
                           child: Row(
