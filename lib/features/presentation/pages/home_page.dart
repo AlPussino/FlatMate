@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';

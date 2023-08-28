@@ -1,10 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slider/carousel.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:page_transition/page_transition.dart';
-
-import '../../../../core/utiles.dart';
 
 class PostOwnerProfilePage extends StatefulWidget {
   const PostOwnerProfilePage({super.key});

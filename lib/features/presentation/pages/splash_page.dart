@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
 import 'package:flutter/material.dart';

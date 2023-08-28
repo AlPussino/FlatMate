@@ -1,9 +1,11 @@
+import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/post_owner_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slider/carousel.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/utiles.dart';
 
 class FlatDescriptionPage extends StatefulWidget {
@@ -30,6 +32,15 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
             fontSize: 20,
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset('assets/svgs/heart_icon.svg'),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -94,7 +105,7 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    "Contact",
+                    "Contract",
                     style: TextStyle(
                       color: Color(0xff000000),
                       fontFamily: 'Dosis',
@@ -216,7 +227,7 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                       ),
                       InkWell(
                         onTap: () async {
-                          _openPhoneDialer("0987654321");
+                          _openPhoneDialer("+959951436554");
                         },
                         child: Container(
                           width: 120,
@@ -266,11 +277,12 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
   }
 
   void _openPhoneDialer(String phoneNumber) async {
-    final String url = "tel:$phoneNumber";
-    if (await canLaunchUrlString(url)) {
-      await launchUrlString(url);
-    } else {
-      throw 'Could not launch $url';
+    Uri url = Uri.parse("tel:$phoneNumber");
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      log("launch error");
     }
   }
 }
