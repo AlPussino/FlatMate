@@ -39,6 +39,7 @@ class _SearchPageState extends State<SearchPage> {
               textStyle: TextStyle(
                 fontSize: 80.0,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Dosis',
               ),
               boxHeight: 300.0,
               loadDuration: Duration(seconds: 1),
@@ -46,20 +47,20 @@ class _SearchPageState extends State<SearchPage> {
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            children: [
               DefaultTextStyle(
                 textAlign: TextAlign.start,
                 style: const TextStyle(
                   fontSize: 40.0,
-                  fontFamily: 'Horizon',
+                  fontFamily: 'Dosis',
                   color: Colors.black,
                 ),
                 child: AnimatedTextKit(
                   isRepeatingAnimation: true,
                   animatedTexts: [
-                    RotateAnimatedText('AWESOME'),
-                    RotateAnimatedText('OPTIMISTIC'),
-                    RotateAnimatedText('DIFFERENT'),
+                    RotateAnimatedText('FIND'),
+                    RotateAnimatedText('YOUR'),
+                    RotateAnimatedText('STAY'),
                   ],
                 ),
               ),

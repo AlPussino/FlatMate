@@ -21,7 +21,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   bool confirmPasswordError = false;
 
   bool _showError = false;
-  late bool isLoggingIn = false;
+  bool isLoggingIn = false;
 
   bool _currentPasswordObscureText = true;
   bool _newPasswordObscureText = true;

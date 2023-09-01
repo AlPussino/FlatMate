@@ -94,8 +94,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               color: Color(0xffF2AE00),
                               backgroundColor: Colors.white,
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+                            errorWidget: (context, url, error) => Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(0xff534F4F).withOpacity(0.5),
+                                ),
+                                child: const Icon(Icons.error)),
                           ),
                         ),
                         Positioned(
@@ -155,6 +161,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 trailing: TextButton(
                   onPressed: () {
                     showDialog(
+                      barrierDismissible: false,
                       context: context,
                       builder: (context) => AlertDialog(
                         shape: RoundedRectangleBorder(
@@ -237,6 +244,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 trailing: TextButton(
                   onPressed: () {
                     showDialog(
+                      barrierDismissible: false,
                       context: context,
                       builder: (context) => AlertDialog(
                         shape: RoundedRectangleBorder(
@@ -319,6 +327,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 trailing: TextButton(
                   onPressed: () {
                     showDialog(
+                      barrierDismissible: false,
                       context: context,
                       builder: (context) => AlertDialog(
                         shape: RoundedRectangleBorder(
@@ -413,6 +422,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 trailing: TextButton(
                   onPressed: () {
                     showDialog(
+                      barrierDismissible: false,
                       context: context,
                       builder: (context) => AlertDialog(
                         shape: RoundedRectangleBorder(

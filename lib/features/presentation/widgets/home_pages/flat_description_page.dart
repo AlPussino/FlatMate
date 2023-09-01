@@ -176,8 +176,15 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                           color: Color(0xffF2AE00),
                           backgroundColor: Colors.white,
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        errorWidget: (context, url, error) => Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xff534F4F).withOpacity(0.5),
+                          ),
+                          width: 100,
+                          height: 100,
+                          child: const Icon(Icons.error),
+                        ),
                       ),
                     ),
                     title: Text(

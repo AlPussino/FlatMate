@@ -24,6 +24,19 @@ class SettingPage extends StatelessWidget {
             fontSize: 24,
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.close,
+                  color: Colors.black,
+                )),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
