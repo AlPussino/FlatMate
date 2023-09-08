@@ -127,6 +127,30 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                   const Divider(color: Colors.grey),
                   const SizedBox(height: 20),
                   Text(
+                    "Flat type",
+                    style: TextStyle(
+                      color: Color(0xff534F4F),
+                      fontFamily: 'Dosis',
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Text(
+                        "Condo | 2 floor | 16x80 square feet",
+                        style: TextStyle(
+                          color: Color(0xff000000),
+                          fontFamily: 'Dosis',
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  const Divider(color: Colors.grey),
+                  const SizedBox(height: 20),
+                  Text(
                     "Left",
                     style: TextStyle(
                       color: Color(0xff534F4F),

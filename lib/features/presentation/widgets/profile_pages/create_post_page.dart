@@ -292,6 +292,263 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       ),
                       const SizedBox(height: 20),
                       const Text(
+                        "Flat type",
+                        style: TextStyle(
+                          color: Color(0xff534F4F),
+                          fontFamily: 'Dosis',
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Rental house type",
+                                style: TextStyle(
+                                  color: Color(0xff534F4F),
+                                  fontFamily: 'Dosis',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Container(
+                                width:
+                                    (MediaQuery.sizeOf(context).width / 2) - 30,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey, // Border color
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.circular(5), // Border radius
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: DropdownButton<String>(
+                                    underline: Container(),
+                                    alignment: Alignment.centerLeft,
+                                    borderRadius: BorderRadius.circular(10),
+                                    style: TextStyle(
+                                      color: Color(0xff534F4F),
+                                      fontFamily: 'Dosis',
+                                      fontSize: 14,
+                                    ),
+                                    value: selectedValue,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        selectedValue = newValue!;
+                                      });
+                                    },
+                                    items: options
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Floor",
+                                style: TextStyle(
+                                  color: Color(0xff534F4F),
+                                  fontFamily: 'Dosis',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Container(
+                                width:
+                                    (MediaQuery.sizeOf(context).width / 2) - 30,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey, // Border color
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.circular(5), // Border radius
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: DropdownButton<String>(
+                                    underline: Container(),
+                                    alignment: Alignment.centerLeft,
+                                    borderRadius: BorderRadius.circular(10),
+                                    style: TextStyle(
+                                      color: Color(0xff534F4F),
+                                      fontFamily: 'Dosis',
+                                      fontSize: 14,
+                                    ),
+                                    value: selectedValue,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        selectedValue = newValue!;
+                                      });
+                                    },
+                                    items: options
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 50,
+                            width: (MediaQuery.sizeOf(context).width / 2) - 30,
+                            child: TextFormField(
+                              style: const TextStyle(
+                                  color: Color(0xff2E2E2E),
+                                  fontFamily: 'Dosis',
+                                  fontSize: 14),
+                              textInputAction: TextInputAction.done,
+                              controller: _additionAddressController,
+                              obscureText: false,
+                              focusNode: _additionalAddressFocusNode,
+                              decoration: InputDecoration(
+                                hintText: 'length (feet)',
+                                contentPadding: const EdgeInsets.all(10),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff534F4F),
+                                  ),
+                                ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff534F4F),
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff534F4F),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff534F4F),
+                                  ),
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  additionalAddressError =
+                                      !isAdditionalAddressValid(value);
+                                  isLoggingIn = false;
+                                });
+                                if (_showError) {
+                                  setState(() {
+                                    _showError = false;
+                                  });
+                                }
+                              },
+                              // onSubmitted: (s) {
+                              //   _focusNode.unfocus();
+                              // },
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter password';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _additionAddressController.text = value!;
+                                _additionalAddressFocusNode.unfocus();
+                              },
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            width: (MediaQuery.sizeOf(context).width / 2) - 30,
+                            child: TextFormField(
+                              style: const TextStyle(
+                                  color: Color(0xff2E2E2E),
+                                  fontFamily: 'Dosis',
+                                  fontSize: 14),
+                              textInputAction: TextInputAction.done,
+                              controller: _additionAddressController,
+                              obscureText: false,
+                              focusNode: _additionalAddressFocusNode,
+                              decoration: InputDecoration(
+                                hintText: "width (feet)",
+                                contentPadding: const EdgeInsets.all(10),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff534F4F),
+                                  ),
+                                ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff534F4F),
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff534F4F),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff534F4F),
+                                  ),
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  additionalAddressError =
+                                      !isAdditionalAddressValid(value);
+                                  isLoggingIn = false;
+                                });
+                                if (_showError) {
+                                  setState(() {
+                                    _showError = false;
+                                  });
+                                }
+                              },
+                              // onSubmitted: (s) {
+                              //   _focusNode.unfocus();
+                              // },
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter password';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _additionAddressController.text = value!;
+                                _additionalAddressFocusNode.unfocus();
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
                         "Contract",
                         style: TextStyle(
                           color: Color(0xff534F4F),

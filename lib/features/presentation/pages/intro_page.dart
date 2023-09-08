@@ -60,10 +60,13 @@ class IntroPage extends StatelessWidget {
         body: AnimatedIntroduction(
           footerBgColor: const Color(0xffF2AE00),
           slides: pages,
+          containerBg: Colors.white,
+          physics: BouncingScrollPhysics(),
           indicatorType: IndicatorType.line,
           footerRadius: 20,
+          doneText: "Login",
           onDone: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               PageTransition(
                   type: PageTransitionType.rightToLeft, child: LoginPage()),

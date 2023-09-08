@@ -11,18 +11,18 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final _nameController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   final FocusNode _nameFocusNode = FocusNode();
-  final FocusNode _phoneFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _confirmPasswordFocusNode = FocusNode();
 
   late bool isLoggingIn = false;
   bool nameError = false;
-  bool phoneNumberError = false;
+  bool emailError = false;
   bool passwordError = false;
   bool confirmPasswordError = false;
 
@@ -34,11 +34,11 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void dispose() {
     _nameController.dispose();
-    _phoneNumberController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     _nameFocusNode.dispose();
-    _phoneFocusNode.dispose();
+    _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
     super.dispose();
@@ -103,6 +103,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     keyboardType: TextInputType.emailAddress,
                     focusNode: _nameFocusNode,
                     decoration: InputDecoration(
+                      helperText:
+                          'username should be between 3 and 20 characters',
                       contentPadding: EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -144,6 +146,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value!.isEmpty) {
                         return 'Please enter username';
                       }
+                      RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9_]{3,20}$');
+                      if (!usernameRegex.hasMatch(value)) {
+                        return 'Invalid username';
+                      }
                       return null;
                     },
                     onSaved: (value) {
@@ -153,7 +159,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   const SizedBox(height: 16),
                   const Text(
-                    "Phone number",
+                    "Email",
                     style: TextStyle(
                       fontFamily: 'Dosis',
                       color: Color(0xff534F4F),
@@ -166,10 +172,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: Color(0xff2E2E2E),
                         fontFamily: 'Dosis',
                         fontSize: 14),
-                    controller: _phoneNumberController,
+                    controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    focusNode: _phoneFocusNode,
+                    focusNode: _emailFocusNode,
                     decoration: InputDecoration(
+                      helperText: 'Enter a valid email',
                       contentPadding: EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -198,7 +205,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        phoneNumberError = !isPhoneNumberValid(value);
+                        emailError = !isEmailValid(value);
                         isLoggingIn = false;
                       });
 
@@ -211,7 +218,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     enabled: true,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter Email or Phone Number';
+                        return 'Please enter Email';
                       }
 
                       // Define the regex pattern
@@ -224,8 +231,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       return null;
                     },
                     onSaved: (value) {
-                      _phoneNumberController.text = value!;
-                      _phoneFocusNode.unfocus();
+                      _emailController.text = value!;
+                      _emailFocusNode.unfocus();
                     },
                   ),
                   const SizedBox(height: 16),
@@ -248,6 +255,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: _passwordObscureText,
                     focusNode: _passwordFocusNode,
                     decoration: InputDecoration(
+                      helperText: "Password must be at least 8",
                       contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -305,6 +313,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter password';
+                      } else if (value.length < 8) {
+                        return 'Password must have at least 8';
                       }
                       return null;
                     },
@@ -333,6 +343,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: _confirmPasswordObscureText,
                     focusNode: _confirmPasswordFocusNode,
                     decoration: InputDecoration(
+                      helperText: "Confirm the same password",
                       contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -391,6 +402,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter password';
+                      } else if (value.length < 8) {
+                        return 'Please confirm the same password';
                       }
                       return null;
                     },
@@ -496,7 +509,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return name.isNotEmpty;
   }
 
-  bool isPhoneNumberValid(String phoneNumber) {
+  bool isEmailValid(String phoneNumber) {
     return phoneNumber.isNotEmpty;
   }
 

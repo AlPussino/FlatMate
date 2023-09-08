@@ -88,12 +88,15 @@ class _PostCardState extends State<PostCard> {
                                     MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "100000/m",
-                                    style: TextStyle(
-                                      color: Color(0xff000000),
-                                      fontFamily: 'Dosis',
-                                      fontSize: 18,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 4),
+                                    child: const Text(
+                                      "100000/m",
+                                      style: TextStyle(
+                                        color: Color(0xff000000),
+                                        fontFamily: 'Dosis',
+                                        fontSize: 18,
+                                      ),
                                     ),
                                   ),
                                   Row(

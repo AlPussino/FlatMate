@@ -1,4 +1,6 @@
+import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flats_by_township_page.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import '../widgets/home_pages/post_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,7 +63,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+                                        child: const FlatsByTownshipPage()),
+                                  );
+                                },
                                 child: const Row(
                                   children: [
                                     Text(

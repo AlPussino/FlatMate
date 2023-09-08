@@ -1,3 +1,4 @@
+import 'package:animated_icon/animated_icon.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_page.dart';
@@ -49,8 +50,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   // ),
                 ),
                 actions: [
-                  IconButton(
-                    onPressed: () {
+                  AnimateIcon(
+                    toolTip: 'Setting',
+                    onTap: () {
                       Navigator.push(
                         context,
                         PageTransition(
@@ -58,10 +60,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: const SettingPage()),
                       );
                     },
-                    icon: const Icon(
-                      Icons.settings,
-                      color: Colors.black,
-                    ),
+                    iconType: IconType.animatedOnTap,
+                    height: 70,
+                    width: 70,
+                    color: Color(0xff000000),
+                    animateIcon: AnimateIcons.settings,
                   ),
                 ],
               ),
