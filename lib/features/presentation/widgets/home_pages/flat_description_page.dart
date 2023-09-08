@@ -24,14 +24,14 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        title: const Text(
-          "Royal Ambassador",
-          style: TextStyle(
-            color: Color(0xff000000),
-            fontFamily: 'Dosis',
-            fontSize: 20,
-          ),
-        ),
+        // title: const Text(
+        //   "Royal Ambassador",
+        //   style: TextStyle(
+        //     color: Color(0xff000000),
+        //     fontFamily: 'Dosis',
+        //     fontSize: 20,
+        //   ),
+        // ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
@@ -81,16 +81,16 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                   Text(
                     "Location",
                     style: TextStyle(
-                      color: Color(0xff000000),
+                      color: Color(0xff534F4F),
                       fontFamily: 'Dosis',
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
                   ),
+                  const SizedBox(height: 10),
                   Text(
                     "Hlaing Township , Yangon",
                     style: TextStyle(
-                      color: Color(0xff534F4F),
+                      color: Color(0xff000000),
                       fontFamily: 'Dosis',
                       fontSize: 16,
                     ),
@@ -98,43 +98,67 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                   Text(
                     "No.69, In Sein Road, Thu Kha Bus Stop",
                     style: TextStyle(
-                      color: Color(0xff534F4F),
+                      color: Color(0xff000000),
                       fontFamily: 'Dosis',
                       fontSize: 16,
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  const Divider(color: Colors.grey),
                   const SizedBox(height: 20),
                   Text(
                     "Contract",
                     style: TextStyle(
-                      color: Color(0xff000000),
+                      color: Color(0xff534F4F),
                       fontFamily: 'Dosis',
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
                   ),
+                  const SizedBox(height: 10),
                   Text(
                     "3  Months , 6 Months , Nego",
                     style: TextStyle(
-                      color: Color(0xff534F4F),
+                      color: Color(0xff000000),
                       fontFamily: 'Dosis',
                       fontSize: 16,
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  const Divider(color: Colors.grey),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Left",
+                    style: TextStyle(
+                      color: Color(0xff534F4F),
+                      fontFamily: 'Dosis',
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "3",
+                    style: TextStyle(
+                      color: Color(0xff000000),
+                      fontFamily: 'Dosis',
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Divider(color: Colors.grey),
                   const SizedBox(height: 20),
                   Text(
                     "Description",
                     style: TextStyle(
-                      color: Color(0xff000000),
+                      color: Color(0xff534F4F),
                       fontFamily: 'Dosis',
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
                   ),
+                  const SizedBox(height: 10),
                   Text(
                     "Stepping into the vibrant hostel, a sense of adventure fills the air. Backpackers from around the globe gather in the common area, sharing stories and laughter. The walls adorned with colorful maps and travel memorabilia spark conversations and inspire new journeys. Dorm rooms exude a cozy camaraderie, with bunk beds draped in curtains for privacy.Stepping into the vibrant hostel, a sense of adventure fills the air. Backpackers from around the globe gather in the common area, sharing stories and laughter. The walls adorned with colorful maps and travel memorabilia spark conversations and inspire new journeys. Dorm rooms exude a cozy camaraderie, with bunk beds draped in curtains for privacy.",
                     style: TextStyle(
-                      color: Color(0xff534F4F),
+                      color: Color(0xff000000),
                       fontFamily: 'Dosis',
                       fontSize: 16,
                     ),
@@ -152,7 +176,7 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                     },
                     tileColor: const Color(0xffE8E8E8),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
                     leading: Hero(
@@ -188,12 +212,11 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                       ),
                     ),
                     title: Text(
-                      "Aung Khant Kyaw",
+                      "Oak the GAY",
                       style: TextStyle(
                         color: Color(0xff000000),
                         fontFamily: 'Dosis',
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(
@@ -202,7 +225,6 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                         color: Color(0xff000000),
                         fontFamily: 'Dosis',
                         fontSize: 14,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   )

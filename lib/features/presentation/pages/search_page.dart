@@ -58,9 +58,9 @@ class _SearchPageState extends State<SearchPage> {
                 child: AnimatedTextKit(
                   isRepeatingAnimation: true,
                   animatedTexts: [
-                    RotateAnimatedText('FIND'),
-                    RotateAnimatedText('YOUR'),
-                    RotateAnimatedText('STAY'),
+                    RotateAnimatedText("I don't know"),
+                    RotateAnimatedText("how to code"),
+                    RotateAnimatedText('Search Page'),
                   ],
                 ),
               ),

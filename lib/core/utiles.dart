@@ -1,11 +1,8 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-
-import '../features/presentation/widgets/setting/view_profile_image_page.dart';
 
 class Utils {
   static headerImagesSlide(String img, BuildContext context) {
@@ -14,20 +11,23 @@ class Utils {
         Navigator.push(
           context,
           PageTransition(
-              type: PageTransitionType.fade,
-              // child: ViewProfileImagePage(
-              //   imgUrl: img,
-              //   imgTag: "FlatImages",
-              // ),
-              child: ImageViewer(images: [
+            type: PageTransitionType.fade,
+            // child: ViewProfileImagePage(
+            //   imgUrl: img,
+            //   imgTag: "FlatImages",
+            // ),
+            child: ImageViewer(
+              images: [
                 'https://images.unsplash.com/photo-1620332372374-f108c53d2e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=872&q=80',
                 'https://images.unsplash.com/photo-1623625434462-e5e42318ae49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
                 'https://images.unsplash.com/photo-1520277739336-7bf67edfa768?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80',
-              ])),
+              ],
+            ),
+          ),
         );
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         child: Hero(
           tag: "FlatImages",
           child: CachedNetworkImage(

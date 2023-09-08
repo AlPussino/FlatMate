@@ -26,7 +26,7 @@ class SettingPage extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 5),
             child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);

@@ -105,7 +105,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       const Text(
                         "Location",
                         style: TextStyle(
-                          color: Color(0xff000000),
+                          color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
                           fontSize: 18,
                         ),
@@ -220,7 +220,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       ),
                       const SizedBox(height: 20),
                       const Text(
-                        "Additional",
+                        "Additional location",
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
@@ -294,7 +294,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       const Text(
                         "Contract",
                         style: TextStyle(
-                          color: Color(0xff000000),
+                          color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
                           fontSize: 18,
                         ),
@@ -365,7 +365,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       const Text(
                         "Description",
                         style: TextStyle(
-                          color: Color(0xff000000),
+                          color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
                           fontSize: 18,
                         ),
@@ -436,7 +436,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       const Text(
                         "Price per month",
                         style: TextStyle(
-                          color: Color(0xff000000),
+                          color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
                           fontSize: 18,
                         ),
@@ -508,7 +508,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       const Text(
                         "Total people",
                         style: TextStyle(
-                          color: Color(0xff000000),
+                          color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
                           fontSize: 18,
                         ),

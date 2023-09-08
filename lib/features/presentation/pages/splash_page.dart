@@ -1,5 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/pages/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -92,7 +92,7 @@ class SplashPage extends StatelessWidget {
                                     context,
                                     PageTransition(
                                         type: PageTransitionType.rightToLeft,
-                                        child: const LoginPage()),
+                                        child: IntroPage()),
                                   );
                                 },
                                 child: const CircleAvatar(

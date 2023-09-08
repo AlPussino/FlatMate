@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_page.dart';
@@ -988,8 +986,7 @@ class _ProfilePageState extends State<ProfilePage> {
         enableFeedback: true,
         isExtended: true,
         onPressed: () async {
-          final XFile? image =
-              await picker.pickImage(source: ImageSource.camera);
+          // final List<XFile?> image = await picker.pickMultiImage();
           Navigator.push(
             context,
             PageTransition(
