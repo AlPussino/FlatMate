@@ -3,10 +3,11 @@ import 'package:finding_apartments_yangon/features/presentation/pages/home_page.
 import 'package:finding_apartments_yangon/features/presentation/pages/profile_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/saved_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/search_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-
+import '../providers/auth_provider.dart';
 import '../providers/home_provider.dart';
 
 class BottomNavigationBarPage extends StatefulWidget {
@@ -24,6 +25,13 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
     const SavedPage(),
     const ProfilePage(),
   ];
+  @override
+  void initState() {
+    bool isTokenExpired = context.read<AuthProvider>().isTokenExpired();
+    isTokenExpired ? context.read<UserProvider>().getUserInfo() : null;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentIndex = context.watch<HomeProvider>().currentIdx;

@@ -9,15 +9,6 @@ class IntroPage extends StatelessWidget {
   final List<SingleIntroScreen> pages = [
     const SingleIntroScreen(
       imageWithBubble: true,
-      headerWidget: Text(
-        'asdfas',
-        style: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.w500,
-          fontFamily: 'Dosis',
-          fontSize: 18,
-        ),
-      ),
       title: 'Welcome to the Event Management App !',
       description:
           'You plans your Events, We\'ll do the rest and will be the best! Guaranteed!  ',

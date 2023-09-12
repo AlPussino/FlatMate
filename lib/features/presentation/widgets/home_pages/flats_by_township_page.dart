@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -99,31 +98,13 @@ class _FlatsByTownshipPageState extends State<FlatsByTownshipPage> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.houseboat_sharp,
+                                      Icons.grid_view,
                                       color: Color(0xff534F4F),
                                       size: 15,
                                     ),
                                     const SizedBox(width: 10),
                                     Text(
-                                      "Condo",
-                                      style: TextStyle(
-                                        color: Color(0xff534F4F),
-                                        fontFamily: 'Dosis',
-                                        fontSize: 14,
-                                      ),
-                                      maxLines: 2,
-                                    ),
-                                    Text(
-                                      "|",
-                                      style: TextStyle(
-                                        color: Color(0xff534F4F),
-                                        fontFamily: 'Dosis',
-                                        fontSize: 14,
-                                      ),
-                                      maxLines: 2,
-                                    ),
-                                    Text(
-                                      "2 floor",
+                                      "Condo | 2 floor",
                                       style: TextStyle(
                                         color: Color(0xff534F4F),
                                         fontFamily: 'Dosis',
@@ -142,40 +123,13 @@ class _FlatsByTownshipPageState extends State<FlatsByTownshipPage> {
                                 child: Row(
                                   children: [
                                     Icon(
-                                      Icons.area_chart_rounded,
+                                      Icons.aspect_ratio_rounded,
                                       color: Color(0xff534F4F),
                                       size: 15,
                                     ),
                                     const SizedBox(width: 10),
                                     Text(
-                                      "17",
-                                      style: TextStyle(
-                                        color: Color(0xff534F4F),
-                                        fontFamily: 'Dosis',
-                                        fontSize: 14,
-                                      ),
-                                      maxLines: 2,
-                                    ),
-                                    Text(
-                                      "x",
-                                      style: TextStyle(
-                                        color: Color(0xff534F4F),
-                                        fontFamily: 'Dosis',
-                                        fontSize: 14,
-                                      ),
-                                      maxLines: 2,
-                                    ),
-                                    Text(
-                                      "80",
-                                      style: TextStyle(
-                                        color: Color(0xff534F4F),
-                                        fontFamily: 'Dosis',
-                                        fontSize: 14,
-                                      ),
-                                      maxLines: 2,
-                                    ),
-                                    Text(
-                                      "square feet",
+                                      "15 x 80 square feet",
                                       style: TextStyle(
                                         color: Color(0xff534F4F),
                                         fontFamily: 'Dosis',
@@ -230,7 +184,7 @@ class _FlatsByTownshipPageState extends State<FlatsByTownshipPage> {
                                           style: TextStyle(
                                             color: Color(0xff000000),
                                             fontFamily: 'Dosis',
-                                            fontSize: 18,
+                                            fontSize: 22,
                                           ),
                                         ),
                                       ),

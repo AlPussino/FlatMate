@@ -1,13 +1,39 @@
+import 'dart:developer';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/intro_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
+import 'bottom_navigation_bar_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(
+      const Duration(seconds: 2),
+      () async {
+        final nav = Navigator.of(context);
+        final success = await context.read<AuthProvider>().isAuthenticated();
+        log('isAuthenticated : $success');
+        if (success) {
+          nav.pushReplacement(
+            MaterialPageRoute(
+                settings: const RouteSettings(name: 'home'),
+                builder: (context) => const BottomNavigationBarPage()),
+          );
+        } else {
+          nav.pushReplacement(
+            MaterialPageRoute(
+                settings: const RouteSettings(name: 'home'),
+                builder: (context) => IntroPage()),
+          );
+        }
+      },
+    );
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -88,12 +114,12 @@ class SplashPage extends StatelessWidget {
                             child: Center(
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.rightToLeft,
-                                        child: IntroPage()),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   PageTransition(
+                                  //       type: PageTransitionType.rightToLeft,
+                                  //       child: IntroPage()),
+                                  // );
                                 },
                                 child: const CircleAvatar(
                                   backgroundColor: Colors.black,

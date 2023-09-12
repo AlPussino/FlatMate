@@ -17,31 +17,69 @@ class _CreatePostPageState extends State<CreatePostPage> {
     withReadStream: true,
     images: <ImageFile>[], // array of pre/default selected images
   );
-  String selectedValue = 'Option 1';
-  List<String> options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  String selectedCityValue = 'Yangon';
+  List<String> cityOptions = ['Yangon', 'Mandalay'];
+
+  String selectedTownshipValue = 'Hlaing';
+  List<String> townshipOptions = [
+    'Hlaing',
+    'Kamayut',
+    'Dagon',
+    'Bahan',
+    'Sule'
+  ];
+
+  String selectedHouseTypeValue = 'Condo';
+  List<String> houseTypeOptions = [
+    'Condo',
+    'Mini condo',
+    'flat',
+    'Hostel',
+    'Whole house'
+  ];
+
+  String selectedFloorValue = '1';
+  List<String> floorOptions = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10'
+  ];
 
   final _additionAddressController = TextEditingController();
   final _contractController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _pricePerMonthController = TextEditingController();
   final _totalPeopleController = TextEditingController();
+  final _lengthController = TextEditingController();
+  final _widthController = TextEditingController();
 
   final FocusNode _additionalAddressFocusNode = FocusNode();
   final FocusNode _contractFocusNode = FocusNode();
   final FocusNode _descriptionFocusNode = FocusNode();
   final FocusNode _pricePerMonthFocusNode = FocusNode();
   final FocusNode _totalPeopleFocusNode = FocusNode();
+  final FocusNode _lengthFocusNode = FocusNode();
+  final FocusNode _widthFocusNode = FocusNode();
 
   bool additionalAddressError = false;
   bool contractError = false;
   bool descriptionError = false;
   bool pricePerMonthError = false;
   bool totalPeopleError = false;
+  bool lengthError = false;
+  bool widthError = false;
 
   final _formKey = GlobalKey<FormState>();
 
   bool _showError = false;
-  bool isLoggingIn = false;
+  bool isPosting = false;
 
   @override
   void dispose() {
@@ -52,12 +90,17 @@ class _CreatePostPageState extends State<CreatePostPage> {
     _descriptionController.dispose();
     _pricePerMonthController.dispose();
     _totalPeopleController.dispose();
+    _lengthController.dispose();
+    _widthController.dispose();
 
     _additionalAddressFocusNode.dispose();
     _contractFocusNode.dispose();
     _descriptionFocusNode.dispose();
     _pricePerMonthFocusNode.dispose();
     _totalPeopleFocusNode.dispose();
+    _lengthFocusNode.dispose();
+    _widthFocusNode.dispose();
+
     super.dispose();
   }
 
@@ -98,7 +141,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                 ),
                 const SizedBox(height: 20),
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -107,7 +150,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -122,7 +165,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                 style: TextStyle(
                                   color: Color(0xff534F4F),
                                   fontFamily: 'Dosis',
-                                  fontSize: 16,
+                                  fontSize: 12,
                                 ),
                               ),
                               Container(
@@ -132,8 +175,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                   border: Border.all(
                                     color: Colors.grey, // Border color
                                   ),
-                                  borderRadius:
-                                      BorderRadius.circular(5), // Border radius
+                                  borderRadius: BorderRadius.circular(
+                                      10), // Border radius
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 10),
@@ -146,13 +189,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                       fontFamily: 'Dosis',
                                       fontSize: 14,
                                     ),
-                                    value: selectedValue,
+                                    value: selectedCityValue,
                                     onChanged: (newValue) {
                                       setState(() {
-                                        selectedValue = newValue!;
+                                        selectedCityValue = newValue!;
                                       });
                                     },
-                                    items: options
+                                    items: cityOptions
                                         .map<DropdownMenuItem<String>>(
                                             (String value) {
                                       return DropdownMenuItem<String>(
@@ -173,7 +216,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                 style: TextStyle(
                                   color: Color(0xff534F4F),
                                   fontFamily: 'Dosis',
-                                  fontSize: 16,
+                                  fontSize: 12,
                                 ),
                               ),
                               Container(
@@ -183,8 +226,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                   border: Border.all(
                                     color: Colors.grey, // Border color
                                   ),
-                                  borderRadius:
-                                      BorderRadius.circular(5), // Border radius
+                                  borderRadius: BorderRadius.circular(
+                                      10), // Border radius
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 10),
@@ -197,13 +240,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                       fontFamily: 'Dosis',
                                       fontSize: 14,
                                     ),
-                                    value: selectedValue,
+                                    value: selectedTownshipValue,
                                     onChanged: (newValue) {
                                       setState(() {
-                                        selectedValue = newValue!;
+                                        selectedTownshipValue = newValue!;
                                       });
                                     },
-                                    items: options
+                                    items: townshipOptions
                                         .map<DropdownMenuItem<String>>(
                                             (String value) {
                                       return DropdownMenuItem<String>(
@@ -224,7 +267,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       TextFormField(
@@ -268,7 +311,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                           setState(() {
                             additionalAddressError =
                                 !isAdditionalAddressValid(value);
-                            isLoggingIn = false;
+                            isPosting = false;
                           });
                           if (_showError) {
                             setState(() {
@@ -296,7 +339,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -311,7 +354,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                 style: TextStyle(
                                   color: Color(0xff534F4F),
                                   fontFamily: 'Dosis',
-                                  fontSize: 16,
+                                  fontSize: 12,
                                 ),
                               ),
                               Container(
@@ -321,8 +364,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                   border: Border.all(
                                     color: Colors.grey, // Border color
                                   ),
-                                  borderRadius:
-                                      BorderRadius.circular(5), // Border radius
+                                  borderRadius: BorderRadius.circular(
+                                      10), // Border radius
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 10),
@@ -335,13 +378,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                       fontFamily: 'Dosis',
                                       fontSize: 14,
                                     ),
-                                    value: selectedValue,
+                                    value: selectedHouseTypeValue,
                                     onChanged: (newValue) {
                                       setState(() {
-                                        selectedValue = newValue!;
+                                        selectedHouseTypeValue = newValue!;
                                       });
                                     },
-                                    items: options
+                                    items: houseTypeOptions
                                         .map<DropdownMenuItem<String>>(
                                             (String value) {
                                       return DropdownMenuItem<String>(
@@ -362,7 +405,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                 style: TextStyle(
                                   color: Color(0xff534F4F),
                                   fontFamily: 'Dosis',
-                                  fontSize: 16,
+                                  fontSize: 12,
                                 ),
                               ),
                               Container(
@@ -372,8 +415,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                   border: Border.all(
                                     color: Colors.grey, // Border color
                                   ),
-                                  borderRadius:
-                                      BorderRadius.circular(5), // Border radius
+                                  borderRadius: BorderRadius.circular(
+                                      10), // Border radius
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 10),
@@ -386,13 +429,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                       fontFamily: 'Dosis',
                                       fontSize: 14,
                                     ),
-                                    value: selectedValue,
+                                    value: selectedFloorValue,
                                     onChanged: (newValue) {
                                       setState(() {
-                                        selectedValue = newValue!;
+                                        selectedFloorValue = newValue!;
                                       });
                                     },
-                                    items: options
+                                    items: floorOptions
                                         .map<DropdownMenuItem<String>>(
                                             (String value) {
                                       return DropdownMenuItem<String>(
@@ -420,9 +463,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                   fontFamily: 'Dosis',
                                   fontSize: 14),
                               textInputAction: TextInputAction.done,
-                              controller: _additionAddressController,
+                              controller: _lengthController,
                               obscureText: false,
-                              focusNode: _additionalAddressFocusNode,
+                              focusNode: _lengthFocusNode,
                               decoration: InputDecoration(
                                 hintText: 'length (feet)',
                                 contentPadding: const EdgeInsets.all(10),
@@ -453,9 +496,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                               ),
                               onChanged: (value) {
                                 setState(() {
-                                  additionalAddressError =
-                                      !isAdditionalAddressValid(value);
-                                  isLoggingIn = false;
+                                  lengthError = !isLengthValid(value);
+                                  isPosting = false;
                                 });
                                 if (_showError) {
                                   setState(() {
@@ -468,13 +510,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
                               // },
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Please enter password';
+                                  return 'Please enter length';
                                 }
                                 return null;
                               },
                               onSaved: (value) {
-                                _additionAddressController.text = value!;
-                                _additionalAddressFocusNode.unfocus();
+                                _lengthController.text = value!;
+                                _lengthFocusNode.unfocus();
                               },
                             ),
                           ),
@@ -487,9 +529,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                   fontFamily: 'Dosis',
                                   fontSize: 14),
                               textInputAction: TextInputAction.done,
-                              controller: _additionAddressController,
+                              controller: _widthController,
                               obscureText: false,
-                              focusNode: _additionalAddressFocusNode,
+                              focusNode: _widthFocusNode,
                               decoration: InputDecoration(
                                 hintText: "width (feet)",
                                 contentPadding: const EdgeInsets.all(10),
@@ -520,9 +562,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                               ),
                               onChanged: (value) {
                                 setState(() {
-                                  additionalAddressError =
-                                      !isAdditionalAddressValid(value);
-                                  isLoggingIn = false;
+                                  widthError = !isWidthValid(value);
+                                  isPosting = false;
                                 });
                                 if (_showError) {
                                   setState(() {
@@ -535,13 +576,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
                               // },
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Please enter password';
+                                  return 'Please enter width';
                                 }
                                 return null;
                               },
                               onSaved: (value) {
-                                _additionAddressController.text = value!;
-                                _additionalAddressFocusNode.unfocus();
+                                _widthController.text = value!;
+                                _widthFocusNode.unfocus();
                               },
                             ),
                           )
@@ -553,7 +594,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       TextFormField(
@@ -596,7 +637,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         onChanged: (value) {
                           setState(() {
                             contractError = !isContractValid(value);
-                            isLoggingIn = false;
+                            isPosting = false;
                           });
                           if (_showError) {
                             setState(() {
@@ -624,7 +665,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       TextFormField(
@@ -667,7 +708,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         onChanged: (value) {
                           setState(() {
                             descriptionError = !isDescriptionValid(value);
-                            isLoggingIn = false;
+                            isPosting = false;
                           });
                           if (_showError) {
                             setState(() {
@@ -695,7 +736,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       TextFormField(
@@ -739,7 +780,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         onChanged: (value) {
                           setState(() {
                             pricePerMonthError = !isPricePerMonthValid(value);
-                            isLoggingIn = false;
+                            isPosting = false;
                           });
                           if (_showError) {
                             setState(() {
@@ -767,7 +808,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       TextFormField(
@@ -811,7 +852,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         onChanged: (value) {
                           setState(() {
                             totalPeopleError = !isTotalPeopleValid(value);
-                            isLoggingIn = false;
+                            isPosting = false;
                           });
                           if (_showError) {
                             setState(() {
@@ -880,5 +921,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
 
   bool isTotalPeopleValid(String totalPeople) {
     return totalPeople.isNotEmpty;
+  }
+
+  bool isLengthValid(String length) {
+    return length.isNotEmpty;
+  }
+
+  bool isWidthValid(String width) {
+    return width.isNotEmpty;
   }
 }

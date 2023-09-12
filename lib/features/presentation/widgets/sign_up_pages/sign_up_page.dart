@@ -1,6 +1,12 @@
+import 'dart:developer';
+import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/sign_up_pages/email_otp_verification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
+
+import '../../../data/models/requests/signup_request_with_email.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -12,17 +18,22 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _phoneNumberFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _confirmPasswordFocusNode = FocusNode();
 
   late bool isLoggingIn = false;
+  bool isButtonDisabled = false;
+
   bool nameError = false;
   bool emailError = false;
+  bool phoneNumberError = false;
   bool passwordError = false;
   bool confirmPasswordError = false;
 
@@ -35,11 +46,13 @@ class _SignUpPageState extends State<SignUpPage> {
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
+    _phoneNumberController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     _nameFocusNode.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
+    _phoneNumberFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
     super.dispose();
   }
@@ -85,16 +98,8 @@ class _SignUpPageState extends State<SignUpPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Full name",
-                    style: TextStyle(
-                      fontFamily: 'Dosis',
-                      color: Color(0xff534F4F),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
                   TextFormField(
+                    cursorColor: Color(0xffF2AE00),
                     style: const TextStyle(
                         color: Color(0xff2E2E2E),
                         fontFamily: 'Dosis',
@@ -103,6 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     keyboardType: TextInputType.emailAddress,
                     focusNode: _nameFocusNode,
                     decoration: InputDecoration(
+                      hintText: 'full name',
                       helperText:
                           'username should be between 3 and 20 characters',
                       contentPadding: EdgeInsets.all(10),
@@ -157,17 +163,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       _nameFocusNode.unfocus();
                     },
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Email",
-                    style: TextStyle(
-                      fontFamily: 'Dosis',
-                      color: Color(0xff534F4F),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 20),
                   TextFormField(
+                    cursorColor: Color(0xffF2AE00),
                     style: const TextStyle(
                         color: Color(0xff2E2E2E),
                         fontFamily: 'Dosis',
@@ -176,6 +174,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     keyboardType: TextInputType.emailAddress,
                     focusNode: _emailFocusNode,
                     decoration: InputDecoration(
+                      hintText: 'email',
                       helperText: 'Enter a valid email',
                       contentPadding: EdgeInsets.all(10),
                       border: OutlineInputBorder(
@@ -220,13 +219,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value!.isEmpty) {
                         return 'Please enter Email';
                       }
-
-                      // Define the regex pattern
-                      // RegExp regex = RegExp('^09');
-
-                      // if (!regex.hasMatch(value)) {
-                      //   return 'Phone number should start with 09.';
-                      // }
+                      if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
+                          .hasMatch(value)) {
+                        return 'Please enter a valid email address.';
+                      }
 
                       return null;
                     },
@@ -235,17 +231,80 @@ class _SignUpPageState extends State<SignUpPage> {
                       _emailFocusNode.unfocus();
                     },
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Password",
-                    style: TextStyle(
-                      fontFamily: 'Dosis',
-                      color: Color(0xff534F4F),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 20),
                   TextFormField(
+                    cursorColor: Color(0xffF2AE00),
+                    style: const TextStyle(
+                        color: Color(0xff2E2E2E),
+                        fontFamily: 'Dosis',
+                        fontSize: 14),
+                    controller: _phoneNumberController,
+                    keyboardType: TextInputType.emailAddress,
+                    focusNode: _phoneNumberFocusNode,
+                    decoration: InputDecoration(
+                      hintText: 'phone number',
+                      helperText: 'Enter a valid email',
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Color(0xff534F4F),
+                        ),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Color(0xff534F4F),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Color(0xff534F4F),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Color(0xff534F4F),
+                        ),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        phoneNumberError = !isPhoneNumberValid(value);
+                        isLoggingIn = false;
+                      });
+
+                      if (_showError) {
+                        setState(() {
+                          _showError = false;
+                        });
+                      }
+                    },
+                    enabled: true,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter phone number';
+                      }
+
+                      // Define the regex pattern
+                      RegExp regex = RegExp('^09');
+
+                      if (!regex.hasMatch(value)) {
+                        return 'Phone number should start with 09.';
+                      }
+
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _phoneNumberController.text = value!;
+                      _phoneNumberFocusNode.unfocus();
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    cursorColor: Color(0xffF2AE00),
                     style: const TextStyle(
                         color: Color(0xff2E2E2E),
                         fontFamily: 'Dosis',
@@ -255,6 +314,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: _passwordObscureText,
                     focusNode: _passwordFocusNode,
                     decoration: InputDecoration(
+                      hintText: 'password',
                       helperText: "Password must be at least 8",
                       contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
@@ -307,9 +367,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         });
                       }
                     },
-                    // onSubmitted: (s) {
-                    //   _focusNode.unfocus();
-                    // },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter password';
@@ -323,26 +380,19 @@ class _SignUpPageState extends State<SignUpPage> {
                       _passwordFocusNode.unfocus();
                     },
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Confirm password",
-                    style: TextStyle(
-                      fontFamily: 'Dosis',
-                      color: Color(0xff534F4F),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 20),
                   TextFormField(
                     style: const TextStyle(
                         color: Color(0xff2E2E2E),
                         fontFamily: 'Dosis',
                         fontSize: 14),
+
                     textInputAction: TextInputAction.done,
                     controller: _confirmPasswordController,
                     obscureText: _confirmPasswordObscureText,
                     focusNode: _confirmPasswordFocusNode,
                     decoration: InputDecoration(
+                      hintText: 'confirm password',
                       helperText: "Confirm the same password",
                       contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
@@ -419,21 +469,35 @@ class _SignUpPageState extends State<SignUpPage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      log(isButtonDisabled.toString());
+                      isButtonDisabled ? null : handleButtonClick();
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       minimumSize: const Size(500, 50),
-                      backgroundColor: const Color(0xffF2AE00),
+                      backgroundColor: _nameController.text.isNotEmpty &&
+                              _phoneNumberController.text.isNotEmpty &&
+                              _emailController.text.isNotEmpty &&
+                              _passwordController.text.isNotEmpty &&
+                              _confirmPasswordController.text.isNotEmpty &&
+                              _passwordController.text ==
+                                  _confirmPasswordController.text &&
+                              _passwordController.text.length >= 8
+                          ? const Color(0xffF2AE00)
+                          : Colors.grey,
                     ),
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Dosis',
-                        fontSize: 16,
-                      ),
-                    ),
+                    child: isLoggingIn
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : Text(
+                            "Sign Up",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Dosis',
+                              fontSize: 16,
+                            ),
+                          ),
                   ),
                 ],
               ),
@@ -509,7 +573,11 @@ class _SignUpPageState extends State<SignUpPage> {
     return name.isNotEmpty;
   }
 
-  bool isEmailValid(String phoneNumber) {
+  bool isEmailValid(String email) {
+    return email.isNotEmpty;
+  }
+
+  bool isPhoneNumberValid(String phoneNumber) {
     return phoneNumber.isNotEmpty;
   }
 
@@ -519,5 +587,69 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool isConfirmPasswordValid(String confirmPassword) {
     return confirmPassword.isNotEmpty;
+  }
+
+  void handleButtonClick() async {
+    if (!isButtonDisabled) {
+      setState(() {
+        isButtonDisabled = true;
+      });
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        setState(() {
+          isLoggingIn = true;
+        });
+        if (_nameController.text.isNotEmpty &&
+            _emailController.text.isNotEmpty &&
+            _phoneNumberController.text.isNotEmpty &&
+            _passwordController.text.isNotEmpty &&
+            _confirmPasswordController.text.isNotEmpty &&
+            _passwordController.text == _confirmPasswordController.text &&
+            _passwordController.text.length >= 8) {
+          _passwordFocusNode.unfocus();
+          final result = await context.read<AuthProvider>().signUpWithEmail(
+              body: SignUpRequestWithEmail(
+                  username: _nameController.text,
+                  email: _emailController.text,
+                  mobileNumber: _phoneNumberController.text,
+                  password: _passwordController.text));
+
+          if (result != null) {
+            setState(() {
+              isLoggingIn = false;
+              isButtonDisabled = false;
+            });
+
+            Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.rightToLeft,
+                  child: EmailOTPVerificationPage(
+                      loginReqWithEmail: SignUpRequestWithEmail(
+                          username: _nameController.text,
+                          email: _emailController.text,
+                          mobileNumber: _phoneNumberController.text,
+                          password: _passwordController.text))),
+            );
+          } else {
+            setState(() {
+              isLoggingIn = false;
+              isButtonDisabled = false;
+            });
+          }
+        } else {
+          null;
+        }
+        setState(() {
+          isLoggingIn = false;
+          isButtonDisabled = false;
+        });
+      } else {
+        setState(() {
+          isButtonDisabled = false;
+          _showError = true;
+        });
+      }
+    }
   }
 }

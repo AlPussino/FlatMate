@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             SliverList.list(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

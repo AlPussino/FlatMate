@@ -2,6 +2,8 @@ import 'package:finding_apartments_yangon/features/presentation/widgets/setting/
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../widgets/log_in_pages/login_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -263,7 +265,17 @@ class SettingPage extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                pref.clear();
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.rightToLeft,
+                      child: const LoginPage()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),

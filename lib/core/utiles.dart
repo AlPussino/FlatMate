@@ -1,8 +1,20 @@
-import 'dart:developer';
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/image_viewer.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
+
+const Map<String, String> headers = {
+  HttpHeaders.contentTypeHeader: 'application/json'
+};
+
+Map<String, String> authHeaders({required String token}) {
+  return {
+    HttpHeaders.contentTypeHeader: 'application/json',
+    HttpHeaders.authorizationHeader: 'Bearer $token'
+  };
+}
 
 class Utils {
   static headerImagesSlide(String img, BuildContext context) {
@@ -50,7 +62,81 @@ class Utils {
     );
   }
 
-  static tap() {
-    log("Tap Tap");
+  static showError(String errorMessage) {
+    showSimpleNotification(
+        Container(
+          height: 40,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.black.withOpacity(0.2), // Shadow color
+              //     offset: Offset(0, 3), // Offset of the shadow
+              //     blurRadius: 5, // Blur radius
+              //     spreadRadius: 1, // Spread radius
+              //   ),
+              // ],
+              color: Color.fromARGB(255, 255, 255, 255),
+              borderRadius: BorderRadius.circular(7)),
+          margin: const EdgeInsets.all(16),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 17),
+              child: Text(
+                errorMessage,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 252, 49, 49),
+                  fontFamily: 'Dosis',
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+        ),
+        autoDismiss: true,
+        contentPadding: const EdgeInsets.all(16),
+        background: Colors.transparent,
+        elevation: 0,
+        position: NotificationPosition.bottom);
+  }
+
+  static showSuccess(String errorMessage) {
+    showSimpleNotification(
+        Container(
+          height: 40,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.black.withOpacity(0.2), // Shadow color
+              //     offset: Offset(0, 3), // Offset of the shadow
+              //     blurRadius: 5, // Blur radius
+              //     spreadRadius: 1, // Spread radius
+              //   ),
+              // ],
+              color: Color.fromARGB(255, 255, 255, 255),
+              borderRadius: BorderRadius.circular(7)),
+          margin: const EdgeInsets.all(16),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 17),
+              child: Text(
+                errorMessage,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 46, 255, 91),
+                  fontFamily: 'Dosis',
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+        ),
+        autoDismiss: true,
+        contentPadding: const EdgeInsets.all(16),
+        background: Colors.transparent,
+        elevation: 0,
+        position: NotificationPosition.bottom);
   }
 }

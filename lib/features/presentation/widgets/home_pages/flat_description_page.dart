@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/post_owner_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slider/carousel.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/utiles.dart';
@@ -24,20 +23,12 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        // title: const Text(
-        //   "Royal Ambassador",
-        //   style: TextStyle(
-        //     color: Color(0xff000000),
-        //     fontFamily: 'Dosis',
-        //     fontSize: 20,
-        //   ),
-        // ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
               onPressed: () {},
-              icon: SvgPicture.asset('assets/svgs/heart_icon.svg'),
+              icon: Icon(Icons.favorite_border),
             ),
           ),
         ],
@@ -47,7 +38,7 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
           Expanded(
             flex: 10,
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(10),
               child: ListView(
                 physics: BouncingScrollPhysics(),
                 children: [
