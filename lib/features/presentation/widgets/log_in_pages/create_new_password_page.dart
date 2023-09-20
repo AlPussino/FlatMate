@@ -1,83 +1,78 @@
-import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class ChangePasswordPage extends StatefulWidget {
-  const ChangePasswordPage({super.key});
+import '../../providers/auth_provider.dart';
+import 'login_page.dart';
+
+class CreateNewPasswordPage extends StatefulWidget {
+  const CreateNewPasswordPage({super.key});
 
   @override
-  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
+  State<CreateNewPasswordPage> createState() => _CreateNewPasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> {
-  final _currentPasswordController = TextEditingController();
-  final _newPasswordController = TextEditingController();
+class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
+  final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
-  final FocusNode _currentPasswordFocusNode = FocusNode();
-  final FocusNode _newPasswordFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _confirmPasswordFocusNode = FocusNode();
 
-  bool currentPasswordError = false;
-  bool newPasswordError = false;
+  late bool isLoggingIn = false;
+  bool isButtonDisabled = false;
+
+  bool passwordError = false;
   bool confirmPasswordError = false;
 
-  bool isButtonDisabled = false;
   bool _showError = false;
-  bool isLoggingIn = false;
-
-  bool _currentPasswordObscureText = true;
-  bool _newPasswordObscureText = true;
+  bool _passwordObscureText = true;
   bool _confirmPasswordObscureText = true;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _currentPasswordController.dispose();
-    _newPasswordController.dispose();
+    _passwordController.dispose();
     _confirmPasswordController.dispose();
-    _currentPasswordFocusNode.dispose();
-    _newPasswordFocusNode.dispose();
+    _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        title: const Text(
-          "Change password",
-          style: TextStyle(
-            color: Color(0xff000000),
-            fontFamily: 'Dosis',
-            fontSize: 20,
-          ),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.only(top: 30, right: 24, left: 24),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
+              const Column(
+                children: [
+                  Text(
+                    "Create new Password",
+                    style: TextStyle(
+                      fontFamily: 'Dosis',
+                      color: Color(0xffF2AE00),
+                      fontSize: 24,
+                    ),
+                  ),
+                  Text(
+                    "Let's create new password mother fucker",
+                    style: TextStyle(
+                      fontFamily: 'Dosis',
+                      color: Color(0xff534F4F),
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 60),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Current password",
-                    style: TextStyle(
-                      fontFamily: 'Dosis',
-                      color: Color(0xff534F4F),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
                     style: const TextStyle(
@@ -85,10 +80,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         fontFamily: 'Dosis',
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
-                    controller: _currentPasswordController,
-                    obscureText: _currentPasswordObscureText,
-                    focusNode: _currentPasswordFocusNode,
+                    controller: _passwordController,
+                    obscureText: _passwordObscureText,
+                    focusNode: _passwordFocusNode,
                     decoration: InputDecoration(
+                      hintText: 'new password',
+                      helperText: "Password must be at least 8",
                       contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -117,12 +114,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
-                            _currentPasswordObscureText =
-                                !_currentPasswordObscureText;
+                            _passwordObscureText = !_passwordObscureText;
                           });
                         },
                         icon: Icon(
-                          _currentPasswordObscureText
+                          _passwordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
                           color: const Color(0xff534F4F),
@@ -132,7 +128,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        currentPasswordError = !isCurrentPasswordValid(value);
+                        passwordError = !isPasswordValid(value);
                         isLoggingIn = false;
                       });
                       if (_showError) {
@@ -141,127 +137,33 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         });
                       }
                     },
-                    // onSubmitted: (s) {
-                    //   _focusNode.unfocus();
-                    // },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter password';
+                      } else if (value.length < 8) {
+                        return 'Password must have at least 8';
                       }
                       return null;
                     },
                     onSaved: (value) {
-                      _currentPasswordController.text = value!;
-                      _currentPasswordFocusNode.unfocus();
+                      _passwordController.text = value!;
+                      _passwordFocusNode.unfocus();
                     },
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "New password",
-                    style: TextStyle(
-                      fontFamily: 'Dosis',
-                      color: Color(0xff534F4F),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 20),
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
                     style: const TextStyle(
                         color: Color(0xff2E2E2E),
                         fontFamily: 'Dosis',
                         fontSize: 14),
-                    textInputAction: TextInputAction.done,
-                    controller: _newPasswordController,
-                    obscureText: _newPasswordObscureText,
-                    focusNode: _newPasswordFocusNode,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Color(0xff534F4F),
-                        ),
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Color(0xff534F4F),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Color(0xff534F4F),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Color(0xff534F4F),
-                        ),
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _newPasswordObscureText = !_newPasswordObscureText;
-                          });
-                        },
-                        icon: Icon(
-                          _newPasswordObscureText
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        newPasswordError = !isNewPasswordValid(value);
-                        isLoggingIn = false;
-                      });
-                      if (_showError) {
-                        setState(() {
-                          _showError = false;
-                        });
-                      }
-                    },
-                    // onSubmitted: (s) {
-                    //   _focusNode.unfocus();
-                    // },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter password';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _newPasswordController.text = value!;
-                      _newPasswordFocusNode.unfocus();
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Confirm password",
-                    style: TextStyle(
-                      fontFamily: 'Dosis',
-                      color: Color(0xff534F4F),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
-                        color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
-                        fontSize: 14),
+
                     textInputAction: TextInputAction.done,
                     controller: _confirmPasswordController,
                     obscureText: _confirmPasswordObscureText,
                     focusNode: _confirmPasswordFocusNode,
                     decoration: InputDecoration(
+                      hintText: 'confirm password',
+                      helperText: "Confirm the same password",
                       contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -320,6 +222,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter password';
+                      } else if (value.length < 8) {
+                        return 'Please confirm the same password';
                       }
                       return null;
                     },
@@ -336,30 +240,31 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 children: [
                   ElevatedButton(
                     onPressed: () async {
+                      log(isButtonDisabled.toString());
                       isButtonDisabled ? null : handleButtonClick();
                     },
                     style: ElevatedButton.styleFrom(
                       shape: ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       minimumSize: const Size(500, 50),
-                      backgroundColor:
-                          _currentPasswordController.text.isNotEmpty &&
-                                  _newPasswordController.text.isNotEmpty &&
-                                  _confirmPasswordController.text.isNotEmpty &&
-                                  _newPasswordController.text ==
-                                      _confirmPasswordController.text &&
-                                  _newPasswordController.text.length >= 8
-                              ? const Color(0xffF2AE00)
-                              : Colors.grey,
+                      backgroundColor: _passwordController.text.isNotEmpty &&
+                              _confirmPasswordController.text.isNotEmpty &&
+                              _passwordController.text ==
+                                  _confirmPasswordController.text &&
+                              _passwordController.text.length >= 8
+                          ? const Color(0xffF2AE00)
+                          : Colors.grey,
                     ),
-                    child: const Text(
-                      "Confirm",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Dosis',
-                        fontSize: 16,
-                      ),
-                    ),
+                    child: isLoggingIn
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : Text(
+                            "Confirm",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Dosis',
+                              fontSize: 16,
+                            ),
+                          ),
                   ),
                 ],
               ),
@@ -370,12 +275,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     );
   }
 
-  bool isCurrentPasswordValid(String currentPassword) {
-    return currentPassword.isNotEmpty;
-  }
-
-  bool isNewPasswordValid(String newPassword) {
-    return newPassword.isNotEmpty;
+  bool isPasswordValid(String password) {
+    return password.isNotEmpty;
   }
 
   bool isConfirmPasswordValid(String confirmPassword) {
@@ -392,15 +293,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         setState(() {
           isLoggingIn = true;
         });
-        if (_currentPasswordController.text.isNotEmpty &&
-            _newPasswordController.text.isNotEmpty &&
+        if (_passwordController.text.isNotEmpty &&
             _confirmPasswordController.text.isNotEmpty &&
-            _newPasswordController.text == _confirmPasswordController.text &&
-            _newPasswordController.text.length >= 8) {
-          //
-          final result = await context.read<UserProvider>().changePassword(
-              currentPassword: _currentPasswordController.text,
-              newPassword: _newPasswordController.text);
+            _passwordController.text == _confirmPasswordController.text &&
+            _passwordController.text.length >= 8) {
+          _passwordFocusNode.unfocus();
+          log('yay');
+          final result = await context
+              .read<AuthProvider>()
+              .createNewPassword(_passwordController.text);
 
           if (result != null) {
             setState(() {
@@ -409,6 +310,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             });
 
             Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              PageTransition(
+                  type: PageTransitionType.rightToLeft, child: LoginPage()),
+            );
           } else {
             setState(() {
               isLoggingIn = false;

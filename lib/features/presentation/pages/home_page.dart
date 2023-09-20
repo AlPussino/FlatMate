@@ -1,7 +1,12 @@
+import 'dart:developer';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flats_by_township_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
+import '../providers/user_provider.dart';
 import '../widgets/home_pages/post_card.dart';
+import '../widgets/log_in_pages/login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +18,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    bool isTokenExpired = context.read<AuthProvider>().isTokenExpired();
+
+    if (isTokenExpired) {
+      final user = context.read<UserProvider>().getUserInfo();
+      user.then((value) {
+        if (value == null) {
+          log("value : $value");
+          Navigator.pushReplacement(
+            context,
+            PageTransition(
+                type: PageTransitionType.leftToRight, child: LoginPage()),
+          );
+        }
+      });
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

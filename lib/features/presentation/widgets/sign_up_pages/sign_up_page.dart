@@ -625,11 +625,13 @@ class _SignUpPageState extends State<SignUpPage> {
               PageTransition(
                   type: PageTransitionType.rightToLeft,
                   child: EmailOTPVerificationPage(
-                      loginReqWithEmail: SignUpRequestWithEmail(
-                          username: _nameController.text,
-                          email: _emailController.text,
-                          mobileNumber: _phoneNumberController.text,
-                          password: _passwordController.text))),
+                    loginReqWithEmail: SignUpRequestWithEmail(
+                        username: _nameController.text,
+                        email: _emailController.text,
+                        mobileNumber: _phoneNumberController.text,
+                        password: _passwordController.text),
+                    isReset: false,
+                  )),
             );
           } else {
             setState(() {

@@ -1,16 +1,18 @@
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/create_new_password_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-
 import '../../../data/models/requests/email_otp_verify_request.dart';
 import '../../../data/models/requests/signup_request_with_email.dart';
 
 class EmailOTPVerificationPage extends StatefulWidget {
   final SignUpRequestWithEmail loginReqWithEmail;
-  const EmailOTPVerificationPage({super.key, required this.loginReqWithEmail});
+  final bool isReset;
+  const EmailOTPVerificationPage(
+      {super.key, required this.loginReqWithEmail, required this.isReset});
 
   @override
   State<EmailOTPVerificationPage> createState() =>
@@ -66,20 +68,34 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () async {
-                final result = await context
-                    .read<AuthProvider>()
-                    .emailOtpVerification(
+                final result = widget.isReset
+                    ? await context
+                        .read<AuthProvider>()
+                        .forgetPasswordOtpVerification(
+                            body: EmailOTPVerifyRequest(
+                                email: widget.loginReqWithEmail.email,
+                                code: verificationCode))
+                    : await context.read<AuthProvider>().emailOtpVerification(
                         body: EmailOTPVerifyRequest(
                             email: widget.loginReqWithEmail.email,
                             code: verificationCode));
                 if (result != null) {
-                  Navigator.pop(context);
-                  Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.rightToLeft,
-                        child: LoginPage()),
-                  );
+                  if (widget.isReset) {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: CreateNewPasswordPage()),
+                    );
+                  } else {
+                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: LoginPage()),
+                    );
+                  }
                 }
               },
               style: ElevatedButton.styleFrom(

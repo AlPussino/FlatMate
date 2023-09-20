@@ -6,7 +6,7 @@ class MyUser {
   String? profileUrl;
   String? mobileNumber;
   String? email;
-  SocialContact? socialContacts;
+  List<SocialContact>? socialContacts;
 
   MyUser({
     this.id,
@@ -16,17 +16,19 @@ class MyUser {
     this.email,
     this.socialContacts,
   });
-
   factory MyUser.fromJson(Map<String, dynamic> json) {
+    List<SocialContact> socialContactsList =
+        (json['social_contacts'] as List? ?? [])
+            .map((contact) => SocialContact.fromJson(contact))
+            .toList();
+
     return MyUser(
       id: json['id'] as int?,
       username: json['username'] as String?,
-      profileUrl: json['profileUrl'] as String?,
-      mobileNumber: json['mobileNumber'] as String?,
+      profileUrl: json['profile_url'] as String?,
+      mobileNumber: json['mobile_number'] as String?,
       email: json['email'] as String?,
-      socialContacts: json['social_contacts'] != null
-          ? SocialContact.fromJson(json['social_contacts'])
-          : null,
+      socialContacts: socialContactsList,
     );
   }
 
@@ -34,10 +36,10 @@ class MyUser {
     return {
       'id': id,
       'username': username,
-      'profileUrl': profileUrl,
-      'mobileNumber': mobileNumber,
+      'profile_url': profileUrl,
+      'mobile_number': mobileNumber,
       'email': email,
-      'social_contacts': socialContacts!.toJson(),
+      'social_contacts': socialContacts,
     };
   }
 }

@@ -1,9 +1,9 @@
-import 'package:finding_apartments_yangon/features/data/models/reponses/login_response.dart';
+import 'package:finding_apartments_yangon/features/data/models/responses/login_response.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/login_request_with_email.dart';
 import 'package:flutter/material.dart';
 import '../../data/datasources/token_datasource.dart';
-import '../../data/models/reponses/email_otp_verify_response.dart';
-import '../../data/models/reponses/email_response.dart';
+import '../../data/models/responses/email_otp_verify_response.dart';
+import '../../data/models/responses/email_response.dart';
 import '../../data/models/requests/email_otp_verify_request.dart';
 import '../../data/models/requests/signup_request_with_email.dart';
 import '../../domain/usecases/auth_usecase.dart';
@@ -41,5 +41,18 @@ class AuthProvider with ChangeNotifier {
     } catch (e) {
       return true;
     }
+  }
+
+  Future<EmailResponse?> forgetPassword(String email) async {
+    return await _authUseCase.forgetPassword(email);
+  }
+
+  Future<EmailOTPVerifyResponse?> forgetPasswordOtpVerification(
+      {required EmailOTPVerifyRequest body}) async {
+    return _authUseCase.forgetPasswordOtpVerification(body);
+  }
+
+  Future<EmailResponse?> createNewPassword(String newPassword) async {
+    return await _authUseCase.createNewPassword(newPassword);
   }
 }

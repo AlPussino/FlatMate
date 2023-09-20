@@ -1,6 +1,6 @@
-class ApiPConfigs {
+class ApiConfigs {
   //base url
-  static const String baseUrl = "http://192.168.0.115:8080";
+  static const String baseUrl = "http://192.168.0.114:8080";
 
   //logIn urls
   static const String logInUrl = "$baseUrl/api/auth/login";
@@ -9,24 +9,50 @@ class ApiPConfigs {
   static const String signUpUrl = "$baseUrl/api/auth/user/register";
   static const String emailOTPVerifyUrl = "$baseUrl/api/auth/user/verify";
 
-  //user urls
-  static const String aboutMeUrl = "$baseUrl/api/user/me";
+  //auth urls
   static const String refreshTokenUrl =
       "$baseUrl/api/auth/refresh-token?token=";
+  static const String forgetPasswordUrl = "$baseUrl/api/user/check-email";
+  static const String forgetPasswordOTPVerifyUrl =
+      "$baseUrl/api/user/verify-otp";
+  static const String resetPasswordUrl = "$baseUrl/api/user/reset-password";
+
+  //user urls
+  static const String aboutMeUrl = "$baseUrl/api/user/me";
+  static const String changeUserNameUrl = "$baseUrl/api/user/me/username";
+  static const String changePasswordUrl = "$baseUrl/api/user/me/password";
+  static const String changeMobileNumberUrl =
+      "$baseUrl/api/user/me/mobile-number";
+  static const String uploadProfileUrl = "$baseUrl/api/user/me/profile";
+  static const String addSocialContactUrl =
+      "$baseUrl/api/user/me/social-contact";
+  static const String removeSocialContactUrl =
+      "$baseUrl/api/user/me/social-contact/";
 }
 
 ///
 
 //base url
-const baseUrl = ApiPConfigs.baseUrl;
+const baseUrl = ApiConfigs.baseUrl;
 
 //logIn urls
-const kLogInUrl = ApiPConfigs.logInUrl;
+const kLogInUrl = ApiConfigs.logInUrl;
 
 //signUp urls
-const kSignUpUrl = ApiPConfigs.signUpUrl;
-const kEmailOTPVerifyUrl = ApiPConfigs.emailOTPVerifyUrl;
+const kSignUpUrl = ApiConfigs.signUpUrl;
+const kEmailOTPVerifyUrl = ApiConfigs.emailOTPVerifyUrl;
+
+//auth urls
+const kRefreshTokenUrl = ApiConfigs.refreshTokenUrl;
+const kForgetPasswordUrl = ApiConfigs.forgetPasswordUrl;
+const kForgetPasswordOTPVerifyUrl = ApiConfigs.forgetPasswordOTPVerifyUrl;
+const kResetPasswordUrl = ApiConfigs.resetPasswordUrl;
 
 //user urls
-const kAboutMeUrl = ApiPConfigs.aboutMeUrl;
-const kRefreshTokenUrl = ApiPConfigs.refreshTokenUrl;
+const kAboutMeUrl = ApiConfigs.aboutMeUrl;
+const kChangeUserNameUrl = ApiConfigs.changeUserNameUrl;
+const kChangePasswordUrl = ApiConfigs.changePasswordUrl;
+const kChangeMobileNumberUrl = ApiConfigs.changeMobileNumberUrl;
+const kUploadProfileUrl = ApiConfigs.uploadProfileUrl;
+const kAddSocialContactUrl = ApiConfigs.addSocialContactUrl;
+const kRemoveSocialContactUrl = ApiConfigs.removeSocialContactUrl;

@@ -13,6 +13,10 @@ abstract class AuthUseCase {
       EmailOTPVerifyRequest body);
   Future<LoginResponse?> logInWithEmail(LogInRequestWithEmail body);
   bool isAuthenticated();
+  Future<EmailResponse?> forgetPassword(String email);
+  Future<EmailOTPVerifyResponse?> forgetPasswordOtpVerification(
+      EmailOTPVerifyRequest body);
+  Future<EmailResponse?> createNewPassword(String newPassword);
 }
 
 class AuthUseCaseImpl implements AuthUseCase {
@@ -41,5 +45,21 @@ class AuthUseCaseImpl implements AuthUseCase {
   @override
   bool isAuthenticated() {
     return _authRepository.isAuthenticated();
+  }
+
+  @override
+  Future<EmailResponse?> forgetPassword(String email) async {
+    return await _authRepository.forgetPassword(email);
+  }
+
+  @override
+  Future<EmailOTPVerifyResponse?> forgetPasswordOtpVerification(
+      EmailOTPVerifyRequest body) async {
+    return await _authRepository.forgetPasswordOtpVerification(body);
+  }
+
+  @override
+  Future<EmailResponse?> createNewPassword(String newPassword) async {
+    return await _authRepository.createNewPassword(newPassword);
   }
 }

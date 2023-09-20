@@ -32,6 +32,7 @@ dependencies:
   http: ^1.1.0
   flutter_verification_code: ^1.1.7
   flutter_easyloading: ^3.0.5
+  image_cropper: ^5.0.0
   
 
   cupertino_icons: ^1.0.2
@@ -57,6 +58,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/svgs/
+    - assets/jsons/
 
  
 

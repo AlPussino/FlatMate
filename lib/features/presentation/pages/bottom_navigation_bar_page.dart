@@ -35,6 +35,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   @override
   Widget build(BuildContext context) {
     final currentIndex = context.watch<HomeProvider>().currentIdx;
+
     return WillPopScope(
       onWillPop: () async {
         bool confirm = await showDialog(

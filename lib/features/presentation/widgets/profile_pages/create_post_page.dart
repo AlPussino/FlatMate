@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 
 class CreatePostPage extends StatefulWidget {
@@ -21,13 +23,19 @@ class _CreatePostPageState extends State<CreatePostPage> {
   List<String> cityOptions = ['Yangon', 'Mandalay'];
 
   String selectedTownshipValue = 'Hlaing';
-  List<String> townshipOptions = [
-    'Hlaing',
-    'Kamayut',
-    'Dagon',
-    'Bahan',
-    'Sule'
-  ];
+  List<String> townshipOptions = [];
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response =
+        await rootBundle.loadString('assets/jsons/divisionsAndTownships.json');
+    final data = await json.decode(response);
+    setState(() {
+      final List<String> uniqueNames =
+          data.map((data) => data["name"] as String).toSet().toList();
+      log("Data : ${uniqueNames}");
+    });
+  }
 
   String selectedHouseTypeValue = 'Condo';
   List<String> houseTypeOptions = [
@@ -39,18 +47,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
   ];
 
   String selectedFloorValue = '1';
-  List<String> floorOptions = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10'
-  ];
+  List<String> floorOptions =
+      List.generate(20, (index) => (index + 1).toString());
 
   final _additionAddressController = TextEditingController();
   final _contractController = TextEditingController();
@@ -84,7 +82,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
   @override
   void dispose() {
     _selectImagesController.dispose();
-
     _additionAddressController.dispose();
     _contractController.dispose();
     _descriptionController.dispose();

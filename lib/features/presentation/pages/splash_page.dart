@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/intro_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';

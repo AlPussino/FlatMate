@@ -1,6 +1,7 @@
 import 'package:finding_apartments_yangon/features/data/models/requests/login_request_with_email.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/bottom_navigation_bar_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/forget_password_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/sign_up_pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Text(
-                    "Hi welcome back, you've been missed",
+                    "Hi welcome back, you've been missed mother fucker",
                     style: TextStyle(
                       fontFamily: 'Dosis',
                       color: Color(0xff534F4F),
@@ -243,7 +244,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 8),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.rightToLeft,
+                            child: const ForgetPasswordPage()),
+                      );
+                    },
                     child: const Text(
                       "Forget password?",
                       style: TextStyle(

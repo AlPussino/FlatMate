@@ -125,7 +125,7 @@ class Utils {
               child: Text(
                 errorMessage,
                 style: TextStyle(
-                  color: Color.fromARGB(255, 46, 255, 91),
+                  color: Color.fromARGB(255, 6, 136, 62),
                   fontFamily: 'Dosis',
                   fontSize: 14,
                 ),
