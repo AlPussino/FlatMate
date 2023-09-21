@@ -134,7 +134,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               Hero(
                                 tag: 'ProfileImageTag',
                                 child: CachedNetworkImage(
-                                  imageUrl: myUser!.profileUrl != null
+                                  imageUrl: myUser.profileUrl != null
                                       ? myUser.profileUrl ?? ""
                                       : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
                                   imageBuilder: (context, imageProvider) =>

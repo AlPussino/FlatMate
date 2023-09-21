@@ -1,3 +1,8 @@
+import 'package:finding_apartments_yangon/features/data/datasources/post_datasource.dart';
+import 'package:finding_apartments_yangon/features/data/repositories/post_repository_impl.dart';
+import 'package:finding_apartments_yangon/features/domain/repositories/post_repository.dart';
+import 'package:finding_apartments_yangon/features/domain/usecases/post_usecase.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,6 +43,12 @@ MultiProvider initApp(
   UserRepository userRepository = UserRepositoryImpl(userDataSource);
   UserUseCase userUseCase = UserUseCaseImpl(userRepository, userDataSource);
 
+  /// Post
+  PostDataSource postDataSource =
+      PostDataSourceImpl(client, pref, tokenDataSource);
+  PostRepository postRepository = PostRepositoryImpl(postDataSource);
+  PostUseCase postUseCase = PostUseCaseImpl(postRepository, postDataSource);
+
   return MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => HomeProvider()),
@@ -45,6 +56,8 @@ MultiProvider initApp(
           create: (_) => AuthProvider(authUseCase, tokenDataSource)),
       ChangeNotifierProvider(
           create: (_) => UserProvider(userUseCase, tokenUseCase)),
+      ChangeNotifierProvider(
+          create: (_) => PostProvider(postUseCase, tokenUseCase)),
     ],
     child: child,
   );

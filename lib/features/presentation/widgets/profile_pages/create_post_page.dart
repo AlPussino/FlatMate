@@ -1,8 +1,12 @@
-import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
+import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
+import 'package:finding_apartments_yangon/features/data/models/post.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
+import 'package:provider/provider.dart';
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
@@ -17,33 +21,23 @@ class _CreatePostPageState extends State<CreatePostPage> {
     allowedImageTypes: ['png', 'jpg', 'jpeg'],
     withData: true,
     withReadStream: true,
-    images: <ImageFile>[], // array of pre/default selected images
+    images: <ImageFile>[],
   );
-  String selectedCityValue = 'Yangon';
-  List<String> cityOptions = ['Yangon', 'Mandalay'];
 
-  String selectedTownshipValue = 'Hlaing';
-  List<String> townshipOptions = [];
+  List<File>? imageFiles;
 
-  // Fetch content from the json file
-  Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/jsons/divisionsAndTownships.json');
-    final data = await json.decode(response);
-    setState(() {
-      final List<String> uniqueNames =
-          data.map((data) => data["name"] as String).toSet().toList();
-      log("Data : ${uniqueNames}");
-    });
-  }
+  String selectedRegion = "စစ်ကိုင်းတိုင်းဒေသကြီး";
+  String? selectedTownship;
+  List<MyanmarData> myanmarData = [];
 
-  String selectedHouseTypeValue = 'Condo';
+  String selectedHouseTypeValue = 'CONDO';
   List<String> houseTypeOptions = [
-    'Condo',
-    'Mini condo',
-    'flat',
-    'Hostel',
-    'Whole house'
+    'CONDO',
+    'MINI_CONDO',
+    'FLAT',
+    'HOSTEL',
+    'HOUSE',
+    'WHOLE_HOUSE'
   ];
 
   String selectedFloorValue = '1';
@@ -78,6 +72,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
 
   bool _showError = false;
   bool isPosting = false;
+  bool isButtonDisabled = false;
+
+  @override
+  void initState() {
+    load();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -99,6 +100,14 @@ class _CreatePostPageState extends State<CreatePostPage> {
     _widthFocusNode.dispose();
 
     super.dispose();
+  }
+
+  Future<void> load() async {
+    List<MyanmarData> data =
+        await context.read<PostProvider>().loadMyanmarData();
+    setState(() {
+      myanmarData = data;
+    });
   }
 
   @override
@@ -129,16 +138,19 @@ class _CreatePostPageState extends State<CreatePostPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MultiImagePickerView(
-                  addMoreButtonTitle: 'add more',
+                  addButtonTitle: '+',
+                  addMoreButtonTitle: '+',
                   controller: _selectImagesController,
                   onChange: (list) {
-                    log(list.toString());
+                    setState(() {
+                      log(list.toString());
+                    });
                   },
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(20),
                 ),
                 const SizedBox(height: 20),
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -158,7 +170,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                "City",
+                                "State / Division",
                                 style: TextStyle(
                                   color: Color(0xff534F4F),
                                   fontFamily: 'Dosis',
@@ -177,27 +189,27 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 10),
-                                  child: DropdownButton<String>(
+                                  child: DropdownButton(
+                                    isExpanded: true,
                                     underline: Container(),
                                     alignment: Alignment.centerLeft,
                                     borderRadius: BorderRadius.circular(10),
                                     style: TextStyle(
                                       color: Color(0xff534F4F),
                                       fontFamily: 'Dosis',
-                                      fontSize: 14,
+                                      fontSize: 10,
                                     ),
-                                    value: selectedCityValue,
+                                    value: selectedRegion,
                                     onChanged: (newValue) {
                                       setState(() {
-                                        selectedCityValue = newValue!;
+                                        selectedRegion = newValue!;
+                                        selectedTownship = null;
                                       });
                                     },
-                                    items: cityOptions
-                                        .map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
+                                    items: myanmarData.map((value) {
+                                      return DropdownMenuItem(
+                                        value: value.name,
+                                        child: Text(value.name),
                                       );
                                     }).toList(),
                                   ),
@@ -229,26 +241,29 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 10),
                                   child: DropdownButton<String>(
+                                    isExpanded: true,
                                     underline: Container(),
                                     alignment: Alignment.centerLeft,
                                     borderRadius: BorderRadius.circular(10),
                                     style: TextStyle(
                                       color: Color(0xff534F4F),
                                       fontFamily: 'Dosis',
-                                      fontSize: 14,
+                                      fontSize: 10,
                                     ),
-                                    value: selectedTownshipValue,
+                                    value: selectedTownship,
                                     onChanged: (newValue) {
                                       setState(() {
-                                        selectedTownshipValue = newValue!;
+                                        selectedTownship = newValue!;
                                       });
                                     },
-                                    items: townshipOptions
-                                        .map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
+                                    items: myanmarData
+                                        .firstWhere((data) =>
+                                            data.name == selectedRegion)
+                                        .townships
+                                        .map((township) {
+                                      return DropdownMenuItem(
+                                        value: township.name,
+                                        child: Text(township.name),
                                       );
                                     }).toList(),
                                   ),
@@ -260,11 +275,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       ),
                       const SizedBox(height: 20),
                       const Text(
-                        "Additional location",
+                        "App. Suite, Unit Building ",
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
-                          fontSize: 14,
+                          fontSize: 12,
                         ),
                       ),
                       TextFormField(
@@ -321,7 +336,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         // },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter password';
+                            return 'Please enter App,Unit..';
                           }
                           return null;
                         },
@@ -460,6 +475,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                   fontFamily: 'Dosis',
                                   fontSize: 14),
                               textInputAction: TextInputAction.done,
+                              keyboardType: TextInputType.number,
                               controller: _lengthController,
                               obscureText: false,
                               focusNode: _lengthFocusNode,
@@ -529,6 +545,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                               controller: _widthController,
                               obscureText: false,
                               focusNode: _widthFocusNode,
+                              keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 hintText: "width (feet)",
                                 contentPadding: const EdgeInsets.all(10),
@@ -595,7 +612,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         ),
                       ),
                       TextFormField(
-                        maxLines: 2,
+                        maxLines: 1,
                         style: const TextStyle(
                             color: Color(0xff2E2E2E),
                             fontFamily: 'Dosis',
@@ -647,7 +664,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         // },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter password';
+                            return 'Please enter contract';
                           }
                           return null;
                         },
@@ -718,7 +735,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         // },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter password';
+                            return 'Please enter description';
                           }
                           return null;
                         },
@@ -790,7 +807,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         // },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter password';
+                            return 'Please enter price per month';
                           }
                           return null;
                         },
@@ -801,7 +818,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       ),
                       const SizedBox(height: 20),
                       const Text(
-                        "Total people",
+                        "Total tenants",
                         style: TextStyle(
                           color: Color(0xff534F4F),
                           fontFamily: 'Dosis',
@@ -809,7 +826,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         ),
                       ),
                       TextFormField(
-                        maxLines: 2,
+                        maxLines: 1,
                         style: const TextStyle(
                             color: Color(0xff2E2E2E),
                             fontFamily: 'Dosis',
@@ -862,7 +879,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         // },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter password';
+                            return 'Please enter expected tenants';
                           }
                           return null;
                         },
@@ -873,21 +890,40 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       ),
                       const SizedBox(height: 40),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          isButtonDisabled ? null : handleButtonClick();
+                        },
                         style: ElevatedButton.styleFrom(
                           shape: ContinuousRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                           minimumSize: const Size(500, 50),
-                          backgroundColor: const Color(0xffF2AE00),
+                          backgroundColor: _contractController
+                                      .text.isNotEmpty &&
+                                  _descriptionController.text.isNotEmpty &&
+                                  _pricePerMonthController.text.isNotEmpty &&
+                                  _totalPeopleController.text.isNotEmpty &&
+                                  selectedRegion.isNotEmpty &&
+                                  selectedTownship!.isNotEmpty &&
+                                  _additionAddressController.text.isNotEmpty &&
+                                  selectedFloorValue.isNotEmpty &&
+                                  _lengthController.text.isNotEmpty &&
+                                  _widthController.text.isNotEmpty &&
+                                  selectedHouseTypeValue.isNotEmpty &&
+                                  _selectImagesController.images.isNotEmpty
+                              ? const Color(0xffF2AE00)
+                              : Colors.grey,
                         ),
-                        child: const Text(
-                          "Post",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Dosis',
-                            fontSize: 16,
-                          ),
-                        ),
+                        child: isPosting
+                            ? const CircularProgressIndicator(
+                                color: Colors.white)
+                            : Text(
+                                'Post',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Dosis',
+                                  fontSize: 16,
+                                ),
+                              ),
                       ),
                     ],
                   ),
@@ -926,5 +962,76 @@ class _CreatePostPageState extends State<CreatePostPage> {
 
   bool isWidthValid(String width) {
     return width.isNotEmpty;
+  }
+
+  void handleButtonClick() async {
+    if (!isButtonDisabled) {
+      setState(() {
+        isButtonDisabled = true;
+      });
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+
+        setState(() {
+          isPosting = true;
+        });
+        if (_contractController.text.isNotEmpty &&
+            _descriptionController.text.isNotEmpty &&
+            _pricePerMonthController.text.isNotEmpty &&
+            _totalPeopleController.text.isNotEmpty &&
+            selectedRegion.isNotEmpty &&
+            selectedTownship!.isNotEmpty &&
+            _additionAddressController.text.isNotEmpty &&
+            selectedFloorValue.isNotEmpty &&
+            _lengthController.text.isNotEmpty &&
+            _widthController.text.isNotEmpty &&
+            selectedHouseTypeValue.isNotEmpty &&
+            _selectImagesController.images.isNotEmpty) {
+          final result =
+              await context.read<PostProvider>().uploadImagesAndCreatePost(
+                  _selectImagesController.images,
+                  Post(
+                    contract: _contractController.text,
+                    description: _descriptionController.text,
+                    price: double.parse(_pricePerMonthController.text),
+                    tenants: int.parse(_totalPeopleController.text),
+                    state: selectedRegion,
+                    township: selectedTownship,
+                    additional: _additionAddressController.text,
+                    apartment: Apartment(
+                      floor: int.parse(selectedFloorValue),
+                      length: double.parse(_lengthController.text),
+                      width: double.parse(_widthController.text),
+                      apartmentType: selectedHouseTypeValue,
+                    ),
+                  ));
+
+          if (result != null) {
+            setState(() {
+              isPosting = false;
+              isButtonDisabled = false;
+            });
+            Navigator.of(context).pop();
+          } else {
+            print('asdf');
+            setState(() {
+              isPosting = false;
+              isButtonDisabled = false;
+            });
+          }
+        } else {
+          null;
+        }
+        setState(() {
+          isPosting = false;
+          isButtonDisabled = false;
+        });
+      } else {
+        setState(() {
+          isButtonDisabled = false;
+          _showError = true;
+        });
+      }
+    }
   }
 }

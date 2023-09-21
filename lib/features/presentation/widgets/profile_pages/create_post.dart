@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
-import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,21 +10,23 @@ class CreatePost extends StatefulWidget {
   State<CreatePost> createState() => _CreatePostState();
 }
 
-String selectedRegion = 'ကချင်ပြည်နယ်';
-String selectedTownship = 'ကန်ပိုက်တီ မြို့';
+String selectedRegion = "စစ်ကိုင်းတိုင်းဒေသကြီး";
+String? selectedTownship;
 List<MyanmarData> myanmarData = [];
 
 class _CreatePostState extends State<CreatePost> {
   @override
   void initState() {
+    load();
+    // myanmarData = context.read<UserProvider>().myanmarData;
     super.initState();
-    loadMyanmarData();
   }
 
-  void loadMyanmarData() async {
-    final data = await context.read<UserProvider>().loadMyanmarData();
+  Future<void> load() async {
+    List<MyanmarData> data =
+        await context.read<PostProvider>().loadMyanmarData();
+    print(data);
     setState(() {
-      log('asfd');
       myanmarData = data;
     });
   }
@@ -46,12 +46,22 @@ class _CreatePostState extends State<CreatePost> {
               onChanged: (newValue) {
                 setState(() {
                   selectedRegion = newValue!;
-                  selectedTownship = ''; // Reset township selection
+                  selectedTownship = null;
+
+                  print(selectedRegion);
+
+                  myanmarData
+                      .firstWhere(
+                        (element) => element.name == selectedRegion,
+                      )
+                      .townships
+                      .map((e) => print("Towns: ${e.name}"))
+                      .toList();
                 });
               },
               items: myanmarData.map((data) {
                 return DropdownMenuItem(
-                  value: data.name.toString(),
+                  value: data.name,
                   child: Text(data.name),
                 );
               }).toList(),
@@ -59,9 +69,9 @@ class _CreatePostState extends State<CreatePost> {
             SizedBox(height: 20.0),
             DropdownButton<String>(
               value: selectedTownship,
-              onChanged: (String? newValue) {
+              onChanged: (newValue) {
                 setState(() {
-                  selectedTownship = newValue ?? '';
+                  selectedTownship = newValue!;
                 });
               },
               items: myanmarData
@@ -69,11 +79,12 @@ class _CreatePostState extends State<CreatePost> {
                   .townships
                   .map((township) {
                 return DropdownMenuItem<String>(
-                  value: township,
-                  child: Text(township),
+                  value: township.name,
+                  child: Text(township.name),
                 );
               }).toList(),
             ),
+            TextFormField()
           ],
         ),
       ),

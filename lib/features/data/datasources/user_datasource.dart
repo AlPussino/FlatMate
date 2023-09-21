@@ -5,10 +5,8 @@ import 'package:finding_apartments_yangon/configs/api_configs.dart';
 import 'package:finding_apartments_yangon/features/data/datasources/token_datasource.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/login_response.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import '../../../core/utiles.dart';
-import '../models/divisions_and_townships.dart';
 import '../models/my_user.dart';
 import '../models/responses/email_response.dart';
 import 'package:http_parser/http_parser.dart';
@@ -23,7 +21,6 @@ abstract class UserDataSource {
   Future<String?> uploadProfile(File file, String? oldImageUrl);
   Future<MyUser?> addSocialContact(AddSocialContactRequest body);
   Future<EmailResponse?> removeSocialContact({required String id});
-  Future<List<MyanmarData>> loadMyanmarData();
 }
 
 class UserDataSourceImpl implements UserDataSource {
@@ -172,7 +169,6 @@ class UserDataSourceImpl implements UserDataSource {
     log("File path : ${file.path}");
 
     var request = http.MultipartRequest('POST', Uri.parse(kUploadProfileUrl));
-    // request.headers['Authorization'] = 'Bearer $token';
 
     request.files.add(await http.MultipartFile.fromPath('image', file.path,
         contentType: MediaType('Auto', 'jpeg')));
@@ -258,18 +254,5 @@ class UserDataSourceImpl implements UserDataSource {
       return null;
     }
     return null;
-  }
-
-  @override
-  Future<List<MyanmarData>> loadMyanmarData() async {
-    log('myanmar data method works');
-    // Load the JSON file from the assets folder
-    final String jsonText =
-        await rootBundle.loadString('assets/jsons/divisionsAndTownships.json');
-    // Parse the JSON data
-    List<dynamic> jsonData = json.decode(jsonText) as List;
-
-    final data = jsonData.map((json) => MyanmarData.fromJson(json)).toList();
-    return data;
   }
 }

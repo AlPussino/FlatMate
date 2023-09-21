@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/email_response.dart';
 import '../../domain/repositories/user_repository.dart';
@@ -45,10 +44,5 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<EmailResponse?> removeSocialContact({required String id}) async {
     return await userDataSource.removeSocialContact(id: id);
-  }
-
-  @override
-  Future<List<MyanmarData>> loadMyanmarData() async {
-    return await userDataSource.loadMyanmarData();
   }
 }

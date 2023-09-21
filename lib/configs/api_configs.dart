@@ -28,6 +28,9 @@ class ApiConfigs {
       "$baseUrl/api/user/me/social-contact";
   static const String removeSocialContactUrl =
       "$baseUrl/api/user/me/social-contact/";
+
+  //post urls
+  static const String createPostUrl = "$baseUrl/api/post";
 }
 
 ///
@@ -56,3 +59,6 @@ const kChangeMobileNumberUrl = ApiConfigs.changeMobileNumberUrl;
 const kUploadProfileUrl = ApiConfigs.uploadProfileUrl;
 const kAddSocialContactUrl = ApiConfigs.addSocialContactUrl;
 const kRemoveSocialContactUrl = ApiConfigs.removeSocialContactUrl;
+
+//post urls
+const kCreatePostUrl = ApiConfigs.createPostUrl;

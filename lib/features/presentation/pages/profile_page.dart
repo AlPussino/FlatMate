@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting/edit_profile_page.dart';
@@ -420,7 +421,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   left: 2),
                                                           child: Container(
                                                             color: Colors.white,
@@ -502,7 +503,7 @@ class _ProfilePageState extends State<ProfilePage> {
             context,
             PageTransition(
                 type: PageTransitionType.rightToLeft,
-                child: const CreatePost()),
+                child: const CreatePostPage()),
           );
         },
         tooltip: 'Add Item',

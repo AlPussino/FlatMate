@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
@@ -126,12 +125,5 @@ class UserProvider with ChangeNotifier {
   Future<EmailResponse?> removeSocialContact({required String id}) async {
     notifyListeners();
     return await _userUseCase.removeSocialContact(id: id);
-  }
-
-  Future<List<MyanmarData>> loadMyanmarData() async {
-    final data = await _userUseCase.loadMyanmarData();
-    _myanmarData = data;
-    notifyListeners();
-    return data;
   }
 }
