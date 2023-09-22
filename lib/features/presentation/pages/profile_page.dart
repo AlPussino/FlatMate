@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_pages/flat_create_post.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/user_provider.dart';
 import '../widgets/log_in_pages/login_page.dart';
-import '../widgets/profile_pages/create_post.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -21,6 +20,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 final ImagePicker picker = ImagePicker();
+final scrollController = ScrollController();
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
@@ -491,25 +491,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        backgroundColor: Color(0xffF2AE00),
-        enableFeedback: true,
-        isExtended: true,
-        onPressed: () async {
-          // final List<XFile?> image = await picker.pickMultiImage();
-          Navigator.push(
-            context,
-            PageTransition(
-                type: PageTransitionType.rightToLeft,
-                child: const CreatePostPage()),
-          );
-        },
-        tooltip: 'Add Item',
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }
 

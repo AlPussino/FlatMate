@@ -29,11 +29,12 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Find Apartments Yangon',
-          theme: ThemeData(
-              // colorScheme:
-              //     ColorScheme.fromSeed(seedColor: const Color(0xffF2AE00)),
-              // useMaterial3: true,
-              ),
+          // theme: ThemeData(
+          //     // colorScheme:
+          //     //     ColorScheme.fromSeed(seedColor: const Color(0xffF2AE00)),
+          //     // useMaterial3: true,
+          //     ),
+
           home: const SplashPage(),
         ),
       ),

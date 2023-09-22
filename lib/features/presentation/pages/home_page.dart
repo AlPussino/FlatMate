@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ui';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flats_by_township_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -47,14 +48,13 @@ class _HomePageState extends State<HomePage> {
               snap: false,
               floating: false,
               expandedHeight: 100,
-              flexibleSpace: const FlexibleSpaceBar(
+              flexibleSpace: FlexibleSpaceBar(
                 titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
                 centerTitle: false,
-                title: const Text(
+                title: Text(
                   "Find Your Stay",
                   style: TextStyle(
                     color: Color(0xffF2AE00),
-                    fontFamily: 'Dosis',
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),

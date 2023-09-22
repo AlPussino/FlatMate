@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
@@ -24,7 +23,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     images: <ImageFile>[],
   );
 
-  List<File>? imageFiles;
+  // List<File>? imageFiles;
 
   String selectedRegion = "စစ်ကိုင်းတိုင်းဒေသကြီး";
   String? selectedTownship;
@@ -75,12 +74,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
   bool isButtonDisabled = false;
 
   @override
-  void initState() {
-    load();
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _selectImagesController.dispose();
     _additionAddressController.dispose();
@@ -112,6 +105,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
 
   @override
   Widget build(BuildContext context) {
+    myanmarData = context.read<PostProvider>().myanmarData;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -177,6 +172,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                                   fontSize: 12,
                                 ),
                               ),
+                              const SizedBox(height: 10),
                               Container(
                                 width:
                                     (MediaQuery.sizeOf(context).width / 2) - 30,
