@@ -1,6 +1,6 @@
 class ApiConfigs {
   //base url
-  static const String baseUrl = "http://192.168.0.114:8080";
+  static const String baseUrl = "http://192.168.0.104:8080";
 
   //logIn urls
   static const String logInUrl = "$baseUrl/api/auth/login";
@@ -31,6 +31,9 @@ class ApiConfigs {
 
   //post urls
   static const String createPostUrl = "$baseUrl/api/post";
+  static const String getMyPostsUrl = "$baseUrl/api/post/me";
+  static const String getPostDetailUrl = "$baseUrl/api/post/";
+  static const String deleteMyPostUrl = "$baseUrl/api/post/";
 }
 
 ///
@@ -62,3 +65,6 @@ const kRemoveSocialContactUrl = ApiConfigs.removeSocialContactUrl;
 
 //post urls
 const kCreatePostUrl = ApiConfigs.createPostUrl;
+const kGetMyPostsUrl = ApiConfigs.getMyPostsUrl;
+const kGetPostDetailUrl = ApiConfigs.getPostDetailUrl;
+const kDeleteMyPostUrl = ApiConfigs.deleteMyPostUrl;

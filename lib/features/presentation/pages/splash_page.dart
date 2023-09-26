@@ -53,37 +53,26 @@ class SplashPage extends StatelessWidget {
                   child: RichText(
                     textWidthBasis: TextWidthBasis.longestLine,
                     textAlign: TextAlign.right,
-                    text: const TextSpan(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 48,
+                        fontFamily: 'Dosis',
+                      ),
                       children: [
                         TextSpan(
                           text: 'FIND\n',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 48,
-                            fontFamily: 'Dosis',
-                          ),
                         ),
                         TextSpan(
                           text: 'YOUR\n',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 48,
-                            fontFamily: 'Dosis',
-                          ),
                         ),
                         TextSpan(
                           text: 'STAY\n',
-                          style: TextStyle(
-                            fontFamily: 'Dosis',
-                            color: Colors.white,
-                            fontSize: 48,
-                          ),
                         ),
                         TextSpan(
                           text: 'Apartments and Hostels in Yangon',
                           style: TextStyle(
                             color: Colors.white,
-                            fontFamily: 'Dosis',
                             fontSize: 18,
                           ),
                         ),

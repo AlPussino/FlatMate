@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/features/data/models/picture.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/image_viewer.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/setting/view_profile_image_page.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
@@ -17,9 +19,32 @@ Map<String, String> authHeaders({required String token}) {
 }
 
 class Utils {
-  static headerImagesSlide(String img, BuildContext context) {
+  static headerImagesSlide(
+      List<Picture> imageList, String img, BuildContext context) {
+    List<String> imgStrList = [];
+    imageList.map((e) => imgStrList.add(e.url!)).toList();
+
+    List<Map<int, String>> myList = [];
+
+    for (int i = 0; i < imgStrList.length; i++) {
+      myList.add({i: imgStrList[i]});
+    }
+
     return InkWell(
       onTap: () {
+        int? foundId;
+        for (final entry in myList) {
+          if (entry.values.first == img) {
+            print(entry.values.first);
+            foundId = entry.keys.first;
+            break;
+          }
+        }
+        if (foundId != -1) {
+          print('Found ID: $foundId');
+        } else {
+          print('String not found in the list.');
+        }
         Navigator.push(
           context,
           PageTransition(
@@ -29,11 +54,8 @@ class Utils {
             //   imgTag: "FlatImages",
             // ),
             child: ImageViewer(
-              images: [
-                'https://images.unsplash.com/photo-1620332372374-f108c53d2e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=872&q=80',
-                'https://images.unsplash.com/photo-1623625434462-e5e42318ae49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
-                'https://images.unsplash.com/photo-1520277739336-7bf67edfa768?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80',
-              ],
+              id: foundId!,
+              images: imageList,
             ),
           ),
         );
@@ -68,14 +90,6 @@ class Utils {
           height: 40,
           width: double.infinity,
           decoration: BoxDecoration(
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black.withOpacity(0.2), // Shadow color
-              //     offset: Offset(0, 3), // Offset of the shadow
-              //     blurRadius: 5, // Blur radius
-              //     spreadRadius: 1, // Spread radius
-              //   ),
-              // ],
               color: Color.fromARGB(255, 255, 255, 255),
               borderRadius: BorderRadius.circular(7)),
           margin: const EdgeInsets.all(16),
@@ -107,14 +121,6 @@ class Utils {
           height: 40,
           width: double.infinity,
           decoration: BoxDecoration(
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black.withOpacity(0.2), // Shadow color
-              //     offset: Offset(0, 3), // Offset of the shadow
-              //     blurRadius: 5, // Blur radius
-              //     spreadRadius: 1, // Spread radius
-              //   ),
-              // ],
               color: Color.fromARGB(255, 255, 255, 255),
               borderRadius: BorderRadius.circular(7)),
           margin: const EdgeInsets.all(16),

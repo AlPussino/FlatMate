@@ -18,11 +18,11 @@ class _SearchPageState extends State<SearchPage> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        title: const Text(
+        title: Text(
           "Search",
           style: TextStyle(
             color: Color(0xff000000),
-            fontFamily: 'Dosis',
+            fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
@@ -39,7 +39,7 @@ class _SearchPageState extends State<SearchPage> {
               textStyle: TextStyle(
                 fontSize: 80.0,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Dosis',
+                fontFamily: DefaultTextStyle.of(context).style.fontFamily,
               ),
               boxHeight: 300.0,
               loadDuration: Duration(seconds: 1),
@@ -50,9 +50,9 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               DefaultTextStyle(
                 textAlign: TextAlign.start,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 40.0,
-                  fontFamily: 'Dosis',
+                  fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   color: Colors.black,
                 ),
                 child: AnimatedTextKit(

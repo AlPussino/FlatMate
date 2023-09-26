@@ -62,11 +62,11 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         automaticallyImplyLeading: true,
-        title: const Text(
+        title: Text(
           "Flat Descriptions",
           style: TextStyle(
             color: Color(0xff000000),
-            fontFamily: 'Dosis',
+            //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontSize: 20,
           ),
         ),
@@ -86,7 +86,8 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                                 _totalPeopleController.text.isNotEmpty
                             ? Color(0xffF2AE00)
                             : Colors.grey,
-                        fontFamily: 'Dosis',
+                        // fontFamily:
+                        //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 20,
                         fontWeight: FontWeight.w500),
                   ),
@@ -98,21 +99,22 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
         child: Form(
           key: _formKey,
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
-              const Text(
+              Text(
                 "Flat description",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  fontFamily: 'Dosis',
+                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "Contract",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  fontFamily: 'Dosis',
+                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -120,9 +122,9 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               TextFormField(
                 cursorColor: Color(0xffF2AE00),
                 maxLines: 1,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Color(0xff2E2E2E),
-                    fontFamily: 'Dosis',
+                    //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14),
                 textInputAction: TextInputAction.done,
                 controller: _contractController,
@@ -153,11 +155,11 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 },
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "Description",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  fontFamily: 'Dosis',
+                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -165,9 +167,9 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               TextFormField(
                 cursorColor: Color(0xffF2AE00),
                 maxLines: 5,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Color(0xff2E2E2E),
-                    fontFamily: 'Dosis',
+                    //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14),
                 textInputAction: TextInputAction.newline,
                 controller: _descriptionController,
@@ -197,11 +199,11 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 },
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "Price per month",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  fontFamily: 'Dosis',
+                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -209,9 +211,9 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               TextFormField(
                 cursorColor: Color(0xffF2AE00),
                 maxLines: 1,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Color(0xff2E2E2E),
-                    fontFamily: 'Dosis',
+                    //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14),
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
@@ -242,11 +244,11 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 },
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "Total tenants",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  fontFamily: 'Dosis',
+                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -255,9 +257,9 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 cursorColor: Color(0xffF2AE00),
 
                 maxLines: 1,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Color(0xff2E2E2E),
-                    fontFamily: 'Dosis',
+                    //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14),
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,

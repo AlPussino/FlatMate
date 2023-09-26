@@ -28,13 +28,13 @@ class MyApp extends StatelessWidget {
         cxt: context,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Find Apartments Yangon',
-          // theme: ThemeData(
-          //     // colorScheme:
-          //     //     ColorScheme.fromSeed(seedColor: const Color(0xffF2AE00)),
-          //     // useMaterial3: true,
-          //     ),
-
+          title: 'FlatMate',
+          theme: ThemeData(
+            fontFamily: 'Dosis',
+            // colorScheme:
+            //     ColorScheme.fromSeed(seedColor: const Color(0xffFFFFFF)),
+            useMaterial3: true,
+          ),
           home: const SplashPage(),
         ),
       ),

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../data/models/requests/signup_request_with_email.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+  SignUpPage({super.key});
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -61,17 +61,18 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 30, right: 24, left: 24),
+        padding: EdgeInsets.only(top: 30, right: 24, left: 24),
         child: Form(
           key: _formKey,
           child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
-              const Column(
+              Column(
                 children: [
                   Text(
                     "Sign Up",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xffF2AE00),
                       fontSize: 24,
                     ),
@@ -79,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Text(
                     "Fill your information below or",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xff534F4F),
                       fontSize: 14,
                     ),
@@ -87,22 +88,22 @@ class _SignUpPageState extends State<SignUpPage> {
                   Text(
                     "register with your google account",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xff534F4F),
                       fontSize: 14,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 60),
+              SizedBox(height: 60),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _nameController,
                     keyboardType: TextInputType.emailAddress,
@@ -163,12 +164,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       _nameFocusNode.unfocus();
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -231,19 +232,19 @@ class _SignUpPageState extends State<SignUpPage> {
                       _emailFocusNode.unfocus();
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _phoneNumberController,
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.phone,
                     focusNode: _phoneNumberFocusNode,
                     decoration: InputDecoration(
                       hintText: 'phone number',
-                      helperText: 'Enter a valid email',
+                      helperText: 'Enter a valid phone number',
                       contentPadding: EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -302,12 +303,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       _phoneNumberFocusNode.unfocus();
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
                     controller: _passwordController,
@@ -316,7 +317,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       hintText: 'password',
                       helperText: "Password must be at least 8",
-                      contentPadding: const EdgeInsets.all(10),
+                      contentPadding: EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -351,7 +352,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           _passwordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
+                          color: Color(0xff534F4F),
                           size: 20,
                         ),
                       ),
@@ -380,11 +381,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       _passwordFocusNode.unfocus();
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   TextFormField(
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
 
                     textInputAction: TextInputAction.done,
@@ -394,7 +395,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       hintText: 'confirm password',
                       helperText: "Confirm the same password",
-                      contentPadding: const EdgeInsets.all(10),
+                      contentPadding: EdgeInsets.all(10),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -430,7 +431,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           _confirmPasswordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
+                          color: Color(0xff534F4F),
                           size: 20,
                         ),
                       ),
@@ -464,7 +465,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: 32),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -476,7 +477,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: ElevatedButton.styleFrom(
                       shape: ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
-                      minimumSize: const Size(500, 50),
+                      minimumSize: Size(500, 50),
                       backgroundColor: _nameController.text.isNotEmpty &&
                               _phoneNumberController.text.isNotEmpty &&
                               _emailController.text.isNotEmpty &&
@@ -485,37 +486,39 @@ class _SignUpPageState extends State<SignUpPage> {
                               _passwordController.text ==
                                   _confirmPasswordController.text &&
                               _passwordController.text.length >= 8
-                          ? const Color(0xffF2AE00)
+                          ? Color(0xffF2AE00)
                           : Colors.grey,
                     ),
                     child: isLoggingIn
-                        ? const CircularProgressIndicator(color: Colors.white)
+                        ? CircularProgressIndicator(color: Colors.white)
                         : Text(
                             "Sign Up",
                             style: TextStyle(
                               color: Colors.white,
-                              fontFamily: 'Dosis',
+                              // fontFamily:
+                              //     DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,
                             ),
                           ),
                   ),
                 ],
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30),
               Column(
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Or Sign in with Google",
                         style: TextStyle(
                           color: Color(0xff534F4F),
-                          fontFamily: 'Dosis',
+                          // fontFamily:
+                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                       ),
-                      const SizedBox(height: 18),
+                      SizedBox(height: 18),
                       Container(
                         height: 50,
                         width: 50,
@@ -528,15 +531,16 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Don't have an account?",
                         style: TextStyle(
                           color: Color(0xff534F4F),
-                          fontFamily: 'Dosis',
+                          // fontFamily:
+                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                       ),
@@ -546,14 +550,15 @@ class _SignUpPageState extends State<SignUpPage> {
                             context,
                             PageTransition(
                                 type: PageTransitionType.leftToRight,
-                                child: const LoginPage()),
+                                child: LoginPage()),
                           );
                         },
-                        child: const Text(
+                        child: Text(
                           "Sign in",
                           style: TextStyle(
                             color: Color(0xffF2AE00),
-                            fontFamily: 'Dosis',
+                            // fontFamily:
+                            //     DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 16,
                           ),
                         ),

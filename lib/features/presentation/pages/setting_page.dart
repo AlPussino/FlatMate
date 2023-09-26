@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/log_in_pages/login_page.dart';
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+  SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,23 +17,23 @@ class SettingPage extends StatelessWidget {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         automaticallyImplyLeading: false,
-        title: const Text(
+        title: Text(
           "Setting",
           style: TextStyle(
             color: Color(0xff000000),
-            fontFamily: 'Dosis',
+            // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 5),
+            padding: EdgeInsets.only(right: 5),
             child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.close,
                   color: Colors.black,
                 )),
@@ -41,14 +41,14 @@ class SettingPage extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: ListView(
           children: [
-            const Text(
+            Text(
               "Account",
               style: TextStyle(
                 color: Color(0xff534F4F),
-                fontFamily: 'Dosis',
+                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
             ),
@@ -58,12 +58,12 @@ class SettingPage extends StatelessWidget {
                   context,
                   PageTransition(
                       type: PageTransitionType.rightToLeft,
-                      child: const EditProfilePage()),
+                      child: EditProfilePage()),
                 );
               },
-              contentPadding: const EdgeInsets.only(right: 0),
+              contentPadding: EdgeInsets.only(right: 0),
               minLeadingWidth: 20,
-              title: const Row(
+              title: Row(
                 children: [
                   Icon(
                     Icons.mode_edit_outline_outlined,
@@ -75,13 +75,13 @@ class SettingPage extends StatelessWidget {
                     "Edit profile",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
                 ],
               ),
-              trailing: const Icon(
+              trailing: Icon(
                 Icons.arrow_forward_ios_sharp,
                 color: Color(0xff534F4F),
                 size: 15,
@@ -93,12 +93,12 @@ class SettingPage extends StatelessWidget {
                   context,
                   PageTransition(
                       type: PageTransitionType.rightToLeft,
-                      child: const ChangePasswordPage()),
+                      child: ChangePasswordPage()),
                 );
               },
-              contentPadding: const EdgeInsets.only(right: 0),
+              contentPadding: EdgeInsets.only(right: 0),
               minLeadingWidth: 20,
-              title: const Row(
+              title: Row(
                 children: [
                   Icon(
                     Icons.password,
@@ -110,30 +110,30 @@ class SettingPage extends StatelessWidget {
                     "Change password",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
                 ],
               ),
-              trailing: const Icon(
+              trailing: Icon(
                 Icons.arrow_forward_ios_sharp,
                 color: Color(0xff534F4F),
                 size: 15,
               ),
             ),
-            const Divider(
+            Divider(
               color: Colors.grey,
             ),
-            const Text(
+            Text(
               "About",
               style: TextStyle(
                 color: Color(0xff534F4F),
-                fontFamily: 'Dosis',
+                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
             ),
-            const ListTile(
+            ListTile(
               contentPadding: EdgeInsets.only(right: 0),
               minLeadingWidth: 20,
               title: Row(
@@ -148,7 +148,7 @@ class SettingPage extends StatelessWidget {
                     "Terms and Conditions",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -160,7 +160,7 @@ class SettingPage extends StatelessWidget {
                 size: 15,
               ),
             ),
-            const ListTile(
+            ListTile(
               contentPadding: EdgeInsets.only(right: 0),
               minLeadingWidth: 20,
               title: Row(
@@ -175,7 +175,7 @@ class SettingPage extends StatelessWidget {
                     "Privacy and Policy",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -187,7 +187,7 @@ class SettingPage extends StatelessWidget {
                 size: 15,
               ),
             ),
-            const ListTile(
+            ListTile(
               contentPadding: EdgeInsets.only(right: 0),
               minLeadingWidth: 20,
               title: Row(
@@ -202,7 +202,7 @@ class SettingPage extends StatelessWidget {
                     "About app",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -214,18 +214,18 @@ class SettingPage extends StatelessWidget {
                 size: 15,
               ),
             ),
-            const Divider(
+            Divider(
               color: Colors.grey,
             ),
-            const Text(
+            Text(
               "Contact",
               style: TextStyle(
                 color: Color(0xff534F4F),
-                fontFamily: 'Dosis',
+                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
             ),
-            const ListTile(
+            ListTile(
               contentPadding: EdgeInsets.zero,
               minLeadingWidth: 20,
               title: Row(
@@ -240,7 +240,7 @@ class SettingPage extends StatelessWidget {
                     "Developers contact",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -252,18 +252,18 @@ class SettingPage extends StatelessWidget {
                 size: 15,
               ),
             ),
-            const Divider(
+            Divider(
               color: Colors.grey,
             ),
-            const Text(
+            Text(
               "Log out",
               style: TextStyle(
                 color: Color(0xff534F4F),
-                fontFamily: 'Dosis',
+                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             ElevatedButton(
               onPressed: () async {
                 SharedPreferences pref = await SharedPreferences.getInstance();
@@ -272,21 +272,20 @@ class SettingPage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   PageTransition(
-                      type: PageTransitionType.rightToLeft,
-                      child: const LoginPage()),
+                      type: PageTransitionType.rightToLeft, child: LoginPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
                 shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                minimumSize: const Size(500, 50),
-                backgroundColor: const Color(0xffF2AE00),
+                minimumSize: Size(500, 50),
+                backgroundColor: Color(0xffF2AE00),
               ),
-              child: const Text(
+              child: Text(
                 "Log out",
                 style: TextStyle(
                   color: Colors.white,
-                  fontFamily: 'Dosis',
+                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),
               ),

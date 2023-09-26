@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ui';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flats_by_township_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -54,6 +53,7 @@ class _HomePageState extends State<HomePage> {
                 title: Text(
                   "Find Your Stay",
                   style: TextStyle(
+                    fontFamily: 'Dosis',
                     color: Color(0xffF2AE00),
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -75,11 +75,13 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 "Hlaing",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontFamily: 'Dosis',
+                                  fontFamily: DefaultTextStyle.of(context)
+                                      .style
+                                      .fontFamily,
                                   fontSize: 18,
                                 ),
                               ),
@@ -92,13 +94,15 @@ class _HomePageState extends State<HomePage> {
                                         child: const FlatsByTownshipPage()),
                                   );
                                 },
-                                child: const Row(
+                                child: Row(
                                   children: [
                                     Text(
                                       "see all",
                                       style: TextStyle(
                                         color: Color(0xff534F4F),
-                                        fontFamily: 'Dosis',
+                                        fontFamily: DefaultTextStyle.of(context)
+                                            .style
+                                            .fontFamily,
                                         fontSize: 16,
                                       ),
                                     ),

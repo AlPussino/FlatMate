@@ -1,5 +1,6 @@
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/picture.dart';
+import 'package:finding_apartments_yangon/features/data/models/post_owner.dart';
 
 class Post {
   int? id;
@@ -12,6 +13,7 @@ class Post {
   String? additional;
   Apartment? apartment;
   List<Picture>? pictures;
+  PostOwner? postOwner;
 
   Post({
     this.id,
@@ -24,6 +26,7 @@ class Post {
     this.additional,
     this.apartment,
     this.pictures,
+    this.postOwner,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
@@ -36,6 +39,11 @@ class Post {
     Apartment? apartment =
         apartmentMap != null ? Apartment.fromJson(apartmentMap) : null;
 
+    Map<String, dynamic> postOwnerMap =
+        json['post_owner'] as Map<String, dynamic>;
+    PostOwner? postOwner =
+        postOwnerMap != null ? PostOwner.fromJson(postOwnerMap) : null;
+
     return Post(
       id: json['id'] as int?,
       contract: json['contract'] as String?,
@@ -47,6 +55,7 @@ class Post {
       additional: json['additional'] as String?,
       apartment: apartment,
       pictures: picturesList,
+      postOwner: postOwner,
     );
   }
 
@@ -62,6 +71,7 @@ class Post {
       'additional': additional,
       'apartment': apartment != null ? apartment!.toJson() : null,
       'pictures': pictures,
+      'post_owner': postOwner != null ? postOwner!.toJson() : null,
     };
   }
 }

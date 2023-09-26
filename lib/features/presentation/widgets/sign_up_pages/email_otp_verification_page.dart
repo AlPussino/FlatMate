@@ -33,7 +33,7 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
                 Text(
                   "Email verification",
                   style: TextStyle(
-                    fontFamily: 'Dosis',
+                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     color: Color(0xffF2AE00),
                     fontSize: 24,
                   ),
@@ -41,7 +41,7 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
                 Text(
                   "A verification code has been sent to ${widget.loginReqWithEmail.email}",
                   style: TextStyle(
-                    fontFamily: 'Dosis',
+                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     color: Color(0xff534F4F),
                     fontSize: 14,
                   ),
@@ -104,11 +104,11 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
                 minimumSize: const Size(500, 50),
                 backgroundColor: const Color(0xffF2AE00),
               ),
-              child: const Text(
+              child: Text(
                 "Confirm",
                 style: TextStyle(
                   color: Colors.white,
-                  fontFamily: 'Dosis',
+                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),
               ),

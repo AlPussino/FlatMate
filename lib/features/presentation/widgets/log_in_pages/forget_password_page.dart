@@ -47,13 +47,14 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
         child: Form(
           key: _formKey,
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
-              const Column(
+              Column(
                 children: [
                   Text(
                     "Forget password?",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xffF2AE00),
                       fontSize: 24,
                     ),
@@ -61,7 +62,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                   Text(
                     "I already know your brain sucks!",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xff534F4F),
                       fontSize: 14,
                     ),
@@ -74,9 +75,10 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                 children: [
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        // fontFamily:
+                        //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -161,7 +163,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                             'Confirm',
                             style: TextStyle(
                               color: Colors.white,
-                              fontFamily: 'Dosis',
+                              // fontFamily:
+                              //     DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,
                             ),
                           ),

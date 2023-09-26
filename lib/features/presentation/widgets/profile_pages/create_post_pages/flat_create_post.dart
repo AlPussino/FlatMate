@@ -69,11 +69,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         automaticallyImplyLeading: true,
-        title: const Text(
+        title: Text(
           "New Post",
           style: TextStyle(
             color: Color(0xff000000),
-            fontFamily: 'Dosis',
+            // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontSize: 20,
           ),
         ),
@@ -123,7 +123,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                           _selectImagesController.images.length > 0
                       ? Color(0xffF2AE00)
                       : Colors.grey,
-                  fontFamily: 'Dosis',
+                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),
             ),
@@ -155,11 +155,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Flat type",
                     style: TextStyle(
                       color: Color(0xff534F4F),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 14,
                     ),
                   ),
@@ -170,11 +170,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Rental house type",
                             style: TextStyle(
                               color: Color(0xff534F4F),
-                              fontFamily: 'Dosis',
+                              //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 12,
                             ),
                           ),
@@ -197,7 +197,9 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                                 borderRadius: BorderRadius.circular(10),
                                 style: TextStyle(
                                   color: Color(0xff534F4F),
-                                  fontFamily: 'Dosis',
+                                  // fontFamily: DefaultTextStyle.of(context)
+                                  //     .style
+                                  //     .fontFamily,
                                   fontSize: 14,
                                 ),
                                 value: selectedHouseTypeValue,
@@ -222,11 +224,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Floor",
                             style: TextStyle(
                               color: Color(0xff534F4F),
-                              fontFamily: 'Dosis',
+                              //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 12,
                             ),
                           ),
@@ -248,7 +250,9 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                                 borderRadius: BorderRadius.circular(10),
                                 style: TextStyle(
                                   color: Color(0xff534F4F),
-                                  fontFamily: 'Dosis',
+                                  // fontFamily: DefaultTextStyle.of(context)
+                                  //     .style
+                                  //     .fontFamily,
                                   fontSize: 14,
                                 ),
                                 value: selectedFloorValue,
@@ -262,7 +266,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                                         (String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
-                                    child: Text(value.contains("0")
+                                    child: Text(value == '0'
                                         ? "Ground floor"
                                         : "${value}th floor"),
                                   );
@@ -275,11 +279,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const Text(
+                  Text(
                     "Area (square feet)",
                     style: TextStyle(
                       color: Color(0xff534F4F),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 14,
                     ),
                   ),
@@ -290,11 +294,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Length",
                             style: TextStyle(
                               color: Color(0xff534F4F),
-                              fontFamily: 'Dosis',
+                              //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 12,
                             ),
                           ),
@@ -304,9 +308,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             width: (MediaQuery.sizeOf(context).width / 2) - 30,
                             child: TextFormField(
                               cursorColor: Color(0xffF2AE00),
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: Color(0xff2E2E2E),
-                                  fontFamily: 'Dosis',
+                                  fontFamily: DefaultTextStyle.of(context)
+                                      .style
+                                      .fontFamily,
                                   fontSize: 14),
                               textInputAction: TextInputAction.done,
                               keyboardType: TextInputType.number,
@@ -339,11 +345,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Width",
                             style: TextStyle(
                               color: Color(0xff534F4F),
-                              fontFamily: 'Dosis',
+                              //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 12,
                             ),
                           ),
@@ -352,9 +358,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             height: 80,
                             width: (MediaQuery.sizeOf(context).width / 2) - 30,
                             child: TextFormField(
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: Color(0xff2E2E2E),
-                                  fontFamily: 'Dosis',
+                                  // fontFamily: DefaultTextStyle.of(context)
+                                  //     .style
+                                  //     .fontFamily,
                                   fontSize: 14),
                               textInputAction: TextInputAction.done,
                               controller: _widthController,

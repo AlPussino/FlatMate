@@ -47,7 +47,6 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                               "Aung Khant Kyaw",
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                fontFamily: 'Dosis',
                                 fontSize: 20,
                               ),
                             ),
@@ -63,7 +62,6 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                   "09-87654321",
                                   style: TextStyle(
                                     color: Color(0xff534F4F),
-                                    fontFamily: 'Dosis',
                                     fontSize: 14,
                                   ),
                                 ),
@@ -130,11 +128,10 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Text(
+                      Text(
                         "Posts",
                         style: TextStyle(
                           color: Colors.black,
-                          fontFamily: 'Dosis',
                           fontSize: 18,
                         ),
                       ),
@@ -149,6 +146,10 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                           height: 130,
                           width: MediaQuery.sizeOf(context).width,
                           child: Card(
+                            elevation: 0.5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
                             color: Colors.white,
                             child: Row(
                               children: [
@@ -156,7 +157,7 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
-                                      color: Colors.white,
+                                      color: Colors.transparent,
                                       child: Center(
                                         child: CachedNetworkImage(
                                           imageUrl:
@@ -203,7 +204,7 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
-                                      color: Colors.white,
+                                      color: Colors.transparent,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -211,7 +212,7 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                           Expanded(
                                             flex: 2,
                                             child: Container(
-                                              color: Colors.white,
+                                              color: Colors.transparent,
                                               child: Row(
                                                 children: [
                                                   Icon(
@@ -224,7 +225,6 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                                     "Condo | 2 floor",
                                                     style: TextStyle(
                                                       color: Color(0xff534F4F),
-                                                      fontFamily: 'Dosis',
                                                       fontSize: 14,
                                                     ),
                                                     maxLines: 2,
@@ -236,7 +236,7 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                           Expanded(
                                             flex: 2,
                                             child: Container(
-                                              color: Colors.white,
+                                              color: Colors.transparent,
                                               child: Row(
                                                 children: [
                                                   Icon(
@@ -249,7 +249,6 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                                     "15 x 80 square feet",
                                                     style: TextStyle(
                                                       color: Color(0xff534F4F),
-                                                      fontFamily: 'Dosis',
                                                       fontSize: 14,
                                                     ),
                                                     maxLines: 2,
@@ -261,7 +260,7 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                           Expanded(
                                             flex: 2,
                                             child: Container(
-                                              color: Colors.white,
+                                              color: Colors.transparent,
                                               child: Row(
                                                 children: [
                                                   Icon(
@@ -274,7 +273,6 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                                     "09-987654321",
                                                     style: TextStyle(
                                                       color: Color(0xff534F4F),
-                                                      fontFamily: 'Dosis',
                                                       fontSize: 14,
                                                     ),
                                                     maxLines: 2,
@@ -286,7 +284,7 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                           Expanded(
                                             flex: 3,
                                             child: Container(
-                                              color: Colors.white,
+                                              color: Colors.transparent,
                                               child: Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
@@ -299,20 +297,19 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                                         const EdgeInsets.only(
                                                             left: 2),
                                                     child: Container(
-                                                      color: Colors.white,
+                                                      color: Colors.transparent,
                                                       child: Text(
                                                         '1000000/m',
                                                         style: TextStyle(
                                                           color:
                                                               Color(0xff000000),
-                                                          fontFamily: 'Dosis',
                                                           fontSize: 22,
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                   Container(
-                                                    color: Colors.white,
+                                                    color: Colors.transparent,
                                                     child: Container(
                                                       height: 25,
                                                       width: 60,
@@ -322,13 +319,12 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                                                             BorderRadius
                                                                 .circular(20),
                                                       ),
-                                                      child: const Center(
+                                                      child: Center(
                                                         child: Text(
                                                           "3 left",
                                                           style: TextStyle(
                                                             color: Color(
                                                                 0xffFFFFFF),
-                                                            fontFamily: 'Dosis',
                                                             fontSize: 12,
                                                           ),
                                                         ),

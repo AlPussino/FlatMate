@@ -7,9 +7,9 @@ class IntroPage extends StatelessWidget {
   IntroPage({super.key});
 
   final List<SingleIntroScreen> pages = [
-    const SingleIntroScreen(
+    SingleIntroScreen(
       imageWithBubble: true,
-      title: 'Welcome to the Event Management App !',
+      title: 'Welcome to the Fucking App !',
       description:
           'You plans your Events, We\'ll do the rest and will be the best! Guaranteed!  ',
       textStyle: TextStyle(
@@ -20,7 +20,7 @@ class IntroPage extends StatelessWidget {
       ),
       imageAsset: 'assets/images/apartment.png',
     ),
-    const SingleIntroScreen(
+    SingleIntroScreen(
       title: 'Book tickets to cricket matches and events',
       description:
           'Tickets to the latest movies, crickets matches, concerts, comedy shows, plus lots more !',

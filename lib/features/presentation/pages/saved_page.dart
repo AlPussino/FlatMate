@@ -28,11 +28,11 @@ class _SavedPageState extends State<SavedPage> {
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
                 centerTitle: false,
-                title: const Text(
+                title: Text(
                   "Saved",
                   style: TextStyle(
                     color: Color(0xff000000),
-                    fontFamily: 'Dosis',
+                    fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
@@ -59,6 +59,10 @@ class _SavedPageState extends State<SavedPage> {
                             height: 130,
                             width: MediaQuery.sizeOf(context).width,
                             child: Card(
+                              elevation: 0.5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               color: Colors.white,
                               child: Row(
                                 children: [
@@ -114,7 +118,7 @@ class _SavedPageState extends State<SavedPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        color: Colors.white,
+                                        color: Colors.transparent,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -122,7 +126,7 @@ class _SavedPageState extends State<SavedPage> {
                                             Expanded(
                                               flex: 2,
                                               child: Container(
-                                                color: Colors.white,
+                                                color: Colors.transparent,
                                                 child: Row(
                                                   children: [
                                                     Icon(
@@ -136,7 +140,11 @@ class _SavedPageState extends State<SavedPage> {
                                                       style: TextStyle(
                                                         color:
                                                             Color(0xff534F4F),
-                                                        fontFamily: 'Dosis',
+                                                        fontFamily:
+                                                            DefaultTextStyle.of(
+                                                                    context)
+                                                                .style
+                                                                .fontFamily,
                                                         fontSize: 14,
                                                       ),
                                                       maxLines: 2,
@@ -148,7 +156,7 @@ class _SavedPageState extends State<SavedPage> {
                                             Expanded(
                                               flex: 2,
                                               child: Container(
-                                                color: Colors.white,
+                                                color: Colors.transparent,
                                                 child: Row(
                                                   children: [
                                                     Icon(
@@ -163,7 +171,11 @@ class _SavedPageState extends State<SavedPage> {
                                                         style: TextStyle(
                                                           color:
                                                               Color(0xff534F4F),
-                                                          fontFamily: 'Dosis',
+                                                          fontFamily:
+                                                              DefaultTextStyle.of(
+                                                                      context)
+                                                                  .style
+                                                                  .fontFamily,
                                                           fontSize: 14,
                                                         ),
                                                         maxLines: 1,
@@ -176,7 +188,7 @@ class _SavedPageState extends State<SavedPage> {
                                             Expanded(
                                               flex: 2,
                                               child: Container(
-                                                color: Colors.white,
+                                                color: Colors.transparent,
                                                 child: Row(
                                                   children: [
                                                     Icon(
@@ -190,7 +202,11 @@ class _SavedPageState extends State<SavedPage> {
                                                       style: TextStyle(
                                                         color:
                                                             Color(0xff534F4F),
-                                                        fontFamily: 'Dosis',
+                                                        fontFamily:
+                                                            DefaultTextStyle.of(
+                                                                    context)
+                                                                .style
+                                                                .fontFamily,
                                                         fontSize: 14,
                                                       ),
                                                       maxLines: 2,
@@ -202,7 +218,7 @@ class _SavedPageState extends State<SavedPage> {
                                             Expanded(
                                               flex: 3,
                                               child: Container(
-                                                color: Colors.white,
+                                                color: Colors.transparent,
                                                 child: Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
@@ -215,13 +231,18 @@ class _SavedPageState extends State<SavedPage> {
                                                           const EdgeInsets.only(
                                                               left: 2),
                                                       child: Container(
-                                                        color: Colors.white,
+                                                        color:
+                                                            Colors.transparent,
                                                         child: Text(
                                                           '1000000/m',
                                                           style: TextStyle(
                                                             color: Color(
                                                                 0xff000000),
-                                                            fontFamily: 'Dosis',
+                                                            fontFamily:
+                                                                DefaultTextStyle.of(
+                                                                        context)
+                                                                    .style
+                                                                    .fontFamily,
                                                             fontSize: 22,
                                                           ),
                                                         ),
@@ -239,14 +260,17 @@ class _SavedPageState extends State<SavedPage> {
                                                               BorderRadius
                                                                   .circular(20),
                                                         ),
-                                                        child: const Center(
+                                                        child: Center(
                                                           child: Text(
                                                             "3 left",
                                                             style: TextStyle(
                                                               color: Color(
                                                                   0xffFFFFFF),
                                                               fontFamily:
-                                                                  'Dosis',
+                                                                  DefaultTextStyle.of(
+                                                                          context)
+                                                                      .style
+                                                                      .fontFamily,
                                                               fontSize: 12,
                                                             ),
                                                           ),

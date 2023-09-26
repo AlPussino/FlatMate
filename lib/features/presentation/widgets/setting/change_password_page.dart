@@ -51,11 +51,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        title: const Text(
+        title: Text(
           "Change password",
           style: TextStyle(
             color: Color(0xff000000),
-            fontFamily: 'Dosis',
+            // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontSize: 20,
           ),
         ),
@@ -69,10 +69,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Current password",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xff534F4F),
                       fontSize: 14,
                     ),
@@ -80,9 +80,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   const SizedBox(height: 8),
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        // fontFamily:
+                        //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
                     controller: _currentPasswordController,
@@ -156,10 +157,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     "New password",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xff534F4F),
                       fontSize: 14,
                     ),
@@ -167,9 +168,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   const SizedBox(height: 8),
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        // fontFamily:
+                        //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
                     controller: _newPasswordController,
@@ -242,10 +244,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     "Confirm password",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xff534F4F),
                       fontSize: 14,
                     ),
@@ -253,11 +255,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   const SizedBox(height: 8),
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        // fontFamily:
+                        //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
+
                     controller: _confirmPasswordController,
                     obscureText: _confirmPasswordObscureText,
                     focusNode: _confirmPasswordFocusNode,
@@ -352,11 +356,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                               ? const Color(0xffF2AE00)
                               : Colors.grey,
                     ),
-                    child: const Text(
+                    child: Text(
                       "Confirm",
                       style: TextStyle(
                         color: Colors.white,
-                        fontFamily: 'Dosis',
+                        // fontFamily:
+                        //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 16,
                       ),
                     ),

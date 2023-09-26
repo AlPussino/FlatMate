@@ -16,20 +16,24 @@ class _PostCardState extends State<PostCard> {
     return Padding(
       padding: const EdgeInsets.all(0),
       child: InkWell(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
         splashColor: Color(0xffF2AE00).withOpacity(0.4),
         onTap: () {
-          Navigator.push(
-            context,
-            PageTransition(
-                type: PageTransitionType.rightToLeft,
-                child: const FlatDescriptionPage()),
-          );
+          // Navigator.push(
+          //   context,
+          //   PageTransition(
+          //       type: PageTransitionType.rightToLeft,
+          //       child: const FlatDescriptionPage()),
+          // );
         },
         child: SizedBox(
           width: 200,
           height: 250,
           child: Card(
+            elevation: 0.5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
             child: Column(
               children: [
                 Expanded(
@@ -47,7 +51,7 @@ class _PostCardState extends State<PostCard> {
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                               image: imageProvider,
                               fit: BoxFit.cover,
@@ -77,7 +81,7 @@ class _PostCardState extends State<PostCard> {
                   child: Padding(
                     padding: const EdgeInsets.all(4),
                     child: Container(
-                      color: Colors.white,
+                      color: Colors.transparent,
                       child: Row(
                         children: [
                           Expanded(
@@ -90,11 +94,13 @@ class _PostCardState extends State<PostCard> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 4),
-                                    child: const Text(
+                                    child: Text(
                                       "100000/m",
                                       style: TextStyle(
                                         color: Color(0xff000000),
-                                        fontFamily: 'Dosis',
+                                        fontFamily: DefaultTextStyle.of(context)
+                                            .style
+                                            .fontFamily,
                                         fontSize: 18,
                                       ),
                                     ),
@@ -115,7 +121,10 @@ class _PostCardState extends State<PostCard> {
                                           "Hlaing, Yangon",
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
-                                            fontFamily: 'Dosis',
+                                            fontFamily:
+                                                DefaultTextStyle.of(context)
+                                                    .style
+                                                    .fontFamily,
                                             fontSize: 14,
                                           ),
                                           maxLines: 2,
@@ -139,7 +148,10 @@ class _PostCardState extends State<PostCard> {
                                           "09-987654321",
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
-                                            fontFamily: 'Dosis',
+                                            fontFamily:
+                                                DefaultTextStyle.of(context)
+                                                    .style
+                                                    .fontFamily,
                                             fontSize: 14,
                                           ),
                                         ),
@@ -153,7 +165,7 @@ class _PostCardState extends State<PostCard> {
                           Expanded(
                             flex: 2,
                             child: Container(
-                              color: Colors.white,
+                              color: Colors.transparent,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -164,12 +176,15 @@ class _PostCardState extends State<PostCard> {
                                       color: Colors.black,
                                       borderRadius: BorderRadius.circular(20),
                                     ),
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
                                         "3 left",
                                         style: TextStyle(
                                           color: Color(0xffFFFFFF),
-                                          fontFamily: 'Dosis',
+                                          fontFamily:
+                                              DefaultTextStyle.of(context)
+                                                  .style
+                                                  .fontFamily,
                                           fontSize: 12,
                                         ),
                                       ),

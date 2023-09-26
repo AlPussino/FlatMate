@@ -49,12 +49,12 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
           key: _formKey,
           child: ListView(
             children: [
-              const Column(
+              Column(
                 children: [
                   Text(
                     "Create new Password",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xffF2AE00),
                       fontSize: 24,
                     ),
@@ -62,7 +62,7 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                   Text(
                     "Let's create new password mother fucker",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xff534F4F),
                       fontSize: 14,
                     ),
@@ -75,9 +75,10 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                 children: [
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        fontFamily:
+                            DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
                     controller: _passwordController,
@@ -152,9 +153,10 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        fontFamily:
+                            DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
 
                     textInputAction: TextInputAction.done,
@@ -261,7 +263,8 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                             "Confirm",
                             style: TextStyle(
                               color: Colors.white,
-                              fontFamily: 'Dosis',
+                              fontFamily:
+                                  DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,
                             ),
                           ),

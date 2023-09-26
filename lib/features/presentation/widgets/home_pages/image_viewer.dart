@@ -1,18 +1,39 @@
+import 'package:finding_apartments_yangon/features/data/models/picture.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class ImageViewer extends StatelessWidget {
-  final List<String> images;
+class ImageViewer extends StatefulWidget {
+  final List<Picture> images;
+  final int id;
 
-  ImageViewer({super.key, required this.images});
-  final PageController pageController = PageController();
+  ImageViewer({
+    super.key,
+    required this.images,
+    required this.id,
+  });
+
+  @override
+  State<ImageViewer> createState() => _ImageViewerState();
+}
+
+class _ImageViewerState extends State<ImageViewer> {
+  // final PageController pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
+    // widget.images.map((e) => print(e.id.toString())).toList();
     return Scaffold(
+      //   body: PageView(
+      //     controller: PageController(initialPage: widget.id),
+      //     onPageChanged: (index) {},
+      //     children: widget.images.map((imageUrl) {
+      //       return Image.network(imageUrl.url!);
+      //     }).toList(),
+      //   ),
+
       body: PageView.builder(
-        controller: pageController,
-        itemCount: images.length,
+        controller: PageController(initialPage: widget.id),
+        itemCount: widget.images.length,
         itemBuilder: (context, index) {
           return Center(
             child: PhotoView(
@@ -31,13 +52,13 @@ class ImageViewer extends StatelessWidget {
               errorBuilder: (context, error, stackTrace) {
                 return const Icon(Icons.error);
               },
-              enablePanAlways: false,
-              gaplessPlayback: true,
+              enablePanAlways: true,
+              gaplessPlayback: false,
               enableRotation: false,
               backgroundDecoration: const BoxDecoration(
                 color: Colors.white,
               ),
-              imageProvider: NetworkImage(images[index]),
+              imageProvider: NetworkImage(widget.images[index].url!),
             ),
           );
         },

@@ -44,11 +44,11 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         automaticallyImplyLeading: true,
-        title: const Text(
+        title: Text(
           "Flat Location",
           style: TextStyle(
             color: Color(0xff000000),
-            fontFamily: 'Dosis',
+            // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontSize: 20,
           ),
         ),
@@ -98,7 +98,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                           _additionAddressController.text.isNotEmpty
                       ? Color(0xffF2AE00)
                       : Colors.grey,
-                  fontFamily: 'Dosis',
+                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),
             ),
@@ -109,14 +109,14 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
         padding: const EdgeInsets.all(20),
         child: Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
-              const Text(
+              Text(
                 "Flat location",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  fontFamily: 'Dosis',
+                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),
               ),
@@ -124,11 +124,11 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "State / Division",
                     style: TextStyle(
                       color: Color(0xff534F4F),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 12,
                     ),
                   ),
@@ -150,7 +150,8 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
                           color: Color(0xff534F4F),
-                          fontFamily: 'Dosis',
+                          // fontFamily:
+                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 12,
                         ),
                         value: selectedRegion,
@@ -175,11 +176,11 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Township",
                     style: TextStyle(
                       color: Color(0xff534F4F),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 12,
                     ),
                   ),
@@ -201,7 +202,8 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
                           color: Color(0xff534F4F),
-                          fontFamily: 'Dosis',
+                          // fontFamily:
+                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 12,
                         ),
                         value: selectedTownship,
@@ -225,11 +227,11 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                 ],
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "App. Suite, Unit Building ",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  fontFamily: 'Dosis',
+                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -237,9 +239,9 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
               TextFormField(
                 cursorColor: Color(0xffF2AE00),
                 maxLines: 3,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Color(0xff2E2E2E),
-                    fontFamily: 'Dosis',
+                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14),
                 textInputAction: TextInputAction.done,
                 controller: _additionAddressController,

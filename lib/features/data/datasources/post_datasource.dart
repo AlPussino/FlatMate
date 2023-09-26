@@ -6,6 +6,7 @@ import 'package:finding_apartments_yangon/core/utiles.dart';
 import 'package:finding_apartments_yangon/features/data/datasources/token_datasource.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
+import 'package:finding_apartments_yangon/features/data/models/post_list.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,9 @@ import 'package:http_parser/http_parser.dart';
 abstract class PostDataSource {
   Future<List<MyanmarData>> loadMyanmarData();
   Future<Post?> createPost(List<File> imageFiles, Post body);
+  Future<PostList?> getMyPosts();
+  Future<Post?> getPostDetail(int postId);
+  Future<bool?> deleteMyPost(int postId);
 }
 
 class PostDataSourceImpl implements PostDataSource {
@@ -86,6 +90,82 @@ class PostDataSourceImpl implements PostDataSource {
       }
     } catch (error) {
       print('Error: $error');
+    }
+    return null;
+  }
+
+  @override
+  Future<PostList?> getMyPosts() async {
+    final token = _tokenDataSource.getToken();
+    try {
+      final resp = await _client.get(
+        Uri.parse(kGetMyPostsUrl),
+        headers: authHeaders(token: token!),
+      );
+
+      if (resp.statusCode == HttpStatus.ok) {
+        return PostList.fromJson(resp.body);
+      } else {
+        Utils.showError('Loading my posts error');
+        return null;
+      }
+    } on SocketException {
+      Utils.showError("Network Error");
+    } catch (e) {
+      log(e.toString());
+      Utils.showError('err : $e');
+      return null;
+    }
+    return null;
+  }
+
+  @override
+  Future<Post?> getPostDetail(int postId) async {
+    final token = _tokenDataSource.getToken();
+    try {
+      final resp = await _client.get(
+        Uri.parse("$kGetPostDetailUrl$postId"),
+        headers: authHeaders(token: token!),
+      );
+
+      if (resp.statusCode == HttpStatus.ok) {
+        return Post.fromJson(jsonDecode(resp.body));
+      } else {
+        Utils.showError('Loading post detail error');
+        return null;
+      }
+    } on SocketException {
+      Utils.showError("Network Error");
+    } catch (e) {
+      log(e.toString());
+      Utils.showError('err : $e');
+      return null;
+    }
+    return null;
+  }
+
+  @override
+  Future<bool?> deleteMyPost(int postId) async {
+    final token = _tokenDataSource.getToken();
+    try {
+      final resp = await _client.delete(
+        Uri.parse("$kDeleteMyPostUrl$postId"),
+        headers: authHeaders(token: token!),
+      );
+
+      if (resp.statusCode == HttpStatus.ok) {
+        Utils.showSuccess(json.decode(resp.body)['message']);
+        return true;
+      } else {
+        Utils.showError('Deleting post error');
+        return null;
+      }
+    } on SocketException {
+      Utils.showError("Network Error");
+    } catch (e) {
+      log(e.toString());
+      Utils.showError('err : $e');
+      return null;
     }
     return null;
   }

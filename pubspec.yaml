@@ -33,6 +33,7 @@ dependencies:
   flutter_verification_code: ^1.1.7
   flutter_easyloading: ^3.0.5
   image_cropper: ^5.0.0
+  internet_connection_checker_plus: ^2.0.0
   
 
   cupertino_icons: ^1.0.2
@@ -65,14 +66,7 @@ flutter:
 
 
   fonts:
-    - family: RobotoCondensed
-      fonts:
-        - asset: fonts/RobotoCondensed-Regular.ttf
     - family: Dosis
       fonts:
         - asset: fonts/Dosis-Regular.ttf
-    - family: BricolageGrotesque
-      fonts:
-        - asset: fonts/BricolageGrotesque-Regular.ttf
-
-
+  

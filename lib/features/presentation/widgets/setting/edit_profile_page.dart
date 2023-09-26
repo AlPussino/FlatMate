@@ -10,7 +10,7 @@ import '../../providers/user_provider.dart';
 import '../log_in_pages/login_page.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+  EditProfilePage({super.key});
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -62,11 +62,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
           elevation: 0,
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
-          title: const Text(
+          title: Text(
             "Edit profile",
             style: TextStyle(
               color: Color(0xff000000),
-              fontFamily: 'Dosis',
+              // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
               fontSize: 20,
             ),
           ),
@@ -88,7 +88,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   snapshot.error.toString(),
                   style: TextStyle(
                     color: Color(0xff000000),
-                    fontFamily: 'Dosis',
+                    fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 20,
                   ),
                 ),
@@ -104,8 +104,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
             }).toList();
 
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -150,7 +151,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     ),
                                   ),
                                   placeholder: (context, url) => Center(
-                                    child: const CircularProgressIndicator(
+                                    child: CircularProgressIndicator(
                                       color: Color(0xffF2AE00),
                                       backgroundColor: Colors.white,
                                     ),
@@ -164,7 +165,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                             color: Color(0xff534F4F)
                                                 .withOpacity(0.5),
                                           ),
-                                          child: const Icon(Icons.error)),
+                                          child: Icon(Icons.error)),
                                 ),
                               ),
                               Positioned(
@@ -176,7 +177,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     Container(
                                       width: 20,
                                       height: 20,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.white,
                                       ),
@@ -189,7 +190,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                                 myUser.profileUrl);
                                         setState(() {});
                                       },
-                                      icon: const Icon(
+                                      icon: Icon(
                                         Icons.add_circle_sharp,
                                         size: 20,
                                         color: Color(0xffF2AE00),
@@ -203,28 +204,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 40),
-                    const Text(
+                    SizedBox(height: 40),
+                    Text(
                       "Full name",
                       style: TextStyle(
                         color: Color(0xff534F4F),
-                        fontFamily: 'Dosis',
+                        fontFamily:
+                            DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     ListTile(
-                      tileColor: const Color(0xffE8E8E8),
+                      tileColor: Color(0xffE8E8E8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      contentPadding:
-                          const EdgeInsets.only(right: 10, left: 20),
+                      contentPadding: EdgeInsets.only(right: 10, left: 20),
                       title: Text(
                         myUser.username ?? '',
                         style: TextStyle(
                           color: Color(0xff000000),
-                          fontFamily: 'Dosis',
+                          fontFamily:
+                              DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                       ),
@@ -234,20 +236,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             barrierDismissible: false,
                             context: context,
                             builder: (context) => AlertDialog(
+                              surfaceTintColor: Colors.white,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               content: Container(
-                                padding: const EdgeInsets.only(top: 40),
+                                padding: EdgeInsets.only(top: 40),
                                 child: SizedBox(
                                   height: 52,
                                   width: 400,
                                   child: TextFormField(
-                                      style: const TextStyle(
+                                      style: TextStyle(
+                                          decoration: TextDecoration.none,
                                           color: Color(0xff2E2E2E),
-                                          fontFamily: 'Dosis',
+                                          // fontFamily:
+                                          //     DefaultTextStyle.of(context)
+                                          //         .style
+                                          //         .fontFamily,
                                           fontSize: 14),
                                       controller: _nameController,
+                                      cursorColor: Color(0xffF2AE00),
                                       decoration: _buildDeco('Full name')),
                                 ),
                               ),
@@ -257,11 +265,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       _nameController.clear();
                                       Navigator.of(context).pop();
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Cancel',
                                       style: TextStyle(
                                           color: Color(0xff2E2E2E),
-                                          fontFamily: 'Dosis',
+                                          fontFamily:
+                                              DefaultTextStyle.of(context)
+                                                  .style
+                                                  .fontFamily,
                                           fontSize: 14),
                                     )),
                                 TextButton(
@@ -276,49 +287,54 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         // setState(() {});
                                       } else {}
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Save',
                                       style: TextStyle(
                                           color: Color(0xffF2AE00),
-                                          fontFamily: 'Dosis',
+                                          fontFamily:
+                                              DefaultTextStyle.of(context)
+                                                  .style
+                                                  .fontFamily,
                                           fontSize: 14),
                                     ))
                               ],
                             ),
                           );
                         },
-                        child: const Text(
+                        child: Text(
                           "change",
                           style: TextStyle(
                             color: Color(0xff3C67FF),
-                            fontFamily: 'Dosis',
+                            fontFamily:
+                                DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 14,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15),
-                    const Text(
+                    SizedBox(height: 15),
+                    Text(
                       "Phone number",
                       style: TextStyle(
                         color: Color(0xff534F4F),
-                        fontFamily: 'Dosis',
+                        fontFamily:
+                            DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     ListTile(
-                      tileColor: const Color(0xffE8E8E8),
+                      tileColor: Color(0xffE8E8E8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      contentPadding:
-                          const EdgeInsets.only(right: 10, left: 20),
+                      contentPadding: EdgeInsets.only(right: 10, left: 20),
                       title: Text(
                         myUser.mobileNumber ?? '',
                         style: TextStyle(
                           color: Color(0xff000000),
-                          fontFamily: 'Dosis',
+                          fontFamily:
+                              DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                       ),
@@ -328,18 +344,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             barrierDismissible: false,
                             context: context,
                             builder: (context) => AlertDialog(
+                              surfaceTintColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(24),
                               ),
                               content: Container(
-                                padding: const EdgeInsets.only(top: 40),
+                                padding: EdgeInsets.only(top: 40),
                                 child: SizedBox(
                                   height: 52,
                                   width: 400,
                                   child: TextFormField(
-                                      style: const TextStyle(
+                                      cursorColor: Color(0xffF2AE00),
+                                      style: TextStyle(
                                           color: Color(0xff2E2E2E),
-                                          fontFamily: 'Dosis',
+                                          fontFamily:
+                                              DefaultTextStyle.of(context)
+                                                  .style
+                                                  .fontFamily,
                                           fontSize: 14),
                                       controller: _phoneNumberController,
                                       decoration: _buildDeco('Phone number')),
@@ -351,11 +372,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       _phoneNumberController.clear();
                                       Navigator.of(context).pop();
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Cancel',
                                       style: TextStyle(
                                           color: Color(0xff2E2E2E),
-                                          fontFamily: 'Dosis',
+                                          fontFamily:
+                                              DefaultTextStyle.of(context)
+                                                  .style
+                                                  .fontFamily,
                                           fontSize: 14),
                                     )),
                                 TextButton(
@@ -371,36 +395,41 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         // setState(() {});
                                       } else {}
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Save',
                                       style: TextStyle(
                                           color: Color(0xffF2AE00),
-                                          fontFamily: 'Dosis',
+                                          fontFamily:
+                                              DefaultTextStyle.of(context)
+                                                  .style
+                                                  .fontFamily,
                                           fontSize: 14),
                                     ))
                               ],
                             ),
                           );
                         },
-                        child: const Text(
+                        child: Text(
                           "change",
                           style: TextStyle(
                             color: Color(0xff3C67FF),
-                            fontFamily: 'Dosis',
+                            fontFamily:
+                                DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 14,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Social accounts",
                           style: TextStyle(
                             color: Color(0xff534F4F),
-                            fontFamily: 'Dosis',
+                            fontFamily:
+                                DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 14,
                           ),
                         ),
@@ -420,7 +449,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             socialContactsOptions.isEmpty ? '' : 'add',
                             style: TextStyle(
                               color: Color(0xff3C67FF),
-                              fontFamily: 'Dosis',
+                              // fontFamily:
+                              //     DefaultTextStyle.of(context).style.fontFamily,
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
@@ -428,10 +458,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     ...myUser.socialContacts!.map((sc) {
                       return Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
+                        padding: EdgeInsets.only(bottom: 20),
                         child: ListTile(
                           onTap: () {
                             showDialog(
@@ -446,12 +476,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ),
                             );
                           },
-                          tileColor: const Color(0xffE8E8E8),
+                          tileColor: Color(0xffE8E8E8),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          contentPadding:
-                              const EdgeInsets.only(right: 10, left: 20),
+                          contentPadding: EdgeInsets.only(right: 10, left: 20),
                           leading: Icon(sc.contactType! == 'FACEBOOK'
                               ? Icons.facebook
                               : sc.contactType! == 'TELEGRAM'
@@ -461,7 +490,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             sc.username!,
                             style: TextStyle(
                               color: Color(0xff000000),
-                              fontFamily: 'Dosis',
+                              fontFamily:
+                                  DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 14,
                             ),
                           ),
@@ -473,17 +503,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   barrierDismissible: false,
                                   builder: (BuildContext context) {
                                     return Dialog(
+                                      surfaceTintColor: Colors.white,
                                       child: SizedBox(
                                         width: 50,
                                         child: Container(
-                                          padding: const EdgeInsets.all(20.0),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                            color: Colors.white,
-                                          ),
+                                          padding: EdgeInsets.all(20.0),
+                                          // decoration: BoxDecoration(
+                                          //   borderRadius:
+                                          //       BorderRadius.circular(50),
+                                          //   color: Colors.white,
+                                          // ),
                                           height: 150,
-                                          child: const Center(
+                                          child: Center(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
@@ -509,11 +540,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 });
                               }
                             },
-                            child: const Text(
+                            child: Text(
                               "remove",
                               style: TextStyle(
                                 color: Color(0xff3C67FF),
-                                fontFamily: 'Dosis',
+                                fontFamily: DefaultTextStyle.of(context)
+                                    .style
+                                    .fontFamily,
                                 fontSize: 14,
                               ),
                             ),
@@ -532,48 +565,48 @@ class _EditProfilePageState extends State<EditProfilePage> {
   InputDecoration _buildDeco(String hint) {
     return InputDecoration(
       filled: true,
-      fillColor: const Color(0xffFAFAFA),
-      contentPadding: const EdgeInsets.all(20),
+      fillColor: Color.fromARGB(255, 255, 255, 255),
+      contentPadding: EdgeInsets.all(20),
       hintText: hint,
-      hintStyle: const TextStyle(
-        fontFamily: 'Dosis',
+      hintStyle: TextStyle(
+        // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: Color(0xff757575),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
@@ -584,7 +617,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 class ShowUpAddSocialView extends StatefulWidget {
   final AddSocialContactRequest? body;
   final List<String> socialContactsListLeft;
-  const ShowUpAddSocialView(
+  ShowUpAddSocialView(
       {super.key, this.body, required this.socialContactsListLeft});
 
   @override
@@ -626,15 +659,17 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      surfaceTintColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
       content: Container(
-        padding: const EdgeInsets.only(top: 40),
+        padding: EdgeInsets.only(top: 40),
         child: SizedBox(
-          height: 220,
+          height: 240,
           width: 400,
-          child: Column(
+          child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
               Container(
                 height: 60,
@@ -643,15 +678,17 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                   border: Border.all(
                     color: Color(0xff534F4F), // Border color
                   ),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10), // Border radius
                 ),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: 10),
                     child: AbsorbPointer(
                       absorbing: widget.body != null ? true : false,
                       child: DropdownButton(
+                        dropdownColor: Colors.white,
                         isExpanded: true,
                         autofocus: true,
                         underline: Container(),
@@ -659,7 +696,8 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
                           color: Color(0xff534F4F),
-                          fontFamily: 'Dosis',
+                          fontFamily:
+                              DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                         value: selectedSocialContact,
@@ -690,19 +728,21 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               TextFormField(
-                  style: const TextStyle(
+                  cursorColor: Color(0xffF2AE00),
+                  style: TextStyle(
                       color: Color(0xff2E2E2E),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 14),
                   controller: _accountNameController,
                   decoration: _buildDeco('Account name')),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               TextFormField(
-                  style: const TextStyle(
+                  cursorColor: Color(0xffF2AE00),
+                  style: TextStyle(
                       color: Color(0xff2E2E2E),
-                      fontFamily: 'Dosis',
+                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 14),
                   controller: _accountLinkController,
                   decoration: _buildDeco('profile link')),
@@ -713,14 +753,16 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
       actions: [
         TextButton(
             onPressed: () {
-              _accountNameController.clear();
-              _accountLinkController.clear();
+              // _accountNameController.clear();
+              // _accountLinkController.clear();
               Navigator.of(context).pop();
             },
-            child: const Text(
+            child: Text(
               'Cancel',
               style: TextStyle(
-                  color: Color(0xff2E2E2E), fontFamily: 'Dosis', fontSize: 14),
+                  color: Color(0xff2E2E2E),
+                  fontFamily: DefaultTextStyle.of(context).style.fontFamily,
+                  fontSize: 14),
             )),
         TextButton(
           onPressed: () async {
@@ -731,16 +773,17 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                 barrierDismissible: false,
                 builder: (BuildContext context) {
                   return Dialog(
+                    surfaceTintColor: Colors.white,
                     child: SizedBox(
                       width: 50,
                       child: Container(
-                        padding: const EdgeInsets.all(20.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.white,
-                        ),
+                        padding: EdgeInsets.all(20),
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(10),
+                        //   color: Colors.white,
+                        // ),
                         height: 150,
-                        child: const Center(
+                        child: Center(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -748,7 +791,7 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                                 color: Color(0xffF2AE00),
                               ),
                               SizedBox(height: 16.0),
-                              Text('Removing...'),
+                              Text('Adding...'),
                             ],
                           ),
                         ),
@@ -764,15 +807,17 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                     contactType: selectedSocialContact));
 
             if (result != null) {
-              _accountNameController.clear();
-              _accountLinkController.clear();
+              // _accountNameController.clear();
+              // _accountLinkController.clear();
               Navigator.pop(context, true);
             } else {}
           },
-          child: const Text(
+          child: Text(
             'Save',
             style: TextStyle(
-                color: Color(0xffF2AE00), fontFamily: 'Dosis', fontSize: 14),
+                color: Color(0xffF2AE00),
+                fontFamily: DefaultTextStyle.of(context).style.fontFamily,
+                fontSize: 14),
           ),
         ),
       ],
@@ -782,48 +827,48 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
   InputDecoration _buildDeco(String hint) {
     return InputDecoration(
       filled: true,
-      fillColor: const Color(0xffFAFAFA),
-      contentPadding: const EdgeInsets.all(20),
+      fillColor: Color(0xffFAFAFA),
+      contentPadding: EdgeInsets.all(20),
       hintText: hint,
-      hintStyle: const TextStyle(
-        fontFamily: 'Dosis',
+      hintStyle: TextStyle(
+        fontFamily: DefaultTextStyle.of(context).style.fontFamily,
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: Color(0xff757575),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Color(0xff534F4F),
         ),
       ),

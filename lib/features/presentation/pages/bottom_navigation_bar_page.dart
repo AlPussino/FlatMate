@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:animations/animations.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/home_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/profile_page.dart';
@@ -8,6 +11,8 @@ import 'package:finding_apartments_yangon/features/presentation/providers/user_p
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_pages/flat_create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
@@ -22,6 +27,10 @@ class BottomNavigationBarPage extends StatefulWidget {
 }
 
 class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
+  InternetStatus? _connectionStatus;
+  late StreamSubscription<InternetStatus> _subscription;
+  bool firstTimeConnected = true;
+
   final screens = [
     const HomePage(),
     const SearchPage(),
@@ -34,6 +43,23 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
     isTokenExpired ? context.read<UserProvider>().getUserInfo() : null;
     load();
 
+    _subscription = InternetConnection().onStatusChange.listen((status) {
+      setState(() {
+        _connectionStatus = status;
+        List<String> parts = _connectionStatus.toString().split('.');
+        if (status == InternetStatus.disconnected) {
+          toast(parts[1]);
+        } else {
+          if (firstTimeConnected) {
+            null;
+            firstTimeConnected = false;
+          } else {
+            toast(parts[1]);
+          }
+        }
+      });
+    });
+
     super.initState();
   }
 
@@ -42,43 +68,52 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   }
 
   @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final currentIndex = context.watch<HomeProvider>().currentIdx;
-
+    log(_connectionStatus.toString());
     return WillPopScope(
       onWillPop: () async {
         bool confirm = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
             backgroundColor: Colors.white,
             elevation: 0,
             shadowColor: Colors.white,
-            title: const Text(
+            title: Text(
               'Are you sure you want to exit?',
               style: TextStyle(
                 color: Color(0xff534F4F),
-                fontFamily: 'Dosis',
-                fontSize: 14,
+                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
+                fontSize: 16,
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text(
+                child: Text(
                   "NO",
                   style: TextStyle(
                     color: Color(0xffF2AE00),
-                    fontFamily: 'Dosis',
+                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14,
                   ),
                 ),
                 onPressed: () => Navigator.of(context).maybePop(false),
               ),
               TextButton(
-                child: const Text(
+                child: Text(
                   "YES",
                   style: TextStyle(
                     color: Color(0xffF2AE00),
-                    fontFamily: 'Dosis',
+                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14,
                   ),
                 ),
@@ -106,7 +141,9 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
           child: screens[currentIndex],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          useLegacyColorScheme: true,
           backgroundColor: Colors.white,
+          mouseCursor: MouseCursor.uncontrolled,
           currentIndex: currentIndex,
           elevation: 5,
           type: BottomNavigationBarType.fixed,
@@ -177,6 +214,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          foregroundColor: Colors.white,
           elevation: 2,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

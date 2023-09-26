@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:finding_apartments_yangon/features/data/models/requests/login_request_with_email.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/bottom_navigation_bar_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
@@ -41,19 +42,21 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    log('what the fuck');
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 30, right: 24, left: 24),
         child: Form(
           key: _formKey,
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
-              const Column(
+              Column(
                 children: [
                   Text(
                     "Sign in",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xffF2AE00),
                       fontSize: 24,
                     ),
@@ -61,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Hi welcome back, you've been missed mother fucker",
                     style: TextStyle(
-                      fontFamily: 'Dosis',
+                      //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                       color: Color(0xff534F4F),
                       fontSize: 14,
                     ),
@@ -74,9 +77,9 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -126,10 +129,10 @@ class _LoginPageState extends State<LoginPage> {
                       if (value!.isEmpty) {
                         return 'Please enter Email';
                       }
-                      if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
-                          .hasMatch(value)) {
-                        return 'Please enter a valid email address.';
-                      }
+                      // if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
+                      //     .hasMatch(value)) {
+                      //   return 'Please enter a valid email address.';
+                      // }
                       return null;
                     },
                     onSaved: (value) {
@@ -140,9 +143,9 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
                   TextFormField(
                     cursorColor: Color(0xffF2AE00),
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color(0xff2E2E2E),
-                        fontFamily: 'Dosis',
+                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
                     controller: _passwordController,
@@ -237,7 +240,8 @@ class _LoginPageState extends State<LoginPage> {
                             'Sign in',
                             style: TextStyle(
                               color: Colors.white,
-                              fontFamily: 'Dosis',
+                              // fontFamily:
+                              //     DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,
                             ),
                           ),
@@ -252,11 +256,11 @@ class _LoginPageState extends State<LoginPage> {
                             child: const ForgetPasswordPage()),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Forget password?",
                       style: TextStyle(
                         color: Color(0xffF2AE00),
-                        fontFamily: 'Dosis',
+                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14,
                       ),
                     ),
@@ -269,11 +273,12 @@ class _LoginPageState extends State<LoginPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Or Sign in with Google",
                         style: TextStyle(
                           color: Color(0xff534F4F),
-                          fontFamily: 'Dosis',
+                          // fontFamily:
+                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                       ),
@@ -304,11 +309,12 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Don't have an account?",
                         style: TextStyle(
                           color: Color(0xff534F4F),
-                          fontFamily: 'Dosis',
+                          // fontFamily:
+                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                       ),
@@ -318,14 +324,15 @@ class _LoginPageState extends State<LoginPage> {
                             context,
                             PageTransition(
                                 type: PageTransitionType.rightToLeft,
-                                child: const SignUpPage()),
+                                child: SignUpPage()),
                           );
                         },
-                        child: const Text(
+                        child: Text(
                           "Sign up",
                           style: TextStyle(
                             color: Color(0xffF2AE00),
-                            fontFamily: 'Dosis',
+                            // fontFamily:
+                            //     DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 16,
                           ),
                         ),
