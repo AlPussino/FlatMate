@@ -228,10 +228,10 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             "Floor",
                             style: TextStyle(
                               color: Color(0xff534F4F),
-                              //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 12,
                             ),
                           ),
+                          const SizedBox(height: 10),
                           Container(
                             width: (MediaQuery.sizeOf(context).width / 2) - 30,
                             decoration: BoxDecoration(

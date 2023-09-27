@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
@@ -30,14 +29,15 @@ class _MyPostsCardState extends State<MyPostsCard> {
           Navigator.push(
             context,
             PageTransition(
-                fullscreenDialog: true,
-                childCurrent: Center(
-                  child: CircularProgressIndicator(),
-                ),
-                type: PageTransitionType.rightToLeft,
-                child: FlatDescriptionPage(
-                  id: widget.post.id!,
-                )),
+              fullscreenDialog: true,
+              childCurrent: Center(
+                child: CircularProgressIndicator(),
+              ),
+              type: PageTransitionType.rightToLeft,
+              child: FlatDescriptionPage(
+                id: widget.post.id!,
+              ),
+            ),
           );
         },
         child: SizedBox(
@@ -69,18 +69,20 @@ class _MyPostsCardState extends State<MyPostsCard> {
                               ),
                             ),
                           ),
-                          placeholder: (context, url) => Padding(
-                            padding: const EdgeInsets.only(
-                                top: 60, right: 20, bottom: 60, left: 20),
-                            child: SizedBox(
-                              height: 30,
-                              width: 30,
-                              child: const CircularProgressIndicator(
-                                color: Color(0xffF2AE00),
-                                backgroundColor: Colors.white,
+                          progressIndicatorBuilder: (context, url, progress) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 60, right: 20, bottom: 60, left: 20),
+                              child: SizedBox(
+                                height: 30,
+                                width: 30,
+                                child: const CircularProgressIndicator(
+                                  color: Color(0xffF2AE00),
+                                  backgroundColor: Colors.white,
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
                         ),
@@ -114,7 +116,9 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                       ),
                                       const SizedBox(width: 10),
                                       Text(
-                                        "${widget.post.apartment!.apartmentType.toString()}  |  ${widget.post.apartment!.floor}floor",
+                                        widget.post.apartment!.floor != 0
+                                            ? "${widget.post.apartment!.apartmentType.toString()}  |  ${widget.post.apartment!.floor}th floor"
+                                            : "${widget.post.apartment!.apartmentType.toString()}  | Ground floor",
                                         style: TextStyle(
                                           color: Color(0xff534F4F),
                                           fontFamily:
@@ -251,6 +255,8 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                       color: Colors.transparent,
                                       child: Text(
                                         '${widget.post.price}/m',
+                                        maxLines: 2,
+                                        softWrap: true,
                                         style: TextStyle(
                                           color: Color(0xff000000),
                                           fontFamily:
@@ -285,7 +291,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                         ),
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

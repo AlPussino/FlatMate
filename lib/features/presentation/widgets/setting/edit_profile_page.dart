@@ -183,12 +183,133 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       ),
                                     ),
                                     IconButton(
-                                      onPressed: () async {
-                                        await context
-                                            .read<UserProvider>()
-                                            .pickImageAndSaveToSever(
-                                                myUser.profileUrl);
-                                        setState(() {});
+                                      onPressed: () {
+                                        showModalBottomSheet(
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(24),
+                                              topRight: Radius.circular(24),
+                                            ),
+                                          ),
+                                          isDismissible: true,
+                                          context: context,
+                                          builder: (context) {
+                                            return Container(
+                                              height: 200,
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        height: 100,
+                                                        width: 100,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          border: Border.all(
+                                                            color: Color(
+                                                                0xffF2AE00),
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                        ),
+                                                        child: IconButton(
+                                                          onPressed: () async {
+                                                            Navigator.pop(
+                                                                context);
+                                                            await context
+                                                                .read<
+                                                                    UserProvider>()
+                                                                .pickImageAndSaveToSever(
+                                                                    myUser
+                                                                        .profileUrl,
+                                                                    true);
+                                                            setState(() {});
+                                                          },
+                                                          icon: Icon(
+                                                            Icons
+                                                                .camera_alt_rounded,
+                                                            size: 30,
+                                                            color: Color(
+                                                                0xffF2AE00),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        'Camera',
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Color(
+                                                                0xffF2AE00)),
+                                                      )
+                                                    ],
+                                                  ),
+
+                                                  //
+
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        height: 100,
+                                                        width: 100,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          border: Border.all(
+                                                            color: Color(
+                                                                0xffF2AE00),
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                        ),
+                                                        child: IconButton(
+                                                          onPressed: () async {
+                                                            Navigator.pop(
+                                                                context);
+                                                            await context
+                                                                .read<
+                                                                    UserProvider>()
+                                                                .pickImageAndSaveToSever(
+                                                                    myUser
+                                                                        .profileUrl,
+                                                                    false);
+                                                            setState(() {});
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.image_rounded,
+                                                            size: 30,
+                                                            color: Color(
+                                                                0xffF2AE00),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        'Gallery',
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Color(
+                                                                0xffF2AE00)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        );
                                       },
                                       icon: Icon(
                                         Icons.add_circle_sharp,

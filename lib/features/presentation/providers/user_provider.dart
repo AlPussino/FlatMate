@@ -58,8 +58,10 @@ class UserProvider with ChangeNotifier {
     return user;
   }
 
-  Future<String?> pickImageAndSaveToSever(String? oldImageUrl) async {
-    final pickedImg = await ImagePicker().pickImage(source: ImageSource.camera);
+  Future<String?> pickImageAndSaveToSever(
+      String? oldImageUrl, bool isCamera) async {
+    final pickedImg = await ImagePicker()
+        .pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
     if (pickedImg != null) {
       final croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedImg.path,

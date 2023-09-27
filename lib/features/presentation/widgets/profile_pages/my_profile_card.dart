@@ -65,11 +65,12 @@ class _MyProfileCardState extends State<MyProfileCard> {
                               ),
                             ),
                           ),
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(
-                            color: Color(0xffF2AE00),
-                            backgroundColor: Colors.white,
-                          ),
+                          progressIndicatorBuilder: (context, url, progress) {
+                            return const CircularProgressIndicator(
+                              color: Color(0xffF2AE00),
+                              backgroundColor: Colors.white,
+                            );
+                          },
                           errorWidget: (context, url, error) => Container(
                               width: 100,
                               height: 100,

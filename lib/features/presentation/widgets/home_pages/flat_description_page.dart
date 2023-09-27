@@ -60,24 +60,25 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                 Expanded(
                   flex: 10,
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(20),
                     child: ListView(
                       physics: BouncingScrollPhysics(),
                       children: [
                         SizedBox(
-                          height: 190,
+                          height: 300,
                           child: Carousel(
                             autoScroll: false,
                             animationPageCurve: Curves.linear,
                             activateIndicatorColor: const Color(0xffF2AE00),
                             indicatorBarColor: Colors.transparent,
                             isCircle: false,
-                            indicatorHeight: 5,
+                            indicatorHeight: 2,
                             indicatorWidth: 20,
                             items: [
                               ...postDetail!.pictures!
                                   .map(
                                     (e) => Utils.headerImagesSlide(
+                                        false,
                                         postDetail.pictures!,
                                         e.url ?? "",
                                         context),
@@ -146,7 +147,9 @@ class _FlatDescriptionPageState extends State<FlatDescriptionPage> {
                         Row(
                           children: [
                             Text(
-                              "${postDetail.apartment!.apartmentType}  |  ${postDetail.apartment!.floor}th floor  |  ${postDetail.apartment!.length} x ${postDetail.apartment!.width} square feet",
+                              postDetail.apartment!.floor != 0
+                                  ? "${postDetail.apartment!.apartmentType}  |  ${postDetail.apartment!.floor}th floor  |  ${postDetail.apartment!.length} x ${postDetail.apartment!.width} square feet"
+                                  : "${postDetail.apartment!.apartmentType}  |  Ground floor  |  ${postDetail.apartment!.length} x ${postDetail.apartment!.width} square feet",
                               style: TextStyle(
                                 color: Color(0xff000000),
                                 // fontFamily:

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'flat_description_page.dart';
 
 class PostCard extends StatefulWidget {
-  const PostCard({super.key});
+  final Post post;
+  const PostCard({super.key, required this.post});
 
   @override
   State<PostCard> createState() => _PostCardState();
@@ -95,7 +95,7 @@ class _PostCardState extends State<PostCard> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 4),
                                     child: Text(
-                                      "100000/m",
+                                      "${widget.post.price} /m",
                                       style: TextStyle(
                                         color: Color(0xff000000),
                                         fontFamily: DefaultTextStyle.of(context)
@@ -118,7 +118,7 @@ class _PostCardState extends State<PostCard> {
                                       Expanded(
                                         flex: 4,
                                         child: Text(
-                                          "Hlaing, Yangon",
+                                          "${widget.post.township}  |  ${widget.post.state}",
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
                                             fontFamily:

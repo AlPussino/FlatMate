@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:finding_apartments_yangon/configs/api_configs.dart';
 import 'package:finding_apartments_yangon/core/utiles.dart';
 import 'package:finding_apartments_yangon/features/data/datasources/token_datasource.dart';
+import 'package:finding_apartments_yangon/features/data/models/all_posts.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_list.dart';
@@ -18,6 +19,7 @@ abstract class PostDataSource {
   Future<PostList?> getMyPosts();
   Future<Post?> getPostDetail(int postId);
   Future<bool?> deleteMyPost(int postId);
+  Future<AllPosts?> getAllPosts(int? pageCursor);
 }
 
 class PostDataSourceImpl implements PostDataSource {
@@ -158,6 +160,33 @@ class PostDataSourceImpl implements PostDataSource {
         return true;
       } else {
         Utils.showError('Deleting post error');
+        return null;
+      }
+    } on SocketException {
+      Utils.showError("Network Error");
+    } catch (e) {
+      log(e.toString());
+      Utils.showError('err : $e');
+      return null;
+    }
+    return null;
+  }
+
+  @override
+  Future<AllPosts?> getAllPosts(int? pageCursor) async {
+    final token = _tokenDataSource.getToken();
+    try {
+      final resp = await _client.get(
+        Uri.parse(pageCursor != null
+            ? "$kGetAllPostsUrl$pageCursor&limit=10"
+            : "$kGetAllPostsUrl&limit=10"),
+        headers: authHeaders(token: token!),
+      );
+
+      if (resp.statusCode == HttpStatus.ok) {
+        return AllPosts.fromJson(jsonDecode(resp.body));
+      } else {
+        Utils.showError('Loading all posts error');
         return null;
       }
     } on SocketException {

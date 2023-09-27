@@ -41,6 +41,9 @@ class _FlatsByTownshipPageState extends State<FlatsByTownshipPage> {
             height: 130,
             width: MediaQuery.sizeOf(context).width,
             child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
               color: Colors.white,
               child: Row(
                 children: [

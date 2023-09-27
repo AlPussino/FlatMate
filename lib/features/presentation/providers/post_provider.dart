@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:developer';
+import 'package:finding_apartments_yangon/features/data/models/all_posts.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_list.dart';
@@ -22,6 +24,15 @@ class PostProvider with ChangeNotifier {
 
   Post? _postDetail;
   Post? get postDetail => _postDetail;
+
+  int _cursor = 1;
+  int? get cursor => _cursor;
+
+  bool? _hasNext;
+  bool? get hasNext => _hasNext;
+
+  List<Post> _allPostList = [];
+  List<Post>? get allPostList => _allPostList;
 
   Future<List<MyanmarData>> loadMyanmarData() async {
     final data = await _postUseCase.loadMyanmarData();
@@ -62,6 +73,28 @@ class PostProvider with ChangeNotifier {
     final data = await _postUseCase.deleteMyPost(postId);
     getMyPosts();
     notifyListeners();
+    return data;
+  }
+
+  Future<AllPosts?> getAllPosts(int? pageCursor) async {
+    final data = await _postUseCase.getAllPosts(pageCursor);
+
+    allPostList!.addAll(data!.postList!);
+    _cursor = data.cursor!;
+    _hasNext = data.hasNext!;
+    log("has next post : ${_hasNext}");
+    log("Cursor id : ${_cursor}");
+    notifyListeners();
+    return data;
+  }
+
+  void clearPostList() {
+    _allPostList.clear();
+  }
+
+  Future<AllPosts?> refreshPosts() async {
+    clearPostList();
+    final data = getAllPosts(null);
     return data;
   }
 }

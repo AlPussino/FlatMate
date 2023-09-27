@@ -77,6 +77,8 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   Widget build(BuildContext context) {
     final currentIndex = context.watch<HomeProvider>().currentIdx;
     log(_connectionStatus.toString());
+    context.read<PostProvider>().clearPostList();
+
     return WillPopScope(
       onWillPop: () async {
         bool confirm = await showDialog(
