@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:finding_apartments_yangon/configs/api_configs.dart';
 import 'package:finding_apartments_yangon/features/data/datasources/token_datasource.dart';
+import 'package:finding_apartments_yangon/features/data/models/other_user.dart';
+import 'package:finding_apartments_yangon/features/data/models/post_owner_list.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/login_response.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/noti_pages/notis.dart';
 import 'package:http/http.dart' as http;
 import '../../../core/utiles.dart';
 import '../models/my_user.dart';
@@ -21,6 +24,8 @@ abstract class UserDataSource {
   Future<String?> uploadProfile(File file, String? oldImageUrl);
   Future<MyUser?> addSocialContact(AddSocialContactRequest body);
   Future<EmailResponse?> removeSocialContact({required String id});
+  Future<OtherUser?> aboutOtherUser({required int userId});
+  Future<PostOwnerList?> searchUser({required String keyword});
 }
 
 class UserDataSourceImpl implements UserDataSource {
@@ -85,17 +90,17 @@ class UserDataSourceImpl implements UserDataSource {
           headers: authHeaders(token: token!));
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess("Name change success.");
+        Notis.showSuccess("Name change success.");
         return MyUser.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError("Name change fail.");
+        Notis.showError("Name change fail.");
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -114,17 +119,17 @@ class UserDataSourceImpl implements UserDataSource {
           headers: authHeaders(token: token!));
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess(json.decode(resp.body)['message']);
+        Notis.showSuccess(json.decode(resp.body)['message']);
         return EmailResponse.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError(json.decode(resp.body)['message']);
+        Notis.showError(json.decode(resp.body)['message']);
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -139,17 +144,17 @@ class UserDataSourceImpl implements UserDataSource {
           headers: authHeaders(token: token!));
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess("Phone number change success.");
+        Notis.showSuccess("Phone number change success.");
         return MyUser.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError("Phone number change fail.");
+        Notis.showError("Phone number change fail.");
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -192,7 +197,7 @@ class UserDataSourceImpl implements UserDataSource {
       final response = await request.send();
 
       if (response.statusCode == HttpStatus.ok) {
-        Utils.showSuccess("Profile image upload success");
+        Notis.showSuccess("Profile image upload success");
         final responseJson = jsonDecode(await response.stream.bytesToString());
         print('Response data: $responseJson');
       } else {
@@ -215,17 +220,17 @@ class UserDataSourceImpl implements UserDataSource {
           headers: authHeaders(token: token!));
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess("Adding social contact success.");
+        Notis.showSuccess("Adding social contact success.");
         return MyUser.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError("Adding social contact fail.");
+        Notis.showError("Adding social contact fail.");
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -240,17 +245,68 @@ class UserDataSourceImpl implements UserDataSource {
           headers: authHeaders(token: token!));
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess(json.decode(resp.body)['message']);
+        Notis.showSuccess(json.decode(resp.body)['message']);
         return EmailResponse.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError(json.decode(resp.body)['message']);
+        Notis.showError(json.decode(resp.body)['message']);
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
+      return null;
+    }
+    return null;
+  }
+
+  @override
+  Future<OtherUser?> aboutOtherUser({required int userId}) async {
+    log("UserId : $userId");
+    final token = _tokenDataSource.getToken();
+    try {
+      final resp = await _client.get(
+        Uri.parse("$kAboutOtherUserUrl$userId"),
+        headers: authHeaders(token: token!),
+      );
+
+      if (resp.statusCode == HttpStatus.ok) {
+        return OtherUser.fromJson(jsonDecode(resp.body));
+      } else {
+        Notis.showError('Loading user info error');
+        return null;
+      }
+    } on SocketException {
+      Notis.showError("Network Error");
+    } catch (e) {
+      log(e.toString());
+      Notis.showError('err : $e');
+      return null;
+    }
+    return null;
+  }
+
+  @override
+  Future<PostOwnerList?> searchUser({required String keyword}) async {
+    final token = _tokenDataSource.getToken();
+    try {
+      final resp = await _client.get(
+        Uri.parse("$kSearchUserUrl$keyword"),
+        headers: authHeaders(token: token!),
+      );
+
+      if (resp.statusCode == HttpStatus.ok) {
+        return PostOwnerList.fromJson(resp.body);
+      } else {
+        Notis.showError('Loading user info error');
+        return null;
+      }
+    } on SocketException {
+      Notis.showError("Network Error");
+    } catch (e) {
+      log(e.toString());
+      Notis.showError('err : $e');
       return null;
     }
     return null;

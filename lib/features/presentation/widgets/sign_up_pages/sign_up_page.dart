@@ -153,10 +153,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value!.isEmpty) {
                         return 'Please enter username';
                       }
-                      RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9_]{3,20}$');
-                      if (!usernameRegex.hasMatch(value)) {
-                        return 'Invalid username';
-                      }
+                      // RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9_]{3,20}$');
+                      // if (!usernameRegex.hasMatch(value)) {
+                      //   return 'Invalid username';
+                      // }
                       return null;
                     },
                     onSaved: (value) {

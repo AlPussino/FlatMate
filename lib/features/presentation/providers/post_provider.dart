@@ -8,6 +8,7 @@ import 'package:finding_apartments_yangon/features/domain/usecases/post_usecase.
 import 'package:finding_apartments_yangon/features/domain/usecases/token_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class PostProvider with ChangeNotifier {
   final PostUseCase _postUseCase;
@@ -33,6 +34,9 @@ class PostProvider with ChangeNotifier {
 
   List<Post> _allPostList = [];
   List<Post>? get allPostList => _allPostList;
+
+  PostList? _savedPostList;
+  PostList? get savedPostList => _savedPostList;
 
   Future<List<MyanmarData>> loadMyanmarData() async {
     final data = await _postUseCase.loadMyanmarData();
@@ -71,6 +75,7 @@ class PostProvider with ChangeNotifier {
 
   Future<bool?> deleteMyPost(int postId) async {
     final data = await _postUseCase.deleteMyPost(postId);
+    log("PP : ${data}");
     getMyPosts();
     notifyListeners();
     return data;
@@ -84,17 +89,35 @@ class PostProvider with ChangeNotifier {
     _hasNext = data.hasNext!;
     log("has next post : ${_hasNext}");
     log("Cursor id : ${_cursor}");
+    log("Total posts : ${allPostList!.length.toString()}");
+    toast("Total Post : ${allPostList!.length}");
     notifyListeners();
     return data;
   }
 
   void clearPostList() {
+    toast("cleard the list");
     _allPostList.clear();
   }
 
   Future<AllPosts?> refreshPosts() async {
     clearPostList();
     final data = getAllPosts(null);
+    return data;
+  }
+
+  Future<Post?> saveOrUnsavePost(int postId, bool save) async {
+    final data = await _postUseCase.saveOrUnsavePost(postId, save);
+    getPostDetail(postId);
+    getSavedPosts();
+    notifyListeners();
+    return data;
+  }
+
+  Future<PostList?> getSavedPosts() async {
+    final data = await _postUseCase.getSavedPosts();
+    _savedPostList = data;
+    notifyListeners();
     return data;
   }
 }

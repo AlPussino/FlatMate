@@ -16,7 +16,7 @@ class PostOwner {
       id: json['id'] as int?,
       username: json['username'] as String?,
       mobileNumber: json['mobile_number'] as String?,
-      profileUrl: json['profile_url'] as String?,
+      profileUrl: json['profile_url'],
     );
   }
 
@@ -25,7 +25,7 @@ class PostOwner {
       'id': id,
       'username': username,
       'mobile_number': mobileNumber,
-      'profile_url': profileUrl,
+      'profile_url': profileUrl!,
     };
   }
 }

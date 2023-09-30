@@ -13,6 +13,8 @@ abstract class PostUseCase {
   Future<Post?> getPostDetail(int postId);
   Future<bool?> deleteMyPost(int postId);
   Future<AllPosts?> getAllPosts(int? pageCursor);
+  Future<Post?> saveOrUnsavePost(int postId, bool save);
+  Future<PostList?> getSavedPosts();
 }
 
 class PostUseCaseImpl implements PostUseCase {
@@ -49,5 +51,15 @@ class PostUseCaseImpl implements PostUseCase {
   @override
   Future<AllPosts?> getAllPosts(int? pageCursor) async {
     return await _postRepository.getAllPosts(pageCursor);
+  }
+
+  @override
+  Future<Post?> saveOrUnsavePost(int postId, bool save) async {
+    return await _postRepository.saveOrUnsavePost(postId, save);
+  }
+
+  @override
+  Future<PostList?> getSavedPosts() async {
+    return await _postRepository.getSavedPosts();
   }
 }

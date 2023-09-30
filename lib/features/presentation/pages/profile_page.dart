@@ -20,7 +20,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 final ImagePicker picker = ImagePicker();
-final scrollController = ScrollController();
 
 class _ProfilePageState extends State<ProfilePage> {
   @override

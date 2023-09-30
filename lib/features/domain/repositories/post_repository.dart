@@ -11,4 +11,6 @@ abstract class PostRepository {
   Future<Post?> getPostDetail(int postId);
   Future<bool?> deleteMyPost(int postId);
   Future<AllPosts?> getAllPosts(int? pageCursor);
+  Future<Post?> saveOrUnsavePost(int postId, bool save);
+  Future<PostList?> getSavedPosts();
 }

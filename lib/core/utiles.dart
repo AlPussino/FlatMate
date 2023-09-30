@@ -60,7 +60,6 @@ class Utils {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: CachedNetworkImage(
-            maxHeightDiskCache: 5000,
             imageUrl: img,
             progressIndicatorBuilder: (context, url, progress) => Center(
               child: SizedBox(
@@ -86,67 +85,5 @@ class Utils {
         ),
       ),
     );
-  }
-
-  static showError(String errorMessage) {
-    showSimpleNotification(
-        Container(
-          height: 40,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
-              borderRadius: BorderRadius.circular(7)),
-          margin: const EdgeInsets.all(16),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 17),
-              child: Text(
-                errorMessage,
-                style: TextStyle(
-                  color: Color.fromARGB(255, 252, 49, 49),
-                  fontFamily: 'Dosis',
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-        ),
-        autoDismiss: true,
-        contentPadding: const EdgeInsets.all(16),
-        background: Colors.transparent,
-        elevation: 0,
-        position: NotificationPosition.bottom);
-  }
-
-  static showSuccess(String errorMessage) {
-    showSimpleNotification(
-        Container(
-          height: 40,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
-              borderRadius: BorderRadius.circular(7)),
-          margin: const EdgeInsets.all(16),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 17),
-              child: Text(
-                errorMessage,
-                style: TextStyle(
-                  color: Color.fromARGB(255, 6, 136, 62),
-                  fontFamily: 'Dosis',
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-        ),
-        autoDismiss: true,
-        contentPadding: const EdgeInsets.all(16),
-        background: Colors.transparent,
-        elevation: 0,
-        position: NotificationPosition.bottom);
   }
 }

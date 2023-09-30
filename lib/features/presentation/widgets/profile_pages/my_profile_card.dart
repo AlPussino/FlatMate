@@ -41,89 +41,87 @@ class _MyProfileCardState extends State<MyProfileCard> {
               borderRadius: BorderRadius.circular(5),
             ),
             child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 53,
-                        backgroundColor: Color(0xffF2AE00),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.myUser.profileUrl ??
-                              "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
-                          imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 53,
+                      backgroundColor: Color(0xffF2AE00),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.myUser.profileUrl ??
+                            "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
+                        imageBuilder: (context, imageProvider) => Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        progressIndicatorBuilder: (context, url, progress) {
+                          return const CircularProgressIndicator(
+                            color: Color(0xffF2AE00),
+                            backgroundColor: Colors.white,
+                          );
+                        },
+                        errorWidget: (context, url, error) => Container(
                             width: 100,
                             height: 100,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
+                              color: Color(0xff534F4F),
+                            ),
+                            child: const Icon(Icons.error)),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget.myUser.username ?? "",
+                            style: TextStyle(
+                              color: Color(0xff000000),
+                              fontFamily:
+                                  DefaultTextStyle.of(context).style.fontFamily,
+                              fontSize: 20,
                             ),
                           ),
-                          progressIndicatorBuilder: (context, url, progress) {
-                            return const CircularProgressIndicator(
-                              color: Color(0xffF2AE00),
-                              backgroundColor: Colors.white,
-                            );
-                          },
-                          errorWidget: (context, url, error) => Container(
-                              width: 100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xff534F4F).withOpacity(0.5),
-                              ),
-                              child: const Icon(Icons.error)),
-                        ),
+                          const SizedBox(height: 20),
+                          Text(
+                            widget.myUser.mobileNumber ?? "",
+                            style: TextStyle(
+                              color: Color(0xff534F4F),
+                              fontFamily:
+                                  DefaultTextStyle.of(context).style.fontFamily,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            widget.myUser.email ?? "",
+                            style: TextStyle(
+                              color: Color(0xff534F4F),
+                              fontFamily:
+                                  DefaultTextStyle.of(context).style.fontFamily,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              widget.myUser.username ?? "",
-                              style: TextStyle(
-                                color: Color(0xff000000),
-                                fontFamily: DefaultTextStyle.of(context)
-                                    .style
-                                    .fontFamily,
-                                fontSize: 20,
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            Text(
-                              widget.myUser.mobileNumber ?? "",
-                              style: TextStyle(
-                                color: Color(0xff534F4F),
-                                fontFamily: DefaultTextStyle.of(context)
-                                    .style
-                                    .fontFamily,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              widget.myUser.email ?? "",
-                              style: TextStyle(
-                                color: Color(0xff534F4F),
-                                fontFamily: DefaultTextStyle.of(context)
-                                    .style
-                                    .fontFamily,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                )),
+                    )
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),

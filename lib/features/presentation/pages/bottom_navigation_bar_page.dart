@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:animations/animations.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/home_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/profile_page.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/home_provider.dart';
@@ -34,9 +32,11 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   final screens = [
     const HomePage(),
     const SearchPage(),
+    const FlatCreatePost(),
     const SavedPage(),
     const ProfilePage(),
   ];
+
   @override
   void initState() {
     bool isTokenExpired = context.read<AuthProvider>().isTokenExpired();
@@ -77,7 +77,6 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   Widget build(BuildContext context) {
     final currentIndex = context.watch<HomeProvider>().currentIdx;
     log(_connectionStatus.toString());
-    context.read<PostProvider>().clearPostList();
 
     return WillPopScope(
       onWillPop: () async {
@@ -94,7 +93,6 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
               'Are you sure you want to exit?',
               style: TextStyle(
                 color: Color(0xff534F4F),
-                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 16,
               ),
             ),
@@ -104,7 +102,6 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
                   "NO",
                   style: TextStyle(
                     color: Color(0xffF2AE00),
-                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14,
                   ),
                 ),
@@ -115,11 +112,12 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
                   "YES",
                   style: TextStyle(
                     color: Color(0xffF2AE00),
-                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                     fontSize: 14,
                   ),
                 ),
-                onPressed: () => Navigator.of(context).pop(true),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
               )
             ],
           ),
@@ -154,6 +152,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
           showUnselectedLabels: false,
           enableFeedback: true,
           onTap: (newIndex) {
+            context.read<PostProvider>().clearPostList();
             context.read<HomeProvider>().changePage(newIndex);
           },
           items: [
@@ -170,6 +169,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
                 ),
               ),
               label: 'Explore',
+              tooltip: 'Explore',
             ),
             BottomNavigationBarItem(
               icon: ColorFiltered(
@@ -184,6 +184,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
                 ),
               ),
               label: 'Search',
+              tooltip: 'Search',
             ),
             BottomNavigationBarItem(
               icon: ColorFiltered(
@@ -194,10 +195,11 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
                   BlendMode.srcIn,
                 ),
                 child: SvgPicture.asset(
-                  'assets/svgs/love_icon.svg',
+                  'assets/svgs/add_icon.svg',
                 ),
               ),
-              label: 'Saved',
+              label: 'Post',
+              tooltip: 'Post',
             ),
             BottomNavigationBarItem(
               icon: ColorFiltered(
@@ -208,35 +210,50 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
                   BlendMode.srcIn,
                 ),
                 child: SvgPicture.asset(
-                  'assets/svgs/person_icon.svg',
+                  'assets/svgs/love_icon.svg',
                 ),
               ),
-              label: 'Profile',
+              label: 'Saved',
+              tooltip: 'Saved',
             ),
+            BottomNavigationBarItem(
+                icon: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    currentIndex == 4
+                        ? const Color(0xffF2AE00)
+                        : const Color(0xff666666),
+                    BlendMode.srcIn,
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/svgs/person_icon.svg',
+                  ),
+                ),
+                label: 'Profile',
+                tooltip: 'Profile'),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          foregroundColor: Colors.white,
-          elevation: 2,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          backgroundColor: Color(0xffF2AE00),
-          enableFeedback: true,
-          isExtended: true,
-          onPressed: () async {
-            // final List<XFile?> image = await picker.pickMultiImage();
-            Navigator.push(
-              context,
-              PageTransition(
-                  type: PageTransitionType.rightToLeft,
-                  child: const FlatCreatePost()),
-            );
-          },
-          tooltip: 'Add Item',
-          child: const Icon(Icons.add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+        // floatingActionButton: FloatingActionButton(
+        //   foregroundColor: Colors.white,
+        //   elevation: 2,
+        //   shape:
+        //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        //   backgroundColor: Color(0xffF2AE00),
+        //   enableFeedback: true,
+        //   isExtended: true,
+        //   onPressed: () async {
+        //     // final List<XFile?> image = await picker.pickMultiImage();
+        //     Navigator.push(
+        //       context,
+        //       PageTransition(
+        //           type: PageTransitionType.rightToLeft,
+        //           child: const FlatCreatePost()),
+        //     );
+        //   },
+        //   tooltip: 'Add Item',
+        //   child: const Icon(Icons.add),
+        // ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       ),
     );
   }

@@ -36,6 +36,13 @@ class _HomePageState extends State<HomePage> {
           ? context.read<PostProvider>().getAllPosts(currentCursor)
           : null;
     }
+    // if (_scrollController.position.userScrollDirection ==
+    //     ScrollDirection.reverse) {
+    //   log('scrolling down');
+    // } else if (_scrollController.position.userScrollDirection ==
+    //     ScrollDirection.forward) {
+    //   log('scrolling up');
+    // }
   }
 
   @override
@@ -97,9 +104,9 @@ class _HomePageState extends State<HomePage> {
                     elevation: 0,
                     automaticallyImplyLeading: false,
                     backgroundColor: Colors.white,
-                    pinned: true,
+                    pinned: false,
                     snap: false,
-                    floating: false,
+                    floating: true,
                     expandedHeight: 100,
                     flexibleSpace: FlexibleSpaceBar(
                       titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
@@ -117,12 +124,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                   allPosts != null
                       ? SliverList.builder(
-                          // addAutomaticKeepAlives: true,
-                          // addRepaintBoundaries: true,
-                          // addSemanticIndexes: true,
+                          addAutomaticKeepAlives: true,
+                          addRepaintBoundaries: true,
+                          addSemanticIndexes: true,
                           itemCount: allPosts!.length,
                           itemBuilder: (context, index) {
-                            Post post = allPosts![index];
+                            final post = allPosts![index];
                             return MainPostCard(post: post);
                           },
                         )

@@ -21,201 +21,208 @@ class _MainPostCardState extends State<MainPostCard> {
 
     widget.post.pictures!.map((e) => imageList.add(e.url!)).toList();
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(5),
-          splashColor: Color(0xffF2AE00).withOpacity(0.4),
-          onTap: () {
-            Navigator.push(
-              context,
-              PageTransition(
-                  fullscreenDialog: true,
-                  childCurrent: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  type: PageTransitionType.rightToLeft,
-                  child: FlatDescriptionPage(
-                    id: widget.post.id!,
-                  )),
-            );
-          },
-          child: Animate(
-            child: SizedBox(
-              width: MediaQuery.sizeOf(context).width,
-              height: 400,
-              child: Card(
-                elevation: 0.5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(5),
+        splashColor: Color(0xffF2AE00).withOpacity(0.4),
+        onTap: () {
+          Navigator.push(
+            context,
+            PageTransition(
+                fullscreenDialog: true,
+                childCurrent: Center(
+                  child: CircularProgressIndicator(),
                 ),
-                child: Column(
-                  children: [
-                    Expanded(
-                        flex: 5,
-                        child: Container(
-                          color: Colors.transparent,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Container(
-                              child: Carousel(
-                                autoScroll: false,
-                                animationPageCurve: Curves.linear,
-                                activateIndicatorColor: const Color(0xffF2AE00),
-                                indicatorBarColor: Colors.transparent,
-                                isCircle: false,
-                                indicatorHeight: 2,
-                                indicatorWidth: 20,
-                                items: [
-                                  ...widget.post.pictures!
-                                      .map(
-                                        (e) => Utils.headerImagesSlide(
-                                            true,
-                                            widget.post.pictures!,
-                                            e.url ?? "",
-                                            context),
-                                      )
-                                      .toList(),
-                                ],
-                              ),
+                type: PageTransitionType.rightToLeft,
+                child: FlatDescriptionPage(
+                  isOwnUserToShowContactCard: false,
+                  isOwnUserToSave: false,
+                  isOwnUserToCall: false,
+                  id: widget.post.id!,
+                )),
+          );
+        },
+        child: Animate(
+          child: SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            height: 400,
+            child: Card(
+              elevation: 0.5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                      flex: 5,
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            child: Carousel(
+                              autoScroll: false,
+                              animationPageCurve: Curves.linear,
+                              activateIndicatorColor: const Color(0xffF2AE00),
+                              indicatorBarColor: Colors.transparent,
+                              isCircle: false,
+                              indicatorHeight: 2,
+                              indicatorWidth: 20,
+                              items: [
+                                ...widget.post.pictures!
+                                    .map(
+                                      (e) => Utils.headerImagesSlide(
+                                          true,
+                                          widget.post.pictures!,
+                                          e.url ?? "",
+                                          context),
+                                    )
+                                    .toList(),
+                              ],
                             ),
                           ),
-                        )),
-                    Expanded(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.transparent,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                      color: Colors.transparent,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 4,
-                                            child: Container(
-                                              color: Colors.transparent,
-                                              child: Text(
-                                                "${widget.post.price!} /m",
-                                                style: TextStyle(fontSize: 22),
-                                              ),
+                        ),
+                      )),
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                    color: Colors.transparent,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 4,
+                                          child: Container(
+                                            color: Colors.transparent,
+                                            child: Text(
+                                              "${widget.post.price!} /m",
+                                              style: TextStyle(fontSize: 22),
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: 1,
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            color: Colors.transparent,
                                             child: Container(
-                                              color: Colors.transparent,
-                                              child: Container(
-                                                height: 35,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.black,
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    "${widget.post.tenants} left",
-                                                    style: TextStyle(
-                                                      color: Color(0xffFFFFFF),
-                                                      fontFamily:
-                                                          DefaultTextStyle.of(
-                                                                  context)
-                                                              .style
-                                                              .fontFamily,
-                                                      fontSize: 12,
-                                                    ),
+                                              height: 35,
+                                              decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "${widget.post.tenants} left",
+                                                  style: TextStyle(
+                                                    color: Color(0xffFFFFFF),
+                                                    fontFamily:
+                                                        DefaultTextStyle.of(
+                                                                context)
+                                                            .style
+                                                            .fontFamily,
+                                                    fontSize: 12,
                                                   ),
                                                 ),
                                               ),
                                             ),
                                           ),
+                                        ),
+                                      ],
+                                    )),
+                              ),
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      color: Colors.transparent,
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.location_on,
+                                            size: 15,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            widget.post.township!,
+                                            style: TextStyle(fontSize: 12),
+                                          ),
                                         ],
-                                      )),
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.post.apartment!.floor != 0
+                                          ? "${widget.post.apartment!.floor}th floor"
+                                          : "Ground floor",
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.location_on,
-                                              size: 15,
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Text(
-                                              widget.post.township!,
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                          ],
-                                        ),
+                              ),
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      color: Colors.transparent,
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.map_rounded,
+                                            size: 15,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            widget.post.state!,
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        widget.post.apartment!.floor != 0
-                                            ? "${widget.post.apartment!.floor}th floor"
-                                            : "Ground floor",
-                                        style: TextStyle(fontSize: 16),
+                                    ),
+                                    Container(
+                                      color: Colors.transparent,
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.grid_view,
+                                            size: 15,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            widget
+                                                .post.apartment!.apartmentType!,
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.map_rounded,
-                                              size: 15,
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Text(
-                                              widget.post.state!,
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.grid_view,
-                                              size: 15,
-                                            ),
-                                            const SizedBox(width: 10),
-                                            Text(
-                                              widget.post.apartment!
-                                                  .apartmentType!,
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        )),
-                  ],
-                ),
+                        ),
+                      )),
+                ],
               ),
             ),
           ),
-        ).animate().shimmer());
+        ),
+      ).animate().shimmer(
+            duration: Duration(seconds: 2),
+            color: Color.fromARGB(20, 242, 173, 0),
+          ),
+    );
   }
 }

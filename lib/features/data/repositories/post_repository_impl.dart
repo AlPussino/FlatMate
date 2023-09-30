@@ -40,4 +40,14 @@ class PostRepositoryImpl implements PostRepository {
   Future<AllPosts?> getAllPosts(int? pageCursor) async {
     return await postDataSource.getAllPosts(pageCursor);
   }
+
+  @override
+  Future<Post?> saveOrUnsavePost(int postId, bool save) async {
+    return await postDataSource.saveOrUnsavePost(postId, save);
+  }
+
+  @override
+  Future<PostList?> getSavedPosts() async {
+    return await postDataSource.getSavedPosts();
+  }
 }

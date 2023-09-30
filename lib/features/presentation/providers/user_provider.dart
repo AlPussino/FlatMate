@@ -1,13 +1,15 @@
 import 'dart:io';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
+import 'package:finding_apartments_yangon/features/data/models/other_user.dart';
+import 'package:finding_apartments_yangon/features/data/models/post_owner_list.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/email_response.dart';
 import 'package:finding_apartments_yangon/features/data/models/social_contact.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/noti_pages/notis.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../configs/strings.dart';
-import '../../../core/utiles.dart';
 import '../../data/models/my_user.dart';
 import '../../domain/usecases/token_usecase.dart';
 import '../../domain/usecases/user_usecase.dart';
@@ -21,11 +23,17 @@ class UserProvider with ChangeNotifier {
   MyUser? _myUser;
   MyUser? get user => _myUser;
 
+  OtherUser? _otherUser;
+  OtherUser? get otherUser => _otherUser;
+
   List<SocialContact>? _socialContactList = [];
   List<SocialContact>? get socialContactList => _socialContactList;
 
   List<MyanmarData> _myanmarData = [];
   List<MyanmarData> get myanmarData => _myanmarData;
+
+  PostOwnerList? _postOwnerList;
+  PostOwnerList? get postOwnerList => _postOwnerList;
 
   Future<MyUser?> getUserInfo() async {
     _myUser = await _userUseCase.getUserInfo();
@@ -96,7 +104,7 @@ class UserProvider with ChangeNotifier {
       final finalImg = XFile(croppedFile!.path);
       final file = File(finalImg.path).readAsBytesSync();
       if (file.length > maxProfileImageSize) {
-        Utils.showError(
+        Notis.showError(
             'Your image is greater than 20 MB, \nPlease Select another image!');
       }
       // _profileImageStr = base64Encode(File(finalImg.path).readAsBytesSync());
@@ -106,13 +114,13 @@ class UserProvider with ChangeNotifier {
       user?.profileUrl = url;
       notifyListeners();
       if (url != null) {
-        Utils.showSuccess("New Profile Uploaded Successfully!");
+        Notis.showSuccess("New Profile Uploaded Successfully!");
 
         notifyListeners();
       }
       return url;
     } else {
-      Utils.showError('Please select an image to upload.');
+      Notis.showError('Please select an image to upload.');
       return Future.value(null);
     }
   }
@@ -127,5 +135,19 @@ class UserProvider with ChangeNotifier {
   Future<EmailResponse?> removeSocialContact({required String id}) async {
     notifyListeners();
     return await _userUseCase.removeSocialContact(id: id);
+  }
+
+  Future<OtherUser?> aboutOtherUser({required int userId}) async {
+    final data = await _userUseCase.aboutOtherUser(userId: userId);
+    _otherUser = data;
+    notifyListeners();
+    return data;
+  }
+
+  Future<PostOwnerList?> searchUser({required String keyword}) async {
+    final data = await _userUseCase.searchUser(keyword: keyword);
+    _postOwnerList = data;
+    notifyListeners();
+    return data;
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 class ApiConfigs {
   //base url
   static const String baseUrl = "http://192.168.0.107:8080";
@@ -28,6 +30,8 @@ class ApiConfigs {
       "$baseUrl/api/user/me/social-contact";
   static const String removeSocialContactUrl =
       "$baseUrl/api/user/me/social-contact/";
+  static const String aboutOtherUserUrl = "$baseUrl/api/user/";
+  static const String searchUserUrl = "$baseUrl/api/user/search?k=";
 
   //post urls
   static const String createPostUrl = "$baseUrl/api/post";
@@ -35,6 +39,8 @@ class ApiConfigs {
   static const String getPostDetailUrl = "$baseUrl/api/post/";
   static const String deleteMyPostUrl = "$baseUrl/api/post/";
   static const String getAllPostsUrl = "$baseUrl/api/post?cursor=";
+  static const String savePostUrl = "$baseUrl/api/post/";
+  static const String getSavedPostsUrl = "$baseUrl/api/post/me/save";
 }
 
 ///
@@ -63,6 +69,8 @@ const kChangeMobileNumberUrl = ApiConfigs.changeMobileNumberUrl;
 const kUploadProfileUrl = ApiConfigs.uploadProfileUrl;
 const kAddSocialContactUrl = ApiConfigs.addSocialContactUrl;
 const kRemoveSocialContactUrl = ApiConfigs.removeSocialContactUrl;
+const kAboutOtherUserUrl = ApiConfigs.aboutOtherUserUrl;
+const kSearchUserUrl = ApiConfigs.searchUserUrl;
 
 //post urls
 const kCreatePostUrl = ApiConfigs.createPostUrl;
@@ -70,3 +78,5 @@ const kGetMyPostsUrl = ApiConfigs.getMyPostsUrl;
 const kGetPostDetailUrl = ApiConfigs.getPostDetailUrl;
 const kDeleteMyPostUrl = ApiConfigs.deleteMyPostUrl;
 const kGetAllPostsUrl = ApiConfigs.getAllPostsUrl;
+const kSavePostUrl = ApiConfigs.savePostUrl;
+const kGetSavedPostsUrl = ApiConfigs.getSavedPostsUrl;

@@ -13,6 +13,7 @@ class Post {
   String? additional;
   Apartment? apartment;
   List<Picture>? pictures;
+  bool? isSaved;
   PostOwner? postOwner;
 
   Post({
@@ -26,6 +27,7 @@ class Post {
     this.additional,
     this.apartment,
     this.pictures,
+    this.isSaved,
     this.postOwner,
   });
 
@@ -34,13 +36,13 @@ class Post {
         .map((pic) => Picture.fromJson(pic))
         .toList();
 
-    Map<String, dynamic> apartmentMap =
-        json['apartment'] as Map<String, dynamic>;
+    Map<String, dynamic>? apartmentMap =
+        json['apartment'] as Map<String, dynamic>?;
     Apartment? apartment =
         apartmentMap != null ? Apartment.fromJson(apartmentMap) : null;
 
-    Map<String, dynamic> postOwnerMap =
-        json['post_owner'] as Map<String, dynamic>;
+    Map<String, dynamic>? postOwnerMap =
+        json['post_owner'] as Map<String, dynamic>?;
     PostOwner? postOwner =
         postOwnerMap != null ? PostOwner.fromJson(postOwnerMap) : null;
 
@@ -55,6 +57,7 @@ class Post {
       additional: json['additional'] as String?,
       apartment: apartment,
       pictures: picturesList,
+      isSaved: json['saved'] as bool?,
       postOwner: postOwner,
     );
   }
@@ -71,6 +74,7 @@ class Post {
       'additional': additional,
       'apartment': apartment != null ? apartment!.toJson() : null,
       'pictures': pictures,
+      'saved': isSaved,
       'post_owner': postOwner != null ? postOwner!.toJson() : null,
     };
   }

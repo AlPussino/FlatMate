@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:finding_apartments_yangon/features/data/datasources/token_datasource.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/login_response.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/login_request_with_email.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/noti_pages/notis.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../configs/api_configs.dart';
@@ -42,14 +43,14 @@ class AuthDataSourceImpl implements AuthDataSource {
       if (resp.statusCode == HttpStatus.ok) {
         return EmailResponse.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError(json.decode(resp.body)['message']);
+        Notis.showError(json.decode(resp.body)['message']);
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -63,19 +64,19 @@ class AuthDataSourceImpl implements AuthDataSource {
           headers: headers, body: json.encode(body.toJson()));
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess(json.decode(resp.body)['message']);
+        Notis.showSuccess(json.decode(resp.body)['message']);
 
         return EmailOTPVerifyResponse.fromJson(json.decode(resp.body));
       } else {
         log('this error ${json.decode(resp.body)['message']}');
-        Utils.showError(json.decode(resp.body)['message']);
+        Notis.showError(json.decode(resp.body)['message']);
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
       return null;
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -90,14 +91,14 @@ class AuthDataSourceImpl implements AuthDataSource {
       if (resp.statusCode == HttpStatus.ok) {
         return convertHttpRespToLoginResp(resp);
       } else {
-        Utils.showError(json.decode(resp.body)['message']);
+        Notis.showError(json.decode(resp.body)['message']);
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -132,17 +133,17 @@ class AuthDataSourceImpl implements AuthDataSource {
       );
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess(json.decode(resp.body)['message']);
+        Notis.showSuccess(json.decode(resp.body)['message']);
         return EmailResponse.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError(json.decode(resp.body)['message']);
+        Notis.showError(json.decode(resp.body)['message']);
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -160,14 +161,14 @@ class AuthDataSourceImpl implements AuthDataSource {
         _tokenDataSource.saveToken(loginResp.token);
         return EmailOTPVerifyResponse.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError(json.decode(resp.body)['message']);
+        Notis.showError(json.decode(resp.body)['message']);
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
       return null;
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -186,17 +187,17 @@ class AuthDataSourceImpl implements AuthDataSource {
       );
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess(json.decode(resp.body)['message']);
+        Notis.showSuccess(json.decode(resp.body)['message']);
         return EmailResponse.fromJson(json.decode(resp.body));
       } else {
-        Utils.showError(json.decode(resp.body)['message']);
+        Notis.showError(json.decode(resp.body)['message']);
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;

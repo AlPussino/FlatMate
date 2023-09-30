@@ -1,5 +1,7 @@
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
+import 'package:finding_apartments_yangon/features/presentation/pages/home_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
@@ -387,7 +389,9 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
             });
             Navigator.of(context).pop();
             Navigator.of(context).pop();
-            Navigator.of(context).pop();
+            context.read<HomeProvider>().changePage(4);
+
+            // Navigator.of(context).pop();
           } else {
             print('asdf');
             setState(() {

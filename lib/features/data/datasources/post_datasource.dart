@@ -8,6 +8,7 @@ import 'package:finding_apartments_yangon/features/data/models/all_posts.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_list.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/noti_pages/notis.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +21,8 @@ abstract class PostDataSource {
   Future<Post?> getPostDetail(int postId);
   Future<bool?> deleteMyPost(int postId);
   Future<AllPosts?> getAllPosts(int? pageCursor);
+  Future<Post?> saveOrUnsavePost(int postId, bool save);
+  Future<PostList?> getSavedPosts();
 }
 
 class PostDataSourceImpl implements PostDataSource {
@@ -82,7 +85,7 @@ class PostDataSourceImpl implements PostDataSource {
       final response = await request.send();
 
       if (response.statusCode == HttpStatus.ok) {
-        Utils.showSuccess("creating post success");
+        Notis.showSuccess("creating post success");
         final responseJson = jsonDecode(await response.stream.bytesToString());
         print('Response data: $responseJson');
         return Post.fromJson(responseJson);
@@ -108,14 +111,14 @@ class PostDataSourceImpl implements PostDataSource {
       if (resp.statusCode == HttpStatus.ok) {
         return PostList.fromJson(resp.body);
       } else {
-        Utils.showError('Loading my posts error');
+        Notis.showError('Loading my posts error');
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -133,14 +136,14 @@ class PostDataSourceImpl implements PostDataSource {
       if (resp.statusCode == HttpStatus.ok) {
         return Post.fromJson(jsonDecode(resp.body));
       } else {
-        Utils.showError('Loading post detail error');
+        Notis.showError('Loading post detail error');
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -156,17 +159,17 @@ class PostDataSourceImpl implements PostDataSource {
       );
 
       if (resp.statusCode == HttpStatus.ok) {
-        Utils.showSuccess(json.decode(resp.body)['message']);
+        Notis.showSuccess(json.decode(resp.body)['message']);
         return true;
       } else {
-        Utils.showError('Deleting post error');
+        Notis.showError('Deleting post error');
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
       return null;
     }
     return null;
@@ -186,14 +189,77 @@ class PostDataSourceImpl implements PostDataSource {
       if (resp.statusCode == HttpStatus.ok) {
         return AllPosts.fromJson(jsonDecode(resp.body));
       } else {
-        Utils.showError('Loading all posts error');
+        Notis.showError('Loading all posts error');
         return null;
       }
     } on SocketException {
-      Utils.showError("Network Error");
+      Notis.showError("Network Error");
     } catch (e) {
       log(e.toString());
-      Utils.showError('err : $e');
+      Notis.showError('err : $e');
+      return null;
+    }
+    return null;
+  }
+
+  @override
+  Future<Post?> saveOrUnsavePost(int postId, bool save) async {
+    final token = _tokenDataSource.getToken();
+    try {
+      final resp = await _client.post(
+        Uri.parse(save == true
+            ? "$kSavePostUrl$postId/save?save=true"
+            : "$kSavePostUrl$postId/save?save=false"),
+        headers: authHeaders(token: token!),
+      );
+
+      if (resp.statusCode == HttpStatus.ok) {
+        if (json.decode(resp.body)['saved']) {
+          Notis.showSuccess("Saved post");
+        } else {
+          Notis.showSuccess("Unsaved post");
+        }
+        return Post.fromJson(jsonDecode(resp.body));
+      } else if (resp.statusCode == HttpStatus.conflict) {
+        Notis.showError(json.decode(resp.body)['message']);
+        return null;
+      } else if (resp.statusCode == HttpStatus.badRequest) {
+        Notis.showError(json.decode(resp.body)['message']);
+        return null;
+      } else {
+        Notis.showError(json.decode(resp.body)['message']);
+        return null;
+      }
+    } on SocketException {
+      Notis.showError("Network Error");
+    } catch (e) {
+      log(e.toString());
+      Notis.showError('err : $e');
+      return null;
+    }
+    return null;
+  }
+
+  @override
+  Future<PostList?> getSavedPosts() async {
+    final token = _tokenDataSource.getToken();
+    try {
+      final resp = await _client.get(
+        Uri.parse(kGetSavedPostsUrl),
+        headers: authHeaders(token: token!),
+      );
+
+      if (resp.statusCode == HttpStatus.ok) {
+        return PostList.fromJson(resp.body);
+      } else {
+        Notis.showError('Loading my saved posts error');
+        return null;
+      }
+    } on SocketException {
+      Notis.showError("Network Error");
+    } catch (e) {
+      log(e.toString());
+      Notis.showError('err : $e');
       return null;
     }
     return null;

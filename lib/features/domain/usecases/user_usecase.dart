@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:finding_apartments_yangon/features/data/models/other_user.dart';
+import 'package:finding_apartments_yangon/features/data/models/post_owner.dart';
+import 'package:finding_apartments_yangon/features/data/models/post_owner_list.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/email_response.dart';
 import '../../data/datasources/user_datasource.dart';
@@ -14,6 +17,8 @@ abstract class UserUseCase {
   Future<String?> uploadProfile(File file, String? oldImageUrl);
   Future<MyUser?> addSocialContact(AddSocialContactRequest body);
   Future<EmailResponse?> removeSocialContact({required String id});
+  Future<OtherUser?> aboutOtherUser({required int userId});
+  Future<PostOwnerList?> searchUser({required String keyword});
 }
 
 class UserUseCaseImpl implements UserUseCase {
@@ -57,5 +62,15 @@ class UserUseCaseImpl implements UserUseCase {
   @override
   Future<EmailResponse?> removeSocialContact({required String id}) async {
     return await userRepository.removeSocialContact(id: id);
+  }
+
+  @override
+  Future<OtherUser?> aboutOtherUser({required int userId}) async {
+    return await userRepository.aboutOtherUser(userId: userId);
+  }
+
+  @override
+  Future<PostOwnerList?> searchUser({required String keyword}) async {
+    return await userRepository.searchUser(keyword: keyword);
   }
 }

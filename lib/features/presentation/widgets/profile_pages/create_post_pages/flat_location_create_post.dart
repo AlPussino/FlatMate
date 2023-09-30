@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
@@ -24,7 +26,9 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
 
   final _additionAddressController = TextEditingController();
 
-  final FocusNode _additionalAddressFocusNode = FocusNode();
+  FocusNode stateFocusNode = FocusNode();
+  FocusNode townshipFocusNode = FocusNode();
+  FocusNode _additionalAddressFocusNode = FocusNode();
 
   bool additionalAddressError = false;
   bool _showError = false;
@@ -144,6 +148,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: DropdownButton(
+                        focusNode: stateFocusNode,
                         isExpanded: true,
                         underline: Container(),
                         alignment: Alignment.centerLeft,
@@ -155,6 +160,9 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                           fontSize: 12,
                         ),
                         value: selectedRegion,
+                        onTap: () {
+                          stateFocusNode.unfocus();
+                        },
                         onChanged: (newValue) {
                           setState(() {
                             selectedRegion = newValue!;
@@ -196,6 +204,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: DropdownButton<String>(
+                        focusNode: townshipFocusNode,
                         isExpanded: true,
                         underline: Container(),
                         alignment: Alignment.centerLeft,
@@ -207,9 +216,16 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                           fontSize: 12,
                         ),
                         value: selectedTownship,
+                        onTap: () {
+                          townshipFocusNode.unfocus();
+                          log('tap');
+                          log(townshipFocusNode.hasFocus.toString());
+                        },
                         onChanged: (newValue) {
                           setState(() {
+                            townshipFocusNode.unfocus();
                             selectedTownship = newValue!;
+                            log(townshipFocusNode.hasFocus.toString());
                           });
                         },
                         items: myanmarData

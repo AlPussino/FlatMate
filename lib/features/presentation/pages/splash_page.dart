@@ -84,37 +84,40 @@ class SplashPage extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Center(
-                  child: DottedBorder(
-                    color: const Color(0xff534F4F),
-                    dashPattern: const [20, 20],
-                    borderType: BorderType.Circle,
-                    child: SizedBox(
-                      width: 200,
-                      height: 200,
-                      child: Center(
-                        child: DottedBorder(
-                          color: const Color(0xff534F4F),
-                          dashPattern: const [20, 20],
-                          borderType: BorderType.Circle,
-                          child: SizedBox(
-                            width: 120,
-                            height: 120,
-                            child: Center(
-                              child: InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   PageTransition(
-                                  //       type: PageTransitionType.rightToLeft,
-                                  //       child: IntroPage()),
-                                  // );
-                                },
-                                child: const CircleAvatar(
-                                  backgroundColor: Colors.black,
-                                  radius: 30,
-                                  child: Icon(
-                                    Icons.arrow_forward,
-                                    color: Colors.white,
+                  child: Visibility(
+                    visible: false,
+                    child: DottedBorder(
+                      color: const Color(0xff534F4F),
+                      dashPattern: const [20, 20],
+                      borderType: BorderType.Circle,
+                      child: SizedBox(
+                        width: 200,
+                        height: 200,
+                        child: Center(
+                          child: DottedBorder(
+                            color: const Color(0xff534F4F),
+                            dashPattern: const [20, 20],
+                            borderType: BorderType.Circle,
+                            child: SizedBox(
+                              width: 120,
+                              height: 120,
+                              child: Center(
+                                child: InkWell(
+                                  onTap: () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   PageTransition(
+                                    //       type: PageTransitionType.rightToLeft,
+                                    //       child: IntroPage()),
+                                    // );
+                                  },
+                                  child: const CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    radius: 30,
+                                    child: Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
