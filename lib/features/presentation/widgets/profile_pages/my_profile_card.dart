@@ -1,18 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/data/models/my_user.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/setting/edit_profile_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-class MyProfileCard extends StatefulWidget {
+class MyProfileCard extends StatelessWidget {
   final MyUser myUser;
   const MyProfileCard({super.key, required this.myUser});
 
-  @override
-  State<MyProfileCard> createState() => _MyProfileCardState();
-}
-
-class _MyProfileCardState extends State<MyProfileCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,7 +47,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                       radius: 53,
                       backgroundColor: Color(0xffF2AE00),
                       child: CachedNetworkImage(
-                        imageUrl: widget.myUser.profileUrl ??
+                        imageUrl: myUser.profileUrl ??
                             "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
                         imageBuilder: (context, imageProvider) => Container(
                           width: 100,
@@ -88,7 +83,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            widget.myUser.username ?? "",
+                            myUser.username ?? "",
                             style: TextStyle(
                               color: Color(0xff000000),
                               fontFamily:
@@ -98,7 +93,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                           ),
                           const SizedBox(height: 20),
                           Text(
-                            widget.myUser.mobileNumber ?? "",
+                            myUser.mobileNumber ?? "",
                             style: TextStyle(
                               color: Color(0xff534F4F),
                               fontFamily:
@@ -107,7 +102,7 @@ class _MyProfileCardState extends State<MyProfileCard> {
                             ),
                           ),
                           Text(
-                            widget.myUser.email ?? "",
+                            myUser.email ?? "",
                             style: TextStyle(
                               color: Color(0xff534F4F),
                               fontFamily:

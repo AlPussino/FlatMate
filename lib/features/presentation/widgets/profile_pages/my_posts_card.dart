@@ -8,16 +8,11 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class MyPostsCard extends StatefulWidget {
+class MyPostsCard extends StatelessWidget {
   final Post post;
   final List<dynamic> imgList;
   const MyPostsCard({super.key, required this.post, required this.imgList});
 
-  @override
-  State<MyPostsCard> createState() => _MyPostsCardState();
-}
-
-class _MyPostsCardState extends State<MyPostsCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +21,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
         borderRadius: BorderRadius.circular(5),
         splashColor: Color(0xffF2AE00).withOpacity(0.4),
         onTap: () {
-          log(widget.post.id.toString());
+          log(post.id.toString());
           Navigator.push(
             context,
             PageTransition(
@@ -39,7 +34,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                 isOwnUserToSave: true,
                 isOwnUserToShowContactCard: true,
                 isOwnUserToCall: true,
-                id: widget.post.id!,
+                id: post.id!,
               ),
             ),
           );
@@ -59,11 +54,10 @@ class _MyPostsCardState extends State<MyPostsCard> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.white,
+                      child: SizedBox(
                         child: Center(
                           child: CachedNetworkImage(
-                            imageUrl: widget.imgList[0],
+                            imageUrl: imgList[0],
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
@@ -99,15 +93,13 @@ class _MyPostsCardState extends State<MyPostsCard> {
                     flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.transparent,
+                      child: SizedBox(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
                               flex: 2,
-                              child: Container(
-                                color: Colors.transparent,
+                              child: SizedBox(
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -121,9 +113,9 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                         ),
                                         const SizedBox(width: 10),
                                         Text(
-                                          widget.post.apartment!.floor != 0
-                                              ? "${widget.post.apartment!.apartmentType.toString()}  |  ${widget.post.apartment!.floor}th floor"
-                                              : "${widget.post.apartment!.apartmentType.toString()}  | Ground floor",
+                                          post.apartment!.floor != 0
+                                              ? "${post.apartment!.apartmentType.toString()}  |  ${post.apartment!.floor}th floor"
+                                              : "${post.apartment!.apartmentType.toString()}  | Ground floor",
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
                                             fontFamily:
@@ -143,7 +135,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                           case 'Delete':
                                             context
                                                 .read<PostProvider>()
-                                                .deleteMyPost(widget.post.id!);
+                                                .deleteMyPost(post.id!);
                                             break;
                                         }
                                       },
@@ -194,8 +186,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                             ),
                             Expanded(
                               flex: 2,
-                              child: Container(
-                                color: Colors.transparent,
+                              child: SizedBox(
                                 child: Row(
                                   children: [
                                     Icon(
@@ -206,7 +197,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        "${widget.post.township}",
+                                        "${post.township}",
                                         style: TextStyle(
                                           color: Color(0xff534F4F),
                                           fontSize: 12,
@@ -220,8 +211,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                             ),
                             Expanded(
                               flex: 2,
-                              child: Container(
-                                color: Colors.transparent,
+                              child: SizedBox(
                                 child: Row(
                                   children: [
                                     Icon(
@@ -231,7 +221,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                     ),
                                     const SizedBox(width: 10),
                                     Text(
-                                      "${widget.post.state}",
+                                      "${post.state}",
                                       style: TextStyle(
                                         color: Color(0xff534F4F),
                                         fontFamily: DefaultTextStyle.of(context)
@@ -247,8 +237,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                             ),
                             Expanded(
                               flex: 3,
-                              child: Container(
-                                color: Colors.transparent,
+                              child: SizedBox(
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment:
@@ -256,10 +245,9 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(left: 2),
-                                      child: Container(
-                                        color: Colors.transparent,
+                                      child: SizedBox(
                                         child: Text(
-                                          '${widget.post.price}/m',
+                                          '${post.price}/m',
                                           maxLines: 2,
                                           softWrap: true,
                                           style: TextStyle(
@@ -273,8 +261,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      color: Colors.white,
+                                    SizedBox(
                                       child: Container(
                                         height: 25,
                                         width: 60,
@@ -285,7 +272,7 @@ class _MyPostsCardState extends State<MyPostsCard> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            "${widget.post.tenants} left",
+                                            "${post.tenants} left",
                                             style: TextStyle(
                                               color: Color(0xffFFFFFF),
                                               fontFamily:

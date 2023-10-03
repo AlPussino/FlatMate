@@ -1,24 +1,18 @@
-import 'package:finding_apartments_yangon/core/utiles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_image_slider/carousel.dart';
 import 'package:page_transition/page_transition.dart';
 
-class OtherUserPostCard extends StatefulWidget {
+class OtherUserPostCard extends StatelessWidget {
   final Post post;
   const OtherUserPostCard({super.key, required this.post});
 
   @override
-  State<OtherUserPostCard> createState() => _OtherUserPostCardState();
-}
-
-class _OtherUserPostCardState extends State<OtherUserPostCard> {
-  @override
   Widget build(BuildContext context) {
     final imageList = [];
-    widget.post.pictures!.map((e) => imageList.add(e.url)).toList();
+    post.pictures!.map((e) => imageList.add(e.url)).toList();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -39,7 +33,7 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                   ),
                   type: PageTransitionType.rightToLeft,
                   child: FlatDescriptionPage(
-                    id: widget.post.id!,
+                    id: post.id!,
                     isOwnUserToSave: false,
                     isOwnUserToCall: false,
                     isOwnUserToShowContactCard: true,
@@ -62,29 +56,41 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.transparent,
+                          child: SizedBox(
                             child: Center(
-                              child: Carousel(
-                                autoScroll: true,
-                                animationPageCurve: Curves.linear,
-                                activateIndicatorColor: const Color(0xffF2AE00),
-                                indicatorBarColor: Colors.transparent,
-                                isCircle: false,
-                                indicatorHeight: 0,
-                                indicatorWidth: 0,
-                                autoScrollDuration: Duration(seconds: 5),
-                                items: [
-                                  ...widget.post.pictures!
-                                      .map(
-                                        (e) => Utils.headerImagesSlide(
-                                            true,
-                                            widget.post.pictures!,
-                                            e.url ?? "",
-                                            context),
-                                      )
-                                      .toList(),
-                                ],
+                              child: CachedNetworkImage(
+                                imageUrl: imageList[0],
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(5),
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                progressIndicatorBuilder:
+                                    (context, url, progress) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 60,
+                                        right: 20,
+                                        bottom: 60,
+                                        left: 20),
+                                    child: SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: const CircularProgressIndicator(
+                                        color: Color(0xffF2AE00),
+                                        backgroundColor: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                               ),
                             ),
                           ),
@@ -94,15 +100,13 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                         flex: 2,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.transparent,
+                          child: SizedBox(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
                                   flex: 2,
-                                  child: Container(
-                                    color: Colors.transparent,
+                                  child: SizedBox(
                                     child: Row(
                                       children: [
                                         Icon(
@@ -112,9 +116,9 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                         ),
                                         const SizedBox(width: 10),
                                         Text(
-                                          widget.post.apartment!.floor != 0
-                                              ? "${widget.post.apartment!.apartmentType}   |   ${widget.post.apartment!.floor}th floor"
-                                              : "${widget.post.apartment!.apartmentType}   |   Ground floor",
+                                          post.apartment!.floor != 0
+                                              ? "${post.apartment!.apartmentType}   |   ${post.apartment!.floor}th floor"
+                                              : "${post.apartment!.apartmentType}   |   Ground floor",
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
                                             fontSize: 14,
@@ -127,8 +131,7 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: Container(
-                                    color: Colors.transparent,
+                                  child: SizedBox(
                                     child: Row(
                                       children: [
                                         Icon(
@@ -138,7 +141,7 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                         ),
                                         const SizedBox(width: 10),
                                         Text(
-                                          widget.post.township!,
+                                          post.township!,
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
                                             fontSize: 12,
@@ -151,8 +154,7 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: Container(
-                                    color: Colors.transparent,
+                                  child: SizedBox(
                                     child: Row(
                                       children: [
                                         Icon(
@@ -162,7 +164,7 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                         ),
                                         const SizedBox(width: 10),
                                         Text(
-                                          widget.post.state!,
+                                          post.state!,
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
                                             fontSize: 12,
@@ -175,8 +177,7 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                 ),
                                 Expanded(
                                   flex: 3,
-                                  child: Container(
-                                    color: Colors.transparent,
+                                  child: SizedBox(
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
@@ -186,10 +187,9 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 2),
-                                          child: Container(
-                                            color: Colors.transparent,
+                                          child: SizedBox(
                                             child: Text(
-                                              '${widget.post.price} /m',
+                                              '${post.price} /m',
                                               style: TextStyle(
                                                 color: Color(0xff000000),
                                                 fontSize: 22,
@@ -197,8 +197,7 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          color: Colors.transparent,
+                                        SizedBox(
                                           child: Container(
                                             height: 25,
                                             width: 60,
@@ -209,7 +208,7 @@ class _OtherUserPostCardState extends State<OtherUserPostCard> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                "${widget.post.tenants} left",
+                                                "${post.tenants} left",
                                                 style: TextStyle(
                                                   color: Color(0xffFFFFFF),
                                                   fontSize: 12,

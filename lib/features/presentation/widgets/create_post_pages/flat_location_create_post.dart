@@ -1,10 +1,9 @@
 import 'dart:developer';
-
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_pages/flat_description_create_post.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_description_create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -150,7 +149,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                       child: DropdownButton(
                         focusNode: stateFocusNode,
                         isExpanded: true,
-                        underline: Container(),
+                        underline: SizedBox(),
                         alignment: Alignment.centerLeft,
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
@@ -206,7 +205,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                       child: DropdownButton<String>(
                         focusNode: townshipFocusNode,
                         isExpanded: true,
-                        underline: Container(),
+                        underline: SizedBox(),
                         alignment: Alignment.centerLeft,
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
@@ -247,19 +246,15 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                 "App. Suite, Unit Building ",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(height: 10),
               TextFormField(
                 cursorColor: Color(0xffF2AE00),
-                maxLines: 3,
-                style: TextStyle(
-                    color: Color(0xff2E2E2E),
-                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                    fontSize: 14),
-                textInputAction: TextInputAction.done,
+                maxLines: 5,
+                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
+                textInputAction: TextInputAction.newline,
                 controller: _additionAddressController,
                 obscureText: false,
                 focusNode: _additionalAddressFocusNode,
@@ -300,12 +295,9 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                     });
                   }
                 },
-                // onSubmitted: (s) {
-                //   _focusNode.unfocus();
-                // },
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter App,Unit..';
+                    return 'Please enter App,Unit...';
                   }
                   return null;
                 },

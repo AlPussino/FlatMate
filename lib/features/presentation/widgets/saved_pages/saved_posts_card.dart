@@ -1,22 +1,18 @@
-import 'package:finding_apartments_yangon/core/utiles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_image_slider/carousel.dart';
 import 'package:page_transition/page_transition.dart';
 
-class SavedPostsCard extends StatefulWidget {
+class SavedPostsCard extends StatelessWidget {
   final Post post;
   const SavedPostsCard({super.key, required this.post});
 
   @override
-  State<SavedPostsCard> createState() => _SavedPostsCardState();
-}
-
-class _SavedPostsCardState extends State<SavedPostsCard> {
-  @override
   Widget build(BuildContext context) {
+    final imgList = [];
+    post.pictures!.map((e) => imgList.add(e.url)).toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       // mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -36,7 +32,7 @@ class _SavedPostsCardState extends State<SavedPostsCard> {
                     ),
                     type: PageTransitionType.rightToLeft,
                     child: FlatDescriptionPage(
-                      id: widget.post.id!,
+                      id: post.id!,
                       isOwnUserToSave: false,
                       isOwnUserToCall: false,
                       isOwnUserToShowContactCard: false,
@@ -58,29 +54,62 @@ class _SavedPostsCardState extends State<SavedPostsCard> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.white,
+                          child: SizedBox(
                             child: Center(
-                              child: Carousel(
-                                autoScroll: true,
-                                animationPageCurve: Curves.linear,
-                                activateIndicatorColor: const Color(0xffF2AE00),
-                                indicatorBarColor: Colors.transparent,
-                                isCircle: false,
-                                indicatorHeight: 0,
-                                indicatorWidth: 0,
-                                autoScrollDuration: Duration(seconds: 5),
-                                items: [
-                                  ...widget.post.pictures!
-                                      .map(
-                                        (e) => Utils.headerImagesSlide(
-                                            true,
-                                            widget.post.pictures!,
-                                            e.url ?? "",
-                                            context),
-                                      )
-                                      .toList(),
-                                ],
+                              // child: Carousel(
+                              //   autoScroll: true,
+                              //   animationPageCurve: Curves.linear,
+                              //   activateIndicatorColor: const Color(0xffF2AE00),
+                              //   indicatorBarColor: Colors.transparent,
+                              //   isCircle: false,
+                              //   indicatorHeight: 0,
+                              //   indicatorWidth: 0,
+                              //   autoScrollDuration: Duration(seconds: 5),
+                              //   items: [
+                              //     ...widget.post.pictures!
+                              //         .map(
+                              //           (e) => Utils.headerImagesSlide(
+                              //               true,
+                              //               widget.post.pictures!,
+                              //               e.url ?? "",
+                              //               context),
+                              //         )
+                              //         .toList(),
+                              //   ],
+                              // ),
+                              child: CachedNetworkImage(
+                                imageUrl: imgList[0],
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(5),
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                progressIndicatorBuilder:
+                                    (context, url, progress) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 60,
+                                        right: 20,
+                                        bottom: 60,
+                                        left: 20),
+                                    child: SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: const CircularProgressIndicator(
+                                        color: Color(0xffF2AE00),
+                                        backgroundColor: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                               ),
                             ),
                           ),
@@ -90,8 +119,7 @@ class _SavedPostsCardState extends State<SavedPostsCard> {
                         flex: 2,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.transparent,
+                          child: SizedBox(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -108,9 +136,9 @@ class _SavedPostsCardState extends State<SavedPostsCard> {
                                         ),
                                         const SizedBox(width: 10),
                                         Text(
-                                          widget.post.apartment!.floor != 0
-                                              ? "${widget.post.apartment!.apartmentType}  |  ${widget.post.apartment!.floor}th floor"
-                                              : "${widget.post.apartment!.apartmentType}  |  Ground floor",
+                                          post.apartment!.floor != 0
+                                              ? "${post.apartment!.apartmentType}  |  ${post.apartment!.floor}th floor"
+                                              : "${post.apartment!.apartmentType}  |  Ground floor",
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
                                             fontFamily:
@@ -139,7 +167,7 @@ class _SavedPostsCardState extends State<SavedPostsCard> {
                                         const SizedBox(width: 10),
                                         Expanded(
                                           child: Text(
-                                            "${widget.post.township}  |  ${widget.post.state}",
+                                            "${post.township}  |  ${post.state}",
                                             style: TextStyle(
                                               color: Color(0xff534F4F),
                                               fontFamily:
@@ -168,7 +196,7 @@ class _SavedPostsCardState extends State<SavedPostsCard> {
                                         ),
                                         const SizedBox(width: 10),
                                         Text(
-                                          "${widget.post.postOwner!.mobileNumber}",
+                                          "${post.postOwner!.mobileNumber}",
                                           style: TextStyle(
                                             color: Color(0xff534F4F),
                                             fontFamily:
@@ -199,7 +227,7 @@ class _SavedPostsCardState extends State<SavedPostsCard> {
                                           child: Container(
                                             color: Colors.transparent,
                                             child: Text(
-                                              '${widget.post.price} /m',
+                                              '${post.price} /m',
                                               style: TextStyle(
                                                 color: Color(0xff000000),
                                                 fontFamily:
@@ -223,7 +251,7 @@ class _SavedPostsCardState extends State<SavedPostsCard> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                "${widget.post.tenants} left",
+                                                "${post.tenants} left",
                                                 style: TextStyle(
                                                   color: Color(0xffFFFFFF),
                                                   fontFamily:

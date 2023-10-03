@@ -1,6 +1,9 @@
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_pages/flat_location_create_post.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/create_post_widgets/flat_floor_drop_down_button.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/create_post_widgets/flat_type_drop_down_button.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_location_create_post.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/utils/utils_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -23,20 +26,6 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
     withReadStream: true,
     images: <ImageFile>[],
   );
-
-  String selectedHouseTypeValue = 'CONDO';
-  List<String> houseTypeOptions = [
-    'CONDO',
-    'MINI_CONDO',
-    'FLAT',
-    'HOSTEL',
-    'HOUSE',
-    'WHOLE_HOUSE'
-  ];
-
-  String selectedFloorValue = '0';
-  List<String> floorOptions =
-      List.generate(20, (index) => (index + 0).toString());
 
   bool _showError = false;
 
@@ -73,7 +62,6 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
           "New Post",
           style: TextStyle(
             color: Color(0xff000000),
-            // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontSize: 20,
           ),
         ),
@@ -123,7 +111,6 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                           _selectImagesController.images.length > 0
                       ? Color(0xffF2AE00)
                       : Colors.grey,
-                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),
             ),
@@ -159,7 +146,6 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                     "Flat type",
                     style: TextStyle(
                       color: Color(0xff534F4F),
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 14,
                     ),
                   ),
@@ -174,51 +160,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             "Rental house type",
                             style: TextStyle(
                               color: Color(0xff534F4F),
-                              //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 12,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Container(
-                            width: (MediaQuery.sizeOf(context).width / 2) - 30,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.grey, // Border color
-                              ),
-                              borderRadius:
-                                  BorderRadius.circular(10), // Border radius
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: DropdownButton(
-                                isExpanded: true,
-                                underline: Container(),
-                                alignment: Alignment.centerLeft,
-                                borderRadius: BorderRadius.circular(10),
-                                style: TextStyle(
-                                  color: Color(0xff534F4F),
-                                  // fontFamily: DefaultTextStyle.of(context)
-                                  //     .style
-                                  //     .fontFamily,
-                                  fontSize: 14,
-                                ),
-                                value: selectedHouseTypeValue,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    selectedHouseTypeValue = newValue!;
-                                  });
-                                },
-                                items: houseTypeOptions
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ),
+                          FlatTypeDropDownButton(),
                         ],
                       ),
                       Column(
@@ -232,48 +178,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Container(
-                            width: (MediaQuery.sizeOf(context).width / 2) - 30,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.grey, // Border color
-                              ),
-                              borderRadius:
-                                  BorderRadius.circular(10), // Border radius
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: DropdownButton<String>(
-                                underline: Container(),
-                                isExpanded: true,
-                                alignment: Alignment.centerLeft,
-                                borderRadius: BorderRadius.circular(10),
-                                style: TextStyle(
-                                  color: Color(0xff534F4F),
-                                  // fontFamily: DefaultTextStyle.of(context)
-                                  //     .style
-                                  //     .fontFamily,
-                                  fontSize: 14,
-                                ),
-                                value: selectedFloorValue,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    selectedFloorValue = newValue!;
-                                  });
-                                },
-                                items: floorOptions
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value == '0'
-                                        ? "Ground floor"
-                                        : "${value}th floor"),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ),
+                          FlatFloorDropDownButton(),
                         ],
                       ),
                     ],
@@ -283,7 +188,6 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                     "Area (square feet)",
                     style: TextStyle(
                       color: Color(0xff534F4F),
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 14,
                     ),
                   ),
@@ -298,28 +202,23 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             "Length",
                             style: TextStyle(
                               color: Color(0xff534F4F),
-                              //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 12,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Container(
+                          SizedBox(
                             height: 80,
                             width: (MediaQuery.sizeOf(context).width / 2) - 30,
                             child: TextFormField(
                               cursorColor: Color(0xffF2AE00),
                               style: TextStyle(
-                                  color: Color(0xff2E2E2E),
-                                  fontFamily: DefaultTextStyle.of(context)
-                                      .style
-                                      .fontFamily,
-                                  fontSize: 14),
+                                  color: Color(0xff2E2E2E), fontSize: 14),
                               textInputAction: TextInputAction.done,
                               keyboardType: TextInputType.number,
                               controller: _lengthController,
                               obscureText: false,
                               focusNode: _lengthFocusNode,
-                              decoration: textFormFieldDecoration(15),
+                              decoration: Utils.textFormFieldDecoration(15),
                               onChanged: (value) {
                                 setState(() {
                                   lengthError = !isLengthValid(value);
@@ -349,12 +248,11 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             "Width",
                             style: TextStyle(
                               color: Color(0xff534F4F),
-                              //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 12,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Container(
+                          SizedBox(
                             height: 80,
                             width: (MediaQuery.sizeOf(context).width / 2) - 30,
                             child: TextFormField(
@@ -370,7 +268,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                               focusNode: _widthFocusNode,
                               cursorColor: Color(0xffF2AE00),
                               keyboardType: TextInputType.number,
-                              decoration: textFormFieldDecoration(50),
+                              decoration: Utils.textFormFieldDecoration(50),
                               onChanged: (value) {
                                 setState(() {
                                   widthError = !isWidthValid(value);
@@ -412,42 +310,5 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
 
   bool isWidthValid(String width) {
     return width.isNotEmpty;
-  }
-
-  InputDecoration textFormFieldDecoration(int hintText) {
-    return InputDecoration(
-      suffixText: 'feet',
-      hintStyle: TextStyle(color: Colors.grey),
-      hintText: hintText.toString(),
-      contentPadding: const EdgeInsets.all(10),
-      border: OutlineInputBorder(
-        gapPadding: 10,
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
-          color: Color(0xff534F4F),
-        ),
-      ),
-      disabledBorder: OutlineInputBorder(
-        gapPadding: 10,
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
-          color: Color(0xff534F4F),
-        ),
-      ),
-      enabledBorder: OutlineInputBorder(
-        gapPadding: 10,
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
-          color: Color(0xff534F4F),
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        gapPadding: 10,
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(
-          color: Color(0xff534F4F),
-        ),
-      ),
-    );
   }
 }

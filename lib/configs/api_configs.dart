@@ -1,8 +1,6 @@
-import 'dart:async';
-
 class ApiConfigs {
   //base url
-  static const String baseUrl = "http://192.168.0.107:8080";
+  static const String baseUrl = "http://192.168.0.108:8080";
 
   //logIn urls
   static const String logInUrl = "$baseUrl/api/auth/login";

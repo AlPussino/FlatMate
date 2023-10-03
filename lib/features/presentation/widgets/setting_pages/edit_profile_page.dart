@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/setting/view_profile_image_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/view_profile_image_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -194,7 +194,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           isDismissible: true,
                                           context: context,
                                           builder: (context) {
-                                            return Container(
+                                            return SizedBox(
                                               height: 200,
                                               child: Row(
                                                 crossAxisAlignment:
@@ -233,7 +233,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                                                     myUser
                                                                         .profileUrl,
                                                                     true);
-                                                            setState(() {});
                                                           },
                                                           icon: Icon(
                                                             Icons
@@ -286,7 +285,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                                                     myUser
                                                                         .profileUrl,
                                                                     false);
-                                                            setState(() {});
                                                           },
                                                           icon: Icon(
                                                             Icons.image_rounded,
@@ -405,7 +403,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       if (result != null) {
                                         _nameController.clear();
                                         Navigator.pop(context);
-                                        // setState(() {});
                                       } else {}
                                     },
                                     child: Text(
@@ -513,7 +510,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       if (result != null) {
                                         _phoneNumberController.clear();
                                         Navigator.pop(context);
-                                        // setState(() {});
                                       } else {}
                                     },
                                     child: Text(
@@ -549,8 +545,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           "Social accounts",
                           style: TextStyle(
                             color: Color(0xff534F4F),
-                            fontFamily:
-                                DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 14,
                           ),
                         ),
@@ -566,14 +560,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                             socialContactsOptions),
                                   );
                           },
-                          child: Text(
-                            socialContactsOptions.isEmpty ? '' : 'add',
-                            style: TextStyle(
-                              color: Color(0xff3C67FF),
-                              // fontFamily:
-                              //     DefaultTextStyle.of(context).style.fontFamily,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                          child: Offstage(
+                            offstage:
+                                socialContactsOptions.isEmpty ? true : false,
+                            child: Text(
+                              'add',
+                              style: TextStyle(
+                                color: Color(0xff3C67FF),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                         ),
@@ -812,7 +808,7 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                         dropdownColor: Colors.white,
                         isExpanded: true,
                         autofocus: true,
-                        underline: Container(),
+                        underline: SizedBox(),
                         alignment: Alignment.centerLeft,
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
@@ -880,10 +876,7 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
             },
             child: Text(
               'Cancel',
-              style: TextStyle(
-                  color: Color(0xff2E2E2E),
-                  fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                  fontSize: 14),
+              style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
             )),
         TextButton(
           onPressed: () async {

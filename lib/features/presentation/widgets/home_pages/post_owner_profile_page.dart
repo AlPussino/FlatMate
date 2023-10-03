@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:finding_apartments_yangon/core/utiles.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/other_user_post_card.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/noti_pages/notis.dart';
@@ -9,23 +8,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class PostOwnerProfilePage extends StatefulWidget {
+class PostOwnerProfilePage extends StatelessWidget {
   final int userId;
   const PostOwnerProfilePage({super.key, required this.userId});
 
-  @override
-  State<PostOwnerProfilePage> createState() => _PostOwnerProfilePageState();
-}
-
-class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         body: FutureBuilder(
-          future: context
-              .read<UserProvider>()
-              .aboutOtherUser(userId: widget.userId),
+          future: context.read<UserProvider>().aboutOtherUser(userId: userId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -184,6 +176,8 @@ class _PostOwnerProfilePageState extends State<PostOwnerProfilePage> {
                     ),
                   ),
                   SliverList.builder(
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: false,
                     itemCount: otherUser.postList!.length,
                     itemBuilder: (context, index) {
                       final post = otherUser.postList![index];

@@ -5,15 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:page_transition/page_transition.dart';
 
-class SearchedUserCard extends StatefulWidget {
+class SearchedUserCard extends StatelessWidget {
   final PostOwner postOwner;
   const SearchedUserCard({super.key, required this.postOwner});
 
-  @override
-  State<SearchedUserCard> createState() => _SearchedUserCardState();
-}
-
-class _SearchedUserCardState extends State<SearchedUserCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,7 +19,7 @@ class _SearchedUserCardState extends State<SearchedUserCard> {
             context,
             PageTransition(
               type: PageTransitionType.rightToLeft,
-              child: PostOwnerProfilePage(userId: widget.postOwner.id!),
+              child: PostOwnerProfilePage(userId: postOwner.id!),
             ),
           );
         },
@@ -42,13 +37,12 @@ class _SearchedUserCardState extends State<SearchedUserCard> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: Container(
-                      color: Colors.transparent,
+                    child: SizedBox(
                       child: CircleAvatar(
                         radius: 30,
                         backgroundColor: Color(0xffF2AE00),
                         child: CachedNetworkImage(
-                          imageUrl: widget.postOwner.profileUrl ??
+                          imageUrl: postOwner.profileUrl ??
                               "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
                           imageBuilder: (context, imageProvider) => Container(
                             width: 100,
@@ -81,19 +75,18 @@ class _SearchedUserCardState extends State<SearchedUserCard> {
                   ),
                   Expanded(
                     flex: 4,
-                    child: Container(
-                      color: Colors.transparent,
+                    child: SizedBox(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.postOwner.username!,
+                            postOwner.username!,
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            widget.postOwner.mobileNumber!,
+                            postOwner.mobileNumber!,
                             style: TextStyle(fontSize: 16),
                           ),
                         ],

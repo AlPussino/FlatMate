@@ -5,14 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class SavedPage extends StatefulWidget {
+class SavedPage extends StatelessWidget {
   const SavedPage({super.key});
 
-  @override
-  State<SavedPage> createState() => _SavedPageState();
-}
-
-class _SavedPageState extends State<SavedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +65,8 @@ class _SavedPageState extends State<SavedPage> {
                         ? SliverPadding(
                             padding: EdgeInsets.only(top: 8),
                             sliver: SliverList.builder(
+                              addAutomaticKeepAlives: false,
+                              addRepaintBoundaries: false,
                               itemCount: savedPostList.posts!.length,
                               itemBuilder: (context, index) {
                                 final post = savedPostList.posts![index];

@@ -7,7 +7,7 @@ import 'package:finding_apartments_yangon/features/presentation/pages/saved_page
 import 'package:finding_apartments_yangon/features/presentation/pages/search_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/create_post_pages/flat_create_post.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
@@ -152,8 +152,11 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
           showUnselectedLabels: false,
           enableFeedback: true,
           onTap: (newIndex) {
-            context.read<PostProvider>().clearPostList();
+            log(currentIndex.toString());
             context.read<HomeProvider>().changePage(newIndex);
+            currentIndex != 0
+                ? context.read<PostProvider>().clearAllPostList()
+                : null;
           },
           items: [
             BottomNavigationBarItem(
@@ -232,28 +235,6 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
                 tooltip: 'Profile'),
           ],
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   foregroundColor: Colors.white,
-        //   elevation: 2,
-        //   shape:
-        //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        //   backgroundColor: Color(0xffF2AE00),
-        //   enableFeedback: true,
-        //   isExtended: true,
-        //   onPressed: () async {
-        //     // final List<XFile?> image = await picker.pickMultiImage();
-        //     Navigator.push(
-        //       context,
-        //       PageTransition(
-        //           type: PageTransitionType.rightToLeft,
-        //           child: const FlatCreatePost()),
-        //     );
-        //   },
-        //   tooltip: 'Add Item',
-        //   child: const Icon(Icons.add),
-        // ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       ),
     );
   }

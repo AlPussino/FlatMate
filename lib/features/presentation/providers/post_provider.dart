@@ -95,13 +95,28 @@ class PostProvider with ChangeNotifier {
     return data;
   }
 
-  void clearPostList() {
-    toast("cleard the list");
+  void clearAllPostList() {
     _allPostList.clear();
   }
 
+  void clearSavedPostList() {
+    if (savedPostList!.posts != null) {
+      savedPostList!.posts!.clear();
+    } else {
+      null;
+    }
+  }
+
+  void clearMyPostList() {
+    if (_myPostList!.posts != null) {
+      _myPostList!.posts!.clear();
+    } else {
+      null;
+    }
+  }
+
   Future<AllPosts?> refreshPosts() async {
-    clearPostList();
+    clearAllPostList();
     final data = getAllPosts(null);
     return data;
   }
@@ -114,10 +129,10 @@ class PostProvider with ChangeNotifier {
     return data;
   }
 
-  Future<PostList?> getSavedPosts() async {
+  Future<PostList> getSavedPosts() async {
     final data = await _postUseCase.getSavedPosts();
     _savedPostList = data;
     notifyListeners();
-    return data;
+    return data!;
   }
 }

@@ -18,11 +18,15 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   final ScrollController _scrollController = ScrollController();
   int? currentCursor;
   bool? hasNext;
   List<Post>? allPosts;
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +39,8 @@ class _HomePageState extends State<HomePage> {
       hasNext != false
           ? context.read<PostProvider>().getAllPosts(currentCursor)
           : null;
+    } else {
+      null;
     }
     // if (_scrollController.position.userScrollDirection ==
     //     ScrollDirection.reverse) {
@@ -46,7 +52,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     bool isTokenExpired = context.read<AuthProvider>().isTokenExpired();
 
     if (isTokenExpired) {
@@ -96,7 +109,6 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.white,
             body: SafeArea(
               child: CustomScrollView(
-                // physics: const BouncingScrollPhysics(),
                 controller: _scrollController,
                 slivers: [
                   SliverAppBar(
@@ -124,9 +136,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   allPosts != null
                       ? SliverList.builder(
-                          addAutomaticKeepAlives: true,
-                          addRepaintBoundaries: true,
-                          addSemanticIndexes: true,
+                          addAutomaticKeepAlives: false,
+                          addRepaintBoundaries: false,
+                          addSemanticIndexes: false,
                           itemCount: allPosts!.length,
                           itemBuilder: (context, index) {
                             final post = allPosts![index];

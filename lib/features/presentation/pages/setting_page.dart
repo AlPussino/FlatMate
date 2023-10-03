@@ -1,5 +1,5 @@
-import 'package:finding_apartments_yangon/features/presentation/widgets/setting/change_password_page.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/setting/edit_profile_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/change_password_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';

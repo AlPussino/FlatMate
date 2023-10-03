@@ -1,25 +1,19 @@
-import 'package:finding_apartments_yangon/core/utiles.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/utils/utils_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_image_slider/carousel.dart';
 import 'package:page_transition/page_transition.dart';
 
-class MainPostCard extends StatefulWidget {
+class MainPostCard extends StatelessWidget {
   final Post post;
   const MainPostCard({super.key, required this.post});
 
   @override
-  State<MainPostCard> createState() => _MainPostCardState();
-}
-
-class _MainPostCardState extends State<MainPostCard> {
-  @override
   Widget build(BuildContext context) {
     List<String> imageList = [];
-
-    widget.post.pictures!.map((e) => imageList.add(e.url!)).toList();
+    post.pictures!.map((e) => imageList.add(e.url!)).toList();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3),
       child: InkWell(
@@ -38,7 +32,7 @@ class _MainPostCardState extends State<MainPostCard> {
                   isOwnUserToShowContactCard: false,
                   isOwnUserToSave: false,
                   isOwnUserToCall: false,
-                  id: widget.post.id!,
+                  id: post.id!,
                 )),
           );
         },
@@ -55,11 +49,10 @@ class _MainPostCardState extends State<MainPostCard> {
                 children: [
                   Expanded(
                       flex: 5,
-                      child: Container(
-                        color: Colors.transparent,
+                      child: SizedBox(
                         child: Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Container(
+                          child: SizedBox(
                             child: Carousel(
                               autoScroll: false,
                               animationPageCurve: Curves.linear,
@@ -69,13 +62,10 @@ class _MainPostCardState extends State<MainPostCard> {
                               indicatorHeight: 2,
                               indicatorWidth: 20,
                               items: [
-                                ...widget.post.pictures!
+                                ...post.pictures!
                                     .map(
-                                      (e) => Utils.headerImagesSlide(
-                                          true,
-                                          widget.post.pictures!,
-                                          e.url ?? "",
-                                          context),
+                                      (e) => Utils.headerImagesSlide(true,
+                                          post.pictures!, e.url ?? "", context),
                                     )
                                     .toList(),
                               ],
@@ -87,65 +77,59 @@ class _MainPostCardState extends State<MainPostCard> {
                       flex: 2,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          color: Colors.transparent,
+                        child: SizedBox(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                 flex: 2,
-                                child: Container(
-                                    color: Colors.transparent,
+                                child: SizedBox(
                                     child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: Container(
-                                            color: Colors.transparent,
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: SizedBox(
+                                        child: Text(
+                                          "${post.price!} /m",
+                                          style: TextStyle(fontSize: 22),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: SizedBox(
+                                        child: Container(
+                                          height: 35,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          child: Center(
                                             child: Text(
-                                              "${widget.post.price!} /m",
-                                              style: TextStyle(fontSize: 22),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Container(
-                                            color: Colors.transparent,
-                                            child: Container(
-                                              height: 35,
-                                              decoration: BoxDecoration(
-                                                color: Colors.black,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  "${widget.post.tenants} left",
-                                                  style: TextStyle(
-                                                    color: Color(0xffFFFFFF),
-                                                    fontFamily:
-                                                        DefaultTextStyle.of(
-                                                                context)
-                                                            .style
-                                                            .fontFamily,
-                                                    fontSize: 12,
-                                                  ),
-                                                ),
+                                              "${post.tenants} left",
+                                              style: TextStyle(
+                                                color: Color(0xffFFFFFF),
+                                                fontFamily:
+                                                    DefaultTextStyle.of(context)
+                                                        .style
+                                                        .fontFamily,
+                                                fontSize: 12,
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    )),
+                                      ),
+                                    ),
+                                  ],
+                                )),
                               ),
                               Expanded(
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      color: Colors.transparent,
+                                    SizedBox(
                                       child: Row(
                                         children: [
                                           Icon(
@@ -154,15 +138,15 @@ class _MainPostCardState extends State<MainPostCard> {
                                           ),
                                           const SizedBox(width: 10),
                                           Text(
-                                            widget.post.township!,
+                                            post.township!,
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ],
                                       ),
                                     ),
                                     Text(
-                                      widget.post.apartment!.floor != 0
-                                          ? "${widget.post.apartment!.floor}th floor"
+                                      post.apartment!.floor != 0
+                                          ? "${post.apartment!.floor}th floor"
                                           : "Ground floor",
                                       style: TextStyle(fontSize: 16),
                                     ),
@@ -174,8 +158,7 @@ class _MainPostCardState extends State<MainPostCard> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      color: Colors.transparent,
+                                    SizedBox(
                                       child: Row(
                                         children: [
                                           Icon(
@@ -184,14 +167,13 @@ class _MainPostCardState extends State<MainPostCard> {
                                           ),
                                           const SizedBox(width: 10),
                                           Text(
-                                            widget.post.state!,
+                                            post.state!,
                                             style: TextStyle(fontSize: 12),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      color: Colors.transparent,
+                                    SizedBox(
                                       child: Row(
                                         children: [
                                           Icon(
@@ -200,8 +182,7 @@ class _MainPostCardState extends State<MainPostCard> {
                                           ),
                                           const SizedBox(width: 10),
                                           Text(
-                                            widget
-                                                .post.apartment!.apartmentType!,
+                                            post.apartment!.apartmentType!,
                                             style: TextStyle(fontSize: 16),
                                           ),
                                         ],

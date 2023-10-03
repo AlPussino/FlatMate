@@ -3,14 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/post_owner_profile_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/utils/utils_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slider/carousel.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../../core/utiles.dart';
 
 class FlatDescriptionPage extends StatelessWidget {
   final int id;
@@ -62,18 +61,13 @@ class FlatDescriptionPage extends StatelessWidget {
                 child: !isOwnUserToSave
                     ? IconButton(
                         onPressed: () async {
-                          final result = postDetail.isSaved == false
+                          !postDetail.isSaved!
                               ? await context
                                   .read<PostProvider>()
                                   .saveOrUnsavePost(id, true)
                               : await context
                                   .read<PostProvider>()
                                   .saveOrUnsavePost(id, false);
-                          if (result != null) {
-                            toast("saved post");
-                          } else {
-                            toast('not saved post');
-                          }
                         },
                         icon: Icon(
                           postDetail.isSaved == false
@@ -136,7 +130,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               "${postDetail.township}  |  ${postDetail.state} ",
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 14,
                               ),
                             ),
@@ -144,7 +137,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               "${postDetail.additional}",
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 16,
                               ),
                             ),
@@ -155,7 +147,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               "Contract",
                               style: TextStyle(
                                 color: Color(0xff534F4F),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 14,
                               ),
                             ),
@@ -164,7 +155,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               postDetail.contract!,
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 16,
                               ),
                             ),
@@ -175,7 +165,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               "Flat type",
                               style: TextStyle(
                                 color: Color(0xff534F4F),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 14,
                               ),
                             ),
@@ -188,8 +177,6 @@ class FlatDescriptionPage extends StatelessWidget {
                                       : "${postDetail.apartment!.apartmentType}  |  Ground floor  |  ${postDetail.apartment!.length} x ${postDetail.apartment!.width} square feet",
                                   style: TextStyle(
                                     color: Color(0xff000000),
-                                    // fontFamily:
-                                    //     DefaultTextStyle.of(context).style.fontFamily,
                                     fontSize: 16,
                                   ),
                                 ),
@@ -202,7 +189,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               "Left",
                               style: TextStyle(
                                 color: Color(0xff534F4F),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 14,
                               ),
                             ),
@@ -211,7 +197,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               "${postDetail.tenants}",
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 16,
                               ),
                             ),
@@ -222,7 +207,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               "Description",
                               style: TextStyle(
                                 color: Color(0xff534F4F),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 14,
                               ),
                             ),
@@ -231,7 +215,6 @@ class FlatDescriptionPage extends StatelessWidget {
                               "${postDetail.description}",
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                                 fontSize: 16,
                               ),
                             ),
@@ -276,10 +259,14 @@ class FlatDescriptionPage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        placeholder: (context, url) =>
-                                            const CircularProgressIndicator(
-                                          color: Color(0xffF2AE00),
-                                          backgroundColor: Colors.white,
+                                        placeholder: (context, url) => Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8),
+                                          child:
+                                              const CircularProgressIndicator(
+                                            color: Color(0xffF2AE00),
+                                            backgroundColor: Colors.white,
+                                          ),
                                         ),
                                         errorWidget: (context, url, error) =>
                                             Container(
@@ -298,8 +285,6 @@ class FlatDescriptionPage extends StatelessWidget {
                                       "${postDetail.postOwner!.username}",
                                       style: TextStyle(
                                         color: Color(0xff000000),
-                                        // fontFamily:
-                                        //     DefaultTextStyle.of(context).style.fontFamily,
                                         fontSize: 16,
                                       ),
                                     ),
@@ -307,13 +292,11 @@ class FlatDescriptionPage extends StatelessWidget {
                                       "${postDetail.postOwner!.mobileNumber}",
                                       style: TextStyle(
                                         color: Color(0xff000000),
-                                        // fontFamily:
-                                        //     DefaultTextStyle.of(context).style.fontFamily,
                                         fontSize: 14,
                                       ),
                                     ),
                                   )
-                                : Container(),
+                                : SizedBox(),
                           ],
                         ),
                       )
@@ -328,8 +311,7 @@ class FlatDescriptionPage extends StatelessWidget {
                   elevation: 10,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      color: Colors.white,
+                    child: SizedBox(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -338,8 +320,6 @@ class FlatDescriptionPage extends StatelessWidget {
                             "${postDetail.price} /m ",
                             style: TextStyle(
                               color: Color(0xff000000),
-                              // fontFamily:
-                              //     DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
                             ),

@@ -68,7 +68,6 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
           "Flat Descriptions",
           style: TextStyle(
             color: Color(0xff000000),
-            //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontSize: 20,
           ),
         ),
@@ -107,7 +106,6 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 "Flat description",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),
               ),
@@ -116,7 +114,6 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 "Contract",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -124,10 +121,7 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               TextFormField(
                 cursorColor: Color(0xffF2AE00),
                 maxLines: 1,
-                style: TextStyle(
-                    color: Color(0xff2E2E2E),
-                    //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                    fontSize: 14),
+                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
                 textInputAction: TextInputAction.done,
                 controller: _contractController,
                 obscureText: false,
@@ -161,7 +155,6 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 "Description",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -169,10 +162,7 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               TextFormField(
                 cursorColor: Color(0xffF2AE00),
                 maxLines: 5,
-                style: TextStyle(
-                    color: Color(0xff2E2E2E),
-                    //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                    fontSize: 14),
+                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
                 textInputAction: TextInputAction.newline,
                 controller: _descriptionController,
                 obscureText: false,
@@ -205,7 +195,6 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 "Price per month",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -213,10 +202,7 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               TextFormField(
                 cursorColor: Color(0xffF2AE00),
                 maxLines: 1,
-                style: TextStyle(
-                    color: Color(0xff2E2E2E),
-                    //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                    fontSize: 14),
+                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 controller: _pricePerMonthController,
@@ -250,7 +236,6 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 "Total tenants",
                 style: TextStyle(
                   color: Color(0xff534F4F),
-                  //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 12,
                 ),
               ),
@@ -259,10 +244,7 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                 cursorColor: Color(0xffF2AE00),
 
                 maxLines: 1,
-                style: TextStyle(
-                    color: Color(0xff2E2E2E),
-                    //    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                    fontSize: 14),
+                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 controller: _totalPeopleController,

@@ -2,7 +2,7 @@ import 'package:finding_apartments_yangon/features/data/models/picture.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class ImageViewer extends StatefulWidget {
+class ImageViewer extends StatelessWidget {
   final List<Picture> images;
   final int id;
 
@@ -11,13 +11,6 @@ class ImageViewer extends StatefulWidget {
     required this.images,
     required this.id,
   });
-
-  @override
-  State<ImageViewer> createState() => _ImageViewerState();
-}
-
-class _ImageViewerState extends State<ImageViewer> {
-  // final PageController pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +25,8 @@ class _ImageViewerState extends State<ImageViewer> {
       //   ),
 
       body: PageView.builder(
-        controller: PageController(initialPage: widget.id),
-        itemCount: widget.images.length,
+        controller: PageController(initialPage: id),
+        itemCount: images.length,
         itemBuilder: (context, index) {
           return Center(
             child: PhotoView(
@@ -58,7 +51,7 @@ class _ImageViewerState extends State<ImageViewer> {
               backgroundDecoration: const BoxDecoration(
                 color: Colors.white,
               ),
-              imageProvider: NetworkImage(widget.images[index].url!),
+              imageProvider: NetworkImage(images[index].url!),
             ),
           );
         },

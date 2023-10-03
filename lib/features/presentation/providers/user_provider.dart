@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/other_user.dart';
@@ -13,6 +14,7 @@ import '../../../configs/strings.dart';
 import '../../data/models/my_user.dart';
 import '../../domain/usecases/token_usecase.dart';
 import '../../domain/usecases/user_usecase.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class UserProvider with ChangeNotifier {
   final UserUseCase _userUseCase;
@@ -109,11 +111,13 @@ class UserProvider with ChangeNotifier {
       }
       // _profileImageStr = base64Encode(File(finalImg.path).readAsBytesSync());
       // String? url = await _userUseCase.uploadProfile(File(finalImg.path),);
+
       String? url =
           await _userUseCase.uploadProfile(File(finalImg.path), oldImageUrl);
       user?.profileUrl = url;
       notifyListeners();
       if (url != null) {
+        getUserInfo();
         Notis.showSuccess("New Profile Uploaded Successfully!");
 
         notifyListeners();
@@ -144,10 +148,16 @@ class UserProvider with ChangeNotifier {
     return data;
   }
 
-  Future<PostOwnerList?> searchUser({required String keyword}) async {
+  Future<PostOwnerList> searchUser({required String keyword}) async {
+    log("call search");
     final data = await _userUseCase.searchUser(keyword: keyword);
     _postOwnerList = data;
+    log("RT : ${_postOwnerList}");
     notifyListeners();
-    return data;
+    return data!;
+  }
+
+  void clearPostOwnerList() {
+    postOwnerList!.postOwners!.clear();
   }
 }
