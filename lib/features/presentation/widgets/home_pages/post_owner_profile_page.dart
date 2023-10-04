@@ -1,8 +1,9 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/other_user_post_card.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/noti_pages/notis.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/notification_pages/toast_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -15,14 +16,14 @@ class PostOwnerProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.whiteColor,
         body: FutureBuilder(
           future: context.read<UserProvider>().aboutOtherUser(userId: userId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: CircularProgressIndicator(
-                  color: Color(0xffF2AE00),
+                  color: AppColor.orangeColor,
                 ),
               );
             } else if (snapshot.hasError) {
@@ -42,10 +43,10 @@ class PostOwnerProfilePage extends StatelessWidget {
               child: CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    surfaceTintColor: Colors.white,
-                    foregroundColor: Colors.black,
+                    surfaceTintColor: AppColor.whiteColor,
+                    foregroundColor: AppColor.blackColor,
                     automaticallyImplyLeading: true,
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppColor.whiteColor,
                     pinned: true,
                     snap: false,
                     floating: false,
@@ -79,12 +80,12 @@ class PostOwnerProfilePage extends StatelessWidget {
                                       Icon(
                                         Icons.phone,
                                         size: 15,
-                                        color: Color(0xff534F4F),
+                                        color: AppColor.greyColor,
                                       ),
                                       Text(
                                         otherUser.mobileNumber!,
                                         style: TextStyle(
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -112,7 +113,7 @@ class PostOwnerProfilePage extends StatelessWidget {
                                                               ? Icons.telegram
                                                               : Icons.message,
                                                       size: 30,
-                                                      color: Color(0xff534F4F),
+                                                      color: AppColor.greyColor,
                                                     ),
                                                   ),
                                                   SizedBox(width: 5),
@@ -141,15 +142,16 @@ class PostOwnerProfilePage extends StatelessWidget {
                                 ),
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(
-                                  color: Color(0xffF2AE00),
-                                  backgroundColor: Colors.white,
+                                  color: AppColor.orangeColor,
+                                  backgroundColor: AppColor.whiteColor,
                                 ),
                                 errorWidget: (context, url, error) => Container(
                                     width: 100,
                                     height: 100,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Color(0xff534F4F).withOpacity(0.5),
+                                      color:
+                                          AppColor.greyColor.withOpacity(0.5),
                                     ),
                                     child: const Icon(Icons.error)),
                               ),
@@ -157,7 +159,7 @@ class PostOwnerProfilePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           const Divider(
-                            color: Colors.grey,
+                            color: AppColor.greyColor,
                           ),
                         ],
                       ),
@@ -169,7 +171,7 @@ class PostOwnerProfilePage extends StatelessWidget {
                       child: Text(
                         "Posts",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: AppColor.blackColor,
                           fontSize: 18,
                         ),
                       ),
@@ -198,7 +200,7 @@ class PostOwnerProfilePage extends StatelessWidget {
       url0,
       mode: LaunchMode.externalApplication,
     )) {
-      Notis.showError('Could not launch $urlStr');
+      ToastNotificatoins.showError('Could not launch $urlStr');
     }
   }
 }

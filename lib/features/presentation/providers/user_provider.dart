@@ -1,26 +1,24 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:finding_apartments_yangon/configs/colors.dart';
+import 'package:finding_apartments_yangon/configs/integers.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/other_user.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_owner_list.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/email_response.dart';
 import 'package:finding_apartments_yangon/features/data/models/social_contact.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/noti_pages/notis.dart';
+import 'package:finding_apartments_yangon/features/domain/usecases/usecase/user_usecase.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/notification_pages/toast_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../configs/strings.dart';
 import '../../data/models/my_user.dart';
-import '../../domain/usecases/token_usecase.dart';
-import '../../domain/usecases/user_usecase.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class UserProvider with ChangeNotifier {
   final UserUseCase _userUseCase;
-  final TokenUseCase _tokenUseCase;
 
-  UserProvider(this._userUseCase, this._tokenUseCase);
+  UserProvider(this._userUseCase);
 
   MyUser? _myUser;
   MyUser? get user => _myUser;
@@ -86,13 +84,13 @@ class UserProvider with ChangeNotifier {
         ],
         uiSettings: [
           AndroidUiSettings(
-            dimmedLayerColor: Colors.white,
-            backgroundColor: Colors.white,
+            dimmedLayerColor: AppColor.whiteColor,
+            backgroundColor: AppColor.whiteColor,
             toolbarTitle: 'Edit',
-            toolbarColor: Colors.white,
+            toolbarColor: AppColor.whiteColor,
             hideBottomControls: false,
             showCropGrid: true,
-            statusBarColor: Colors.white,
+            statusBarColor: AppColor.whiteColor,
             activeControlsWidgetColor: const Color(0xff227143),
             toolbarWidgetColor: const Color(0xff227143),
             initAspectRatio: CropAspectRatioPreset.square,
@@ -105,8 +103,8 @@ class UserProvider with ChangeNotifier {
       );
       final finalImg = XFile(croppedFile!.path);
       final file = File(finalImg.path).readAsBytesSync();
-      if (file.length > maxProfileImageSize) {
-        Notis.showError(
+      if (file.length > AppInteger.maxProfileImageSize) {
+        ToastNotificatoins.showError(
             'Your image is greater than 20 MB, \nPlease Select another image!');
       }
       // _profileImageStr = base64Encode(File(finalImg.path).readAsBytesSync());
@@ -115,16 +113,15 @@ class UserProvider with ChangeNotifier {
       String? url =
           await _userUseCase.uploadProfile(File(finalImg.path), oldImageUrl);
       user?.profileUrl = url;
+      getUserInfo();
       notifyListeners();
       if (url != null) {
-        getUserInfo();
-        Notis.showSuccess("New Profile Uploaded Successfully!");
-
+        ToastNotificatoins.showSuccess("New Profile Uploaded Successfully!");
         notifyListeners();
       }
       return url;
     } else {
-      Notis.showError('Please select an image to upload.');
+      ToastNotificatoins.showError('Please select an image to upload.');
       return Future.value(null);
     }
   }
@@ -136,9 +133,12 @@ class UserProvider with ChangeNotifier {
     return user;
   }
 
-  Future<EmailResponse?> removeSocialContact({required String id}) async {
+  Future<MyUser?> removeSocialContact({required String id}) async {
+    final user = await _userUseCase.removeSocialContact(id: id);
+    _myUser = user;
+    log("Data => $user");
     notifyListeners();
-    return await _userUseCase.removeSocialContact(id: id);
+    return user;
   }
 
   Future<OtherUser?> aboutOtherUser({required int userId}) async {

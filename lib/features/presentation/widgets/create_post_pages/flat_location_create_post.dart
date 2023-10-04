@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
@@ -41,11 +42,11 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
     myanmarData = context.read<PostProvider>().myanmarData;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: AppColor.whiteColor,
+        foregroundColor: AppColor.blackColor,
         automaticallyImplyLeading: true,
         title: Text(
           "Flat Location",
@@ -99,8 +100,8 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                   color: selectedRegion.isNotEmpty &&
                           selectedTownship != null &&
                           _additionAddressController.text.isNotEmpty
-                      ? Color(0xffF2AE00)
-                      : Colors.grey,
+                      ? AppColor.orangeColor
+                      : AppColor.greyColor,
                   // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),
@@ -118,7 +119,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
               Text(
                 "Flat location",
                 style: TextStyle(
-                  color: Color(0xff534F4F),
+                  color: AppColor.greyColor,
                   // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),
@@ -130,7 +131,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                   Text(
                     "State / Division",
                     style: TextStyle(
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 12,
                     ),
@@ -140,7 +141,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                     width: MediaQuery.sizeOf(context).width,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.grey, // Border color
+                        color: AppColor.greyColor, // Border color
                       ),
                       borderRadius: BorderRadius.circular(10), // Border radius
                     ),
@@ -153,7 +154,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                         alignment: Alignment.centerLeft,
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           // fontFamily:
                           //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 12,
@@ -186,7 +187,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                   Text(
                     "Township",
                     style: TextStyle(
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 12,
                     ),
@@ -196,7 +197,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                     width: MediaQuery.sizeOf(context).width,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.grey, // Border color
+                        color: AppColor.greyColor, // Border color
                       ),
                       borderRadius: BorderRadius.circular(10), // Border radius
                     ),
@@ -209,7 +210,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                         alignment: Alignment.centerLeft,
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           // fontFamily:
                           //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 12,
@@ -245,15 +246,15 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
               Text(
                 "App. Suite, Unit Building ",
                 style: TextStyle(
-                  color: Color(0xff534F4F),
+                  color: AppColor.greyColor,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(height: 10),
               TextFormField(
-                cursorColor: Color(0xffF2AE00),
+                cursorColor: AppColor.orangeColor,
                 maxLines: 5,
-                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
+                style: TextStyle(color: AppColor.textColor, fontSize: 14),
                 textInputAction: TextInputAction.newline,
                 controller: _additionAddressController,
                 obscureText: false,
@@ -263,25 +264,25 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                     ),
                   ),
                   disabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                     ),
                   ),
                 ),

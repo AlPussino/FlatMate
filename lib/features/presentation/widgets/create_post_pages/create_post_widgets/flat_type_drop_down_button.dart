@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:flutter/material.dart';
 
 class FlatTypeDropDownButton extends StatefulWidget {
@@ -24,7 +25,7 @@ class _FlatTypeDropDownButtonState extends State<FlatTypeDropDownButton> {
       width: (MediaQuery.sizeOf(context).width / 2) - 30,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey, // Border color
+          color: AppColor.greyColor, // Border color
         ),
         borderRadius: BorderRadius.circular(10), // Border radius
       ),
@@ -36,7 +37,7 @@ class _FlatTypeDropDownButtonState extends State<FlatTypeDropDownButton> {
           alignment: Alignment.centerLeft,
           borderRadius: BorderRadius.circular(10),
           style: TextStyle(
-            color: Color(0xff534F4F),
+            color: AppColor.greyColor,
             fontSize: 14,
           ),
           value: selectedHouseTypeValue,

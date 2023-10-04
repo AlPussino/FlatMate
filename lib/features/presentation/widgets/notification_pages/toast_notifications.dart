@@ -1,7 +1,8 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 
-class Notis {
+class ToastNotificatoins {
   static showError(String errorMessage) {
     showSimpleNotification(
         Container(
@@ -28,7 +29,7 @@ class Notis {
         ),
         autoDismiss: true,
         contentPadding: const EdgeInsets.all(16),
-        background: Colors.transparent,
+        background: AppColor.transparent,
         elevation: 0,
         position: NotificationPosition.bottom);
   }
@@ -59,7 +60,7 @@ class Notis {
         ),
         autoDismiss: true,
         contentPadding: const EdgeInsets.all(16),
-        background: Colors.transparent,
+        background: AppColor.transparent,
         elevation: 0,
         position: NotificationPosition.bottom);
   }

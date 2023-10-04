@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:finding_apartments_yangon/features/data/datasources/post_datasource.dart';
+import 'package:finding_apartments_yangon/features/data/datasources/datasource/post_datasource.dart';
 import 'package:finding_apartments_yangon/features/data/models/all_posts.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';

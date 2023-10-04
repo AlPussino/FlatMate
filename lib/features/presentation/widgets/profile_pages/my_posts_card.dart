@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
@@ -19,7 +20,7 @@ class MyPostsCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: InkWell(
         borderRadius: BorderRadius.circular(5),
-        splashColor: Color(0xffF2AE00).withOpacity(0.4),
+        splashColor: AppColor.orangeColor.withOpacity(0.4),
         onTap: () {
           log(post.id.toString());
           Navigator.push(
@@ -48,7 +49,7 @@ class MyPostsCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               elevation: 0.5,
-              color: Colors.white,
+              color: AppColor.whiteColor,
               child: Row(
                 children: [
                   Expanded(
@@ -76,8 +77,8 @@ class MyPostsCard extends StatelessWidget {
                                   height: 30,
                                   width: 30,
                                   child: const CircularProgressIndicator(
-                                    color: Color(0xffF2AE00),
-                                    backgroundColor: Colors.white,
+                                    color: AppColor.orangeColor,
+                                    backgroundColor: AppColor.whiteColor,
                                   ),
                                 ),
                               );
@@ -108,7 +109,7 @@ class MyPostsCard extends StatelessWidget {
                                       children: [
                                         Icon(
                                           Icons.grid_view,
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                           size: 15,
                                         ),
                                         const SizedBox(width: 10),
@@ -117,7 +118,7 @@ class MyPostsCard extends StatelessWidget {
                                               ? "${post.apartment!.apartmentType.toString()}  |  ${post.apartment!.floor}th floor"
                                               : "${post.apartment!.apartmentType.toString()}  | Ground floor",
                                           style: TextStyle(
-                                            color: Color(0xff534F4F),
+                                            color: AppColor.greyColor,
                                             fontFamily:
                                                 DefaultTextStyle.of(context)
                                                     .style
@@ -191,7 +192,7 @@ class MyPostsCard extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.location_on,
-                                      color: Color(0xff534F4F),
+                                      color: AppColor.greyColor,
                                       size: 15,
                                     ),
                                     const SizedBox(width: 10),
@@ -199,7 +200,7 @@ class MyPostsCard extends StatelessWidget {
                                       child: Text(
                                         "${post.township}",
                                         style: TextStyle(
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                           fontSize: 12,
                                         ),
                                         maxLines: 1,
@@ -216,14 +217,14 @@ class MyPostsCard extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.map_rounded,
-                                      color: Color(0xff534F4F),
+                                      color: AppColor.greyColor,
                                       size: 15,
                                     ),
                                     const SizedBox(width: 10),
                                     Text(
                                       "${post.state}",
                                       style: TextStyle(
-                                        color: Color(0xff534F4F),
+                                        color: AppColor.greyColor,
                                         fontFamily: DefaultTextStyle.of(context)
                                             .style
                                             .fontFamily,
@@ -266,7 +267,7 @@ class MyPostsCard extends StatelessWidget {
                                         height: 25,
                                         width: 60,
                                         decoration: BoxDecoration(
-                                          color: Colors.black,
+                                          color: AppColor.blackColor,
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
@@ -274,7 +275,7 @@ class MyPostsCard extends StatelessWidget {
                                           child: Text(
                                             "${post.tenants} left",
                                             style: TextStyle(
-                                              color: Color(0xffFFFFFF),
+                                              color: AppColor.whiteColor,
                                               fontFamily:
                                                   DefaultTextStyle.of(context)
                                                       .style
@@ -299,9 +300,8 @@ class MyPostsCard extends StatelessWidget {
             ),
           ),
         ).animate().shimmer(
-              duration: Duration(seconds: 2),
-              color: Color.fromARGB(20, 242, 173, 0),
-            ),
+            duration: Duration(seconds: 2),
+            color: AppColor.animationOrangeColor),
       ),
     );
   }

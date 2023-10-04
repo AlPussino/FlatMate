@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_introduction/animated_introduction.dart';
@@ -13,7 +14,7 @@ class IntroPage extends StatelessWidget {
       description:
           'You plans your Events, We\'ll do the rest and will be the best! Guaranteed!  ',
       textStyle: TextStyle(
-        color: Colors.white,
+        color: AppColor.whiteColor,
         fontWeight: FontWeight.w500,
         fontFamily: 'Dosis',
         fontSize: 18,
@@ -25,7 +26,7 @@ class IntroPage extends StatelessWidget {
       description:
           'Tickets to the latest movies, crickets matches, concerts, comedy shows, plus lots more !',
       textStyle: TextStyle(
-        color: Colors.white,
+        color: AppColor.whiteColor,
         fontWeight: FontWeight.w500,
         fontFamily: 'Dosis',
         fontSize: 18,
@@ -36,7 +37,7 @@ class IntroPage extends StatelessWidget {
       title: 'Grabs all events now only in your hands',
       description: 'All events are now in your hands, just a click away ! ',
       textStyle: TextStyle(
-        color: Colors.white,
+        color: AppColor.whiteColor,
         fontWeight: FontWeight.w500,
         fontFamily: 'Dosis',
         fontSize: 18,
@@ -49,9 +50,9 @@ class IntroPage extends StatelessWidget {
     return Scaffold(
       body: Scaffold(
         body: AnimatedIntroduction(
-          footerBgColor: const Color(0xffF2AE00),
+          footerBgColor: AppColor.orangeColor,
           slides: pages,
-          containerBg: Colors.white,
+          containerBg: AppColor.whiteColor,
           physics: BouncingScrollPhysics(),
           indicatorType: IndicatorType.line,
           footerRadius: 20,

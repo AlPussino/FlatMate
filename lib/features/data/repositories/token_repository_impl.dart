@@ -1,4 +1,4 @@
-import '../datasources/token_datasource.dart';
+import 'package:finding_apartments_yangon/features/data/datasources/datasource/token_datasource.dart';
 import '../../domain/repositories/token_repository.dart';
 
 class TokenRepositoryImpl implements TokenRepository {

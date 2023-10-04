@@ -4,17 +4,15 @@ import 'package:finding_apartments_yangon/features/data/models/all_posts.dart';
 import 'package:finding_apartments_yangon/features/data/models/divisions_and_townships.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_list.dart';
-import 'package:finding_apartments_yangon/features/domain/usecases/post_usecase.dart';
-import 'package:finding_apartments_yangon/features/domain/usecases/token_usecase.dart';
+import 'package:finding_apartments_yangon/features/domain/usecases/usecase/post_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 class PostProvider with ChangeNotifier {
   final PostUseCase _postUseCase;
-  final TokenUseCase _tokenUseCase;
 
-  PostProvider(this._postUseCase, this._tokenUseCase);
+  PostProvider(this._postUseCase);
 
   List<MyanmarData> _myanmarData = [];
   List<MyanmarData> get myanmarData => _myanmarData;

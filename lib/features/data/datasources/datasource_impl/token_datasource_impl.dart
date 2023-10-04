@@ -1,15 +1,6 @@
 import 'package:finding_apartments_yangon/configs/strings.dart';
+import 'package:finding_apartments_yangon/features/data/datasources/datasource/token_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-abstract class TokenDataSource {
-  Future<void> saveToken(String token);
-  String? getToken();
-  Future<void> saveRefreshToken(String refreshToken);
-  String? getRefreshToken();
-  Future<void> saveTokenExpireDate(String tokenExpireDate);
-  String getTokenExpireDate();
-  bool isAuthenticated();
-}
 
 class TokenDataSourceImpl implements TokenDataSource {
   final SharedPreferences pref;
@@ -17,32 +8,32 @@ class TokenDataSourceImpl implements TokenDataSource {
   TokenDataSourceImpl(this.pref);
   @override
   Future<void> saveToken(String token) async {
-    await pref.setString(kTokenKey, token);
+    await pref.setString(AppString.tokenKey, token);
   }
 
   @override
   String? getToken() {
-    return pref.getString(kTokenKey);
+    return pref.getString(AppString.tokenKey);
   }
 
   @override
   Future<void> saveRefreshToken(String refreshToken) async {
-    await pref.setString(kRefreshTokenKey, refreshToken);
+    await pref.setString(AppString.refreshTokenKey, refreshToken);
   }
 
   @override
   String? getRefreshToken() {
-    return pref.getString(kRefreshTokenKey);
+    return pref.getString(AppString.refreshTokenKey);
   }
 
   @override
   Future<void> saveTokenExpireDate(String tokenExpireDate) async {
-    await pref.setString(kTokenExpiredDate, tokenExpireDate);
+    await pref.setString(AppString.tokenExpiredDate, tokenExpireDate);
   }
 
   @override
   String getTokenExpireDate() {
-    return pref.getString(kTokenExpiredDate) ?? '';
+    return pref.getString(AppString.tokenExpiredDate) ?? '';
   }
 
   @override

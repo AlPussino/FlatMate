@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/sign_up_pages/email_otp_verification_page.dart';
@@ -73,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Sign Up",
                     style: TextStyle(
                       //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xffF2AE00),
+                      color: AppColor.orangeColor,
                       fontSize: 24,
                     ),
                   ),
@@ -81,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Fill your information below or",
                     style: TextStyle(
                       //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
@@ -89,7 +90,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     "register with your google account",
                     style: TextStyle(
                       //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
@@ -100,9 +101,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _nameController,
@@ -116,25 +117,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                     ),
@@ -166,9 +167,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   SizedBox(height: 20),
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _emailController,
@@ -181,25 +182,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                     ),
@@ -234,9 +235,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   SizedBox(height: 20),
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _phoneNumberController,
@@ -249,25 +250,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                     ),
@@ -305,9 +306,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   SizedBox(height: 20),
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
@@ -321,25 +322,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -352,7 +353,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           _passwordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           size: 20,
                         ),
                       ),
@@ -384,7 +385,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(height: 20),
                   TextFormField(
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
 
@@ -399,25 +400,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -431,7 +432,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           _confirmPasswordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           size: 20,
                         ),
                       ),
@@ -486,15 +487,15 @@ class _SignUpPageState extends State<SignUpPage> {
                               _passwordController.text ==
                                   _confirmPasswordController.text &&
                               _passwordController.text.length >= 8
-                          ? Color(0xffF2AE00)
-                          : Colors.grey,
+                          ? AppColor.orangeColor
+                          : AppColor.greyColor,
                     ),
                     child: isLoggingIn
-                        ? CircularProgressIndicator(color: Colors.white)
+                        ? CircularProgressIndicator(color: AppColor.whiteColor)
                         : Text(
                             "Sign Up",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColor.whiteColor,
                               // fontFamily:
                               //     DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,
@@ -512,7 +513,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Text(
                         "Or Sign in with Google",
                         style: TextStyle(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           // fontFamily:
                           //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
@@ -523,9 +524,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 50,
                         width: 50,
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
+                          border: Border.all(color: AppColor.blackColor),
                           shape: BoxShape.circle,
-                          color: Colors.transparent,
+                          color: AppColor.transparent,
                         ),
                         child: Image.asset('assets/images/google_logo.png'),
                       ),
@@ -538,7 +539,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Text(
                         "Don't have an account?",
                         style: TextStyle(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           // fontFamily:
                           //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
@@ -556,7 +557,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Text(
                           "Sign in",
                           style: TextStyle(
-                            color: Color(0xffF2AE00),
+                            color: AppColor.orangeColor,
                             // fontFamily:
                             //     DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 16,

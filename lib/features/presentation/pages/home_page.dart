@@ -1,13 +1,15 @@
 import 'dart:developer';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/main_post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
 import '../providers/user_provider.dart';
 import '../widgets/log_in_pages/login_page.dart';
 
@@ -60,7 +62,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    bool isTokenExpired = context.read<AuthProvider>().isTokenExpired();
+    bool isTokenExpired = context.read<TokenProvider>().isTokenExpired();
 
     if (isTokenExpired) {
       final user = context.read<UserProvider>().getUserInfo();
@@ -77,7 +79,7 @@ class _HomePageState extends State<HomePage>
     }
 
     return RefreshIndicator(
-      color: Color(0xffF2AE00),
+      color: AppColor.orangeColor,
       edgeOffset: 100,
       onRefresh: () => context.read<PostProvider>().refreshPosts(),
       child: FutureBuilder(
@@ -86,7 +88,7 @@ class _HomePageState extends State<HomePage>
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(
-                color: Color(0xffF2AE00),
+                color: AppColor.orangeColor,
               ),
             );
           } else if (snapshot.hasError) {
@@ -106,16 +108,16 @@ class _HomePageState extends State<HomePage>
           hasNext = context.watch<PostProvider>().hasNext;
 
           return Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: AppColor.whiteColor,
             body: SafeArea(
               child: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
                   SliverAppBar(
-                    surfaceTintColor: Colors.white,
+                    surfaceTintColor: AppColor.whiteColor,
                     elevation: 0,
                     automaticallyImplyLeading: false,
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppColor.whiteColor,
                     pinned: false,
                     snap: false,
                     floating: true,
@@ -123,13 +125,19 @@ class _HomePageState extends State<HomePage>
                     flexibleSpace: FlexibleSpaceBar(
                       titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
                       centerTitle: false,
-                      title: Text(
-                        "Find Your Stay",
-                        style: TextStyle(
-                          fontFamily: 'Dosis',
-                          color: Color(0xffF2AE00),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                      title: InkWell(
+                        splashColor: AppColor.transparent,
+                        onTap: () {
+                          toast("Fuck You");
+                        },
+                        child: Text(
+                          "Find Your Stay",
+                          style: TextStyle(
+                            fontFamily: 'Dosis',
+                            color: AppColor.orangeColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
                         ),
                       ),
                     ),
@@ -153,7 +161,7 @@ class _HomePageState extends State<HomePage>
                     child: hasNext == true
                         ? Center(
                             child: CircularProgressIndicator(
-                              color: Color(0xffF2AE00),
+                              color: AppColor.orangeColor,
                             ),
                           )
                         : Center(
@@ -165,7 +173,7 @@ class _HomePageState extends State<HomePage>
                                   style: TextStyle(
                                     fontFamily: 'Dosis',
                                     fontSize: 14,
-                                    color: Colors.black,
+                                    color: AppColor.blackColor,
                                   ),
                                   child: AnimatedTextKit(
                                     isRepeatingAnimation: false,

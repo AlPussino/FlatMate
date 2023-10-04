@@ -1,10 +1,10 @@
 import 'dart:io';
+import 'package:finding_apartments_yangon/features/data/datasources/datasource/user_datasource.dart';
 import 'package:finding_apartments_yangon/features/data/models/other_user.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_owner_list.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/email_response.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../datasources/user_datasource.dart';
 import '../models/my_user.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -44,7 +44,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<EmailResponse?> removeSocialContact({required String id}) async {
+  Future<MyUser?> removeSocialContact({required String id}) async {
     return await userDataSource.removeSocialContact(id: id);
   }
 

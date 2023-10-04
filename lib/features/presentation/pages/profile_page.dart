@@ -1,15 +1,16 @@
 import 'dart:developer';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/my_user.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_list.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
 import '../providers/user_provider.dart';
 import '../widgets/log_in_pages/login_page.dart';
 
@@ -18,7 +19,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isTokenExpired = context.read<AuthProvider>().isTokenExpired();
+    bool isTokenExpired = context.read<TokenProvider>().isTokenExpired();
 
     if (isTokenExpired) {
       final user = context.read<UserProvider>().getUserInfo();
@@ -45,14 +46,14 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       body: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.whiteColor,
         body: FutureBuilder(
           future: Future.wait([fetchMyUserInfo(), fetchMyPosts()]),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: CircularProgressIndicator(
-                  color: Color(0xffF2AE00),
+                  color: AppColor.orangeColor,
                 ),
               );
             } else if (snapshot.hasError) {
@@ -74,8 +75,8 @@ class ProfilePage extends StatelessWidget {
               child: CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    backgroundColor: Colors.white,
-                    surfaceTintColor: Colors.white,
+                    backgroundColor: AppColor.whiteColor,
+                    surfaceTintColor: AppColor.whiteColor,
                     pinned: true,
                     elevation: 1,
                     automaticallyImplyLeading: false,
@@ -89,8 +90,6 @@ class ProfilePage extends StatelessWidget {
                         "Profile",
                         style: TextStyle(
                           color: Color(0xff000000),
-                          fontFamily:
-                              DefaultTextStyle.of(context).style.fontFamily,
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
                         ),
@@ -108,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                           },
                           icon: Icon(
                             Icons.settings,
-                            color: Colors.black,
+                            color: AppColor.blackColor,
                           ))
                     ],
                   ),

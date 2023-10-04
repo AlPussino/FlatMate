@@ -1,14 +1,5 @@
-import '../repositories/token_repository.dart';
-
-abstract class TokenUseCase {
-  Future<void> saveToken(String token);
-  String? getToken();
-  Future<void> saveRefreshToken(String refreshToken);
-  String? getRefreshToken();
-  Future<void> saveTokenExpiredDate(String tokenExpiredDate);
-  String? getTokenExpiredDate();
-  bool isAuthenticated();
-}
+import 'package:finding_apartments_yangon/features/domain/repositories/token_repository.dart';
+import 'package:finding_apartments_yangon/features/domain/usecases/usecase/token_usecase.dart';
 
 class TokenUseCaseImpl implements TokenUseCase {
   final TokenRepository tokenRepository;

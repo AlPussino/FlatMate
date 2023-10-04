@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/saved_pages/saved_posts_card.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +12,14 @@ class SavedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       body: FutureBuilder(
         future: context.read<PostProvider>().getSavedPosts(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(
-                color: Color(0xffF2AE00),
+                color: AppColor.orangeColor,
               ),
             );
           } else if (snapshot.hasError) {
@@ -37,8 +38,8 @@ class SavedPage extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  surfaceTintColor: Colors.white,
-                  backgroundColor: Colors.white,
+                  surfaceTintColor: AppColor.whiteColor,
+                  backgroundColor: AppColor.whiteColor,
                   pinned: true,
                   elevation: 1,
                   automaticallyImplyLeading: false,

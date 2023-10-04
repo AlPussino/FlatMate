@@ -47,34 +47,34 @@ class ApiConfigs {
 const baseUrl = ApiConfigs.baseUrl;
 
 //logIn urls
-const kLogInUrl = ApiConfigs.logInUrl;
+const logInUrl = ApiConfigs.logInUrl;
 
 //signUp urls
-const kSignUpUrl = ApiConfigs.signUpUrl;
-const kEmailOTPVerifyUrl = ApiConfigs.emailOTPVerifyUrl;
+const signUpUrl = ApiConfigs.signUpUrl;
+const emailOTPVerifyUrl = ApiConfigs.emailOTPVerifyUrl;
 
 //auth urls
-const kRefreshTokenUrl = ApiConfigs.refreshTokenUrl;
-const kForgetPasswordUrl = ApiConfigs.forgetPasswordUrl;
-const kForgetPasswordOTPVerifyUrl = ApiConfigs.forgetPasswordOTPVerifyUrl;
-const kResetPasswordUrl = ApiConfigs.resetPasswordUrl;
+const refreshTokenUrl = ApiConfigs.refreshTokenUrl;
+const forgetPasswordUrl = ApiConfigs.forgetPasswordUrl;
+const forgetPasswordOTPVerifyUrl = ApiConfigs.forgetPasswordOTPVerifyUrl;
+const resetPasswordUrl = ApiConfigs.resetPasswordUrl;
 
 //user urls
-const kAboutMeUrl = ApiConfigs.aboutMeUrl;
-const kChangeUserNameUrl = ApiConfigs.changeUserNameUrl;
-const kChangePasswordUrl = ApiConfigs.changePasswordUrl;
-const kChangeMobileNumberUrl = ApiConfigs.changeMobileNumberUrl;
-const kUploadProfileUrl = ApiConfigs.uploadProfileUrl;
-const kAddSocialContactUrl = ApiConfigs.addSocialContactUrl;
-const kRemoveSocialContactUrl = ApiConfigs.removeSocialContactUrl;
-const kAboutOtherUserUrl = ApiConfigs.aboutOtherUserUrl;
-const kSearchUserUrl = ApiConfigs.searchUserUrl;
+const aboutMeUrl = ApiConfigs.aboutMeUrl;
+const changeUserNameUrl = ApiConfigs.changeUserNameUrl;
+const changePasswordUrl = ApiConfigs.changePasswordUrl;
+const changeMobileNumberUrl = ApiConfigs.changeMobileNumberUrl;
+const uploadProfileUrl = ApiConfigs.uploadProfileUrl;
+const addSocialContactUrl = ApiConfigs.addSocialContactUrl;
+const removeSocialContactUrl = ApiConfigs.removeSocialContactUrl;
+const aboutOtherUserUrl = ApiConfigs.aboutOtherUserUrl;
+const searchUserUrl = ApiConfigs.searchUserUrl;
 
 //post urls
-const kCreatePostUrl = ApiConfigs.createPostUrl;
-const kGetMyPostsUrl = ApiConfigs.getMyPostsUrl;
-const kGetPostDetailUrl = ApiConfigs.getPostDetailUrl;
-const kDeleteMyPostUrl = ApiConfigs.deleteMyPostUrl;
-const kGetAllPostsUrl = ApiConfigs.getAllPostsUrl;
-const kSavePostUrl = ApiConfigs.savePostUrl;
-const kGetSavedPostsUrl = ApiConfigs.getSavedPostsUrl;
+const createPostUrl = ApiConfigs.createPostUrl;
+const getMyPostsUrl = ApiConfigs.getMyPostsUrl;
+const getPostDetailUrl = ApiConfigs.getPostDetailUrl;
+const deleteMyPostUrl = ApiConfigs.deleteMyPostUrl;
+const getAllPostsUrl = ApiConfigs.getAllPostsUrl;
+const savePostUrl = ApiConfigs.savePostUrl;
+const getSavedPostsUrl = ApiConfigs.getSavedPostsUrl;

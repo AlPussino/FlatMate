@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/create_new_password_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
@@ -33,16 +34,14 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
                 Text(
                   "Email verification",
                   style: TextStyle(
-                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                    color: Color(0xffF2AE00),
+                    color: AppColor.orangeColor,
                     fontSize: 24,
                   ),
                 ),
                 Text(
                   "A verification code has been sent to ${widget.loginReqWithEmail.email}",
                   style: TextStyle(
-                    // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                    color: Color(0xff534F4F),
+                    color: AppColor.greyColor,
                     fontSize: 14,
                   ),
                 ),
@@ -53,7 +52,7 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
               child: VerificationCode(
                 underlineWidth: 1,
                 underlineUnfocusedColor: const Color(0xffB0B0B0),
-                underlineColor: const Color(0xffF2AE00),
+                underlineColor: AppColor.orangeColor,
                 keyboardType: TextInputType.number,
                 length: 6,
                 autofocus: true,
@@ -71,11 +70,11 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
                 final result = widget.isReset
                     ? await context
                         .read<AuthProvider>()
-                        .forgetPasswordOtpVerification(
+                        .verifyOtpForForgetPassword(
                             body: EmailOTPVerifyRequest(
                                 email: widget.loginReqWithEmail.email,
                                 code: verificationCode))
-                    : await context.read<AuthProvider>().emailOtpVerification(
+                    : await context.read<AuthProvider>().verifyOtpForSignUp(
                         body: EmailOTPVerifyRequest(
                             email: widget.loginReqWithEmail.email,
                             code: verificationCode));
@@ -102,13 +101,12 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
                 shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 minimumSize: const Size(500, 50),
-                backgroundColor: const Color(0xffF2AE00),
+                backgroundColor: AppColor.orangeColor,
               ),
               child: Text(
                 "Confirm",
                 style: TextStyle(
-                  color: Colors.white,
-                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
+                  color: AppColor.whiteColor,
                   fontSize: 16,
                 ),
               ),

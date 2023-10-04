@@ -8,12 +8,12 @@ import '../../data/models/requests/email_otp_verify_request.dart';
 
 abstract class AuthRepository {
   Future<EmailResponse?> signUpWithEmail(SignUpRequestWithEmail body);
-  Future<EmailOTPVerifyResponse?> emailOtpVerification(
+  Future<EmailOTPVerifyResponse?> verifyOtpForSignUp(
       EmailOTPVerifyRequest body);
   Future<LoginResponse?> logInWithEmail(LogInRequestWithEmail body);
   bool isAuthenticated();
   Future<EmailResponse?> forgetPassword(String email);
-  Future<EmailOTPVerifyResponse?> forgetPasswordOtpVerification(
+  Future<EmailOTPVerifyResponse?> verifyOtpForForgetPassword(
       EmailOTPVerifyRequest body);
   Future<EmailResponse?> createNewPassword(String newPassword);
 }

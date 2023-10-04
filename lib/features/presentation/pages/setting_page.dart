@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/change_password_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +12,11 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: AppColor.whiteColor,
+        foregroundColor: AppColor.blackColor,
         automaticallyImplyLeading: false,
         title: Text(
           "Setting",
@@ -35,7 +36,7 @@ class SettingPage extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.close,
-                  color: Colors.black,
+                  color: AppColor.blackColor,
                 )),
           )
         ],
@@ -47,7 +48,7 @@ class SettingPage extends StatelessWidget {
             Text(
               "Account",
               style: TextStyle(
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
@@ -67,7 +68,7 @@ class SettingPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.mode_edit_outline_outlined,
-                    color: Color(0xff534F4F),
+                    color: AppColor.greyColor,
                     size: 15,
                   ),
                   SizedBox(width: 10),
@@ -83,7 +84,7 @@ class SettingPage extends StatelessWidget {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios_sharp,
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 size: 15,
               ),
             ),
@@ -102,7 +103,7 @@ class SettingPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.password,
-                    color: Color(0xff534F4F),
+                    color: AppColor.greyColor,
                     size: 15,
                   ),
                   SizedBox(width: 10),
@@ -118,17 +119,17 @@ class SettingPage extends StatelessWidget {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios_sharp,
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 size: 15,
               ),
             ),
             Divider(
-              color: Colors.grey,
+              color: AppColor.greyColor,
             ),
             Text(
               "About",
               style: TextStyle(
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
@@ -140,7 +141,7 @@ class SettingPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.question_mark_outlined,
-                    color: Color(0xff534F4F),
+                    color: AppColor.greyColor,
                     size: 15,
                   ),
                   SizedBox(width: 10),
@@ -156,7 +157,7 @@ class SettingPage extends StatelessWidget {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios_sharp,
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 size: 15,
               ),
             ),
@@ -167,7 +168,7 @@ class SettingPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.question_mark_outlined,
-                    color: Color(0xff534F4F),
+                    color: AppColor.greyColor,
                     size: 15,
                   ),
                   SizedBox(width: 10),
@@ -183,7 +184,7 @@ class SettingPage extends StatelessWidget {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios_sharp,
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 size: 15,
               ),
             ),
@@ -194,7 +195,7 @@ class SettingPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.question_mark_outlined,
-                    color: Color(0xff534F4F),
+                    color: AppColor.greyColor,
                     size: 15,
                   ),
                   SizedBox(width: 10),
@@ -210,17 +211,17 @@ class SettingPage extends StatelessWidget {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios_sharp,
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 size: 15,
               ),
             ),
             Divider(
-              color: Colors.grey,
+              color: AppColor.greyColor,
             ),
             Text(
               "Contact",
               style: TextStyle(
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
@@ -232,7 +233,7 @@ class SettingPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.web,
-                    color: Color(0xff534F4F),
+                    color: AppColor.greyColor,
                     size: 15,
                   ),
                   SizedBox(width: 10),
@@ -248,17 +249,17 @@ class SettingPage extends StatelessWidget {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios_sharp,
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 size: 15,
               ),
             ),
             Divider(
-              color: Colors.grey,
+              color: AppColor.greyColor,
             ),
             Text(
               "Log out",
               style: TextStyle(
-                color: Color(0xff534F4F),
+                color: AppColor.greyColor,
                 // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
@@ -279,12 +280,12 @@ class SettingPage extends StatelessWidget {
                 shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 minimumSize: Size(500, 50),
-                backgroundColor: Color(0xffF2AE00),
+                backgroundColor: AppColor.orangeColor,
               ),
               child: Text(
                 "Log out",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColor.whiteColor,
                   // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),

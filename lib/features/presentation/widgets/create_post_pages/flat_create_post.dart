@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/create_post_widgets/flat_floor_drop_down_button.dart';
@@ -52,18 +53,18 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: AppColor.whiteColor,
+        foregroundColor: AppColor.blackColor,
         automaticallyImplyLeading: true,
         title: Text(
           "New Post",
           style: TextStyle(
-            color: Color(0xff000000),
-            fontSize: 20,
-          ),
+              color: Color(0xff000000),
+              fontSize: 24,
+              fontWeight: FontWeight.bold),
         ),
         actions: [
           TextButton(
@@ -109,8 +110,8 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                           _lengthController.text.isNotEmpty &&
                           _widthController.text.isNotEmpty &&
                           _selectImagesController.images.length > 0
-                      ? Color(0xffF2AE00)
-                      : Colors.grey,
+                      ? AppColor.orangeColor
+                      : AppColor.greyColor,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),
             ),
@@ -145,7 +146,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                   Text(
                     "Flat type",
                     style: TextStyle(
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
@@ -159,7 +160,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                           Text(
                             "Rental house type",
                             style: TextStyle(
-                              color: Color(0xff534F4F),
+                              color: AppColor.greyColor,
                               fontSize: 12,
                             ),
                           ),
@@ -173,7 +174,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                           Text(
                             "Floor",
                             style: TextStyle(
-                              color: Color(0xff534F4F),
+                              color: AppColor.greyColor,
                               fontSize: 12,
                             ),
                           ),
@@ -187,7 +188,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                   Text(
                     "Area (square feet)",
                     style: TextStyle(
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
@@ -201,7 +202,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                           Text(
                             "Length",
                             style: TextStyle(
-                              color: Color(0xff534F4F),
+                              color: AppColor.greyColor,
                               fontSize: 12,
                             ),
                           ),
@@ -210,9 +211,9 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             height: 80,
                             width: (MediaQuery.sizeOf(context).width / 2) - 30,
                             child: TextFormField(
-                              cursorColor: Color(0xffF2AE00),
+                              cursorColor: AppColor.orangeColor,
                               style: TextStyle(
-                                  color: Color(0xff2E2E2E), fontSize: 14),
+                                  color: AppColor.textColor, fontSize: 14),
                               textInputAction: TextInputAction.done,
                               keyboardType: TextInputType.number,
                               controller: _lengthController,
@@ -247,7 +248,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                           Text(
                             "Width",
                             style: TextStyle(
-                              color: Color(0xff534F4F),
+                              color: AppColor.greyColor,
                               fontSize: 12,
                             ),
                           ),
@@ -257,7 +258,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             width: (MediaQuery.sizeOf(context).width / 2) - 30,
                             child: TextFormField(
                               style: TextStyle(
-                                  color: Color(0xff2E2E2E),
+                                  color: AppColor.textColor,
                                   // fontFamily: DefaultTextStyle.of(context)
                                   //     .style
                                   //     .fontFamily,
@@ -266,7 +267,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                               controller: _widthController,
                               obscureText: false,
                               focusNode: _widthFocusNode,
-                              cursorColor: Color(0xffF2AE00),
+                              cursorColor: AppColor.orangeColor,
                               keyboardType: TextInputType.number,
                               decoration: Utils.textFormFieldDecoration(50),
                               onChanged: (value) {

@@ -13,7 +13,7 @@ abstract class UserRepository {
   Future<MyUser?> changeMobileNumber({required String mobileNumber});
   Future<String?> uploadProfile(File file, String? oldImageUrl);
   Future<MyUser?> addSocialContact(AddSocialContactRequest body);
-  Future<EmailResponse?> removeSocialContact({required String id});
+  Future<MyUser?> removeSocialContact({required String id});
   Future<OtherUser?> aboutOtherUser({required int userId});
   Future<PostOwnerList?> searchUser({required String keyword});
 }

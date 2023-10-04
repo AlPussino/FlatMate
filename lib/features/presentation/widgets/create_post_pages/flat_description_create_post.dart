@@ -1,6 +1,6 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
-import 'package:finding_apartments_yangon/features/presentation/pages/home_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:flutter/material.dart';
@@ -58,11 +58,11 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: AppColor.whiteColor,
+        foregroundColor: AppColor.blackColor,
         automaticallyImplyLeading: true,
         title: Text(
           "Flat Descriptions",
@@ -77,7 +77,7 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               isButtonDisabled ? null : handleButtonClick();
             },
             child: isPosting
-                ? const CircularProgressIndicator(color: Color(0xffF2AE00))
+                ? const CircularProgressIndicator(color: AppColor.orangeColor)
                 : Text(
                     "Post",
                     style: TextStyle(
@@ -85,8 +85,8 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                                 _descriptionController.text.isNotEmpty &&
                                 _pricePerMonthController.text.isNotEmpty &&
                                 _totalPeopleController.text.isNotEmpty
-                            ? Color(0xffF2AE00)
-                            : Colors.grey,
+                            ? AppColor.orangeColor
+                            : AppColor.greyColor,
                         // fontFamily:
                         //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 20,
@@ -105,7 +105,7 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               Text(
                 "Flat description",
                 style: TextStyle(
-                  color: Color(0xff534F4F),
+                  color: AppColor.greyColor,
                   fontSize: 16,
                 ),
               ),
@@ -113,15 +113,15 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               Text(
                 "Contract",
                 style: TextStyle(
-                  color: Color(0xff534F4F),
+                  color: AppColor.greyColor,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(height: 10),
               TextFormField(
-                cursorColor: Color(0xffF2AE00),
+                cursorColor: AppColor.orangeColor,
                 maxLines: 1,
-                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
+                style: TextStyle(color: AppColor.textColor, fontSize: 14),
                 textInputAction: TextInputAction.done,
                 controller: _contractController,
                 obscureText: false,
@@ -154,15 +154,15 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               Text(
                 "Description",
                 style: TextStyle(
-                  color: Color(0xff534F4F),
+                  color: AppColor.greyColor,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(height: 10),
               TextFormField(
-                cursorColor: Color(0xffF2AE00),
+                cursorColor: AppColor.orangeColor,
                 maxLines: 5,
-                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
+                style: TextStyle(color: AppColor.textColor, fontSize: 14),
                 textInputAction: TextInputAction.newline,
                 controller: _descriptionController,
                 obscureText: false,
@@ -194,15 +194,15 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               Text(
                 "Price per month",
                 style: TextStyle(
-                  color: Color(0xff534F4F),
+                  color: AppColor.greyColor,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(height: 10),
               TextFormField(
-                cursorColor: Color(0xffF2AE00),
+                cursorColor: AppColor.orangeColor,
                 maxLines: 1,
-                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
+                style: TextStyle(color: AppColor.textColor, fontSize: 14),
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 controller: _pricePerMonthController,
@@ -235,16 +235,16 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               Text(
                 "Total tenants",
                 style: TextStyle(
-                  color: Color(0xff534F4F),
+                  color: AppColor.greyColor,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(height: 10),
               TextFormField(
-                cursorColor: Color(0xffF2AE00),
+                cursorColor: AppColor.orangeColor,
 
                 maxLines: 1,
-                style: TextStyle(color: Color(0xff2E2E2E), fontSize: 14),
+                style: TextStyle(color: AppColor.textColor, fontSize: 14),
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 controller: _totalPeopleController,
@@ -306,25 +306,25 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
-          color: Color(0xff534F4F),
+          color: AppColor.greyColor,
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
-          color: Color(0xff534F4F),
+          color: AppColor.greyColor,
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
-          color: Color(0xff534F4F),
+          color: AppColor.greyColor,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(
-          color: Color(0xff534F4F),
+          color: AppColor.greyColor,
         ),
       ),
     );

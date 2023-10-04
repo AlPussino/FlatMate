@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,11 +47,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: AppColor.whiteColor,
+        foregroundColor: AppColor.blackColor,
         title: Text(
           "Change password",
           style: TextStyle(
@@ -73,15 +74,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     "Current password",
                     style: TextStyle(
                       // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         // fontFamily:
                         //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
@@ -94,25 +95,25 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -126,7 +127,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           _currentPasswordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           size: 20,
                         ),
                       ),
@@ -161,15 +162,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     "New password",
                     style: TextStyle(
                       // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         // fontFamily:
                         //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
@@ -182,25 +183,25 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -213,7 +214,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           _newPasswordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           size: 20,
                         ),
                       ),
@@ -248,15 +249,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     "Confirm password",
                     style: TextStyle(
                       // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         // fontFamily:
                         //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
@@ -270,25 +271,25 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -302,7 +303,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           _confirmPasswordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           size: 20,
                         ),
                       ),
@@ -353,13 +354,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                   _newPasswordController.text ==
                                       _confirmPasswordController.text &&
                                   _newPasswordController.text.length >= 8
-                              ? const Color(0xffF2AE00)
-                              : Colors.grey,
+                              ? AppColor.orangeColor
+                              : AppColor.greyColor,
                     ),
                     child: Text(
                       "Confirm",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColor.whiteColor,
                         // fontFamily:
                         //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 16,

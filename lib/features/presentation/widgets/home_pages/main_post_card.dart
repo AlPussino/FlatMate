@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/utils/utils_widget.dart';
@@ -18,7 +19,7 @@ class MainPostCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3),
       child: InkWell(
         borderRadius: BorderRadius.circular(5),
-        splashColor: Color(0xffF2AE00).withOpacity(0.4),
+        splashColor: AppColor.orangeColor.withOpacity(0.4),
         onTap: () {
           Navigator.push(
             context,
@@ -56,8 +57,8 @@ class MainPostCard extends StatelessWidget {
                             child: Carousel(
                               autoScroll: false,
                               animationPageCurve: Curves.linear,
-                              activateIndicatorColor: const Color(0xffF2AE00),
-                              indicatorBarColor: Colors.transparent,
+                              activateIndicatorColor: AppColor.orangeColor,
+                              indicatorBarColor: AppColor.transparent,
                               isCircle: false,
                               indicatorHeight: 2,
                               indicatorWidth: 20,
@@ -101,7 +102,7 @@ class MainPostCard extends StatelessWidget {
                                         child: Container(
                                           height: 35,
                                           decoration: BoxDecoration(
-                                            color: Colors.black,
+                                            color: AppColor.blackColor,
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
@@ -109,7 +110,7 @@ class MainPostCard extends StatelessWidget {
                                             child: Text(
                                               "${post.tenants} left",
                                               style: TextStyle(
-                                                color: Color(0xffFFFFFF),
+                                                color: AppColor.whiteColor,
                                                 fontFamily:
                                                     DefaultTextStyle.of(context)
                                                         .style
@@ -201,9 +202,7 @@ class MainPostCard extends StatelessWidget {
           ),
         ),
       ).animate().shimmer(
-            duration: Duration(seconds: 2),
-            color: Color.fromARGB(20, 242, 173, 0),
-          ),
+          duration: Duration(seconds: 2), color: AppColor.animationOrangeColor),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/login_request_with_email.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/bottom_navigation_bar_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                     "Sign in",
                     style: TextStyle(
                       //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xffF2AE00),
+                      color: AppColor.orangeColor,
                       fontSize: 24,
                     ),
                   ),
@@ -65,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                     "Hi welcome back, you've been missed mother fucker",
                     style: TextStyle(
                       //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
@@ -76,9 +77,9 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     controller: _emailController,
@@ -90,25 +91,25 @@ class _LoginPageState extends State<LoginPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                     ),
@@ -142,9 +143,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
                     textInputAction: TextInputAction.done,
@@ -157,25 +158,25 @@ class _LoginPageState extends State<LoginPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -188,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                           _passwordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           size: 20,
                         ),
                       ),
@@ -231,15 +232,16 @@ class _LoginPageState extends State<LoginPage> {
                       minimumSize: const Size(500, 50),
                       backgroundColor: _emailController.text.isNotEmpty &&
                               _passwordController.text.isNotEmpty
-                          ? const Color(0xffF2AE00)
-                          : Colors.grey,
+                          ? AppColor.orangeColor
+                          : AppColor.greyColor,
                     ),
                     child: isLoggingIn
-                        ? const CircularProgressIndicator(color: Colors.white)
+                        ? const CircularProgressIndicator(
+                            color: AppColor.whiteColor)
                         : Text(
                             'Sign in',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColor.whiteColor,
                               // fontFamily:
                               //     DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,
@@ -259,7 +261,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       "Forget password?",
                       style: TextStyle(
-                        color: Color(0xffF2AE00),
+                        color: AppColor.orangeColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14,
                       ),
@@ -276,7 +278,7 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         "Or Sign in with Google",
                         style: TextStyle(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           // fontFamily:
                           //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
@@ -296,9 +298,9 @@ class _LoginPageState extends State<LoginPage> {
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
+                            border: Border.all(color: AppColor.blackColor),
                             shape: BoxShape.circle,
-                            color: Colors.transparent,
+                            color: AppColor.transparent,
                           ),
                           child: Image.asset('assets/images/google_logo.png'),
                         ),
@@ -312,7 +314,7 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         "Don't have an account?",
                         style: TextStyle(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           // fontFamily:
                           //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
@@ -330,7 +332,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           "Sign up",
                           style: TextStyle(
-                            color: Color(0xffF2AE00),
+                            color: AppColor.orangeColor,
                             // fontFamily:
                             //     DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 16,

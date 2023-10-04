@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class SavedPostsCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: InkWell(
             borderRadius: BorderRadius.circular(5),
-            splashColor: Color(0xffF2AE00).withOpacity(0.4),
+            splashColor: AppColor.orangeColor,
             onTap: () {
               Navigator.push(
                 context,
@@ -48,7 +49,7 @@ class SavedPostsCard extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  color: Colors.white,
+                  color: AppColor.whiteColor,
                   child: Row(
                     children: [
                       Expanded(
@@ -59,8 +60,8 @@ class SavedPostsCard extends StatelessWidget {
                               // child: Carousel(
                               //   autoScroll: true,
                               //   animationPageCurve: Curves.linear,
-                              //   activateIndicatorColor: const Color(0xffF2AE00),
-                              //   indicatorBarColor: Colors.transparent,
+                              //   activateIndicatorColor: const AppColor.orangeColor,
+                              //   indicatorBarColor: AppColor.transparent,
                               //   isCircle: false,
                               //   indicatorHeight: 0,
                               //   indicatorWidth: 0,
@@ -102,8 +103,8 @@ class SavedPostsCard extends StatelessWidget {
                                       height: 30,
                                       width: 30,
                                       child: const CircularProgressIndicator(
-                                        color: Color(0xffF2AE00),
-                                        backgroundColor: Colors.white,
+                                        color: AppColor.orangeColor,
+                                        backgroundColor: AppColor.whiteColor,
                                       ),
                                     ),
                                   );
@@ -126,12 +127,12 @@ class SavedPostsCard extends StatelessWidget {
                                 Expanded(
                                   flex: 2,
                                   child: Container(
-                                    color: Colors.transparent,
+                                    color: AppColor.transparent,
                                     child: Row(
                                       children: [
                                         Icon(
                                           Icons.grid_view,
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                           size: 15,
                                         ),
                                         const SizedBox(width: 10),
@@ -140,7 +141,7 @@ class SavedPostsCard extends StatelessWidget {
                                               ? "${post.apartment!.apartmentType}  |  ${post.apartment!.floor}th floor"
                                               : "${post.apartment!.apartmentType}  |  Ground floor",
                                           style: TextStyle(
-                                            color: Color(0xff534F4F),
+                                            color: AppColor.greyColor,
                                             fontFamily:
                                                 DefaultTextStyle.of(context)
                                                     .style
@@ -156,12 +157,12 @@ class SavedPostsCard extends StatelessWidget {
                                 Expanded(
                                   flex: 2,
                                   child: Container(
-                                    color: Colors.transparent,
+                                    color: AppColor.transparent,
                                     child: Row(
                                       children: [
                                         Icon(
                                           Icons.location_on,
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                           size: 15,
                                         ),
                                         const SizedBox(width: 10),
@@ -169,7 +170,7 @@ class SavedPostsCard extends StatelessWidget {
                                           child: Text(
                                             "${post.township}  |  ${post.state}",
                                             style: TextStyle(
-                                              color: Color(0xff534F4F),
+                                              color: AppColor.greyColor,
                                               fontFamily:
                                                   DefaultTextStyle.of(context)
                                                       .style
@@ -186,19 +187,19 @@ class SavedPostsCard extends StatelessWidget {
                                 Expanded(
                                   flex: 2,
                                   child: Container(
-                                    color: Colors.transparent,
+                                    color: AppColor.transparent,
                                     child: Row(
                                       children: [
                                         Icon(
                                           Icons.phone,
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                           size: 15,
                                         ),
                                         const SizedBox(width: 10),
                                         Text(
                                           "${post.postOwner!.mobileNumber}",
                                           style: TextStyle(
-                                            color: Color(0xff534F4F),
+                                            color: AppColor.greyColor,
                                             fontFamily:
                                                 DefaultTextStyle.of(context)
                                                     .style
@@ -214,7 +215,7 @@ class SavedPostsCard extends StatelessWidget {
                                 Expanded(
                                   flex: 3,
                                   child: Container(
-                                    color: Colors.transparent,
+                                    color: AppColor.transparent,
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
@@ -225,7 +226,7 @@ class SavedPostsCard extends StatelessWidget {
                                           padding:
                                               const EdgeInsets.only(left: 2),
                                           child: Container(
-                                            color: Colors.transparent,
+                                            color: AppColor.transparent,
                                             child: Text(
                                               '${post.price} /m',
                                               style: TextStyle(
@@ -240,12 +241,12 @@ class SavedPostsCard extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          color: Colors.white,
+                                          color: AppColor.whiteColor,
                                           child: Container(
                                             height: 25,
                                             width: 60,
                                             decoration: BoxDecoration(
-                                              color: Colors.black,
+                                              color: AppColor.blackColor,
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
@@ -253,7 +254,7 @@ class SavedPostsCard extends StatelessWidget {
                                               child: Text(
                                                 "${post.tenants} left",
                                                 style: TextStyle(
-                                                  color: Color(0xffFFFFFF),
+                                                  color: AppColor.whiteColor,
                                                   fontFamily:
                                                       DefaultTextStyle.of(
                                                               context)
@@ -279,9 +280,8 @@ class SavedPostsCard extends StatelessWidget {
                 ),
               ),
             ).animate().shimmer(
-                  duration: Duration(seconds: 2),
-                  color: Color.fromARGB(20, 242, 173, 0),
-                ),
+                duration: Duration(seconds: 2),
+                color: AppColor.animationOrangeColor),
           ),
         ),
       ],

@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/picture.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -37,8 +38,8 @@ class ImageViewer extends StatelessWidget {
                   height: 50,
                   width: 50,
                   child: const CircularProgressIndicator(
-                    color: Color(0xffF2AE00),
-                    backgroundColor: Colors.white,
+                    color: AppColor.orangeColor,
+                    backgroundColor: AppColor.whiteColor,
                   ),
                 );
               },
@@ -49,7 +50,7 @@ class ImageViewer extends StatelessWidget {
               gaplessPlayback: false,
               enableRotation: false,
               backgroundDecoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColor.whiteColor,
               ),
               imageProvider: NetworkImage(images[index].url!),
             ),

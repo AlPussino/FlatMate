@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -35,11 +36,11 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: AppColor.whiteColor,
+        foregroundColor: AppColor.blackColor,
         automaticallyImplyLeading: true,
       ),
       body: Padding(
@@ -55,7 +56,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     "Forget password?",
                     style: TextStyle(
                       // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xffF2AE00),
+                      color: AppColor.orangeColor,
                       fontSize: 24,
                     ),
                   ),
@@ -63,7 +64,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     "I already know your brain sucks!",
                     style: TextStyle(
                       // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
@@ -74,9 +75,9 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         // fontFamily:
                         //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
@@ -89,25 +90,25 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                     ),
@@ -154,15 +155,16 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                           borderRadius: BorderRadius.circular(20)),
                       minimumSize: const Size(500, 50),
                       backgroundColor: _emailController.text.isNotEmpty
-                          ? const Color(0xffF2AE00)
-                          : Colors.grey,
+                          ? AppColor.orangeColor
+                          : AppColor.greyColor,
                     ),
                     child: isLoggingIn
-                        ? const CircularProgressIndicator(color: Colors.white)
+                        ? const CircularProgressIndicator(
+                            color: AppColor.whiteColor)
                         : Text(
                             'Confirm',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColor.whiteColor,
                               // fontFamily:
                               //     DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,

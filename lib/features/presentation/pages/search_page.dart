@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/search_pages/searched_user_card.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/shimmers.dart/search_loading.dart';
@@ -36,14 +37,14 @@ class _SearchPageState extends State<SearchPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.whiteColor,
         body: FutureBuilder(
           future: context.read<UserProvider>().searchUser(keyword: '.'),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: CircularProgressIndicator(
-                  color: Color(0xffF2AE00),
+                  color: AppColor.orangeColor,
                 ),
               );
             } else if (snapshot.hasError) {
@@ -62,8 +63,8 @@ class _SearchPageState extends State<SearchPage>
               child: CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    surfaceTintColor: Colors.white,
-                    backgroundColor: Colors.white,
+                    surfaceTintColor: AppColor.whiteColor,
+                    backgroundColor: AppColor.whiteColor,
                     pinned: true,
                     elevation: 1,
                     automaticallyImplyLeading: false,
@@ -96,9 +97,9 @@ class _SearchPageState extends State<SearchPage>
                               Expanded(
                                 flex: 4,
                                 child: TextFormField(
-                                  cursorColor: Color(0xffF2AE00),
+                                  cursorColor: AppColor.orangeColor,
                                   style: TextStyle(
-                                    color: Color(0xff2E2E2E),
+                                    color: AppColor.textColor,
                                     fontSize: 14,
                                   ),
                                   controller: _searchKeyController,
@@ -117,25 +118,25 @@ class _SearchPageState extends State<SearchPage>
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: BorderSide(
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                         ),
                                       ),
                                       disabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: BorderSide(
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                         ),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: BorderSide(
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                         ),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: BorderSide(
-                                          color: Color(0xff534F4F),
+                                          color: AppColor.greyColor,
                                         ),
                                       ),
                                       suffixIcon: _searchKeyController

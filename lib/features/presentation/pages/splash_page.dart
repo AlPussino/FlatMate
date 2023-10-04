@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/intro_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class SplashPage extends StatelessWidget {
                     textAlign: TextAlign.right,
                     text: TextSpan(
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColor.whiteColor,
                         fontSize: 48,
                         fontFamily: 'Dosis',
                       ),
@@ -72,7 +73,7 @@ class SplashPage extends StatelessWidget {
                         TextSpan(
                           text: 'Apartments and Hostels in Yangon',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: AppColor.whiteColor,
                             fontSize: 18,
                           ),
                         ),
@@ -87,7 +88,7 @@ class SplashPage extends StatelessWidget {
                   child: Visibility(
                     visible: false,
                     child: DottedBorder(
-                      color: const Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       dashPattern: const [20, 20],
                       borderType: BorderType.Circle,
                       child: SizedBox(
@@ -95,7 +96,7 @@ class SplashPage extends StatelessWidget {
                         height: 200,
                         child: Center(
                           child: DottedBorder(
-                            color: const Color(0xff534F4F),
+                            color: AppColor.greyColor,
                             dashPattern: const [20, 20],
                             borderType: BorderType.Circle,
                             child: SizedBox(
@@ -103,20 +104,13 @@ class SplashPage extends StatelessWidget {
                               height: 120,
                               child: Center(
                                 child: InkWell(
-                                  onTap: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   PageTransition(
-                                    //       type: PageTransitionType.rightToLeft,
-                                    //       child: IntroPage()),
-                                    // );
-                                  },
+                                  onTap: () {},
                                   child: const CircleAvatar(
-                                    backgroundColor: Colors.black,
+                                    backgroundColor: AppColor.blackColor,
                                     radius: 30,
                                     child: Icon(
                                       Icons.arrow_forward,
-                                      color: Colors.white,
+                                      color: AppColor.whiteColor,
                                     ),
                                   ),
                                 ),

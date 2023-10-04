@@ -1,19 +1,21 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:animations/animations.dart';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/home_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/profile_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/saved_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/search_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/bottom_navigation_bar_pages/bottom_navigation_bar_widgets/bottom_navigation_bar_item.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/bottom_navigation_bar_pages/bottom_navigation_bar_widgets/exit_comfirmation_dialog.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_create_post.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
 import '../providers/home_provider.dart';
 
 class BottomNavigationBarPage extends StatefulWidget {
@@ -39,7 +41,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
 
   @override
   void initState() {
-    bool isTokenExpired = context.read<AuthProvider>().isTokenExpired();
+    bool isTokenExpired = context.read<TokenProvider>().isTokenExpired();
     isTokenExpired ? context.read<UserProvider>().getUserInfo() : null;
     load();
 
@@ -82,47 +84,9 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
       onWillPop: () async {
         bool confirm = await showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            backgroundColor: Colors.white,
-            elevation: 0,
-            shadowColor: Colors.white,
-            title: Text(
-              'Are you sure you want to exit?',
-              style: TextStyle(
-                color: Color(0xff534F4F),
-                fontSize: 16,
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text(
-                  "NO",
-                  style: TextStyle(
-                    color: Color(0xffF2AE00),
-                    fontSize: 14,
-                  ),
-                ),
-                onPressed: () => Navigator.of(context).maybePop(false),
-              ),
-              TextButton(
-                child: Text(
-                  "YES",
-                  style: TextStyle(
-                    color: Color(0xffF2AE00),
-                    fontSize: 14,
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-              )
-            ],
-          ),
+          builder: (context) => ExitConfirmationDialog(),
         );
-        return confirm ? true : false;
+        return confirm;
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -142,97 +106,32 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           useLegacyColorScheme: true,
-          backgroundColor: Colors.white,
+          backgroundColor: AppColor.whiteColor,
           mouseCursor: MouseCursor.uncontrolled,
           currentIndex: currentIndex,
           elevation: 5,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: const Color(0xffF2AE00),
+          selectedItemColor: AppColor.orangeColor,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           enableFeedback: true,
           onTap: (newIndex) {
-            log(currentIndex.toString());
             context.read<HomeProvider>().changePage(newIndex);
             currentIndex != 0
                 ? context.read<PostProvider>().clearAllPostList()
                 : null;
           },
           items: [
-            BottomNavigationBarItem(
-              icon: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  currentIndex == 0
-                      ? const Color(0xffF2AE00)
-                      : const Color(0xff666666),
-                  BlendMode.srcIn,
-                ),
-                child: SvgPicture.asset(
-                  'assets/svgs/home_icon.svg',
-                ),
-              ),
-              label: 'Explore',
-              tooltip: 'Explore',
-            ),
-            BottomNavigationBarItem(
-              icon: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  currentIndex == 1
-                      ? const Color(0xffF2AE00)
-                      : const Color(0xff666666),
-                  BlendMode.srcIn,
-                ),
-                child: SvgPicture.asset(
-                  'assets/svgs/search_icon.svg',
-                ),
-              ),
-              label: 'Search',
-              tooltip: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  currentIndex == 2
-                      ? const Color(0xffF2AE00)
-                      : const Color(0xff666666),
-                  BlendMode.srcIn,
-                ),
-                child: SvgPicture.asset(
-                  'assets/svgs/add_icon.svg',
-                ),
-              ),
-              label: 'Post',
-              tooltip: 'Post',
-            ),
-            BottomNavigationBarItem(
-              icon: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  currentIndex == 3
-                      ? const Color(0xffF2AE00)
-                      : const Color(0xff666666),
-                  BlendMode.srcIn,
-                ),
-                child: SvgPicture.asset(
-                  'assets/svgs/love_icon.svg',
-                ),
-              ),
-              label: 'Saved',
-              tooltip: 'Saved',
-            ),
-            BottomNavigationBarItem(
-                icon: ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    currentIndex == 4
-                        ? const Color(0xffF2AE00)
-                        : const Color(0xff666666),
-                    BlendMode.srcIn,
-                  ),
-                  child: SvgPicture.asset(
-                    'assets/svgs/person_icon.svg',
-                  ),
-                ),
-                label: 'Profile',
-                tooltip: 'Profile'),
+            BottomNavigationBarItems.bottomNavigationBarItem(
+                currentIndex, 0, 'assets/svgs/home_icon.svg', 'Explore'),
+            BottomNavigationBarItems.bottomNavigationBarItem(
+                currentIndex, 1, 'assets/svgs/search_icon.svg', 'Search'),
+            BottomNavigationBarItems.bottomNavigationBarItem(
+                currentIndex, 2, 'assets/svgs/add_icon.svg', 'Post'),
+            BottomNavigationBarItems.bottomNavigationBarItem(
+                currentIndex, 3, 'assets/svgs/love_icon.svg', 'Saved'),
+            BottomNavigationBarItems.bottomNavigationBarItem(
+                currentIndex, 4, 'assets/svgs/person_icon.svg', 'Profile'),
           ],
         ),
       ),

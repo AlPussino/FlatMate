@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/core/init_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // make statusBar transparent
   SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+    const SystemUiOverlayStyle(statusBarColor: AppColor.transparent),
   );
 
   final pref = await SharedPreferences.getInstance();
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: 'Dosis',
             // colorScheme:
-            //     ColorScheme.fromSeed(seedColor: const Color(0xffFFFFFF)),
+            //     ColorScheme.fromSeed(seedColor: const AppColor.whiteColor),
             useMaterial3: true,
           ),
           home: const SplashPage(),

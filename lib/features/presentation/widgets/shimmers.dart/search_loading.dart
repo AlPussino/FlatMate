@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -11,7 +12,7 @@ class SearchLoadingShimmer extends StatelessWidget {
       child: Card(
         elevation: 0.1,
         child: Shimmer.fromColors(
-          baseColor: Colors.grey,
+          baseColor: AppColor.greyColor,
           highlightColor: Colors.yellow,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -32,13 +33,13 @@ class SearchLoadingShimmer extends StatelessWidget {
                           Container(
                             width: 250,
                             height: 20.0,
-                            color: Colors.white, // Shimmer effect
+                            color: AppColor.whiteColor, // Shimmer effect
                           ),
                           SizedBox(height: 8.0),
                           Container(
                             width: 150.0,
                             height: 12.0,
-                            color: Colors.white, // Shimmer effect
+                            color: AppColor.whiteColor, // Shimmer effect
                           ),
                         ],
                       ),

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,7 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                     "Create new Password",
                     style: TextStyle(
                       fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xffF2AE00),
+                      color: AppColor.orangeColor,
                       fontSize: 24,
                     ),
                   ),
@@ -63,7 +64,7 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                     "Let's create new password mother fucker",
                     style: TextStyle(
                       fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      color: Color(0xff534F4F),
+                      color: AppColor.greyColor,
                       fontSize: 14,
                     ),
                   ),
@@ -74,9 +75,9 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
-                    cursorColor: Color(0xffF2AE00),
+                    cursorColor: AppColor.orangeColor,
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         fontFamily:
                             DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
@@ -91,25 +92,25 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -122,7 +123,7 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                           _passwordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           size: 20,
                         ),
                       ),
@@ -154,7 +155,7 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                   const SizedBox(height: 20),
                   TextFormField(
                     style: TextStyle(
-                        color: Color(0xff2E2E2E),
+                        color: AppColor.textColor,
                         fontFamily:
                             DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
@@ -170,25 +171,25 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Color(0xff534F4F),
+                          color: AppColor.greyColor,
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -202,7 +203,7 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                           _confirmPasswordObscureText
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: const Color(0xff534F4F),
+                          color: AppColor.greyColor,
                           size: 20,
                         ),
                       ),
@@ -254,17 +255,16 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                               _passwordController.text ==
                                   _confirmPasswordController.text &&
                               _passwordController.text.length >= 8
-                          ? const Color(0xffF2AE00)
-                          : Colors.grey,
+                          ? AppColor.orangeColor
+                          : AppColor.greyColor,
                     ),
                     child: isLoggingIn
-                        ? const CircularProgressIndicator(color: Colors.white)
+                        ? const CircularProgressIndicator(
+                            color: AppColor.whiteColor)
                         : Text(
                             "Confirm",
                             style: TextStyle(
-                              color: Colors.white,
-                              fontFamily:
-                                  DefaultTextStyle.of(context).style.fontFamily,
+                              color: AppColor.whiteColor,
                               fontSize: 16,
                             ),
                           ),

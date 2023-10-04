@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/my_user.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MyProfileCard extends StatelessWidget {
         width: MediaQuery.sizeOf(context).width,
         child: InkWell(
           borderRadius: BorderRadius.circular(5),
-          splashColor: Color(0xffF2AE00).withOpacity(0.4),
+          splashColor: AppColor.orangeColor.withOpacity(0.4),
           onTap: () {
             Navigator.push(
               context,
@@ -45,7 +46,7 @@ class MyProfileCard extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 53,
-                      backgroundColor: Color(0xffF2AE00),
+                      backgroundColor: AppColor.orangeColor,
                       child: CachedNetworkImage(
                         imageUrl: myUser.profileUrl ??
                             "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
@@ -62,8 +63,8 @@ class MyProfileCard extends StatelessWidget {
                         ),
                         progressIndicatorBuilder: (context, url, progress) {
                           return const CircularProgressIndicator(
-                            color: Color(0xffF2AE00),
-                            backgroundColor: Colors.white,
+                            color: AppColor.orangeColor,
+                            backgroundColor: AppColor.whiteColor,
                           );
                         },
                         errorWidget: (context, url, error) => Container(
@@ -71,7 +72,7 @@ class MyProfileCard extends StatelessWidget {
                             height: 100,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Color(0xff534F4F),
+                              color: AppColor.greyColor,
                             ),
                             child: const Icon(Icons.error)),
                       ),
@@ -95,7 +96,7 @@ class MyProfileCard extends StatelessWidget {
                           Text(
                             myUser.mobileNumber ?? "",
                             style: TextStyle(
-                              color: Color(0xff534F4F),
+                              color: AppColor.greyColor,
                               fontFamily:
                                   DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,
@@ -104,7 +105,7 @@ class MyProfileCard extends StatelessWidget {
                           Text(
                             myUser.email ?? "",
                             style: TextStyle(
-                              color: Color(0xff534F4F),
+                              color: AppColor.greyColor,
                               fontFamily:
                                   DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,

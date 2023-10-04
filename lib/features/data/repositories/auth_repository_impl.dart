@@ -1,4 +1,4 @@
-import 'package:finding_apartments_yangon/features/data/datasources/auth_datasource.dart';
+import 'package:finding_apartments_yangon/features/data/datasources/datasource/auth_datasource.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/login_response.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/login_request_with_email.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/signup_request_with_email.dart';
@@ -18,9 +18,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<EmailOTPVerifyResponse?> emailOtpVerification(
+  Future<EmailOTPVerifyResponse?> verifyOtpForSignUp(
       EmailOTPVerifyRequest body) async {
-    return await _authDataSource.emailOtpVerification(body);
+    return await _authDataSource.verifyOtpForSignUp(body);
   }
 
   @override
@@ -39,9 +39,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<EmailOTPVerifyResponse?> forgetPasswordOtpVerification(
+  Future<EmailOTPVerifyResponse?> verifyOtpForForgetPassword(
       EmailOTPVerifyRequest body) async {
-    return await _authDataSource.forgetPasswordOtpVerification(body);
+    return await _authDataSource.verifyOtpForForgetPassword(body);
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/post_owner_profile_page.dart';
@@ -32,7 +33,7 @@ class FlatDescriptionPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: CircularProgressIndicator(
-              color: Color(0xffF2AE00),
+              color: AppColor.orangeColor,
             ),
           );
         } else if (snapshot.hasError) {
@@ -49,12 +50,12 @@ class FlatDescriptionPage extends StatelessWidget {
         Post? postDetail = context.watch<PostProvider>().postDetail;
         log(postDetail!.isSaved.toString());
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColor.whiteColor,
           appBar: AppBar(
             forceMaterialTransparency: true,
             elevation: 0,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
+            backgroundColor: AppColor.whiteColor,
+            foregroundColor: AppColor.blackColor,
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -73,7 +74,7 @@ class FlatDescriptionPage extends StatelessWidget {
                           postDetail.isSaved == false
                               ? Icons.favorite_border
                               : Icons.favorite,
-                          color: Color(0xffF2AE00),
+                          color: AppColor.orangeColor,
                         ),
                       )
                     : null,
@@ -94,8 +95,8 @@ class FlatDescriptionPage extends StatelessWidget {
                         child: Carousel(
                           autoScroll: false,
                           animationPageCurve: Curves.linear,
-                          activateIndicatorColor: const Color(0xffF2AE00),
-                          indicatorBarColor: Colors.transparent,
+                          activateIndicatorColor: AppColor.orangeColor,
+                          indicatorBarColor: AppColor.transparent,
                           isCircle: false,
                           indicatorHeight: 2,
                           indicatorWidth: 20,
@@ -121,7 +122,7 @@ class FlatDescriptionPage extends StatelessWidget {
                             Text(
                               "Location",
                               style: TextStyle(
-                                color: Color(0xff534F4F),
+                                color: AppColor.greyColor,
                                 fontSize: 14,
                               ),
                             ),
@@ -141,12 +142,12 @@ class FlatDescriptionPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const Divider(color: Colors.grey),
+                            const Divider(color: AppColor.greyColor),
                             const SizedBox(height: 20),
                             Text(
                               "Contract",
                               style: TextStyle(
-                                color: Color(0xff534F4F),
+                                color: AppColor.greyColor,
                                 fontSize: 14,
                               ),
                             ),
@@ -159,12 +160,12 @@ class FlatDescriptionPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const Divider(color: Colors.grey),
+                            const Divider(color: AppColor.greyColor),
                             const SizedBox(height: 20),
                             Text(
                               "Flat type",
                               style: TextStyle(
-                                color: Color(0xff534F4F),
+                                color: AppColor.greyColor,
                                 fontSize: 14,
                               ),
                             ),
@@ -183,12 +184,12 @@ class FlatDescriptionPage extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 10),
-                            const Divider(color: Colors.grey),
+                            const Divider(color: AppColor.greyColor),
                             const SizedBox(height: 20),
                             Text(
                               "Left",
                               style: TextStyle(
-                                color: Color(0xff534F4F),
+                                color: AppColor.greyColor,
                                 fontSize: 14,
                               ),
                             ),
@@ -201,12 +202,12 @@ class FlatDescriptionPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const Divider(color: Colors.grey),
+                            const Divider(color: AppColor.greyColor),
                             const SizedBox(height: 20),
                             Text(
                               "Description",
                               style: TextStyle(
-                                color: Color(0xff534F4F),
+                                color: AppColor.greyColor,
                                 fontSize: 14,
                               ),
                             ),
@@ -264,15 +265,16 @@ class FlatDescriptionPage extends StatelessWidget {
                                               const EdgeInsets.only(left: 8),
                                           child:
                                               const CircularProgressIndicator(
-                                            color: Color(0xffF2AE00),
-                                            backgroundColor: Colors.white,
+                                            color: AppColor.orangeColor,
+                                            backgroundColor:
+                                                AppColor.whiteColor,
                                           ),
                                         ),
                                         errorWidget: (context, url, error) =>
                                             Container(
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
-                                            color: Color(0xff534F4F)
+                                            color: AppColor.greyColor
                                                 .withOpacity(0.5),
                                           ),
                                           width: 100,
@@ -307,7 +309,7 @@ class FlatDescriptionPage extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Material(
-                  color: Colors.white,
+                  color: AppColor.whiteColor,
                   elevation: 10,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -335,7 +337,7 @@ class FlatDescriptionPage extends StatelessWidget {
                                     height: 50,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
-                                        color: Colors.black),
+                                        color: AppColor.blackColor),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -346,7 +348,7 @@ class FlatDescriptionPage extends StatelessWidget {
                                           child: Text(
                                             "Call now",
                                             style: TextStyle(
-                                              color: Color(0xffFFFFFF),
+                                              color: AppColor.whiteColor,
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -357,10 +359,11 @@ class FlatDescriptionPage extends StatelessWidget {
                                               const EdgeInsets.only(right: 6),
                                           child: CircleAvatar(
                                             radius: 19,
-                                            backgroundColor: Color(0xffF2AE00),
+                                            backgroundColor:
+                                                AppColor.orangeColor,
                                             child: Icon(
                                               Icons.phone,
-                                              color: Colors.black,
+                                              color: AppColor.blackColor,
                                             ),
                                           ),
                                         )
@@ -385,7 +388,7 @@ class FlatDescriptionPage extends StatelessWidget {
                                     height: 50,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
-                                        color: Colors.black),
+                                        color: AppColor.blackColor),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -396,7 +399,7 @@ class FlatDescriptionPage extends StatelessWidget {
                                           child: Text(
                                             "Delete",
                                             style: TextStyle(
-                                              color: Color(0xffFFFFFF),
+                                              color: AppColor.whiteColor,
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -407,10 +410,11 @@ class FlatDescriptionPage extends StatelessWidget {
                                               const EdgeInsets.only(right: 6),
                                           child: CircleAvatar(
                                             radius: 19,
-                                            backgroundColor: Color(0xffF2AE00),
+                                            backgroundColor:
+                                                AppColor.orangeColor,
                                             child: Icon(
                                               Icons.delete,
-                                              color: Colors.black,
+                                              color: AppColor.blackColor,
                                             ),
                                           ),
                                         )

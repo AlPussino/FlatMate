@@ -1,3 +1,4 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -27,8 +28,8 @@ class _ViewProfileImagePageState extends State<ViewProfileImagePage> {
               maxScale: PhotoViewComputedScale.contained * 4,
               loadingBuilder: (context, event) {
                 return const CircularProgressIndicator(
-                  color: Color(0xffF2AE00),
-                  backgroundColor: Colors.white,
+                  color: AppColor.orangeColor,
+                  backgroundColor: AppColor.whiteColor,
                 );
               },
               errorBuilder: (context, error, stackTrace) {
@@ -38,7 +39,7 @@ class _ViewProfileImagePageState extends State<ViewProfileImagePage> {
               gaplessPlayback: true,
               enableRotation: false,
               backgroundDecoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColor.whiteColor,
               ),
               imageProvider: NetworkImage(widget.imgUrl),
             ),
