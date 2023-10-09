@@ -97,7 +97,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   Future<LoginResponse?> convertHttpRespToLoginResp(http.Response resp) async {
     final loginResponse = LoginResponse.fromJson(json.decode(resp.body));
     await tokenDataSource.saveToken(loginResponse.token);
-    await tokenDataSource.saveRefreshToken(loginResponse.refreshToken ?? '');
+    await tokenDataSource.saveRefreshToken(loginResponse.refreshToken!);
     await tokenDataSource
         .saveTokenExpireDate(loginResponse.expiration.toString());
     log("This is token : ${loginResponse.token}");

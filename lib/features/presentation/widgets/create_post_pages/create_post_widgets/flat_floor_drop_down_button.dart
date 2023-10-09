@@ -9,6 +9,7 @@ class FlatFloorDropDownButton extends StatefulWidget {
       _FlatFloorDropDownButtonState();
 }
 
+FocusNode floorFocusNode = FocusNode();
 String selectedFloorValue = '0';
 List<String> floorOptions =
     List.generate(21, (index) => (index + 0).toString());
@@ -27,6 +28,7 @@ class _FlatFloorDropDownButtonState extends State<FlatFloorDropDownButton> {
       child: Padding(
         padding: const EdgeInsets.only(left: 10),
         child: DropdownButton<String>(
+          focusNode: floorFocusNode,
           underline: SizedBox(),
           isDense: false,
           menuMaxHeight: 400,
@@ -40,8 +42,12 @@ class _FlatFloorDropDownButtonState extends State<FlatFloorDropDownButton> {
           value: selectedFloorValue,
           onChanged: (newValue) {
             setState(() {
+              floorFocusNode.unfocus();
               selectedFloorValue = newValue!;
             });
+          },
+          onTap: () {
+            floorFocusNode.unfocus();
           },
           items: floorOptions.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(

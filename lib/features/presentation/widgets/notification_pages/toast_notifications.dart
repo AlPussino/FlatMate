@@ -9,7 +9,7 @@ class ToastNotificatoins {
           height: 40,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: AppColor.whiteColor,
               borderRadius: BorderRadius.circular(7)),
           margin: const EdgeInsets.all(16),
           child: Align(
@@ -19,7 +19,7 @@ class ToastNotificatoins {
               child: Text(
                 errorMessage,
                 style: TextStyle(
-                  color: Color.fromARGB(255, 252, 49, 49),
+                  color: AppColor.redColor,
                   fontFamily: 'Dosis',
                   fontSize: 14,
                 ),
@@ -40,7 +40,7 @@ class ToastNotificatoins {
           height: 40,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: AppColor.whiteColor,
               borderRadius: BorderRadius.circular(7)),
           margin: const EdgeInsets.all(16),
           child: Align(
@@ -50,7 +50,7 @@ class ToastNotificatoins {
               child: Text(
                 successMessage,
                 style: TextStyle(
-                  color: Color.fromARGB(255, 6, 136, 62),
+                  color: AppColor.greenColor,
                   fontFamily: 'Dosis',
                   fontSize: 14,
                 ),

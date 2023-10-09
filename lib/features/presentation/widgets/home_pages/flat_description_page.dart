@@ -239,48 +239,41 @@ class FlatDescriptionPage extends StatelessWidget {
                                     ),
                                     contentPadding: const EdgeInsets.only(
                                         top: 5, bottom: 5),
-                                    leading: Hero(
-                                      tag: 'ProfileImageTag1',
-                                      child: CachedNetworkImage(
-                                        imageUrl: postDetail
-                                                    .postOwner!.profileUrl !=
-                                                null
-                                            ? postDetail.postOwner!.profileUrl!
-                                            : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          width: 100,
-                                          height: 100,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.contain,
-                                            ),
+                                    leading: CachedNetworkImage(
+                                      imageUrl: postDetail
+                                                  .postOwner!.profileUrl !=
+                                              null
+                                          ? postDetail.postOwner!.profileUrl!
+                                          : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                        width: 100,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.contain,
                                           ),
                                         ),
-                                        placeholder: (context, url) => Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8),
-                                          child:
-                                              const CircularProgressIndicator(
-                                            color: AppColor.orangeColor,
-                                            backgroundColor:
-                                                AppColor.whiteColor,
-                                          ),
+                                      ),
+                                      placeholder: (context, url) => Padding(
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: const CircularProgressIndicator(
+                                          color: AppColor.orangeColor,
+                                          backgroundColor: AppColor.whiteColor,
                                         ),
-                                        errorWidget: (context, url, error) =>
-                                            Container(
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: AppColor.greyColor
-                                                .withOpacity(0.5),
-                                          ),
-                                          width: 100,
-                                          height: 100,
-                                          child: const Icon(Icons.error),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: AppColor.greyColor
+                                              .withOpacity(0.5),
                                         ),
+                                        width: 100,
+                                        height: 100,
+                                        child: const Icon(Icons.error),
                                       ),
                                     ),
                                     title: Text(

@@ -13,7 +13,7 @@ class SearchLoadingShimmer extends StatelessWidget {
         elevation: 0.1,
         child: Shimmer.fromColors(
           baseColor: AppColor.greyColor,
-          highlightColor: Colors.yellow,
+          highlightColor: AppColor.whiteColor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

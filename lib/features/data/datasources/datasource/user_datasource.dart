@@ -7,7 +7,7 @@ import 'package:finding_apartments_yangon/features/data/models/responses/email_r
 
 abstract class UserDataSource {
   Future<MyUser?> getUserInfo();
-  Future<MyUser?> refreshToken(Function call);
+  // Future<MyUser?> refreshToken(Function call);
   Future<MyUser?> changeUserName({required String userName});
   Future<EmailResponse?> changePassword(
       {required String currentPassword, required String newPassword});

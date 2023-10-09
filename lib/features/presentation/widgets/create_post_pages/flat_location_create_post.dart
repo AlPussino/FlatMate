@@ -52,7 +52,6 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
           "Flat Location",
           style: TextStyle(
             color: Color(0xff000000),
-            // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontSize: 20,
           ),
         ),
@@ -102,7 +101,6 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                           _additionAddressController.text.isNotEmpty
                       ? AppColor.orangeColor
                       : AppColor.greyColor,
-                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 20,
                   fontWeight: FontWeight.w500),
             ),
@@ -120,7 +118,6 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                 "Flat location",
                 style: TextStyle(
                   color: AppColor.greyColor,
-                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),
               ),
@@ -132,7 +129,6 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                     "State / Division",
                     style: TextStyle(
                       color: AppColor.greyColor,
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 12,
                     ),
                   ),
@@ -155,8 +151,6 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
                           color: AppColor.greyColor,
-                          // fontFamily:
-                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 12,
                         ),
                         value: selectedRegion,
@@ -188,7 +182,6 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                     "Township",
                     style: TextStyle(
                       color: AppColor.greyColor,
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 12,
                     ),
                   ),
@@ -211,8 +204,6 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                         borderRadius: BorderRadius.circular(10),
                         style: TextStyle(
                           color: AppColor.greyColor,
-                          // fontFamily:
-                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 12,
                         ),
                         value: selectedTownship,

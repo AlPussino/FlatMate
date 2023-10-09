@@ -4,8 +4,10 @@ import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/other_user_post_card.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/notification_pages/toast_notifications.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/view_profile_image_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -124,36 +126,52 @@ class PostOwnerProfilePage extends StatelessWidget {
                                       ]),
                                 ],
                               ),
-                              CachedNetworkImage(
-                                imageUrl: otherUser.profileUrl != null
-                                    ? otherUser.profileUrl!
-                                    : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
-                                imageBuilder: (context, imageProvider) =>
-                                    Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: imageProvider,
-                                      fit: BoxFit.cover,
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: ViewProfileImagePage(
+                                        imgUrl: otherUser.profileUrl != null
+                                            ? otherUser.profileUrl ?? ""
+                                            : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(
-                                  color: AppColor.orangeColor,
-                                  backgroundColor: AppColor.whiteColor,
-                                ),
-                                errorWidget: (context, url, error) => Container(
+                                  );
+                                },
+                                child: CachedNetworkImage(
+                                  imageUrl: otherUser.profileUrl != null
+                                      ? otherUser.profileUrl!
+                                      : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
                                     width: 100,
                                     height: 100,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color:
-                                          AppColor.greyColor.withOpacity(0.5),
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    child: const Icon(Icons.error)),
+                                  ),
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(
+                                    color: AppColor.orangeColor,
+                                    backgroundColor: AppColor.whiteColor,
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      Container(
+                                          width: 100,
+                                          height: 100,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: AppColor.greyColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          child: const Icon(Icons.error)),
+                                ),
                               ),
                             ],
                           ),

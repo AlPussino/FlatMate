@@ -8,6 +8,7 @@ class FlatTypeDropDownButton extends StatefulWidget {
   State<FlatTypeDropDownButton> createState() => _FlatTypeDropDownButtonState();
 }
 
+FocusNode houseTypeFocusNode = FocusNode();
 String selectedHouseTypeValue = 'CONDO';
 List<String> houseTypeOptions = [
   'CONDO',
@@ -32,6 +33,7 @@ class _FlatTypeDropDownButtonState extends State<FlatTypeDropDownButton> {
       child: Padding(
         padding: const EdgeInsets.only(left: 10),
         child: DropdownButton(
+          focusNode: houseTypeFocusNode,
           isExpanded: true,
           underline: SizedBox(),
           alignment: Alignment.centerLeft,
@@ -45,6 +47,9 @@ class _FlatTypeDropDownButtonState extends State<FlatTypeDropDownButton> {
             setState(() {
               selectedHouseTypeValue = newValue!;
             });
+          },
+          onTap: () {
+            houseTypeFocusNode.unfocus();
           },
           items: houseTypeOptions.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(

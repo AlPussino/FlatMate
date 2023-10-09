@@ -81,8 +81,8 @@ class PostProvider with ChangeNotifier {
 
   Future<AllPosts?> getAllPosts(int? pageCursor) async {
     final data = await _postUseCase.getAllPosts(pageCursor);
-
-    allPostList!.addAll(data!.postList!);
+    data!.postList!.shuffle();
+    allPostList!.addAll(data.postList!);
     _cursor = data.cursor!;
     _hasNext = data.hasNext!;
     log("has next post : ${_hasNext}");

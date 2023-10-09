@@ -25,7 +25,6 @@ class EditProfileCard extends StatelessWidget {
                   imgUrl: myUser.profileUrl != null
                       ? myUser.profileUrl ?? ""
                       : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
-                  imgTag: "ProfileImageTag",
                 ),
               ),
             );
@@ -33,38 +32,35 @@ class EditProfileCard extends StatelessWidget {
           child: Stack(
             alignment: Alignment.bottomRight,
             children: [
-              Hero(
-                tag: 'ProfileImageTag',
-                child: CachedNetworkImage(
-                  imageUrl: myUser.profileUrl != null
-                      ? myUser.profileUrl ?? ""
-                      : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
-                  imageBuilder: (context, imageProvider) => Container(
+              CachedNetworkImage(
+                imageUrl: myUser.profileUrl != null
+                    ? myUser.profileUrl ?? ""
+                    : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
+                imageBuilder: (context, imageProvider) => Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(
+                    color: AppColor.orangeColor,
+                    backgroundColor: AppColor.whiteColor,
+                  ),
+                ),
+                errorWidget: (context, url, error) => Container(
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                      ),
+                      color: AppColor.greyColor.withOpacity(0.5),
                     ),
-                  ),
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(
-                      color: AppColor.orangeColor,
-                      backgroundColor: AppColor.whiteColor,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.greyColor.withOpacity(0.5),
-                      ),
-                      child: Icon(Icons.error)),
-                ),
+                    child: Icon(Icons.error)),
               ),
               Positioned(
                 right: -10,

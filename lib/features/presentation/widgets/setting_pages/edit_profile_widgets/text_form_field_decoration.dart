@@ -5,7 +5,7 @@ class TextFormFieldDecoration {
   static textFormFieldDecoration(String hint) {
     return InputDecoration(
       filled: true,
-      fillColor: Color.fromARGB(255, 255, 255, 255),
+      fillColor: AppColor.whiteColor,
       contentPadding: EdgeInsets.all(20),
       hintText: hint,
       hintStyle: TextStyle(

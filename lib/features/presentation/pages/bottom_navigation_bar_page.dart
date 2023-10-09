@@ -7,10 +7,7 @@ import 'package:finding_apartments_yangon/features/presentation/pages/profile_pa
 import 'package:finding_apartments_yangon/features/presentation/pages/saved_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/search_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
-import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
-import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/bottom_navigation_bar_pages/bottom_navigation_bar_widgets/bottom_navigation_bar_item.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/bottom_navigation_bar_pages/bottom_navigation_bar_widgets/exit_comfirmation_dialog.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_create_post.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
@@ -41,10 +38,6 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
 
   @override
   void initState() {
-    bool isTokenExpired = context.read<TokenProvider>().isTokenExpired();
-    isTokenExpired ? context.read<UserProvider>().getUserInfo() : null;
-    load();
-
     _subscription = InternetConnection().onStatusChange.listen((status) {
       setState(() {
         _connectionStatus = status;
@@ -65,10 +58,6 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
     super.initState();
   }
 
-  Future<void> load() async {
-    await context.read<PostProvider>().loadMyanmarData();
-  }
-
   @override
   void dispose() {
     _subscription.cancel();
@@ -82,11 +71,23 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
 
     return WillPopScope(
       onWillPop: () async {
-        bool confirm = await showDialog(
-          context: context,
-          builder: (context) => ExitConfirmationDialog(),
-        );
-        return confirm;
+        // bool confirm = await showDialog(
+        //   context: context,
+        //   builder: (context) => ExitConfirmationDialog(),
+        // );
+        if (currentIndex == 0) {
+          bool? result = context.read<HomeProvider>().isListAtTop();
+          log(result.toString());
+
+          if (result == true) {
+            return true;
+          } else {
+            context.read<HomeProvider>().scrollUpToTheStart();
+            return false;
+          }
+        } else {
+          return true;
+        }
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -119,7 +120,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
             context.read<HomeProvider>().changePage(newIndex);
             currentIndex != 0
                 ? context.read<PostProvider>().clearAllPostList()
-                : null;
+                : scrollUpAndRefreshPosts();
           },
           items: [
             BottomNavigationBarItems.bottomNavigationBarItem(
@@ -136,5 +137,10 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
         ),
       ),
     );
+  }
+
+  void scrollUpAndRefreshPosts() {
+    context.read<HomeProvider>().scrollUpToTheStart();
+    context.read<PostProvider>().refreshPosts();
   }
 }

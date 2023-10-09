@@ -22,7 +22,6 @@ class SettingPage extends StatelessWidget {
           "Setting",
           style: TextStyle(
             color: Color(0xff000000),
-            // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
@@ -49,7 +48,6 @@ class SettingPage extends StatelessWidget {
               "Account",
               style: TextStyle(
                 color: AppColor.greyColor,
-                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
             ),
@@ -76,7 +74,6 @@ class SettingPage extends StatelessWidget {
                     "Edit profile",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -111,7 +108,6 @@ class SettingPage extends StatelessWidget {
                     "Change password",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -130,7 +126,6 @@ class SettingPage extends StatelessWidget {
               "About",
               style: TextStyle(
                 color: AppColor.greyColor,
-                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
             ),
@@ -149,7 +144,6 @@ class SettingPage extends StatelessWidget {
                     "Terms and Conditions",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -176,7 +170,6 @@ class SettingPage extends StatelessWidget {
                     "Privacy and Policy",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -203,7 +196,6 @@ class SettingPage extends StatelessWidget {
                     "About app",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -222,7 +214,6 @@ class SettingPage extends StatelessWidget {
               "Contact",
               style: TextStyle(
                 color: AppColor.greyColor,
-                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
             ),
@@ -241,7 +232,6 @@ class SettingPage extends StatelessWidget {
                     "Developers contact",
                     style: TextStyle(
                       color: Color(0xff000000),
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       fontSize: 16,
                     ),
                   ),
@@ -260,7 +250,6 @@ class SettingPage extends StatelessWidget {
               "Log out",
               style: TextStyle(
                 color: AppColor.greyColor,
-                // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                 fontSize: 14,
               ),
             ),
@@ -286,7 +275,6 @@ class SettingPage extends StatelessWidget {
                 "Log out",
                 style: TextStyle(
                   color: AppColor.whiteColor,
-                  // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                   fontSize: 16,
                 ),
               ),

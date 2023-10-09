@@ -11,7 +11,6 @@ import 'package:finding_apartments_yangon/features/data/models/other_user.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_owner_list.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/data/models/responses/email_response.dart';
-import 'package:finding_apartments_yangon/features/data/models/responses/login_response.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/notification_pages/toast_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -24,25 +23,16 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<MyUser?> getUserInfo() async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
     final token = tokenDataSource.getToken();
     try {
       final response = await client.get(Uri.parse(aboutMeUrl),
           headers: authHeaders(token: token!));
 
       if (response.statusCode == HttpStatus.ok) {
-        log("Token : ${tokenDataSource.getToken()}");
-        log("Refresh Token : ${tokenDataSource.getRefreshToken()}");
-        log("Token Expired Date : ${tokenDataSource.getTokenExpireDate()}");
-        log("User info : ${response.body}");
         return MyUser.fromJson(json.decode(response.body));
       } else if (response.statusCode == HttpStatus.unauthorized) {
-        final user = await refreshToken(getUserInfo);
-
-        if (user != null) {
-          return user;
-        } else {
-          return null;
-        }
+        return null;
       } else {
         throw Exception(response.body);
       }
@@ -57,38 +47,8 @@ class UserDataSourceImpl implements UserDataSource {
   }
 
   @override
-  Future<MyUser?> refreshToken(Function call) async {
-    final refreshToken = tokenDataSource.getRefreshToken();
-    try {
-      final response = await client.get(
-        Uri.parse("$refreshTokenUrl$refreshToken"),
-      );
-
-      if (response.statusCode == HttpStatus.ok) {
-        final loginResp = LoginResponse.fromJson(json.decode(response.body));
-        await tokenDataSource.saveToken(loginResp.token);
-        await tokenDataSource.saveRefreshToken(loginResp.refreshToken ?? '');
-        await tokenDataSource
-            .saveTokenExpireDate(loginResp.expiration.toString());
-        final MyUser user = await call();
-        return user;
-      } else if (response.statusCode == HttpStatus.badRequest) {
-        return null;
-      } else {
-        return null;
-      }
-    } on SocketException {
-      ToastNotificatoins.showError(AppString.networkError);
-      return null;
-    } catch (e) {
-      log(e.toString());
-      ToastNotificatoins.showError('err : $e');
-      return null;
-    }
-  }
-
-  @override
   Future<MyUser?> changeUserName({required String userName}) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
     try {
       final token = tokenDataSource.getToken();
       final response = await client.put(Uri.parse(changeUserNameUrl),
@@ -115,6 +75,8 @@ class UserDataSourceImpl implements UserDataSource {
   @override
   Future<EmailResponse?> changePassword(
       {required String currentPassword, required String newPassword}) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     try {
       final token = tokenDataSource.getToken();
       final response = await client.put(Uri.parse(changePasswordUrl),
@@ -143,6 +105,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<MyUser?> changeMobileNumber({required String mobileNumber}) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     try {
       final token = tokenDataSource.getToken();
       final response = await client.put(Uri.parse(changeMobileNumberUrl),
@@ -168,6 +132,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<String?> uploadProfile(File file, String? oldImageUrl) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
 
     Map<String, String> headers = {
@@ -205,7 +171,7 @@ class UserDataSourceImpl implements UserDataSource {
       if (response.statusCode == HttpStatus.ok) {
         ToastNotificatoins.showSuccess("Profile image upload success");
         final responseJson = jsonDecode(await response.stream.bytesToString());
-        return responseJson;
+        return responseJson.toString();
       } else {
         return null;
       }
@@ -221,6 +187,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<MyUser?> addSocialContact(AddSocialContactRequest body) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     try {
       final token = tokenDataSource.getToken();
       final response = await client.post(Uri.parse(addSocialContactUrl),
@@ -246,6 +214,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<MyUser?> removeSocialContact({required String id}) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     try {
       final token = tokenDataSource.getToken();
       final response = await client.delete(
@@ -271,7 +241,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<OtherUser?> aboutOtherUser({required int userId}) async {
-    log("UserId : $userId");
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
     try {
       final response = await client.get(
@@ -297,6 +268,8 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<PostOwnerList?> searchUser({required String keyword}) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
     try {
       final response = await client.get(

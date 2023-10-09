@@ -4,7 +4,6 @@ import 'package:finding_apartments_yangon/features/data/models/my_user.dart';
 import 'package:finding_apartments_yangon/features/data/models/post_list.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
-import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_profile_card.dart';
 import 'package:flutter/material.dart';
@@ -12,28 +11,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
-import '../widgets/log_in_pages/login_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isTokenExpired = context.read<TokenProvider>().isTokenExpired();
-
-    if (isTokenExpired) {
-      final user = context.read<UserProvider>().getUserInfo();
-      user.then((value) {
-        if (value == null) {
-          log("value : $value");
-          Navigator.pushReplacement(
-            context,
-            PageTransition(
-                type: PageTransitionType.leftToRight, child: LoginPage()),
-          );
-        }
-      });
-    }
     Future<MyUser?> fetchMyUserInfo() async {
       final myData = await context.read<UserProvider>().getUserInfo();
       return myData;
@@ -75,6 +58,7 @@ class ProfilePage extends StatelessWidget {
               child: CustomScrollView(
                 slivers: [
                   SliverAppBar(
+                    clipBehavior: Clip.antiAlias,
                     backgroundColor: AppColor.whiteColor,
                     surfaceTintColor: AppColor.whiteColor,
                     pinned: true,

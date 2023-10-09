@@ -40,4 +40,9 @@ class TokenUseCaseImpl implements TokenUseCase {
   bool isAuthenticated() {
     return tokenRepository.isAuthenticated();
   }
+
+  @override
+  bool isTokenExpired() {
+    return tokenRepository.isTokenExpired();
+  }
 }

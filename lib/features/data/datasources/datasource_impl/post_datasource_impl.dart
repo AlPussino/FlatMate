@@ -38,6 +38,8 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<Post?> createPost(List<File> imageFiles, Post body) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
 
     Map<String, String> headers = {
@@ -92,6 +94,8 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<PostList?> getMyPosts() async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
     try {
       final response = await client.get(
@@ -117,6 +121,8 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<Post?> getPostDetail(int postId) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
     try {
       final response = await client.get(
@@ -142,6 +148,8 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<bool?> deleteMyPost(int postId) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
     try {
       final response = await client.delete(
@@ -168,6 +176,8 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<AllPosts?> getAllPosts(int? pageCursor) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
     try {
       final response = await client.get(
@@ -195,6 +205,8 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<Post?> saveOrUnsavePost(int postId, bool save) async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
     try {
       final response = await client.post(
@@ -233,6 +245,8 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<PostList?> getSavedPosts() async {
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
     final token = tokenDataSource.getToken();
     try {
       final response = await client.get(
@@ -241,7 +255,14 @@ class PostDataSourceImpl implements PostDataSource {
       );
 
       if (response.statusCode == HttpStatus.ok) {
+        log("OK savelist");
         return PostList.fromJson(response.body);
+      } else if (response.statusCode == HttpStatus.badRequest) {
+        log('bad req');
+        return null;
+      } else if (response.statusCode == HttpStatus.unauthorized) {
+        log('Unauth');
+        return null;
       } else {
         ToastNotificatoins.showError('Loading my saved posts error');
         return null;

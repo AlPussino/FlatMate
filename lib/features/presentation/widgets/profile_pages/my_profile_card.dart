@@ -32,6 +32,7 @@ class MyProfileCard extends StatelessWidget {
             );
           },
           child: Card(
+            color: AppColor.cardBackgroundColor,
             elevation: 0.5,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
@@ -61,10 +62,20 @@ class MyProfileCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        progressIndicatorBuilder: (context, url, progress) {
-                          return const CircularProgressIndicator(
-                            color: AppColor.orangeColor,
-                            backgroundColor: AppColor.whiteColor,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) {
+                          double? progress = downloadProgress.progress;
+
+                          return Center(
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 4,
+                                color: AppColor.orangeColor,
+                                value: progress,
+                              ),
+                            ),
                           );
                         },
                         errorWidget: (context, url, error) => Container(

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/add_social_contact_request.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
@@ -30,7 +29,7 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
   }
 
   String selectedSocialContact = '';
-  List<String> socialContactsListAll = ["FACEBOOK", "INSTAGRAM", "TELEGRAM"];
+  // List<String> socialContactsListAll = ["FACEBOOK", "INSTAGRAM", "TELEGRAM"];
 
   List<String> socialContactsListForEdit = [];
 
@@ -96,7 +95,6 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                         onChanged: (newValue) {
                           setState(() {
                             selectedSocialContact = newValue!;
-                            log(selectedSocialContact);
                           });
                         },
                         items: widget.body == null
@@ -123,19 +121,13 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
               SizedBox(height: 20),
               TextFormField(
                   cursorColor: AppColor.orangeColor,
-                  style: TextStyle(
-                      color: AppColor.textColor,
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      fontSize: 14),
+                  style: TextStyle(color: AppColor.textColor, fontSize: 14),
                   controller: _accountNameController,
                   decoration: _buildDeco('Account name')),
               SizedBox(height: 20),
               TextFormField(
                   cursorColor: AppColor.orangeColor,
-                  style: TextStyle(
-                      color: AppColor.textColor,
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      fontSize: 14),
+                  style: TextStyle(color: AppColor.textColor, fontSize: 14),
                   controller: _accountLinkController,
                   decoration: _buildDeco('profile link')),
             ],
@@ -155,7 +147,7 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
             )),
         TextButton(
           onPressed: () async {
-            Navigator.pop(context, true);
+            Navigator.pop(context);
             showDialog(
                 context: context,
                 useRootNavigator: true,
@@ -192,9 +184,8 @@ class _ShowUpAddSocialViewState extends State<ShowUpAddSocialView> {
                     contactType: selectedSocialContact));
 
             if (result != null) {
-              // _accountNameController.clear();
-              // _accountLinkController.clear();
-              Navigator.pop(context, true);
+              log("Result => ${result.toString()}");
+              Navigator.pop(context);
             } else {}
           },
           child: Text(

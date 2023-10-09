@@ -40,4 +40,9 @@ class TokenRepositoryImpl implements TokenRepository {
   bool isAuthenticated() {
     return tokenDataSource.isAuthenticated();
   }
+
+  @override
+  bool isTokenExpired() {
+    return tokenDataSource.isTokenExpired();
+  }
 }

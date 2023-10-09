@@ -18,8 +18,7 @@ class LoginResponse {
       expiration: json['expiration'] != null
           ? DateTime.parse(json['expiration'])
           : null,
-      refreshToken:
-          json['refresh_token'] != null ? json['refresh_token'] : null,
+      refreshToken: json['refresh_token'],
     );
   }
 
@@ -28,7 +27,7 @@ class LoginResponse {
       'token': token,
       'type': type!,
       'expiration': expiration!.toIso8601String(),
-      'refresh_token': refreshToken!,
+      'refresh_token': refreshToken,
     };
   }
 }

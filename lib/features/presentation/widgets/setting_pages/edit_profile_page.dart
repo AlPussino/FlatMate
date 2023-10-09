@@ -1,38 +1,19 @@
 import 'dart:developer';
 import 'package:finding_apartments_yangon/configs/colors.dart';
-import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_widgets/adding_social_account_dialog.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_widgets/edit_profile_card.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_widgets/full_name_list_tile.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_widgets/phone_number_list_tile.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_widgets/social_account_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '../../providers/user_provider.dart';
-import '../log_in_pages/login_page.dart';
 
 class EditProfilePage extends StatelessWidget {
   EditProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isTokenExpired = context.read<TokenProvider>().isTokenExpired();
-    if (isTokenExpired) {
-      final user = context.read<UserProvider>().getUserInfo();
-      user.then(
-        (value) {
-          if (value == null) {
-            Navigator.pushReplacement(
-              context,
-              PageTransition(
-                  type: PageTransitionType.leftToRight, child: LoginPage()),
-            );
-          }
-        },
-      );
-    }
-
     List<String> socialContactsOptions = [
       'FACEBOOK',
       'INSTAGRAM',

@@ -2,16 +2,12 @@ import 'dart:developer';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
-import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/main_post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:overlay_support/overlay_support.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '../providers/user_provider.dart';
-import '../widgets/log_in_pages/login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,6 +28,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    context.read<HomeProvider>().saveController(_scrollController);
     _scrollController.addListener(_onScroll);
   }
 
@@ -62,21 +59,6 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    bool isTokenExpired = context.read<TokenProvider>().isTokenExpired();
-
-    if (isTokenExpired) {
-      final user = context.read<UserProvider>().getUserInfo();
-      user.then((value) {
-        if (value == null) {
-          log("value : $value");
-          Navigator.pushReplacement(
-            context,
-            PageTransition(
-                type: PageTransitionType.leftToRight, child: LoginPage()),
-          );
-        }
-      });
-    }
 
     return RefreshIndicator(
       color: AppColor.orangeColor,
@@ -128,7 +110,7 @@ class _HomePageState extends State<HomePage>
                       title: InkWell(
                         splashColor: AppColor.transparent,
                         onTap: () {
-                          toast("Fuck You");
+                          context.read<HomeProvider>().scrollUpToTheStart();
                         },
                         child: Text(
                           "Find Your Stay",

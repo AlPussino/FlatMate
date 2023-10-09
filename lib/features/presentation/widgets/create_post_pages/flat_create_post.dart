@@ -1,6 +1,7 @@
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/create_post_widgets/flat_floor_drop_down_button.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/create_post_widgets/flat_type_drop_down_button.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_location_create_post.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class FlatCreatePost extends StatefulWidget {
   const FlatCreatePost({super.key});
@@ -50,8 +52,13 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
     super.dispose();
   }
 
+  Future<void> loadMyanmarData() async {
+    await context.read<PostProvider>().loadMyanmarData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    loadMyanmarData();
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(

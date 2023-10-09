@@ -6,14 +6,22 @@ class TokenProvider with ChangeNotifier {
 
   TokenProvider(this._tokenDataSource);
 
+  // bool isTokenExpired() {
+  //   try {
+  //     String tokenExpireDate = _tokenDataSource.getTokenExpireDate();
+  //     DateTime expirationDateTime = DateTime.parse(tokenExpireDate);
+  //     DateTime currentDateTime = DateTime.now().toUtc();
+  //     log("Token expired => ${expirationDateTime.isBefore(currentDateTime)}");
+  //     log("Cur time : $currentDateTime");
+  //     log("Exp time : $expirationDateTime");
+  //     return expirationDateTime.isBefore(currentDateTime);
+  //   } catch (e) {
+  //     return true;
+  //   }
+  // }
+
   bool isTokenExpired() {
-    try {
-      String tokenExpireDate = _tokenDataSource.getTokenExpireDate();
-      DateTime expirationDateTime = DateTime.parse(tokenExpireDate);
-      DateTime currentDateTime = DateTime.now();
-      return currentDateTime.isAfter(expirationDateTime);
-    } catch (e) {
-      return true;
-    }
+    final data = _tokenDataSource.isTokenExpired();
+    return data;
   }
 }

@@ -35,7 +35,7 @@ MultiProvider initApp(
   http.Client client = http.Client();
 
   ///Token
-  TokenDataSource tokenDataSource = TokenDataSourceImpl(pref);
+  TokenDataSource tokenDataSource = TokenDataSourceImpl(client, pref);
 
   ///Authentication
   AuthDataSource authDataSource =

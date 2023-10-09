@@ -6,4 +6,5 @@ abstract class TokenUseCase {
   Future<void> saveTokenExpiredDate(String tokenExpiredDate);
   String? getTokenExpiredDate();
   bool isAuthenticated();
+  bool isTokenExpired();
 }

@@ -49,16 +49,20 @@ class Utils {
           borderRadius: BorderRadius.circular(5),
           child: CachedNetworkImage(
             imageUrl: img,
-            progressIndicatorBuilder: (context, url, progress) => Center(
-              child: SizedBox(
-                height: 30,
-                width: 30,
-                child: CircularProgressIndicator(
-                  color: AppColor.orangeColor,
-                  backgroundColor: AppColor.whiteColor,
+            progressIndicatorBuilder: (context, url, downloadProgress) {
+              double? progress = downloadProgress.progress;
+              return Center(
+                child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 4,
+                    color: AppColor.orangeColor,
+                    value: progress,
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
             errorWidget: (context, url, error) => const Icon(Icons.error),
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
