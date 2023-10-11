@@ -33,9 +33,8 @@ class EditProfileCard extends StatelessWidget {
             alignment: Alignment.bottomRight,
             children: [
               CachedNetworkImage(
-                imageUrl: myUser.profileUrl != null
-                    ? myUser.profileUrl ?? ""
-                    : "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
+                imageUrl: myUser.profileUrl ??
+                    "https://img.freepik.com/free-vector/mysterious-gangster-character_23-2148483453.jpg?w=740&t=st=1694579352~exp=1694579952~hmac=fb3ade8ee793f7b89b94ff12fa773da23e827fb82279da7c36ffd3eb3033d98f",
                 imageBuilder: (context, imageProvider) => Container(
                   width: 100,
                   height: 100,

@@ -24,7 +24,12 @@ class _ViewProfileImagePageState extends State<ViewProfileImagePage> {
         child: Center(
           child: PhotoView(
             onTapDown: (context, details, controllerValue) {
-              log(controllerValue.scale.toString());
+              log(controllerValue.position.toString());
+            },
+            onScaleEnd: (context, details, controllerValue) {
+              controllerValue.position == Offset(0.0, 0.0)
+                  ? Navigator.pop(context)
+                  : null;
             },
             minScale: PhotoViewComputedScale.contained,
             maxScale: PhotoViewComputedScale.covered,
@@ -37,7 +42,7 @@ class _ViewProfileImagePageState extends State<ViewProfileImagePage> {
             errorBuilder: (context, error, stackTrace) {
               return const Icon(Icons.error);
             },
-            enablePanAlways: true,
+            enablePanAlways: false,
             gaplessPlayback: true,
             enableRotation: false,
             backgroundDecoration: const BoxDecoration(

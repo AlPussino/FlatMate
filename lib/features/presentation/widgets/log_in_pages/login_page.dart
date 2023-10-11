@@ -3,6 +3,7 @@ import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/requests/login_request_with_email.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/bottom_navigation_bar_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/forget_password_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/sign_up_pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    log('what the fuck');
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 30, right: 24, left: 24),
@@ -359,6 +359,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void handleButtonClick() async {
+    String deviceId = await context.read<TokenProvider>().getDeviceId();
+    log("DeviceId : $deviceId");
     if (!isButtonDisabled) {
       setState(() {
         isButtonDisabled = true;
@@ -373,10 +375,13 @@ class _LoginPageState extends State<LoginPage> {
         if (_emailController.text.isNotEmpty &&
             _passwordController.text.isNotEmpty) {
           _passwordFocusNode.unfocus();
-          final result = await context.read<AuthProvider>().logInWithEmail(
-              LogInRequestWithEmail(
-                  email: _emailController.text,
-                  password: _passwordController.text));
+          final result = await context
+              .read<AuthProvider>()
+              .logInWithEmail(LogInRequestWithEmail(
+                email: _emailController.text,
+                password: _passwordController.text,
+                deviceId: deviceId,
+              ));
 
           if (result != null) {
             setState(() {

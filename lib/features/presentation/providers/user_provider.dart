@@ -107,8 +107,6 @@ class UserProvider with ChangeNotifier {
         ToastNotificatoins.showError(
             'Your image is greater than 20 MB, \nPlease Select another image!');
       }
-      // _profileImageStr = base64Encode(File(finalImg.path).readAsBytesSync());
-      // String? url = await _userUseCase.uploadProfile(File(finalImg.path),);
 
       String? url =
           await _userUseCase.uploadProfile(File(finalImg.path), oldImageUrl);

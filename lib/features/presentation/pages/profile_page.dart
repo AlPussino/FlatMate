@@ -111,47 +111,51 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   myPosts != null
-                      ? SliverList.builder(
-                          addAutomaticKeepAlives: false,
-                          addRepaintBoundaries: false,
-                          itemCount: myPosts.posts!.length,
-                          itemBuilder: (context, index) {
-                            final post = myPosts.posts![index];
-                            final imgList = [];
-                            post.pictures!
-                                .map(
-                                  (e) => imgList.add(e.url!),
-                                )
-                                .toList();
+                      ? myPosts.posts!.isNotEmpty
+                          ? SliverList.builder(
+                              addAutomaticKeepAlives: false,
+                              addRepaintBoundaries: false,
+                              itemCount: myPosts.posts!.length,
+                              itemBuilder: (context, index) {
+                                final post = myPosts.posts![index];
+                                final imgList = [];
+                                post.pictures!
+                                    .map(
+                                      (e) => imgList.add(e.url!),
+                                    )
+                                    .toList();
 
-                            return MyPostsCard(post: post, imgList: imgList);
-                          },
-                        )
-                      : SliverToBoxAdapter(
-                          child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Center(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "No Posts",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                return MyPostsCard(
+                                    post: post, imgList: imgList);
+                              },
+                            )
+                          : SliverToBoxAdapter(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Center(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "No Posts",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Dude , I'm sure You don't know how to post You stupid Fucker",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    "Dude , I'm sure You don't know how to post You stupid Fucker",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
+                            )
+                      : SliverToBoxAdapter(),
                 ],
               ),
             );

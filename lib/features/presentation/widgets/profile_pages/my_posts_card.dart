@@ -4,6 +4,7 @@ import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card_widgets/pop_up_menu_button_to_edit_post.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -134,58 +135,7 @@ class MyPostsCard extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  PopupMenuButton<String>(
-                                    child: Icon(Icons.more_vert),
-                                    onSelected: (String choice) {
-                                      switch (choice) {
-                                        case 'Delete':
-                                          context
-                                              .read<PostProvider>()
-                                              .deleteMyPost(post.id!);
-                                          break;
-                                      }
-                                    },
-                                    itemBuilder: (BuildContext context) {
-                                      return <PopupMenuEntry<String>>[
-                                        PopupMenuItem<String>(
-                                          value: 'Delete',
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Icon(Icons.delete),
-                                              SizedBox(width: 10),
-                                              Text('Delete'),
-                                            ],
-                                          ),
-                                        ),
-                                        PopupMenuItem<String>(
-                                          value: 'Edit',
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Icon(Icons.edit),
-                                              SizedBox(width: 10),
-                                              Text('Edit'),
-                                            ],
-                                          ),
-                                        ),
-                                        PopupMenuItem<String>(
-                                          value: 'Left',
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Icon(Icons.people),
-                                              SizedBox(width: 10),
-                                              Text('Tenants left'),
-                                            ],
-                                          ),
-                                        ),
-                                      ];
-                                    },
-                                  ),
+                                  PopUpMenuButtonToEditPost(post: post),
                                 ],
                               ),
                             ),
