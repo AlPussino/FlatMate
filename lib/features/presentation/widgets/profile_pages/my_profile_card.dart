@@ -33,7 +33,7 @@ class MyProfileCard extends StatelessWidget {
           },
           child: Card(
             color: AppColor.cardBackgroundColor,
-            elevation: 0.5,
+            elevation: 0.2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),

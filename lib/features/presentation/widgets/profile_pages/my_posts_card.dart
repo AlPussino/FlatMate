@@ -2,12 +2,10 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
-import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/flat_description_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card_widgets/pop_up_menu_button_to_edit_post.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
 
 class MyPostsCard extends StatelessWidget {
   final Post post;
@@ -51,7 +49,7 @@ class MyPostsCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
             ),
             elevation: 0,
-            color: Color.fromARGB(255, 250, 250, 250),
+            color: AppColor.whiteColor,
             child: Row(
               children: [
                 Expanded(

@@ -19,6 +19,7 @@ class SavedPostsCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           child: InkWell(
+            // radius: 10,
             borderRadius: BorderRadius.circular(5),
             splashColor: AppColor.orangeColor,
             onTap: () {
@@ -46,7 +47,7 @@ class SavedPostsCard extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
-                color: AppColor.cardBackgroundColor,
+                color: AppColor.whiteColor,
                 child: Row(
                   children: [
                     Expanded(
@@ -54,27 +55,6 @@ class SavedPostsCard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
                           child: Center(
-                            // child: Carousel(
-                            //   autoScroll: true,
-                            //   animationPageCurve: Curves.linear,
-                            //   activateIndicatorColor: const AppColor.orangeColor,
-                            //   indicatorBarColor: AppColor.transparent,
-                            //   isCircle: false,
-                            //   indicatorHeight: 0,
-                            //   indicatorWidth: 0,
-                            //   autoScrollDuration: Duration(seconds: 5),
-                            //   items: [
-                            //     ...widget.post.pictures!
-                            //         .map(
-                            //           (e) => Utils.headerImagesSlide(
-                            //               true,
-                            //               widget.post.pictures!,
-                            //               e.url ?? "",
-                            //               context),
-                            //         )
-                            //         .toList(),
-                            //   ],
-                            // ),
                             child: CachedNetworkImage(
                               imageUrl: imgList[0],
                               imageBuilder: (context, imageProvider) =>

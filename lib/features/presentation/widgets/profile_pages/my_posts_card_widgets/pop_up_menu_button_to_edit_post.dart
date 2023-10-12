@@ -1,4 +1,3 @@
-import 'package:customizable_counter/customizable_counter.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card_widgets/bottom_sheet_to_edit_tenants.dart';
 import 'package:flutter/material.dart';

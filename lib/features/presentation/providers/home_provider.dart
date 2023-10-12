@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class HomeProvider with ChangeNotifier {
   int currentIdx = 0;
-  ScrollController? _scrollController;
-  ScrollController get scrollController => _scrollController!;
+  ScrollController _scrollController = ScrollController();
+  ScrollController get scrollController => _scrollController;
 
   void changePage(int idx) {
     currentIdx = idx;
@@ -11,7 +11,7 @@ class HomeProvider with ChangeNotifier {
   }
 
   void scrollUpToTheStart() {
-    _scrollController!.animateTo(
+    _scrollController.animateTo(
       0,
       duration: Duration(milliseconds: 500),
       curve: Curves.easeInOut,
@@ -23,6 +23,6 @@ class HomeProvider with ChangeNotifier {
   }
 
   bool isListAtTop() {
-    return _scrollController!.position.atEdge ? true : false;
+    return _scrollController.position.atEdge ? true : false;
   }
 }

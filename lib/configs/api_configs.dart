@@ -39,6 +39,7 @@ class ApiConfigs {
   static const String getAllPostsUrl = "$baseUrl/api/post?cursor=";
   static const String savePostUrl = "$baseUrl/api/post/";
   static const String getSavedPostsUrl = "$baseUrl/api/post/me/save";
+  static const String editTenantsUrl = "$baseUrl/api/post/me/";
 }
 
 ///
@@ -78,3 +79,4 @@ const deleteMyPostUrl = ApiConfigs.deleteMyPostUrl;
 const getAllPostsUrl = ApiConfigs.getAllPostsUrl;
 const savePostUrl = ApiConfigs.savePostUrl;
 const getSavedPostsUrl = ApiConfigs.getSavedPostsUrl;
+const editTenantsUrl = ApiConfigs.editTenantsUrl;

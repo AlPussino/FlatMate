@@ -86,27 +86,27 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     focusNode: _emailFocusNode,
                     decoration: InputDecoration(
                       hintText: 'email',
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: EdgeInsets.all(5),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(
                           color: AppColor.greyColor,
                         ),
                       ),
                       disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(
                           color: AppColor.greyColor,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(
                           color: AppColor.greyColor,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(
                           color: AppColor.greyColor,
                         ),

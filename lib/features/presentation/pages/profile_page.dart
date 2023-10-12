@@ -1,7 +1,5 @@
 import 'dart:developer';
 import 'package:finding_apartments_yangon/configs/colors.dart';
-import 'package:finding_apartments_yangon/features/data/models/my_user.dart';
-import 'package:finding_apartments_yangon/features/data/models/post_list.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card.dart';
@@ -17,21 +15,16 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<MyUser?> fetchMyUserInfo() async {
+    Future<void> fetchMyUserInfoAnfMyPosts() async {
       final myData = await context.read<UserProvider>().getUserInfo();
-      return myData;
-    }
-
-    Future<PostList?> fetchMyPosts() async {
-      final myPosts = await context.read<PostProvider>().getMyPosts();
-      return myPosts;
+      myData != null ? await context.read<PostProvider>().getMyPosts() : null;
     }
 
     return Scaffold(
       body: Scaffold(
         backgroundColor: AppColor.whiteColor,
         body: FutureBuilder(
-          future: Future.wait([fetchMyUserInfo(), fetchMyPosts()]),
+          future: fetchMyUserInfoAnfMyPosts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(

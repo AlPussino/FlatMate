@@ -46,12 +46,11 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColor.whiteColor,
-        foregroundColor: AppColor.blackColor,
         automaticallyImplyLeading: true,
         title: Text(
           "Flat Location",
           style: TextStyle(
-            color: Color(0xff000000),
+            color: AppColor.blackColor,
             fontSize: 20,
           ),
         ),

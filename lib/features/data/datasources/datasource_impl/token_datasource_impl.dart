@@ -56,6 +56,9 @@ class TokenDataSourceImpl implements TokenDataSource {
       String tokenExpiredDate = getTokenExpireDate();
       DateTime expirationDateTime = DateTime.parse(tokenExpiredDate);
       DateTime currentDateTime = DateTime.now().toUtc();
+      log("Token is expired : ${expirationDateTime.isBefore(currentDateTime)}");
+      log("Expired Date : $expirationDateTime");
+      log("Current Data : $currentDateTime");
       return expirationDateTime.isBefore(currentDateTime);
     } catch (e) {
       return true;
@@ -71,12 +74,16 @@ class TokenDataSourceImpl implements TokenDataSource {
       );
 
       if (response.statusCode == HttpStatus.ok) {
+        log("refresh toke ok");
         return convertHttpRespToLoginResp(response);
       } else if (response.statusCode == HttpStatus.badRequest) {
         log('bad request error');
         return null;
       } else if (response.statusCode == HttpStatus.unauthorized) {
         log('Unauthorize error');
+        return null;
+      } else if (response.statusCode == HttpStatus.notFound) {
+        log('Token not found error');
         return null;
       } else {
         ToastNotificatoins.showError('refreshing token error');
@@ -108,7 +115,7 @@ class TokenDataSourceImpl implements TokenDataSource {
     final expiredResult = isTokenExpired();
     if (expiredResult == true) {
       final refreshResult = await refreshToken();
-      log(refreshResult.toString());
+
       if (refreshResult != null) {
         log("success refresh token");
       } else {

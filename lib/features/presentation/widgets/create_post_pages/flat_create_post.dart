@@ -1,4 +1,5 @@
 import 'package:finding_apartments_yangon/configs/colors.dart';
+import 'package:finding_apartments_yangon/configs/strings.dart';
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
@@ -132,7 +133,43 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
           children: [
             MultiImagePickerView(
               draggable: true,
-              addButtonTitle: '+',
+              addButtonTitle: '+ add photos',
+              initialContainerBuilder: (context, pickerCallback) {
+                return Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: InkWell(
+                    onTap: () {
+                      pickerCallback.call();
+                    },
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          // color: AppColor.orangeColor,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        color: AppColor.dividerColor,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.image,
+                            color: AppColor.greyColor,
+                          ),
+                          Text(
+                            AppString.addImageToPost,
+                            style: TextStyle(color: AppColor.greyColor),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
               addMoreButtonTitle: '+',
               controller: _selectImagesController,
               onChange: (list) {

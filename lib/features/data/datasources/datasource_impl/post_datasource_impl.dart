@@ -255,16 +255,52 @@ class PostDataSourceImpl implements PostDataSource {
       );
 
       if (response.statusCode == HttpStatus.ok) {
-        log("OK savelist");
         return PostList.fromJson(response.body);
       } else if (response.statusCode == HttpStatus.badRequest) {
-        log('bad req');
+        log('bad req error');
         return null;
       } else if (response.statusCode == HttpStatus.unauthorized) {
-        log('Unauth');
+        log('authorization error');
         return null;
       } else {
         ToastNotificatoins.showError('Loading my saved posts error');
+        return null;
+      }
+    } on SocketException {
+      ToastNotificatoins.showError(AppString.networkError);
+      return null;
+    } catch (e) {
+      log(e.toString());
+      ToastNotificatoins.showError('err : $e');
+      return null;
+    }
+  }
+
+  @override
+  Future<Post?> editTenants(int postId, int tenants) async {
+    log("EWo");
+    log(postId.toString());
+    log(tenants.toString());
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
+    final token = tokenDataSource.getToken();
+    try {
+      final response = await client.put(
+        Uri.parse("$editTenantsUrl$postId?tenant=$tenants"),
+        headers: authHeaders(token: token!),
+      );
+
+      if (response.statusCode == HttpStatus.ok) {
+        ToastNotificatoins.showSuccess("Tenants edit success");
+        return Post.fromJson(jsonDecode(response.body));
+      } else if (response.statusCode == HttpStatus.badRequest) {
+        log('bad req error');
+        return null;
+      } else if (response.statusCode == HttpStatus.unauthorized) {
+        log('authorization error');
+        return null;
+      } else {
+        ToastNotificatoins.showError('Editing tenants error');
         return null;
       }
     } on SocketException {

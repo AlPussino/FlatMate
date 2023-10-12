@@ -133,4 +133,12 @@ class PostProvider with ChangeNotifier {
     notifyListeners();
     return data!;
   }
+
+  Future<Post?> editTenants(int postId, int tenants) async {
+    final data = await _postUseCase.editTenants(postId, tenants);
+    _postDetail = data;
+    getMyPosts();
+    notifyListeners();
+    return data;
+  }
 }

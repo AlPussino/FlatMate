@@ -16,6 +16,8 @@ import 'package:finding_apartments_yangon/features/domain/usecases/usecase_impl/
 import 'package:finding_apartments_yangon/features/domain/usecases/usecase_impl/user_usecase_impl.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/token_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/ui_providers/log_in_providers/log_in_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/ui_providers/profile_providers/edit_post_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,6 +63,10 @@ MultiProvider initApp(
       ChangeNotifierProvider(create: (_) => UserProvider(userUseCase)),
       ChangeNotifierProvider(create: (_) => PostProvider(postUseCase)),
       ChangeNotifierProvider(create: (_) => TokenProvider(tokenDataSource)),
+
+      // UI providers
+      ChangeNotifierProvider(create: (_) => EditPostProvider()),
+      ChangeNotifierProvider(create: (_) => LogInProvider()),
     ],
     child: child,
   );

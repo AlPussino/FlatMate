@@ -177,7 +177,7 @@ class PostOwnerProfilePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           const Divider(
-                            color: AppColor.greyColor,
+                            color: AppColor.dividerColor,
                           ),
                         ],
                       ),

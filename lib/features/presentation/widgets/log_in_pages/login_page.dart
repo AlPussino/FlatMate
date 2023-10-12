@@ -57,7 +57,6 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Sign in",
                     style: TextStyle(
-                      //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                       color: AppColor.orangeColor,
                       fontSize: 24,
                     ),
@@ -65,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Hi welcome back, you've been missed mother fucker",
                     style: TextStyle(
-                      //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                       color: AppColor.greyColor,
                       fontSize: 14,
                     ),
@@ -78,10 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   TextFormField(
                     cursorColor: AppColor.orangeColor,
-                    style: TextStyle(
-                        color: AppColor.textColor,
-                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
-                        fontSize: 14),
+                    style: TextStyle(color: AppColor.textColor, fontSize: 14),
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     focusNode: _emailFocusNode,
@@ -130,10 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (value!.isEmpty) {
                         return 'Please enter Email';
                       }
-                      // if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
-                      //     .hasMatch(value)) {
-                      //   return 'Please enter a valid email address.';
-                      // }
+
                       return null;
                     },
                     onSaved: (value) {
@@ -144,10 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
                   TextFormField(
                     cursorColor: AppColor.orangeColor,
-                    style: TextStyle(
-                        color: AppColor.textColor,
-                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
-                        fontSize: 14),
+                    style: TextStyle(color: AppColor.textColor, fontSize: 14),
                     textInputAction: TextInputAction.done,
                     controller: _passwordController,
                     obscureText: _passwordObscureText,
@@ -242,8 +231,6 @@ class _LoginPageState extends State<LoginPage> {
                             'Sign in',
                             style: TextStyle(
                               color: AppColor.whiteColor,
-                              // fontFamily:
-                              //     DefaultTextStyle.of(context).style.fontFamily,
                               fontSize: 16,
                             ),
                           ),
@@ -262,7 +249,6 @@ class _LoginPageState extends State<LoginPage> {
                       "Forget password?",
                       style: TextStyle(
                         color: AppColor.orangeColor,
-                        //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14,
                       ),
                     ),
@@ -279,8 +265,6 @@ class _LoginPageState extends State<LoginPage> {
                         "Or Sign in with Google",
                         style: TextStyle(
                           color: AppColor.greyColor,
-                          // fontFamily:
-                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                       ),
@@ -315,8 +299,6 @@ class _LoginPageState extends State<LoginPage> {
                         "Don't have an account?",
                         style: TextStyle(
                           color: AppColor.greyColor,
-                          // fontFamily:
-                          //     DefaultTextStyle.of(context).style.fontFamily,
                           fontSize: 14,
                         ),
                       ),
@@ -333,8 +315,6 @@ class _LoginPageState extends State<LoginPage> {
                           "Sign up",
                           style: TextStyle(
                             color: AppColor.orangeColor,
-                            // fontFamily:
-                            //     DefaultTextStyle.of(context).style.fontFamily,
                             fontSize: 16,
                           ),
                         ),

@@ -8,4 +8,7 @@ class AppString {
 
   /// Network
   static const String networkError = 'Network Error';
+
+  // UI
+  static const String addImageToPost = 'pick at least one photo to post';
 }

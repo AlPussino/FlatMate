@@ -1,5 +1,5 @@
 import 'package:finding_apartments_yangon/configs/colors.dart';
-import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page_1.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_introduction/animated_introduction.dart';
 import 'package:page_transition/page_transition.dart';
@@ -61,7 +61,7 @@ class IntroPage extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               PageTransition(
-                  type: PageTransitionType.rightToLeft, child: LoginPage()),
+                  type: PageTransitionType.rightToLeft, child: LogInPage()),
             );
           },
         ),

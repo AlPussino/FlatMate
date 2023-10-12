@@ -48,7 +48,7 @@ class OtherUserPostCard extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
-                color: AppColor.cardBackgroundColor,
+                color: AppColor.whiteColor,
                 child: Row(
                   children: [
                     Expanded(

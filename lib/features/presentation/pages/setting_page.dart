@@ -1,10 +1,10 @@
 import 'package:finding_apartments_yangon/configs/colors.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page_1.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/change_password_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../widgets/log_in_pages/login_page.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
@@ -120,7 +120,7 @@ class SettingPage extends StatelessWidget {
               ),
             ),
             Divider(
-              color: AppColor.greyColor,
+              color: AppColor.dividerColor,
             ),
             Text(
               "About",
@@ -208,7 +208,7 @@ class SettingPage extends StatelessWidget {
               ),
             ),
             Divider(
-              color: AppColor.greyColor,
+              color: AppColor.dividerColor,
             ),
             Text(
               "Contact",
@@ -244,7 +244,7 @@ class SettingPage extends StatelessWidget {
               ),
             ),
             Divider(
-              color: AppColor.greyColor,
+              color: AppColor.dividerColor,
             ),
             Text(
               "Log out",
@@ -262,7 +262,7 @@ class SettingPage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   PageTransition(
-                      type: PageTransitionType.rightToLeft, child: LoginPage()),
+                      type: PageTransitionType.rightToLeft, child: LogInPage()),
                 );
               },
               style: ElevatedButton.styleFrom(

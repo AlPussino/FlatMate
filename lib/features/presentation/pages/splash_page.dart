@@ -15,17 +15,17 @@ class SplashPage extends StatelessWidget {
     Future.delayed(
       const Duration(seconds: 2),
       () async {
-        final nav = Navigator.of(context);
-        final success = await context.read<AuthProvider>().isAuthenticated();
-        log('isAuthenticated : $success');
-        if (success) {
-          nav.pushReplacement(
+        final navigator = Navigator.of(context);
+        final result = await context.read<AuthProvider>().isAuthenticated();
+        log('isAuthenticated : $result');
+        if (result) {
+          navigator.pushReplacement(
             MaterialPageRoute(
                 settings: const RouteSettings(name: 'home'),
                 builder: (context) => const BottomNavigationBarPage()),
           );
         } else {
-          nav.pushReplacement(
+          navigator.pushReplacement(
             MaterialPageRoute(
                 settings: const RouteSettings(name: 'home'),
                 builder: (context) => IntroPage()),

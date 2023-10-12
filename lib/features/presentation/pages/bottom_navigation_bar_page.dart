@@ -7,6 +7,7 @@ import 'package:finding_apartments_yangon/features/presentation/pages/profile_pa
 import 'package:finding_apartments_yangon/features/presentation/pages/saved_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/search_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/ui_providers/log_in_providers/log_in_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/bottom_navigation_bar_pages/bottom_navigation_bar_widgets/bottom_navigation_bar_item.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_create_post.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
 
   @override
   void initState() {
+    context.read<LogInProvider>().restartLogInProvider();
     _subscription = InternetConnection().onStatusChange.listen((status) {
       setState(() {
         _connectionStatus = status;

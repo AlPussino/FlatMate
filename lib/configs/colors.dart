@@ -19,4 +19,5 @@ class AppColor {
   static const Color textColor = Color(0xff2E2E2E);
   static const Color cardBackgroundColor =
       const Color.fromARGB(255, 250, 250, 250);
+  static const Color dividerColor = Color.fromARGB(34, 83, 79, 79);
 }

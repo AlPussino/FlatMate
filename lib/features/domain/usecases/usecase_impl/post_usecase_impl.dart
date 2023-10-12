@@ -50,4 +50,9 @@ class PostUseCaseImpl implements PostUseCase {
   Future<PostList?> getSavedPosts() async {
     return await _postRepository.getSavedPosts();
   }
+
+  @override
+  Future<Post?> editTenants(int postId, int tenants) async {
+    return await _postRepository.editTenants(postId, tenants);
+  }
 }

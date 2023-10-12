@@ -4,6 +4,7 @@ import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/post_owner_profile_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card_widgets/bottom_sheet_to_edit_tenants.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/utils/utils_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slider/carousel.dart';
@@ -72,8 +73,8 @@ class FlatDescriptionPage extends StatelessWidget {
                         },
                         icon: Icon(
                           postDetail.isSaved == false
-                              ? Icons.favorite_border
-                              : Icons.favorite,
+                              ? Icons.book_outlined
+                              : Icons.book,
                           color: AppColor.orangeColor,
                         ),
                       )
@@ -134,15 +135,16 @@ class FlatDescriptionPage extends StatelessWidget {
                                 fontSize: 14,
                               ),
                             ),
+                            const SizedBox(height: 10),
                             Text(
                               "${postDetail.additional}",
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                fontSize: 16,
+                                fontSize: 12,
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const Divider(color: AppColor.greyColor),
+                            const Divider(color: AppColor.dividerColor),
                             const SizedBox(height: 20),
                             Text(
                               "Contract",
@@ -156,11 +158,11 @@ class FlatDescriptionPage extends StatelessWidget {
                               postDetail.contract!,
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                fontSize: 16,
+                                fontSize: 12,
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const Divider(color: AppColor.greyColor),
+                            const Divider(color: AppColor.dividerColor),
                             const SizedBox(height: 20),
                             Text(
                               "Flat type",
@@ -184,7 +186,7 @@ class FlatDescriptionPage extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 10),
-                            const Divider(color: AppColor.greyColor),
+                            const Divider(color: AppColor.dividerColor),
                             const SizedBox(height: 20),
                             Text(
                               "Left",
@@ -202,7 +204,7 @@ class FlatDescriptionPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const Divider(color: AppColor.greyColor),
+                            const Divider(color: AppColor.dividerColor),
                             const SizedBox(height: 20),
                             Text(
                               "Description",
@@ -216,7 +218,7 @@ class FlatDescriptionPage extends StatelessWidget {
                               "${postDetail.description}",
                               style: TextStyle(
                                 color: Color(0xff000000),
-                                fontSize: 16,
+                                fontSize: 12,
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -257,13 +259,22 @@ class FlatDescriptionPage extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      placeholder: (context, url) => Padding(
-                                        padding: const EdgeInsets.only(left: 8),
-                                        child: const CircularProgressIndicator(
-                                          color: AppColor.orangeColor,
-                                          backgroundColor: AppColor.whiteColor,
-                                        ),
-                                      ),
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) {
+                                        final progress =
+                                            downloadProgress.progress;
+                                        return Container(
+                                          width: 100,
+                                          height: 100,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: CircularProgressIndicator(
+                                            color: AppColor.orangeColor,
+                                            value: progress,
+                                          ),
+                                        );
+                                      },
                                       errorWidget: (context, url, error) =>
                                           Container(
                                         decoration: BoxDecoration(
@@ -366,15 +377,9 @@ class FlatDescriptionPage extends StatelessWidget {
                                 )
                               : InkWell(
                                   onTap: () async {
-                                    final result = await context
-                                        .read<PostProvider>()
-                                        .deleteMyPost(id);
-                                    if (result == true) {
-                                      log("FDP : $result");
-                                      Navigator.pop(context);
-                                    } else {
-                                      null;
-                                    }
+                                    BottomSheetToEditTenants
+                                        .bottomSheetToEditTenants(
+                                            context, postDetail);
                                   },
                                   child: Container(
                                     width: 120,
@@ -390,7 +395,7 @@ class FlatDescriptionPage extends StatelessWidget {
                                           padding:
                                               const EdgeInsets.only(left: 20),
                                           child: Text(
-                                            "Delete",
+                                            "Edit",
                                             style: TextStyle(
                                               color: AppColor.whiteColor,
                                               fontSize: 12,
@@ -406,7 +411,7 @@ class FlatDescriptionPage extends StatelessWidget {
                                             backgroundColor:
                                                 AppColor.orangeColor,
                                             child: Icon(
-                                              Icons.delete,
+                                              Icons.people,
                                               color: AppColor.blackColor,
                                             ),
                                           ),

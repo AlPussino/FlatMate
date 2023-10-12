@@ -150,21 +150,26 @@ class _HomePageState extends State<HomePage>
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                DefaultTextStyle(
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontFamily: 'Dosis',
-                                    fontSize: 14,
-                                    color: AppColor.blackColor,
-                                  ),
-                                  child: AnimatedTextKit(
-                                    isRepeatingAnimation: false,
-                                    animatedTexts: [
-                                      RotateAnimatedText(
-                                          "Fuck , You've scrolled down to the end "),
-                                    ],
-                                  ),
-                                ),
+                                // DefaultTextStyle(
+                                //   textAlign: TextAlign.start,
+                                //   style: TextStyle(
+                                //     fontFamily: 'Dosis',
+                                //     fontSize: 14,
+                                //     color: AppColor.blackColor,
+                                //   ),
+                                //   child: AnimatedTextKit(
+                                //     isRepeatingAnimation: false,
+                                //     animatedTexts: [
+                                //       RotateAnimatedText(
+                                //           "Fuck , You've scrolled down to the end "),
+                                //     ],
+                                //   ),
+                                // ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 20, top: 20),
+                                  child: Text("Harder, Faster and Deeper ! "),
+                                )
                               ],
                             ),
                           ),

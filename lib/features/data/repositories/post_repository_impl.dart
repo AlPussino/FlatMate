@@ -50,4 +50,9 @@ class PostRepositoryImpl implements PostRepository {
   Future<PostList?> getSavedPosts() async {
     return await postDataSource.getSavedPosts();
   }
+
+  @override
+  Future<Post?> editTenants(int postId, int tenants) async {
+    return await postDataSource.editTenants(postId, tenants);
+  }
 }
