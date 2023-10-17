@@ -44,16 +44,17 @@ class PostProvider with ChangeNotifier {
   }
 
   Future<Post?> uploadImagesAndCreatePost(
-      Iterable<ImageFile> images, Post body) async {
+      bool isEdit, int? postId, Iterable<ImageFile> images, Post body) async {
     for (var imageFile in images) {
       files.add(File(imageFile.path!));
     }
-    print(files.length);
-    final data = await _postUseCase.createPost(files, body);
+
+    final data = isEdit
+        ? await _postUseCase.editPost(postId!, files, body)
+        : await _postUseCase.createPost(files, body);
     files.clear();
     getMyPosts();
     notifyListeners();
-    print("Data : $data");
     return data;
   }
 

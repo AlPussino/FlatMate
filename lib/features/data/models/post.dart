@@ -15,6 +15,7 @@ class Post {
   List<Picture>? pictures;
   bool? isSaved;
   PostOwner? postOwner;
+  List<int>? removeImagesId;
 
   Post({
     this.id,
@@ -29,6 +30,7 @@ class Post {
     this.pictures,
     this.isSaved,
     this.postOwner,
+    this.removeImagesId,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
@@ -59,6 +61,8 @@ class Post {
       pictures: picturesList,
       isSaved: json['saved'] as bool?,
       postOwner: postOwner,
+      removeImagesId:
+          json['removed_image_ids'] != null ? json['removed_image_ids'] : null,
     );
   }
 
@@ -76,6 +80,7 @@ class Post {
       'pictures': pictures,
       'saved': isSaved,
       'post_owner': postOwner != null ? postOwner!.toJson() : null,
+      'removed_image_ids': removeImagesId != null ? removeImagesId : null,
     };
   }
 }

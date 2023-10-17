@@ -1,11 +1,11 @@
 import 'dart:developer';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/home_pages/main_post_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -38,16 +38,15 @@ class _HomePageState extends State<HomePage>
       hasNext != false
           ? context.read<PostProvider>().getAllPosts(currentCursor)
           : null;
+    } else if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
+      context.read<HomeProvider>().hideAndShowNavigationBar(true);
+    } else if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
+      context.read<HomeProvider>().hideAndShowNavigationBar(false);
     } else {
       null;
     }
-    // if (_scrollController.position.userScrollDirection ==
-    //     ScrollDirection.reverse) {
-    //   log('scrolling down');
-    // } else if (_scrollController.position.userScrollDirection ==
-    //     ScrollDirection.forward) {
-    //   log('scrolling up');
-    // }
   }
 
   @override
@@ -173,7 +172,7 @@ class _HomePageState extends State<HomePage>
                               ],
                             ),
                           ),
-                  )
+                  ),
                 ],
               ),
             ),

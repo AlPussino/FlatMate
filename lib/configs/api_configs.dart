@@ -1,6 +1,6 @@
 class ApiConfigs {
   //base url
-  static const String baseUrl = "http://192.168.0.111:8080";
+  static const String baseUrl = "http://192.168.0.102:8080";
 
   //logIn urls
   static const String logInUrl = "$baseUrl/api/auth/login";
@@ -40,6 +40,7 @@ class ApiConfigs {
   static const String savePostUrl = "$baseUrl/api/post/";
   static const String getSavedPostsUrl = "$baseUrl/api/post/me/save";
   static const String editTenantsUrl = "$baseUrl/api/post/me/";
+  static const String editPostUrl = "$baseUrl/api/post/";
 }
 
 ///
@@ -80,3 +81,4 @@ const getAllPostsUrl = ApiConfigs.getAllPostsUrl;
 const savePostUrl = ApiConfigs.savePostUrl;
 const getSavedPostsUrl = ApiConfigs.getSavedPostsUrl;
 const editTenantsUrl = ApiConfigs.editTenantsUrl;
+const editPostUrl = ApiConfigs.editPostUrl;

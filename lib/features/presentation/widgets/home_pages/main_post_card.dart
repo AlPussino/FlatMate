@@ -110,7 +110,9 @@ class MainPostCard extends StatelessWidget {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            "${post.tenants} left",
+                                            post.tenants != 0
+                                                ? "${post.tenants} left"
+                                                : "Full",
                                             style: TextStyle(
                                               color: AppColor.whiteColor,
                                               fontFamily:

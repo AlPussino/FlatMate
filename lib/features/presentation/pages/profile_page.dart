@@ -1,10 +1,12 @@
 import 'dart:developer';
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_profile_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,26 @@ class ProfilePage extends StatelessWidget {
       final myData = await context.read<UserProvider>().getUserInfo();
       myData != null ? await context.read<PostProvider>().getMyPosts() : null;
     }
+
+    final ScrollController _scrollController = ScrollController();
+
+    void _onScroll() {
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        log('scrolling down');
+        context.read<HomeProvider>().hideAndShowNavigationBar(true);
+        log("${context.read<HomeProvider>().showBottomNavigationBar}");
+      } else if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        log('scrolling up');
+        context.read<HomeProvider>().hideAndShowNavigationBar(false);
+        log("${context.read<HomeProvider>().showBottomNavigationBar}");
+      } else {
+        null;
+      }
+    }
+
+    _scrollController.addListener(_onScroll);
 
     return Scaffold(
       body: Scaffold(
@@ -49,6 +71,8 @@ class ProfilePage extends StatelessWidget {
 
             return SafeArea(
               child: CustomScrollView(
+                physics: const ClampingScrollPhysics(),
+                controller: _scrollController,
                 slivers: [
                   SliverAppBar(
                     clipBehavior: Clip.antiAlias,

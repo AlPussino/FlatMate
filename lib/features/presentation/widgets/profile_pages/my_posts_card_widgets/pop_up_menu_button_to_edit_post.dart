@@ -1,6 +1,9 @@
+import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_create_post.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card_widgets/bottom_sheet_to_edit_tenants.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class PopUpMenuButtonToEditPost extends StatelessWidget {
@@ -10,7 +13,9 @@ class PopUpMenuButtonToEditPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-      child: Icon(Icons.more_vert),
+      surfaceTintColor: AppColor.dividerColor,
+      icon: Icon(Icons.more_vert),
+      iconSize: 30,
       onSelected: (String choice) {
         switch (choice) {
           case 'Delete':
@@ -18,6 +23,14 @@ class PopUpMenuButtonToEditPost extends StatelessWidget {
             break;
           case 'Left':
             BottomSheetToEditTenants.bottomSheetToEditTenants(context, post);
+            break;
+          case 'Edit':
+            Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.rightToLeft,
+                  child: FlatCreatePost(isEdit: true, post: post)),
+            );
             break;
         }
       },

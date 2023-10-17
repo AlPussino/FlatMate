@@ -69,7 +69,7 @@ class FullNameListTile extends StatelessWidget {
       },
       tileColor: Color(0xffE8E8E8),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
       ),
       contentPadding: EdgeInsets.only(right: 10, left: 20),
       title: Text(

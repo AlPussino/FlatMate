@@ -2,6 +2,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class LogInProvider with ChangeNotifier {
+  GlobalKey<FormState> _formKey = GlobalKey();
+  GlobalKey<FormState> get formKey => _formKey;
+
   String _email = '';
   String get email => _email;
 
@@ -75,7 +78,5 @@ class LogInProvider with ChangeNotifier {
     _isEmailAndPasswordFilled = false;
     _isLoginIn = false;
     _isLogInButtonDisable = false;
-    // _emailFocusNode.dispose();
-    // _passwordFocusNode.dispose();
   }
 }

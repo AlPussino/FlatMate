@@ -14,4 +14,5 @@ abstract class PostUseCase {
   Future<Post?> saveOrUnsavePost(int postId, bool save);
   Future<PostList?> getSavedPosts();
   Future<Post?> editTenants(int postId, int tenants);
+  Future<Post?> editPost(int postId, List<File> imageFiles, Post body);
 }

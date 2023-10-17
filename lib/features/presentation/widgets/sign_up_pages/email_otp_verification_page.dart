@@ -1,5 +1,6 @@
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/ui_providers/sign_up_providers/sign_up_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/create_new_password_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,7 @@ class _EmailOTPVerificationPageState extends State<EmailOTPVerificationPage> {
                           type: PageTransitionType.rightToLeft,
                           child: LoginPage()),
                     );
+                    context.read<SignUpProvider>().restartSignUpProvider();
                   }
                 }
               },

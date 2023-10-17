@@ -2,7 +2,8 @@ import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:flutter/material.dart';
 
 class FlatTypeDropDownButton extends StatefulWidget {
-  const FlatTypeDropDownButton({super.key});
+  final post;
+  const FlatTypeDropDownButton({super.key, this.post});
 
   @override
   State<FlatTypeDropDownButton> createState() => _FlatTypeDropDownButtonState();
@@ -20,6 +21,14 @@ List<String> houseTypeOptions = [
 ];
 
 class _FlatTypeDropDownButtonState extends State<FlatTypeDropDownButton> {
+  @override
+  void initState() {
+    super.initState();
+    widget.post != null
+        ? selectedHouseTypeValue = widget.post.apartment.apartmentType
+        : null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

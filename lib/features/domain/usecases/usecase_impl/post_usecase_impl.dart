@@ -55,4 +55,9 @@ class PostUseCaseImpl implements PostUseCase {
   Future<Post?> editTenants(int postId, int tenants) async {
     return await _postRepository.editTenants(postId, tenants);
   }
+
+  @override
+  Future<Post?> editPost(int postId, List<File> imageFiles, Post body) async {
+    return await _postRepository.editPost(postId, imageFiles, body);
+  }
 }

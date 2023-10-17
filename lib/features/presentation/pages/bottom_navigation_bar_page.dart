@@ -7,10 +7,10 @@ import 'package:finding_apartments_yangon/features/presentation/pages/profile_pa
 import 'package:finding_apartments_yangon/features/presentation/pages/saved_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/pages/search_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
-import 'package:finding_apartments_yangon/features/presentation/providers/ui_providers/log_in_providers/log_in_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/bottom_navigation_bar_pages/bottom_navigation_bar_widgets/bottom_navigation_bar_item.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_create_post.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
@@ -32,14 +32,13 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   final screens = [
     const HomePage(),
     const SearchPage(),
-    const FlatCreatePost(),
+    const FlatCreatePost(isEdit: false),
     const SavedPage(),
     const ProfilePage(),
   ];
 
   @override
   void initState() {
-    context.read<LogInProvider>().restartLogInProvider();
     _subscription = InternetConnection().onStatusChange.listen((status) {
       setState(() {
         _connectionStatus = status;
@@ -84,6 +83,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
           if (result == true) {
             return true;
           } else {
+            context.read<HomeProvider>().hideAndShowNavigationBar(false);
             context.read<HomeProvider>().scrollUpToTheStart();
             return false;
           }
@@ -107,35 +107,42 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
           },
           child: screens[currentIndex],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          useLegacyColorScheme: true,
-          backgroundColor: AppColor.whiteColor,
-          mouseCursor: MouseCursor.uncontrolled,
-          currentIndex: currentIndex,
-          elevation: 5,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: AppColor.orangeColor,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          enableFeedback: true,
-          onTap: (newIndex) {
-            context.read<HomeProvider>().changePage(newIndex);
-            currentIndex != 0
-                ? context.read<PostProvider>().clearAllPostList()
-                : scrollUpAndRefreshPosts();
-          },
-          items: [
-            BottomNavigationBarItems.bottomNavigationBarItem(
-                currentIndex, 0, 'assets/svgs/home_icon.svg', 'Explore'),
-            BottomNavigationBarItems.bottomNavigationBarItem(
-                currentIndex, 1, 'assets/svgs/search_icon.svg', 'Search'),
-            BottomNavigationBarItems.bottomNavigationBarItem(
-                currentIndex, 2, 'assets/svgs/add_icon.svg', 'Post'),
-            BottomNavigationBarItems.bottomNavigationBarItem(
-                currentIndex, 3, 'assets/svgs/love_icon.svg', 'Saved'),
-            BottomNavigationBarItems.bottomNavigationBarItem(
-                currentIndex, 4, 'assets/svgs/person_icon.svg', 'Profile'),
-          ],
+        bottomNavigationBar: AnimatedSize(
+          curve: Curves.easeInOut,
+          duration: Duration(milliseconds: 300),
+          child: Visibility(
+            visible: !context.watch<HomeProvider>().showBottomNavigationBar,
+            child: BottomNavigationBar(
+              useLegacyColorScheme: true,
+              backgroundColor: AppColor.whiteColor,
+              mouseCursor: MouseCursor.uncontrolled,
+              currentIndex: currentIndex,
+              elevation: 5,
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: AppColor.orangeColor,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              enableFeedback: true,
+              onTap: (newIndex) {
+                context.read<HomeProvider>().changePage(newIndex);
+                currentIndex != 0
+                    ? context.read<PostProvider>().clearAllPostList()
+                    : scrollUpAndRefreshPosts();
+              },
+              items: [
+                BottomNavigationBarItems.bottomNavigationBarItem(
+                    currentIndex, 0, 'assets/svgs/home_icon.svg', 'Explore'),
+                BottomNavigationBarItems.bottomNavigationBarItem(
+                    currentIndex, 1, 'assets/svgs/search_icon.svg', 'Search'),
+                BottomNavigationBarItems.bottomNavigationBarItem(
+                    currentIndex, 2, 'assets/svgs/add_icon.svg', 'Post'),
+                BottomNavigationBarItems.bottomNavigationBarItem(
+                    currentIndex, 3, 'assets/svgs/love_icon.svg', 'Saved'),
+                BottomNavigationBarItems.bottomNavigationBarItem(
+                    currentIndex, 4, 'assets/svgs/person_icon.svg', 'Profile'),
+              ],
+            ),
+          ),
         ),
       ),
     );

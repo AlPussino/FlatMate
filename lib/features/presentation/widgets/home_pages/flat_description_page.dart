@@ -263,16 +263,9 @@ class FlatDescriptionPage extends StatelessWidget {
                                           (context, url, downloadProgress) {
                                         final progress =
                                             downloadProgress.progress;
-                                        return Container(
-                                          width: 100,
-                                          height: 100,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: CircularProgressIndicator(
-                                            color: AppColor.orangeColor,
-                                            value: progress,
-                                          ),
+                                        return CircularProgressIndicator(
+                                          color: AppColor.orangeColor,
+                                          value: progress,
                                         );
                                       },
                                       errorWidget: (context, url, error) =>

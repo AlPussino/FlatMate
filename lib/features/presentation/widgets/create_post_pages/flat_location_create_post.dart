@@ -6,16 +6,16 @@ import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_description_create_post.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class FlatLocationCreatePost extends StatefulWidget {
-  final Post flatBody;
-  final Iterable<ImageFile> images;
+  final flatBody;
+  final images;
+  final post;
   const FlatLocationCreatePost(
-      {super.key, required this.flatBody, required this.images});
+      {super.key, required this.flatBody, required this.images, this.post});
 
   @override
   State<FlatLocationCreatePost> createState() => _FlatLocationCreatePostState();
@@ -38,7 +38,20 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
   List<MyanmarData> myanmarData = [];
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.post != null) {
+      selectedRegion = widget.post.state;
+      selectedTownship = widget.post.township;
+      _additionAddressController.text = '${widget.post.additional}';
+    } else {
+      null;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    log('${widget.flatBody.apartment!.floor}');
     myanmarData = context.read<PostProvider>().myanmarData;
 
     return Scaffold(
@@ -70,6 +83,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                         child: FlatDescriptionCreatePost(
                           images: widget.images,
                           flatBody: Post(
+                            removeImagesId: widget.flatBody.removeImagesId,
                             apartment: Apartment(
                               apartmentType:
                                   widget.flatBody.apartment!.apartmentType,
@@ -81,6 +95,7 @@ class _FlatLocationCreatePostState extends State<FlatLocationCreatePost> {
                             township: selectedTownship,
                             additional: _additionAddressController.text,
                           ),
+                          post: widget.post != null ? widget.post : null,
                         )),
                   );
                 } else if (selectedRegion.isNotEmpty &&

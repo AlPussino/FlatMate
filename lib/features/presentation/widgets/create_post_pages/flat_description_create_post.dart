@@ -4,14 +4,14 @@ import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:provider/provider.dart';
 
 class FlatDescriptionCreatePost extends StatefulWidget {
-  final Post flatBody;
-  final Iterable<ImageFile> images;
+  final flatBody;
+  final images;
+  final post;
   const FlatDescriptionCreatePost(
-      {super.key, required this.flatBody, required this.images});
+      {super.key, required this.flatBody, required this.images, this.post});
 
   @override
   State<FlatDescriptionCreatePost> createState() =>
@@ -39,6 +39,19 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
   bool _showError = false;
   bool isPosting = false;
   bool isButtonDisabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.post != null) {
+      _contractController.text = '${widget.post.contract}';
+      _descriptionController.text = '${widget.post.description}';
+      _pricePerMonthController.text = '${widget.post.price}';
+      _totalPeopleController.text = '${widget.post.tenants}';
+    } else {
+      null;
+    }
+  }
 
   @override
   void dispose() {
@@ -87,8 +100,6 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
                                 _totalPeopleController.text.isNotEmpty
                             ? AppColor.orangeColor
                             : AppColor.greyColor,
-                        // fontFamily:
-                        //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 20,
                         fontWeight: FontWeight.w500),
                   ),
@@ -347,8 +358,11 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
             _totalPeopleController.text.isNotEmpty) {
           final result =
               await context.read<PostProvider>().uploadImagesAndCreatePost(
+                  widget.post == null ? false : true,
+                  widget.post == null ? null : widget.post.id,
                   widget.images,
                   Post(
+                    removeImagesId: widget.flatBody.removeImagesId,
                     contract: _contractController.text,
                     description: _descriptionController.text,
                     price: double.parse(_pricePerMonthController.text),
@@ -368,14 +382,12 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
             setState(() {
               isPosting = false;
               isButtonDisabled = false;
+              widget.post != null ? Navigator.of(context).pop() : null;
             });
             Navigator.of(context).pop();
             Navigator.of(context).pop();
             context.read<HomeProvider>().changePage(4);
-
-            // Navigator.of(context).pop();
           } else {
-            print('asdf');
             setState(() {
               isPosting = false;
               isButtonDisabled = false;

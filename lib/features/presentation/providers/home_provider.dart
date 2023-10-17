@@ -5,6 +5,9 @@ class HomeProvider with ChangeNotifier {
   ScrollController _scrollController = ScrollController();
   ScrollController get scrollController => _scrollController;
 
+  bool _showBottomNavigationBar = false;
+  bool get showBottomNavigationBar => _showBottomNavigationBar;
+
   void changePage(int idx) {
     currentIdx = idx;
     notifyListeners();
@@ -24,5 +27,10 @@ class HomeProvider with ChangeNotifier {
 
   bool isListAtTop() {
     return _scrollController.position.atEdge ? true : false;
+  }
+
+  void hideAndShowNavigationBar(bool scrolling) {
+    _showBottomNavigationBar = scrolling;
+    notifyListeners();
   }
 }

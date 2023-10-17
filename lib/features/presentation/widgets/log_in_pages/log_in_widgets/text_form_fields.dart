@@ -5,7 +5,11 @@ import 'package:provider/provider.dart';
 
 class TextFormFields extends StatelessWidget {
   final isEmail;
-  const TextFormFields({super.key, required this.isEmail});
+
+  const TextFormFields({
+    super.key,
+    required this.isEmail,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +54,19 @@ class TextFormFields extends StatelessWidget {
         isEmail
             ? context.read<LogInProvider>().saveEmail(value)
             : context.read<LogInProvider>().savePassword(value);
+      },
+      validator: (value) {
+        if (isEmail) {
+          if (value!.isEmpty) {
+            return 'Please enter Email';
+          }
+          return null;
+        } else {
+          if (value!.isEmpty) {
+            return 'Please enter Password';
+          }
+          return null;
+        }
       },
     );
   }

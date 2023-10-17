@@ -1,8 +1,10 @@
 import 'dart:developer';
 import 'package:finding_apartments_yangon/configs/colors.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/saved_pages/saved_posts_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -34,8 +36,29 @@ class SavedPage extends StatelessWidget {
             );
           }
           final savedPostList = context.watch<PostProvider>().savedPostList;
+
+          final ScrollController _scrollController = ScrollController();
+
+          void _onScroll() {
+            if (_scrollController.position.userScrollDirection ==
+                ScrollDirection.reverse) {
+              log('scrolling down');
+              context.read<HomeProvider>().hideAndShowNavigationBar(true);
+              log("${context.read<HomeProvider>().showBottomNavigationBar}");
+            } else if (_scrollController.position.userScrollDirection ==
+                ScrollDirection.forward) {
+              log('scrolling up');
+              context.read<HomeProvider>().hideAndShowNavigationBar(false);
+              log("${context.read<HomeProvider>().showBottomNavigationBar}");
+            } else {
+              null;
+            }
+          }
+
+          _scrollController.addListener(_onScroll);
           return SafeArea(
             child: CustomScrollView(
+              controller: _scrollController,
               slivers: [
                 SliverAppBar(
                   surfaceTintColor: AppColor.whiteColor,

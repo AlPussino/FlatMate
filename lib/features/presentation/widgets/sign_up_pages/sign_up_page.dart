@@ -388,7 +388,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: AppColor.textColor,
                         //fontFamily:DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 14),
-
                     textInputAction: TextInputAction.done,
                     controller: _confirmPasswordController,
                     obscureText: _confirmPasswordObscureText,
@@ -448,9 +447,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         });
                       }
                     },
-                    // onSubmitted: (s) {
-                    //   _focusNode.unfocus();
-                    // },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter password';

@@ -312,4 +312,66 @@ class PostDataSourceImpl implements PostDataSource {
       return null;
     }
   }
+
+  @override
+  Future<Post?> editPost(int postId, List<File> imageFiles, Post body) async {
+    log("PostID : $postId");
+    log("Images : ${imageFiles.length}");
+    await tokenDataSource.refreshTokenIfTokenIsExpired();
+
+    final token = tokenDataSource.getToken();
+
+    Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+      'Connection': 'keep-alive',
+      'Accept': '*/*',
+      'Authorization': 'Bearer $token'
+    };
+
+    var request =
+        http.MultipartRequest('PUT', Uri.parse("$editPostUrl$postId"));
+
+    for (var image in imageFiles) {
+      final imageStream = http.ByteStream(image.openRead());
+      final imageLength = await image.length();
+
+      final imageUri = Uri.file(image.path);
+
+      final multipartFile = http.MultipartFile(
+        'images', // The field name for the file in the form data
+        imageStream,
+        imageLength,
+        filename: imageUri.pathSegments.last,
+        contentType: MediaType('Auto', 'jpg'),
+      );
+
+      request.files.add(multipartFile);
+    }
+
+    request.files.add(
+      http.MultipartFile.fromString('data', json.encode(body.toJson()),
+          contentType: MediaType('application', 'json')),
+    );
+
+    request.headers.addAll(headers);
+
+    try {
+      final response = await request.send();
+
+      if (response.statusCode == HttpStatus.ok) {
+        log('ok');
+        ToastNotificatoins.showSuccess("updating post success");
+        final responseJson = jsonDecode(await response.stream.bytesToString());
+        return Post.fromJson(responseJson);
+      } else {
+        log('this error');
+        return null;
+      }
+    } on SocketException {
+      ToastNotificatoins.showError(AppString.networkError);
+      return null;
+    } catch (error) {
+      return null;
+    }
+  }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'dart:io';
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/configs/strings.dart';
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
@@ -11,10 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class FlatCreatePost extends StatefulWidget {
-  const FlatCreatePost({super.key});
+  final post;
+  final isEdit;
+  const FlatCreatePost({super.key, this.post, required this.isEdit});
 
   @override
   State<FlatCreatePost> createState() => _FlatCreatePostState();
@@ -28,7 +34,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
     allowedImageTypes: ['png', 'jpg', 'jpeg'],
     withData: true,
     withReadStream: true,
-    images: <ImageFile>[],
+    images: [],
   );
 
   bool _showError = false;
@@ -42,6 +48,56 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
   bool lengthError = false;
   bool widthError = false;
 
+  List<String> imagesStringUrls = [];
+  List<File> files = [];
+  List<int> removeImagesIdList = [];
+
+  Future<List<File>> downloadImages(List<String> imageUrls) async {
+    final tempDir = await getTemporaryDirectory();
+
+    for (String imageUrl in imageUrls) {
+      try {
+        final response = await http.get(Uri.parse(imageUrl));
+
+        final file = File(
+            '${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await file.writeAsBytes(response.bodyBytes);
+        files.add(file);
+      } catch (e) {
+        print('Error downloading image: $e');
+      }
+    }
+
+    files.map((file) {
+      _selectImagesController.addImage(ImageFile(file.uri.toString(),
+          name: file.path,
+          extension: file.path.split('.').last,
+          path: file.path));
+    }).toList();
+    log(_selectImagesController.images.length.toString());
+
+    return files;
+  }
+
+  void changeImg(List<String> imageUrls) async {
+    await downloadImages(imageUrls);
+  }
+
+  @override
+  void initState() {
+    if (widget.isEdit) {
+      widget.post.pictures.map((e) => imagesStringUrls.add(e.url)).toList();
+      widget.post.pictures.map((e) => removeImagesIdList.add(e.id)).toList();
+
+      changeImg(imagesStringUrls);
+      _lengthController.text = '${widget.post.apartment.length}';
+      _widthController.text = '${widget.post.apartment.width}';
+    } else {
+      null;
+    }
+    super.initState();
+  }
+
   @override
   void dispose() {
     _selectImagesController.dispose();
@@ -49,7 +105,6 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
     _widthController.dispose();
     _lengthFocusNode.dispose();
     _widthFocusNode.dispose();
-
     super.dispose();
   }
 
@@ -79,7 +134,6 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-
                 if (selectedFloorValue.isNotEmpty &&
                     selectedHouseTypeValue.isNotEmpty &&
                     _lengthController.text.isNotEmpty &&
@@ -92,6 +146,8 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                         child: FlatLocationCreatePost(
                           images: _selectImagesController.images,
                           flatBody: Post(
+                            removeImagesId:
+                                widget.isEdit ? removeImagesIdList : null,
                             apartment: Apartment(
                               floor: int.parse(selectedFloorValue),
                               length: double.parse(_lengthController.text),
@@ -99,6 +155,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                               apartmentType: selectedHouseTypeValue,
                             ),
                           ),
+                          post: widget.isEdit ? widget.post : null,
                         )),
                   );
                 } else if (selectedFloorValue.isNotEmpty &&
@@ -147,7 +204,6 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 1,
-                          // color: AppColor.orangeColor,
                         ),
                         borderRadius: BorderRadius.circular(10),
                         color: AppColor.dividerColor,
@@ -174,6 +230,9 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
               controller: _selectImagesController,
               onChange: (list) {
                 setState(() {
+                  list.map((e) {
+                    log("Name : ${e.name}");
+                  }).toList();
                   if (_selectImagesController.images.length > 5) {
                     toast("if not necessary,please don't use above 5 images");
                   }
@@ -209,7 +268,8 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          FlatTypeDropDownButton(),
+                          FlatTypeDropDownButton(
+                              post: widget.isEdit ? widget.post : null),
                         ],
                       ),
                       Column(
@@ -223,7 +283,8 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          FlatFloorDropDownButton(),
+                          FlatFloorDropDownButton(
+                              post: widget.isEdit ? widget.post : null),
                         ],
                       ),
                     ],
