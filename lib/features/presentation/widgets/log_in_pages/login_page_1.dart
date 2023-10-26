@@ -145,7 +145,7 @@ class LogInPage extends StatelessWidget {
                             color: AppColor.whiteColor,
                           )
                         : Text(
-                            'Sign in',
+                            'Log in',
                             style: TextStyle(
                               color: AppColor.whiteColor,
                               fontSize: 16,

@@ -37,7 +37,7 @@ class PostUseCaseImpl implements PostUseCase {
   }
 
   @override
-  Future<AllPosts?> getAllPosts(int? pageCursor) async {
+  Future<AllPosts?> getAllPosts(String? pageCursor) async {
     return await _postRepository.getAllPosts(pageCursor);
   }
 

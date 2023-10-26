@@ -13,7 +13,23 @@ class MainPostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> imageList = [];
-    post.pictures!.map((e) => imageList.add(e.url!)).toList();
+    // post.pictures!.map((e) => imageList.add(e.url!)).toList();
+    int index = 0;
+    while (index < post.pictures!.length) {
+      imageList.add(post.pictures![index].url!);
+      index++;
+    }
+    //
+    List<Widget> widgets = [];
+    int imageIndex = 0;
+    while (imageIndex < post.pictures!.length) {
+      final picture = post.pictures![imageIndex];
+      final url = picture.url ?? "";
+      final widget =
+          Utils.headerImagesSlide(true, post.pictures!, url, context);
+      widgets.add(widget);
+      imageIndex++;
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       child: InkWell(
@@ -65,12 +81,13 @@ class MainPostCard extends StatelessWidget {
                             indicatorHeight: 2,
                             indicatorWidth: 20,
                             items: [
-                              ...post.pictures!
-                                  .map(
-                                    (e) => Utils.headerImagesSlide(true,
-                                        post.pictures!, e.url ?? "", context),
-                                  )
-                                  .toList(),
+                              // ...post.pictures!
+                              //     .map(
+                              //       (e) => Utils.headerImagesSlide(true,
+                              //           post.pictures!, e.url ?? "", context),
+                              //     )
+                              //     .toList(),
+                              ...widgets,
                             ],
                           ),
                         ),

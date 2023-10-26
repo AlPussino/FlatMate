@@ -1,17 +1,48 @@
 import 'dart:developer';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:finding_apartments_yangon/configs/colors.dart';
-import 'package:finding_apartments_yangon/features/presentation/pages/intro_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/auth_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'bottom_navigation_bar_page.dart';
+import 'package:quick_actions/quick_actions.dart';
+
+import 'pages.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final QuickActions quickActions = const QuickActions();
+    quickActions.initialize((String shortcutType) {
+      if (shortcutType == 'Explore') {
+        context.read<HomeProvider>().changePage(0);
+      } else if (shortcutType == 'Post') {
+        log('2');
+        context.read<HomeProvider>().changePage(2);
+      } else {
+        context.read<HomeProvider>().changePage(3);
+      }
+    });
+
+    quickActions.setShortcutItems(<ShortcutItem>[
+      const ShortcutItem(
+        type: 'Explore',
+        localizedTitle: 'Explore',
+        icon: 'explore',
+      ),
+      const ShortcutItem(
+        type: 'Post',
+        localizedTitle: 'Post',
+        icon: 'plus',
+      ),
+      const ShortcutItem(
+        type: 'Profile',
+        localizedTitle: 'Profile',
+        icon: 'profile_user',
+      )
+    ]);
     Future.delayed(
       const Duration(seconds: 2),
       () async {

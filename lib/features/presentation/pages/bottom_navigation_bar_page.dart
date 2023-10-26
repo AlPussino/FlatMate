@@ -2,19 +2,16 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:animations/animations.dart';
 import 'package:finding_apartments_yangon/configs/colors.dart';
-import 'package:finding_apartments_yangon/features/presentation/pages/home_page.dart';
-import 'package:finding_apartments_yangon/features/presentation/pages/profile_page.dart';
-import 'package:finding_apartments_yangon/features/presentation/pages/saved_page.dart';
-import 'package:finding_apartments_yangon/features/presentation/pages/search_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/bottom_navigation_bar_pages/bottom_navigation_bar_widgets/bottom_navigation_bar_item.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_create_post.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '../providers/home_provider.dart';
+import 'pages.dart';
 
 class BottomNavigationBarPage extends StatefulWidget {
   const BottomNavigationBarPage({super.key});
@@ -68,7 +65,6 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   @override
   Widget build(BuildContext context) {
     final currentIndex = context.watch<HomeProvider>().currentIdx;
-    log(_connectionStatus.toString());
 
     return WillPopScope(
       onWillPop: () async {
@@ -104,6 +100,11 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
               secondaryAnimation: secondaryAnimation,
               child: child,
             );
+            // return ScaleTransition(
+            //   scale: CurvedAnimation(
+            //       parent: animation, curve: Curves.fastEaseInToSlowEaseOut),
+            //   child: child,
+            // );
           },
           child: screens[currentIndex],
         ),
@@ -144,6 +145,31 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
             ),
           ),
         ),
+        floatingActionButton: AnimatedSize(
+          curve: Curves.fastEaseInToSlowEaseOut,
+          duration: Duration(milliseconds: 300),
+          alignment: Alignment.center,
+          reverseDuration: Duration(milliseconds: 300),
+          child: Visibility(
+            visible: !context.watch<HomeProvider>().showBottomNavigationBar,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.bottomToTop,
+                      child: FlatCreatePost(isEdit: false)),
+                );
+              },
+              child: Icon(
+                Icons.add,
+                color: AppColor.whiteColor,
+              ),
+              backgroundColor: AppColor.orangeColor,
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }

@@ -9,8 +9,11 @@ class Utils {
   static headerImagesSlide(bool isMainPost, List<Picture> imageList, String img,
       BuildContext context) {
     List<String> imgStrList = [];
-    imageList.map((e) => imgStrList.add(e.url!)).toList();
-
+    int index = 0;
+    while (index < imageList.length) {
+      imgStrList.add(imageList[index].url!);
+      index++;
+    }
     List<Map<int, String>> myList = [];
 
     for (int i = 0; i < imgStrList.length; i++) {
@@ -82,7 +85,7 @@ class Utils {
   static textFormFieldDecoration(int hintText) {
     return InputDecoration(
       suffixText: 'feet',
-      hintStyle: TextStyle(color: AppColor.greyColor),
+      hintStyle: TextStyle(color: AppColor.bottomNavigationBarIconColor),
       hintText: hintText.toString(),
       contentPadding: const EdgeInsets.all(10),
       border: OutlineInputBorder(

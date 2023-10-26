@@ -26,7 +26,8 @@ class HomeProvider with ChangeNotifier {
   }
 
   bool isListAtTop() {
-    return _scrollController.position.atEdge ? true : false;
+    // return _scrollController.position.atEdge ? true : false;
+    return _scrollController.position.pixels == 0.0 ? true : false;
   }
 
   void hideAndShowNavigationBar(bool scrolling) {

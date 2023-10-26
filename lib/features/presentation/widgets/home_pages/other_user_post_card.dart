@@ -12,7 +12,12 @@ class OtherUserPostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageList = [];
-    post.pictures!.map((e) => imageList.add(e.url)).toList();
+    // post.pictures!.map((e) => imageList.add(e.url)).toList();
+    int index = 0;
+    while (index < post.pictures!.length) {
+      imageList.add(post.pictures![index].url);
+      index++;
+    }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 0),
       child: Column(

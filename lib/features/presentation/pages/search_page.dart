@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/search_pages/searched_user_card.dart';
@@ -39,7 +40,7 @@ class _SearchPageState extends State<SearchPage>
     final postOwnerList = context.watch<UserProvider>().postOwnerList;
 
     return Scaffold(
-      backgroundColor: AppColor.whiteColor,
+      backgroundColor: AppColor.transparent,
       body:
           //  FutureBuilder(
           //   future: context.read<UserProvider>().searchUser(keyword: '.'),

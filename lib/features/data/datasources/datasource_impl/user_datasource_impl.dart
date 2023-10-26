@@ -51,7 +51,7 @@ class UserDataSourceImpl implements UserDataSource {
     await tokenDataSource.refreshTokenIfTokenIsExpired();
     try {
       final token = tokenDataSource.getToken();
-      final response = await client.put(Uri.parse(changeUserNameUrl),
+      final response = await client.patch(Uri.parse(changeUserNameUrl),
           body: json.encode({"username": userName}),
           headers: authHeaders(token: token!));
 
@@ -79,7 +79,7 @@ class UserDataSourceImpl implements UserDataSource {
 
     try {
       final token = tokenDataSource.getToken();
-      final response = await client.put(Uri.parse(changePasswordUrl),
+      final response = await client.patch(Uri.parse(changePasswordUrl),
           body: json.encode({
             "current_password": currentPassword,
             "new_password": newPassword,
@@ -109,7 +109,7 @@ class UserDataSourceImpl implements UserDataSource {
 
     try {
       final token = tokenDataSource.getToken();
-      final response = await client.put(Uri.parse(changeMobileNumberUrl),
+      final response = await client.patch(Uri.parse(changeMobileNumberUrl),
           body: json.encode({"mobile_number": mobileNumber}),
           headers: authHeaders(token: token!));
 

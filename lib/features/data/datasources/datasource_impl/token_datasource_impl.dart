@@ -59,7 +59,19 @@ class TokenDataSourceImpl implements TokenDataSource {
       log("Token is expired : ${expirationDateTime.isBefore(currentDateTime)}");
       log("Expired Date : $expirationDateTime");
       log("Current Data : $currentDateTime");
-      return expirationDateTime.isBefore(currentDateTime);
+
+      // when 5 minutes before
+      DateTime fiveMinutesBefore =
+          currentDateTime.subtract(Duration(minutes: 5));
+
+      log("Before 5mins to expire : ${expirationDateTime.isBefore(fiveMinutesBefore)} ");
+      if (expirationDateTime.isBefore(fiveMinutesBefore)) {
+        log("Refreshing token 5mins before expired");
+        return true;
+      } else {
+        // when expired
+        return expirationDateTime.isBefore(currentDateTime);
+      }
     } catch (e) {
       return true;
     }

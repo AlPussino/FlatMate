@@ -73,7 +73,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   Text(
                     "Current password",
                     style: TextStyle(
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: AppColor.greyColor,
                       fontSize: 14,
                     ),
@@ -81,11 +80,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   const SizedBox(height: 8),
                   TextFormField(
                     cursorColor: AppColor.orangeColor,
-                    style: TextStyle(
-                        color: AppColor.textColor,
-                        // fontFamily:
-                        //     DefaultTextStyle.of(context).style.fontFamily,
-                        fontSize: 14),
+                    style: TextStyle(color: AppColor.textColor, fontSize: 14),
                     textInputAction: TextInputAction.done,
                     controller: _currentPasswordController,
                     obscureText: _currentPasswordObscureText,
@@ -161,7 +156,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   Text(
                     "New password",
                     style: TextStyle(
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: AppColor.greyColor,
                       fontSize: 14,
                     ),
@@ -169,11 +163,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   const SizedBox(height: 8),
                   TextFormField(
                     cursorColor: AppColor.orangeColor,
-                    style: TextStyle(
-                        color: AppColor.textColor,
-                        // fontFamily:
-                        //     DefaultTextStyle.of(context).style.fontFamily,
-                        fontSize: 14),
+                    style: TextStyle(color: AppColor.textColor, fontSize: 14),
                     textInputAction: TextInputAction.done,
                     controller: _newPasswordController,
                     obscureText: _newPasswordObscureText,
@@ -237,6 +227,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       if (value!.isEmpty) {
                         return 'Please enter password';
                       }
+                      if (value.length < 8) {
+                        return 'Password must be at least 8';
+                      }
                       return null;
                     },
                     onSaved: (value) {
@@ -248,7 +241,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   Text(
                     "Confirm password",
                     style: TextStyle(
-                      // fontFamily: DefaultTextStyle.of(context).style.fontFamily,
                       color: AppColor.greyColor,
                       fontSize: 14,
                     ),
@@ -256,11 +248,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   const SizedBox(height: 8),
                   TextFormField(
                     cursorColor: AppColor.orangeColor,
-                    style: TextStyle(
-                        color: AppColor.textColor,
-                        // fontFamily:
-                        //     DefaultTextStyle.of(context).style.fontFamily,
-                        fontSize: 14),
+                    style: TextStyle(color: AppColor.textColor, fontSize: 14),
                     textInputAction: TextInputAction.done,
 
                     controller: _confirmPasswordController,
@@ -326,6 +314,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       if (value!.isEmpty) {
                         return 'Please enter password';
                       }
+                      if (value != _newPasswordController.text) {
+                        return 'Passwords must be same';
+                      }
                       return null;
                     },
                     onSaved: (value) {
@@ -361,8 +352,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       "Confirm",
                       style: TextStyle(
                         color: AppColor.whiteColor,
-                        // fontFamily:
-                        //     DefaultTextStyle.of(context).style.fontFamily,
                         fontSize: 16,
                       ),
                     ),

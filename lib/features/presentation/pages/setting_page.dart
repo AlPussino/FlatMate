@@ -2,8 +2,10 @@ import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/log_in_pages/login_page_1.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/change_password_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/edit_profile_page.dart';
+import 'package:finding_apartments_yangon/features/presentation/widgets/setting_pages/map_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingPage extends StatelessWidget {
@@ -254,30 +256,64 @@ class SettingPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () async {
-                SharedPreferences pref = await SharedPreferences.getInstance();
-                pref.clear();
-                Navigator.pop(context);
-                Navigator.pushReplacement(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.rightToLeft, child: LogInPage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                shape: ContinuousRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                minimumSize: Size(500, 50),
-                backgroundColor: AppColor.orangeColor,
-              ),
-              child: Text(
-                "Log out",
-                style: TextStyle(
-                  color: AppColor.whiteColor,
-                  fontSize: 16,
+            Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    pref.clear();
+                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: LogInPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    minimumSize: Size(500, 50),
+                    backgroundColor: AppColor.orangeColor,
+                  ),
+                  child: Text(
+                    "Log out",
+                    style: TextStyle(
+                      color: AppColor.whiteColor,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    minimumSize: Size(500, 50),
+                    backgroundColor: AppColor.blackColor,
+                  ),
+                  onPressed: () async {
+                    var status = await Permission.location.request();
+
+                    status.isGranted
+                        ? Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: MapPage()),
+                          )
+                        : null;
+                  },
+                  child: Text(
+                    "Map",
+                    style: TextStyle(
+                      color: AppColor.whiteColor,
+                      fontSize: 16,
+                    ),
+                  ),
+                )
+              ],
             ),
           ],
         ),

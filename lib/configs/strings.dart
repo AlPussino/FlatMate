@@ -11,6 +11,7 @@ class AppString {
 
   // UI
   static const String addImageToPost = 'pick at least one photo to post';
+  static const String loadingImageToEditPost = 'Loading...';
 
   // Sign Up helper texts
   static const String fullNameHelperText =

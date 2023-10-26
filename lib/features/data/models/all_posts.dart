@@ -2,7 +2,7 @@ import 'package:finding_apartments_yangon/features/data/models/post.dart';
 
 class AllPosts {
   List<Post>? postList;
-  int? cursor;
+  String? cursor;
   bool? hasNext;
 
   AllPosts({
@@ -18,7 +18,7 @@ class AllPosts {
 
     return AllPosts(
       postList: postList,
-      cursor: json['cursor'] as int?,
+      cursor: json['cursor'] as String?,
       hasNext: json['has_next'] as bool?,
     );
   }

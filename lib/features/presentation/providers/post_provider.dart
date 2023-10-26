@@ -24,8 +24,8 @@ class PostProvider with ChangeNotifier {
   Post? _postDetail;
   Post? get postDetail => _postDetail;
 
-  int _cursor = 1;
-  int? get cursor => _cursor;
+  String? _cursor;
+  String? get cursor => _cursor;
 
   bool? _hasNext;
   bool? get hasNext => _hasNext;
@@ -80,7 +80,7 @@ class PostProvider with ChangeNotifier {
     return data;
   }
 
-  Future<AllPosts?> getAllPosts(int? pageCursor) async {
+  Future<AllPosts?> getAllPosts(String? pageCursor) async {
     final data = await _postUseCase.getAllPosts(pageCursor);
     data!.postList!.shuffle();
     allPostList!.addAll(data.postList!);

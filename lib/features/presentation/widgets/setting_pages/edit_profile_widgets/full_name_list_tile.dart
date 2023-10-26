@@ -12,6 +12,9 @@ class FullNameListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> fullNameFormKey = GlobalKey<FormState>();
+    String tempFullNameToCheckChanges = myUser.username;
+
     _nameController.text = myUser.username;
     return ListTile(
       onTap: () {
@@ -26,17 +29,29 @@ class FullNameListTile extends StatelessWidget {
             content: Container(
               padding: EdgeInsets.only(top: 40),
               child: SizedBox(
-                height: 52,
+                height: 82,
                 width: 400,
-                child: TextFormField(
-                  style: TextStyle(
-                      decoration: TextDecoration.none,
-                      color: AppColor.textColor,
-                      fontSize: 14),
-                  controller: _nameController,
-                  cursorColor: AppColor.orangeColor,
-                  decoration: TextFormFieldDecoration.textFormFieldDecoration(
-                      'Full Name'),
+                child: Form(
+                  key: fullNameFormKey,
+                  child: TextFormField(
+                    style: TextStyle(
+                        decoration: TextDecoration.none,
+                        color: AppColor.textColor,
+                        fontSize: 14),
+                    controller: _nameController,
+                    cursorColor: AppColor.orangeColor,
+                    decoration: TextFormFieldDecoration.textFormFieldDecoration(
+                        'Full Name'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Enter Full name';
+                      }
+                      if (value == tempFullNameToCheckChanges) {
+                        return 'Change Full Name to update';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
               ),
             ),
@@ -51,13 +66,14 @@ class FullNameListTile extends StatelessWidget {
                   )),
               TextButton(
                   onPressed: () async {
-                    final result = await context
-                        .read<UserProvider>()
-                        .changeUserName(userName: _nameController.text);
-                    if (result != null) {
-                      _nameController.clear();
-                      Navigator.pop(context);
-                    } else {}
+                    if (fullNameFormKey.currentState!.validate()) {
+                      final result = await context
+                          .read<UserProvider>()
+                          .changeUserName(userName: _nameController.text);
+                      if (result != null) {
+                        Navigator.pop(context);
+                      } else {}
+                    }
                   },
                   child: Text(
                     'Save',

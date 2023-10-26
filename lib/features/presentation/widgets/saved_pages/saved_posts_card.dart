@@ -12,7 +12,12 @@ class SavedPostsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imgList = [];
-    post.pictures!.map((e) => imgList.add(e.url)).toList();
+    // post.pictures!.map((e) => imgList.add(e.url)).toList();
+    int index = 0;
+    while (index < post.pictures!.length) {
+      imgList.add(post.pictures![index].url);
+      index++;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

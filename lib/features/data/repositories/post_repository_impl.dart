@@ -37,7 +37,7 @@ class PostRepositoryImpl implements PostRepository {
   }
 
   @override
-  Future<AllPosts?> getAllPosts(int? pageCursor) async {
+  Future<AllPosts?> getAllPosts(String? pageCursor) async {
     return await postDataSource.getAllPosts(pageCursor);
   }
 

@@ -9,6 +9,7 @@ import 'package:finding_apartments_yangon/features/presentation/widgets/utils/ut
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slider/carousel.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -48,8 +49,22 @@ class FlatDescriptionPage extends StatelessWidget {
             ),
           );
         }
+
         Post? postDetail = context.watch<PostProvider>().postDetail;
         log(postDetail!.isSaved.toString());
+        int index = 0;
+        List<Widget> widgets = [];
+        while (index < postDetail.pictures!.length) {
+          final e = postDetail.pictures![index];
+          final widget = Utils.headerImagesSlide(
+            false,
+            postDetail.pictures!,
+            e.url ?? "",
+            context,
+          );
+          widgets.add(widget);
+          index++;
+        }
         return Scaffold(
           backgroundColor: AppColor.whiteColor,
           appBar: AppBar(
@@ -102,15 +117,16 @@ class FlatDescriptionPage extends StatelessWidget {
                           indicatorHeight: 2,
                           indicatorWidth: 20,
                           items: [
-                            ...postDetail.pictures!
-                                .map(
-                                  (e) => Utils.headerImagesSlide(
-                                      false,
-                                      postDetail.pictures!,
-                                      e.url ?? "",
-                                      context),
-                                )
-                                .toList(),
+                            ...widgets
+                            // ...postDetail.pictures!
+                            //     .map(
+                            //       (e) => Utils.headerImagesSlide(
+                            //           false,
+                            //           postDetail.pictures!,
+                            //           e.url ?? "",
+                            //           context),
+                            //     )
+                            //     .toList(),
                           ],
                         ),
                       ),
@@ -432,7 +448,7 @@ class FlatDescriptionPage extends StatelessWidget {
       url,
       mode: LaunchMode.externalApplication,
     )) {
-      log("launch error");
+      toast("can't launch the link!");
     }
   }
 }

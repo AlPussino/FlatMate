@@ -41,6 +41,81 @@ class PostOwnerProfilePage extends StatelessWidget {
             }
 
             final otherUser = context.watch<UserProvider>().otherUser;
+
+            List<Widget> socialContactWidgets = [];
+            int index = 0;
+
+            while (index < otherUser!.socialContacts!.length) {
+              final contact = otherUser.socialContacts![index];
+              Widget socialContactWidget;
+
+              if (contact.contactType == 'FACEBOOK') {
+                socialContactWidget = Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        _launchUrl(contact.profileUrl!);
+                      },
+                      child: Icon(
+                        Icons.facebook,
+                        size: 30,
+                        color: AppColor.greyColor,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                  ],
+                );
+              } else if (contact.contactType == 'TELEGRAM') {
+                socialContactWidget = Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        _launchUrl(contact.profileUrl!);
+                      },
+                      child: Icon(
+                        Icons.telegram,
+                        size: 30,
+                        color: AppColor.greyColor,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                  ],
+                );
+              } else {
+                // Handle other contact types here
+                socialContactWidget = Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        _launchUrl(contact.profileUrl!);
+                      },
+                      // child: Icon(
+                      //   Icons.circle,
+                      //   size: 30,
+                      //   color: AppColor.greyColor,
+                      // ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: ColorFiltered(
+                          colorFilter: ColorFilter.mode(
+                              AppColor.greyColor, BlendMode.srcIn),
+                          child: SvgPicture.asset(
+                            'assets/svgs/instagram-with-circle.svg',
+                            width: 25,
+                            height: 25,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                  ],
+                );
+              }
+
+              socialContactWidgets.add(socialContactWidget);
+              index++;
+            }
+
             return SafeArea(
               child: CustomScrollView(
                 slivers: [
@@ -70,7 +145,7 @@ class PostOwnerProfilePage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    otherUser!.username!,
+                                    otherUser.username!,
                                     style: TextStyle(
                                       color: Color(0xff000000),
                                       fontSize: 20,
@@ -98,31 +173,32 @@ class PostOwnerProfilePage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        ...otherUser.socialContacts!
-                                            .map(
-                                              (e) => Row(
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      _launchUrl(e.profileUrl!);
-                                                    },
-                                                    child: Icon(
-                                                      e.contactType ==
-                                                              'FACEBOOK'
-                                                          ? Icons.facebook
-                                                          : e.contactType ==
-                                                                  'TELEGRAM'
-                                                              ? Icons.telegram
-                                                              : Icons.message,
-                                                      size: 30,
-                                                      color: AppColor.greyColor,
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 5),
-                                                ],
-                                              ),
-                                            )
-                                            .toList(),
+                                        // ...otherUser.socialContacts!
+                                        //     .map(
+                                        //       (e) => Row(
+                                        //         children: [
+                                        //           InkWell(
+                                        //             onTap: () {
+                                        //               _launchUrl(e.profileUrl!);
+                                        //             },
+                                        //             child: Icon(
+                                        //               e.contactType ==
+                                        //                       'FACEBOOK'
+                                        //                   ? Icons.facebook
+                                        //                   : e.contactType ==
+                                        //                           'TELEGRAM'
+                                        //                       ? Icons.telegram
+                                        //                       : Icons.message,
+                                        //               size: 30,
+                                        //               color: AppColor.greyColor,
+                                        //             ),
+                                        //           ),
+                                        //           SizedBox(width: 5),
+                                        //         ],
+                                        //       ),
+                                        //     )
+                                        //     .toList(),
+                                        ...socialContactWidgets,
                                       ]),
                                 ],
                               ),
@@ -212,7 +288,6 @@ class PostOwnerProfilePage extends StatelessWidget {
   }
 
   Future<void> _launchUrl(String urlStr) async {
-    log("tap");
     Uri url0 = Uri.parse(urlStr);
     if (!await launchUrl(
       url0,

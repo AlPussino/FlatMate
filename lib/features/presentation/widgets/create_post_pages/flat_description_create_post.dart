@@ -3,6 +3,7 @@ import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/ui_providers/create_posts_providers/create_posts_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -383,6 +384,10 @@ class _FlatDescriptionCreatePostState extends State<FlatDescriptionCreatePost> {
               isPosting = false;
               isButtonDisabled = false;
               widget.post != null ? Navigator.of(context).pop() : null;
+              context
+                  .read<CreatePostsProvider>()
+                  .selectImagesController
+                  .clearImages();
             });
             Navigator.of(context).pop();
             Navigator.of(context).pop();

@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage>
   @override
   bool get wantKeepAlive => true;
   final ScrollController _scrollController = ScrollController();
-  int? currentCursor;
+  String? currentCursor;
   bool? hasNext;
   List<Post>? allPosts;
 
@@ -89,10 +89,11 @@ class _HomePageState extends State<HomePage>
           hasNext = context.watch<PostProvider>().hasNext;
 
           return Scaffold(
-            backgroundColor: AppColor.whiteColor,
+            backgroundColor: AppColor.transparent,
             body: SafeArea(
               child: CustomScrollView(
                 controller: _scrollController,
+                physics: const ClampingScrollPhysics(),
                 slivers: [
                   SliverAppBar(
                     surfaceTintColor: AppColor.whiteColor,

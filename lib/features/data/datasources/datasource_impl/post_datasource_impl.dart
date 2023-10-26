@@ -175,15 +175,16 @@ class PostDataSourceImpl implements PostDataSource {
   }
 
   @override
-  Future<AllPosts?> getAllPosts(int? pageCursor) async {
+  Future<AllPosts?> getAllPosts(String? pageCursor) async {
+    log("PageCursor $pageCursor");
     await tokenDataSource.refreshTokenIfTokenIsExpired();
 
     final token = tokenDataSource.getToken();
     try {
       final response = await client.get(
         Uri.parse(pageCursor != null
-            ? "$getAllPostsUrl$pageCursor&limit=10"
-            : "$getAllPostsUrl&limit=10"),
+            ? "$getAllPostsUrl?cursor=$pageCursor&limit=10"
+            : "$getAllPostsUrl"),
         headers: authHeaders(token: token!),
       );
 
@@ -285,7 +286,7 @@ class PostDataSourceImpl implements PostDataSource {
 
     final token = tokenDataSource.getToken();
     try {
-      final response = await client.put(
+      final response = await client.patch(
         Uri.parse("$editTenantsUrl$postId?tenant=$tenants"),
         headers: authHeaders(token: token!),
       );

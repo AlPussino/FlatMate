@@ -50,7 +50,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   Future<EmailOTPVerifyResponse?> verifyOtpForSignUp(
       EmailOTPVerifyRequest body) async {
     try {
-      final response = await client.put(Uri.parse(emailOTPVerifyUrl),
+      final response = await client.patch(Uri.parse(emailOTPVerifyUrl),
           headers: headers, body: json.encode(body.toJson()));
 
       if (response.statusCode == HttpStatus.ok) {
@@ -144,7 +144,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   Future<EmailOTPVerifyResponse?> verifyOtpForForgetPassword(
       EmailOTPVerifyRequest body) async {
     try {
-      final response = await client.put(Uri.parse(forgetPasswordOTPVerifyUrl),
+      final response = await client.patch(Uri.parse(forgetPasswordOTPVerifyUrl),
           headers: headers, body: json.encode(body.toJson()));
 
       if (response.statusCode == HttpStatus.ok) {
@@ -169,7 +169,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   Future<EmailResponse?> createNewPassword(String newPassword) async {
     try {
       final token = tokenDataSource.getToken();
-      final response = await client.put(
+      final response = await client.patch(
         Uri.parse(resetPasswordUrl),
         headers: authHeaders(token: token!),
         body: jsonEncode(<String, dynamic>{

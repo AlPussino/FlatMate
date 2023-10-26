@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class LogInProvider with ChangeNotifier {
@@ -32,8 +31,6 @@ class LogInProvider with ChangeNotifier {
   void saveEmail(String email) {
     _email = email;
 
-    log("Email : $email");
-    log("Logging? : $isLoginIn");
     _isEmailAndPasswordFilled =
         email.isNotEmpty && password.isNotEmpty ? true : false;
 
@@ -42,7 +39,6 @@ class LogInProvider with ChangeNotifier {
 
   void savePassword(String password) {
     _password = password;
-    log("Password : $password");
 
     _isEmailAndPasswordFilled =
         password.isNotEmpty && email.isNotEmpty ? true : false;
@@ -52,7 +48,6 @@ class LogInProvider with ChangeNotifier {
 
   void obscurePassword(bool obscurePassword) {
     _isPasswordObscure = obscurePassword;
-    log(isPasswordObscure.toString());
     notifyListeners();
   }
 

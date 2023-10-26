@@ -10,7 +10,7 @@ abstract class PostRepository {
   Future<PostList?> getMyPosts();
   Future<Post?> getPostDetail(int postId);
   Future<bool?> deleteMyPost(int postId);
-  Future<AllPosts?> getAllPosts(int? pageCursor);
+  Future<AllPosts?> getAllPosts(String? pageCursor);
   Future<Post?> saveOrUnsavePost(int postId, bool save);
   Future<PostList?> getSavedPosts();
   Future<Post?> editTenants(int postId, int tenants);

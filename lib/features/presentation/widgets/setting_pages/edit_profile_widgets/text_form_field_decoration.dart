@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class TextFormFieldDecoration {
   static textFormFieldDecoration(String hint) {
     return InputDecoration(
+      labelStyle: TextStyle(color: AppColor.greyColor),
+      labelText: hint,
       filled: true,
       fillColor: AppColor.whiteColor,
       contentPadding: EdgeInsets.all(20),

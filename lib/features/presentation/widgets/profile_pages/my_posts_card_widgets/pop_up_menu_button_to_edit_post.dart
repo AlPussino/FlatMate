@@ -14,8 +14,12 @@ class PopUpMenuButtonToEditPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
       surfaceTintColor: AppColor.dividerColor,
-      icon: Icon(Icons.more_vert),
       iconSize: 30,
+      child: Icon(
+        Icons.more_vert,
+        size: 30,
+        color: AppColor.blackColor,
+      ),
       onSelected: (String choice) {
         switch (choice) {
           case 'Delete':

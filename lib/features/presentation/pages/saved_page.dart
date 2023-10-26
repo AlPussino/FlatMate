@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:finding_apartments_yangon/configs/colors.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
@@ -14,7 +15,7 @@ class SavedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.whiteColor,
+      backgroundColor: AppColor.transparent,
       body: FutureBuilder(
         future: context.read<PostProvider>().getSavedPosts(),
         builder: (context, snapshot) {
@@ -42,14 +43,10 @@ class SavedPage extends StatelessWidget {
           void _onScroll() {
             if (_scrollController.position.userScrollDirection ==
                 ScrollDirection.reverse) {
-              log('scrolling down');
               context.read<HomeProvider>().hideAndShowNavigationBar(true);
-              log("${context.read<HomeProvider>().showBottomNavigationBar}");
             } else if (_scrollController.position.userScrollDirection ==
                 ScrollDirection.forward) {
-              log('scrolling up');
               context.read<HomeProvider>().hideAndShowNavigationBar(false);
-              log("${context.read<HomeProvider>().showBottomNavigationBar}");
             } else {
               null;
             }
@@ -59,6 +56,7 @@ class SavedPage extends StatelessWidget {
           return SafeArea(
             child: CustomScrollView(
               controller: _scrollController,
+              physics: const BouncingScrollPhysics(),
               slivers: [
                 SliverAppBar(
                   surfaceTintColor: AppColor.whiteColor,

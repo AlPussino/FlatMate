@@ -33,7 +33,7 @@ class ImageViewer extends StatelessWidget {
             return PhotoViewGalleryPageOptions(
               imageProvider: CachedNetworkImageProvider(images[index].url!),
               initialScale: PhotoViewComputedScale.contained,
-              maxScale: PhotoViewComputedScale.covered,
+              // maxScale: PhotoViewComputedScale.covered,
               minScale: PhotoViewComputedScale.contained,
             );
           },

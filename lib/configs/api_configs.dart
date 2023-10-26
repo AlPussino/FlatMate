@@ -1,46 +1,45 @@
 class ApiConfigs {
   //base url
-  static const String baseUrl = "http://192.168.0.102:8080";
+  static const String baseUrl = "http://192.168.0.117:8080";
 
   //logIn urls
   static const String logInUrl = "$baseUrl/api/auth/login";
 
   //signUp urls
-  static const String signUpUrl = "$baseUrl/api/auth/user/register";
-  static const String emailOTPVerifyUrl = "$baseUrl/api/auth/user/verify";
+  static const String signUpUrl = "$baseUrl/api/auth/users/register";
+  static const String emailOTPVerifyUrl = "$baseUrl/api/auth/users/verify";
 
   //auth urls
   static const String refreshTokenUrl =
       "$baseUrl/api/auth/refresh-token?token=";
-  static const String forgetPasswordUrl = "$baseUrl/api/user/check-email";
-  static const String forgetPasswordOTPVerifyUrl =
-      "$baseUrl/api/user/verify-otp";
-  static const String resetPasswordUrl = "$baseUrl/api/user/reset-password";
+  static const String forgetPasswordUrl = "$baseUrl/api/users/email";
+  static const String forgetPasswordOTPVerifyUrl = "$baseUrl/api/users/verify";
+  static const String resetPasswordUrl = "$baseUrl/api/users/password";
 
   //user urls
-  static const String aboutMeUrl = "$baseUrl/api/user/me";
-  static const String changeUserNameUrl = "$baseUrl/api/user/me/username";
-  static const String changePasswordUrl = "$baseUrl/api/user/me/password";
+  static const String aboutMeUrl = "$baseUrl/api/users/me";
+  static const String changeUserNameUrl = "$baseUrl/api/users/me/username";
+  static const String changePasswordUrl = "$baseUrl/api/users/me/password";
   static const String changeMobileNumberUrl =
-      "$baseUrl/api/user/me/mobile-number";
-  static const String uploadProfileUrl = "$baseUrl/api/user/me/profile";
+      "$baseUrl/api/users/me/mobile-number";
+  static const String uploadProfileUrl = "$baseUrl/api/users/me/profile";
   static const String addSocialContactUrl =
-      "$baseUrl/api/user/me/social-contact";
+      "$baseUrl/api/users/me/social-contact";
   static const String removeSocialContactUrl =
-      "$baseUrl/api/user/me/social-contact/";
-  static const String aboutOtherUserUrl = "$baseUrl/api/user/";
-  static const String searchUserUrl = "$baseUrl/api/user/search?k=";
+      "$baseUrl/api/users/me/social-contact/";
+  static const String aboutOtherUserUrl = "$baseUrl/api/users/";
+  static const String searchUserUrl = "$baseUrl/api/users/search?k=";
 
   //post urls
-  static const String createPostUrl = "$baseUrl/api/post";
-  static const String getMyPostsUrl = "$baseUrl/api/post/me";
-  static const String getPostDetailUrl = "$baseUrl/api/post/";
-  static const String deleteMyPostUrl = "$baseUrl/api/post/";
-  static const String getAllPostsUrl = "$baseUrl/api/post?cursor=";
-  static const String savePostUrl = "$baseUrl/api/post/";
-  static const String getSavedPostsUrl = "$baseUrl/api/post/me/save";
-  static const String editTenantsUrl = "$baseUrl/api/post/me/";
-  static const String editPostUrl = "$baseUrl/api/post/";
+  static const String createPostUrl = "$baseUrl/api/posts";
+  static const String getMyPostsUrl = "$baseUrl/api/posts/me";
+  static const String getPostDetailUrl = "$baseUrl/api/posts/";
+  static const String deleteMyPostUrl = "$baseUrl/api/posts/";
+  static const String getAllPostsUrl = "$baseUrl/api/posts";
+  static const String savePostUrl = "$baseUrl/api/posts/";
+  static const String getSavedPostsUrl = "$baseUrl/api/posts/me/save";
+  static const String editTenantsUrl = "$baseUrl/api/posts/me/";
+  static const String editPostUrl = "$baseUrl/api/posts/";
 }
 
 ///

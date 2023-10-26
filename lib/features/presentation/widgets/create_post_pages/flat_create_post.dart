@@ -5,6 +5,7 @@ import 'package:finding_apartments_yangon/configs/strings.dart';
 import 'package:finding_apartments_yangon/features/data/models/apartment.dart';
 import 'package:finding_apartments_yangon/features/data/models/post.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/ui_providers/create_posts_providers/create_posts_providers.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/create_post_widgets/flat_floor_drop_down_button.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/create_post_widgets/flat_type_drop_down_button.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/create_post_pages/flat_location_create_post.dart';
@@ -28,14 +29,6 @@ class FlatCreatePost extends StatefulWidget {
 
 class _FlatCreatePostState extends State<FlatCreatePost> {
   final _formKey = GlobalKey<FormState>();
-
-  final _selectImagesController = MultiImagePickerController(
-    maxImages: 9,
-    allowedImageTypes: ['png', 'jpg', 'jpeg'],
-    withData: true,
-    withReadStream: true,
-    images: [],
-  );
 
   bool _showError = false;
 
@@ -68,13 +61,19 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
       }
     }
 
-    files.map((file) {
-      _selectImagesController.addImage(ImageFile(file.uri.toString(),
-          name: file.path,
-          extension: file.path.split('.').last,
-          path: file.path));
-    }).toList();
-    log(_selectImagesController.images.length.toString());
+    int index = 0;
+    while (index < files.length) {
+      final file = files[index];
+      context.read<CreatePostsProvider>().addImages(ImageFile(
+            file.uri.toString(),
+            name: file.path,
+            extension: file.path.split('.').last,
+            path: file.path,
+          ));
+      index++;
+    }
+
+    log("before build Images : ${context.read<CreatePostsProvider>().selectImagesController.images.length}");
 
     return files;
   }
@@ -85,22 +84,30 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
 
   @override
   void initState() {
+    super.initState();
+    loadMyanmarData();
     if (widget.isEdit) {
-      widget.post.pictures.map((e) => imagesStringUrls.add(e.url)).toList();
-      widget.post.pictures.map((e) => removeImagesIdList.add(e.id)).toList();
+      context.read<CreatePostsProvider>().selectImagesController.clearImages();
+
+      int index = 0;
+      while (index < widget.post.pictures.length) {
+        final url = widget.post.pictures[index].url;
+        final id = widget.post.pictures[index].id;
+        imagesStringUrls.add(url);
+        removeImagesIdList.add(id);
+        index++;
+      }
 
       changeImg(imagesStringUrls);
       _lengthController.text = '${widget.post.apartment.length}';
       _widthController.text = '${widget.post.apartment.width}';
     } else {
-      null;
+      context.read<CreatePostsProvider>().selectImagesController.clearImages();
     }
-    super.initState();
   }
 
   @override
   void dispose() {
-    _selectImagesController.dispose();
     _lengthController.dispose();
     _widthController.dispose();
     _lengthFocusNode.dispose();
@@ -114,16 +121,16 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
 
   @override
   Widget build(BuildContext context) {
-    loadMyanmarData();
+    log("Images : ${context.read<CreatePostsProvider>().selectImagesController.images.length}");
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColor.whiteColor,
+        backgroundColor: AppColor.transparent,
         foregroundColor: AppColor.blackColor,
         automaticallyImplyLeading: true,
         title: Text(
-          "New Post",
+          !widget.isEdit ? "New Post" : "Edit Post",
           style: TextStyle(
               color: Color(0xff000000),
               fontSize: 24,
@@ -138,13 +145,21 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                     selectedHouseTypeValue.isNotEmpty &&
                     _lengthController.text.isNotEmpty &&
                     _widthController.text.isNotEmpty &&
-                    _selectImagesController.images.length > 0) {
+                    context
+                            .read<CreatePostsProvider>()
+                            .selectImagesController
+                            .images
+                            .length >
+                        0) {
                   Navigator.push(
                     context,
                     PageTransition(
                         type: PageTransitionType.rightToLeft,
                         child: FlatLocationCreatePost(
-                          images: _selectImagesController.images,
+                          images: context
+                              .read<CreatePostsProvider>()
+                              .selectImagesController
+                              .images,
                           flatBody: Post(
                             removeImagesId:
                                 widget.isEdit ? removeImagesIdList : null,
@@ -162,7 +177,12 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                     selectedHouseTypeValue.isNotEmpty &&
                     _lengthController.text.isNotEmpty &&
                     _widthController.text.isNotEmpty &&
-                    _selectImagesController.images.length < 1) {
+                    context
+                            .watch<CreatePostsProvider>()
+                            .selectImagesController
+                            .images
+                            .length <
+                        1) {
                   toast('Please select at least 1 image');
                 }
               }
@@ -174,7 +194,12 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                           selectedHouseTypeValue.isNotEmpty &&
                           _lengthController.text.isNotEmpty &&
                           _widthController.text.isNotEmpty &&
-                          _selectImagesController.images.length > 0
+                          context
+                                  .watch<CreatePostsProvider>()
+                                  .selectImagesController
+                                  .images
+                                  .length >
+                              0
                       ? AppColor.orangeColor
                       : AppColor.greyColor,
                   fontSize: 20,
@@ -212,13 +237,23 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.image,
-                            color: AppColor.greyColor,
-                          ),
+                          widget.isEdit
+                              ? CircularProgressIndicator(
+                                  color: AppColor.orangeColor,
+                                  backgroundColor: AppColor.whiteColor,
+                                )
+                              : Icon(
+                                  Icons.image,
+                                  color: AppColor.greyColor,
+                                ),
+                          const SizedBox(height: 5),
                           Text(
-                            AppString.addImageToPost,
-                            style: TextStyle(color: AppColor.greyColor),
+                            widget.isEdit
+                                ? AppString.loadingImageToEditPost
+                                : AppString.addImageToPost,
+                            style: TextStyle(
+                              color: AppColor.greyColor,
+                            ),
                           )
                         ],
                       ),
@@ -227,16 +262,18 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                 );
               },
               addMoreButtonTitle: '+',
-              controller: _selectImagesController,
+              controller:
+                  context.watch<CreatePostsProvider>().selectImagesController,
               onChange: (list) {
-                setState(() {
-                  list.map((e) {
-                    log("Name : ${e.name}");
-                  }).toList();
-                  if (_selectImagesController.images.length > 5) {
-                    toast("if not necessary,please don't use above 5 images");
-                  }
-                });
+                if (context
+                        .watch<CreatePostsProvider>()
+                        .selectImagesController
+                        .images
+                        .length >
+                    5) {
+                  toast("if not necessary,please don't use above 5 images");
+                }
+                ;
               },
               padding: const EdgeInsets.all(20),
             ),
@@ -363,11 +400,7 @@ class _FlatCreatePostState extends State<FlatCreatePost> {
                             width: (MediaQuery.sizeOf(context).width / 2) - 30,
                             child: TextFormField(
                               style: TextStyle(
-                                  color: AppColor.textColor,
-                                  // fontFamily: DefaultTextStyle.of(context)
-                                  //     .style
-                                  //     .fontFamily,
-                                  fontSize: 14),
+                                  color: AppColor.textColor, fontSize: 14),
                               textInputAction: TextInputAction.done,
                               controller: _widthController,
                               obscureText: false,

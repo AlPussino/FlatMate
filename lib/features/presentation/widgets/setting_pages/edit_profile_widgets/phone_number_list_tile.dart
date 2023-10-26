@@ -11,7 +11,10 @@ class PhoneNumberListTile extends StatelessWidget {
   final _phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> phoneNumberFormKey = GlobalKey<FormState>();
     _phoneNumberController.text = myUser.mobileNumber;
+    String TempPhoneNumberToCheckChanges = myUser.mobileNumber;
+
     return ListTile(
       onTap: () {
         showDialog(
@@ -25,17 +28,36 @@ class PhoneNumberListTile extends StatelessWidget {
             content: Container(
               padding: EdgeInsets.only(top: 40),
               child: SizedBox(
-                height: 52,
+                height: 82,
                 width: 400,
-                child: TextFormField(
-                  cursorColor: AppColor.orangeColor,
-                  style: TextStyle(
-                      color: AppColor.textColor,
-                      fontFamily: DefaultTextStyle.of(context).style.fontFamily,
-                      fontSize: 14),
-                  controller: _phoneNumberController,
-                  decoration: TextFormFieldDecoration.textFormFieldDecoration(
-                      "Phone Number"),
+                child: Form(
+                  key: phoneNumberFormKey,
+                  child: TextFormField(
+                    cursorColor: AppColor.orangeColor,
+                    style: TextStyle(
+                        color: AppColor.textColor,
+                        fontFamily:
+                            DefaultTextStyle.of(context).style.fontFamily,
+                        fontSize: 14),
+                    controller: _phoneNumberController,
+                    decoration: TextFormFieldDecoration.textFormFieldDecoration(
+                        "Phone Number"),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter phone number';
+                      }
+
+                      RegExp regex = RegExp('^09');
+
+                      if (!regex.hasMatch(value)) {
+                        return 'Phone number should start with 09.';
+                      }
+                      if (value == TempPhoneNumberToCheckChanges) {
+                        return 'Change Phone number to update';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
               ),
             ),
@@ -50,14 +72,16 @@ class PhoneNumberListTile extends StatelessWidget {
                   )),
               TextButton(
                   onPressed: () async {
-                    final result = await context
-                        .read<UserProvider>()
-                        .changeMobileNumber(
-                            mobileNumber: _phoneNumberController.text);
-                    if (result != null) {
-                      _phoneNumberController.clear();
-                      Navigator.pop(context);
-                    } else {}
+                    if (phoneNumberFormKey.currentState!.validate()) {
+                      final result = await context
+                          .read<UserProvider>()
+                          .changeMobileNumber(
+                              mobileNumber: _phoneNumberController.text);
+                      if (result != null) {
+                        _phoneNumberController.clear();
+                        Navigator.pop(context);
+                      } else {}
+                    }
                   },
                   child: Text(
                     'Save',

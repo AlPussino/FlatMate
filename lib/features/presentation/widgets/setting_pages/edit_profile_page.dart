@@ -59,12 +59,40 @@ class EditProfilePage extends StatelessWidget {
             }
 
             final myUser = context.watch<UserProvider>().user;
-            myUser!.socialContacts!.map((e) {
-              log(e.id.toString());
-              if (socialContactsOptions.contains(e.contactType)) {
-                socialContactsOptions.remove(e.contactType);
+            // myUser!.socialContacts!.map((e) {
+            //   log(e.id.toString());
+            //   if (socialContactsOptions.contains(e.contactType)) {
+            //     socialContactsOptions.remove(e.contactType);
+            //   }
+            // }).toList();
+            int index = 0;
+
+            while (index < myUser!.socialContacts!.length) {
+              final contact = myUser.socialContacts![index];
+              log(contact.id.toString());
+
+              if (socialContactsOptions.contains(contact.contactType)) {
+                socialContactsOptions.remove(contact.contactType);
               }
-            }).toList();
+
+              index++;
+            }
+
+            int widgetIndex = 0;
+            List<Widget> socialContactWidgets = [];
+
+            while (widgetIndex < myUser.socialContacts!.length) {
+              final socialContact = myUser.socialContacts![widgetIndex];
+              final widget = Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: SocialAccountListTile(
+                  socialContactsOptions: socialContactsOptions,
+                  socialContact: socialContact,
+                ),
+              );
+              socialContactWidgets.add(widget);
+              widgetIndex++;
+            }
 
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -145,14 +173,15 @@ class EditProfilePage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 10),
-                    ...myUser.socialContacts!.map((socialContact) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: 20),
-                        child: SocialAccountListTile(
-                            socialContactsOptions: socialContactsOptions,
-                            socialContact: socialContact),
-                      );
-                    }),
+                    // ...myUser.socialContacts!.map((socialContact) {
+                    //   return Padding(
+                    //     padding: EdgeInsets.only(bottom: 20),
+                    //     child: SocialAccountListTile(
+                    //         socialContactsOptions: socialContactsOptions,
+                    //         socialContact: socialContact),
+                    //   );
+                    // }).toList(),
+                    ...socialContactWidgets,
                   ],
                 ),
               ),

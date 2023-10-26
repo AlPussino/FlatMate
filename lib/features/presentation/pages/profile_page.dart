@@ -1,8 +1,9 @@
 import 'dart:developer';
+
 import 'package:finding_apartments_yangon/configs/colors.dart';
-import 'package:finding_apartments_yangon/features/presentation/pages/setting_page.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/home_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/providers/post_provider.dart';
+import 'package:finding_apartments_yangon/features/presentation/providers/user_provider.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_posts_card.dart';
 import 'package:finding_apartments_yangon/features/presentation/widgets/profile_pages/my_profile_card.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '../providers/user_provider.dart';
+
+import 'pages.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -27,14 +29,10 @@ class ProfilePage extends StatelessWidget {
     void _onScroll() {
       if (_scrollController.position.userScrollDirection ==
           ScrollDirection.reverse) {
-        log('scrolling down');
         context.read<HomeProvider>().hideAndShowNavigationBar(true);
-        log("${context.read<HomeProvider>().showBottomNavigationBar}");
       } else if (_scrollController.position.userScrollDirection ==
           ScrollDirection.forward) {
-        log('scrolling up');
         context.read<HomeProvider>().hideAndShowNavigationBar(false);
-        log("${context.read<HomeProvider>().showBottomNavigationBar}");
       } else {
         null;
       }
@@ -44,7 +42,7 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       body: Scaffold(
-        backgroundColor: AppColor.whiteColor,
+        backgroundColor: AppColor.transparent,
         body: FutureBuilder(
           future: fetchMyUserInfoAnfMyPosts(),
           builder: (context, snapshot) {
@@ -71,7 +69,7 @@ class ProfilePage extends StatelessWidget {
 
             return SafeArea(
               child: CustomScrollView(
-                physics: const ClampingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 controller: _scrollController,
                 slivers: [
                   SliverAppBar(
@@ -136,11 +134,12 @@ class ProfilePage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final post = myPosts.posts![index];
                                 final imgList = [];
-                                post.pictures!
-                                    .map(
-                                      (e) => imgList.add(e.url!),
-                                    )
-                                    .toList();
+
+                                int imageIndex = 0;
+                                while (imageIndex < post.pictures!.length) {
+                                  imgList.add(post.pictures![imageIndex].url);
+                                  imageIndex++;
+                                }
 
                                 return MyPostsCard(
                                     post: post, imgList: imgList);
